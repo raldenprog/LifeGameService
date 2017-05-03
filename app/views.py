@@ -36,8 +36,9 @@ def get_table(table):
         return None
     else:
         cur.execute("SELECT * FROM " + table)
+        result = cur.fetchall()
         con.close()
-        return cur.fetchall()
+        return result
 
 
 def add_user(user_login, user_email, user_password):
