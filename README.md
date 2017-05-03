@@ -1,1 +1,0 @@
-# Life ctf game service #

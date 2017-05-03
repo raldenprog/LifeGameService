@@ -1,0 +1,17 @@
+{
+    "event":"Full_Zashkvar_CTF",
+    "name":"You_Mama",
+    "category":"admin",
+    "tags":"#admin_mudak",
+    "description":"blabla",
+    "hints":"NO MORE HINTS!",
+    "points":"100",
+    "flag":"flagsdfdsf",
+    "links":"www.somehub.com",
+    "authors":
+        [{
+            "name":"Anton",
+            "team":"Sweety",
+            "contacts":""
+        }]
+}

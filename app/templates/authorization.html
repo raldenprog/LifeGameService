@@ -1,0 +1,27 @@
+<html>
+{% extends "base.html" %}
+
+{% block content %}
+  <head>
+    <title> Аuthorization</title>
+  </head>
+  <body>
+      <h1>Привет, юный хакер!</h1>
+      <p1>Готов к свершениям? Тогда вперед!</p1>
+      <p1> Заходи, не стесняйся.</p1>
+
+  <h2>Sign In</h2>
+  <form action="" method="post" name="login">
+    {{form.hidden_tag()}}
+    <p>
+          <h3>Please enter your Login:</h3><br>
+        {{form.Login(size=40)}}<br>
+        Please enter your Password:<br>
+        {{form.password(size=80)}}<br>
+    </p>
+    <p>{{form.remember_me}} Remember Me</p>
+    <p><input type="submit" value="Sign In"></p>
+</form>
+  </body>
+{% endblock %}
+</html>
