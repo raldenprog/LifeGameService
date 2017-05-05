@@ -13,7 +13,13 @@ class LoginForm(Form):
 class RegForm(Form):
     Login = TextField('Login', validators=[Required()])
     Password = TextField('Password', validators=[Required()])
-    Email = TextField('Password', validators=[Required()])
+    Name = TextField('Name', validators=[Required()])
+    Patronymic = TextField('Patronymic', validators=[Required()])
+    Email = TextField('Email', validators=[Required()])
+    Sex = TextField('Sex', validators=[Required()])
+    City = TextField('City', validators=[Required()])
+    Educational = TextField('Educational', validators=[Required()])
+    Logo = TextField('Logo', validators=[Required()])
 
 
 class CreateForm(Form):

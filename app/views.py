@@ -1,10 +1,19 @@
 # coding: utf-8
 from app import app
+
+from app.database import get_user, registration_users
 from flask import render_template, flash, redirect, session, url_for, request
 from app.forms import LoginForm, RegForm, CreateForm
 from werkzeug.utils import secure_filename
 import os
 import sqlite3
+
+
+@app.after_request
+def patch_response(response):
+    response.headers['Content-Security-Policy'] = \
+        "default-src 'self' 'unsafe-inline';"
+    return response
 
 
 @app.route("/")
@@ -19,44 +28,9 @@ def tasks():
     user_login = None
     if session["login"]:
         user_login = session["login"]
-    return render_template("tasks.html",
-                           login=user_login,
-                           )
+    return render_template("tasks.html", login=user_login)
 
 
-def get_table(table):
-    """Функция получения данных из базы, передаем ей название таблицы
-
-    После выбора базы данных, внести необходимые исключения
-    """
-    try:
-        con = sqlite3.connect("users.db")
-        cur = con.cursor()
-    except:
-        return None
-    else:
-        cur.execute("SELECT * FROM " + table)
-        result = cur.fetchall()
-        con.close()
-        return result
-
-
-def add_user(user_login, user_email, user_password):
-    """функция создания пользователя
-       передаем ей логин mail и pass
-       После выбора базы данных, внести необходимые исключения
-    """
-    try:
-        con = sqlite3.connect("users.db")
-        cur = con.cursor()
-    except:
-        return False
-    else:
-        purchases = [(user_login, user_email, user_password)]
-        cur.executemany('INSERT INTO users VALUES (NULL,?,?,?)', purchases)
-        con.commit()
-        con.close()
-        return True
 
 
 @app.route('/login', methods=['GET', 'POST'])       # вход пользователей
@@ -71,7 +45,7 @@ def login():
         flash("Login requested for Login=\"" + form.Login.data + "\", remember_me=" + str(form.remember_me.data))
         check_pass = 0
         check_user = 0
-        users = get_table("users")
+        users = get_user.get_table("users")
         # Оставляю пока так, позже нужно переписать
         if users is not None:
             for user in users:
@@ -98,7 +72,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route("/reg", methods=["GET", "POST"])
+@app.route("/registration", methods=["GET", "POST"])
 def reg():
     """регистрация пользователей
     проверка на наличие пользователя через функцию getdb,
@@ -106,14 +80,27 @@ def reg():
     """
     form = RegForm()
     if form.validate_on_submit():
+        print(form.Login.data)
+        print(get_user.get_table(form.Login.data))
         flash("Login requested for Login=\"" + form.Login.data)
-        users = get_table("users")
-        if users is not None:
-            for user in users:
-                if form.Login.data == user[1]:
-                    return "A user with this address already exists"
-            add_user(str(form.Login.data), str(form.Email.data), str(form.Password.data))
-            return redirect('/index')
+        if get_user.get_table(form.Login.data) > 0:
+            return "A user with this address already exists"
+        else:
+            registration_data = {
+                'login': str(form.Login.data),
+                'password': str(form.Password.data),
+                'name': str(form.Name.data),
+                'patronymic': str(form.Patronymic.data),
+                'email': str(form.Email.data),
+                'sex': str(form.Sex.data),
+                'city': str(form.City.data),
+                'Educational': str(form.Educational.data),
+                'logo': str(form.Logo.data)
+            }
+            print(registration_data)
+            registration_users.add_user(registration_data)
+            return redirect('/')
+    print("Nooooononononono")
     return render_template('reg.html', title='Sign In', form=form)
 
 
