@@ -71,13 +71,13 @@ def logout():
     session.pop("login", None)
     return redirect(url_for('login'))
 
-
 @app.route("/registration", methods=["GET", "POST"])
 def reg():
     """регистрация пользователей
     проверка на наличие пользователя через функцию getdb,
     а создание пользователя через add_user
     """
+    current_dir = os.path.abspath(os.curdir)
     form = RegForm()
     if form.validate_on_submit():
         print(form.Login.data)
@@ -86,6 +86,8 @@ def reg():
         if get_user.get_table(form.Login.data) > 0:
             return "A user with this address already exists"
         else:
+
+
             registration_data = {
                 'login': str(form.Login.data),
                 'password': str(form.Password.data),
@@ -97,6 +99,11 @@ def reg():
                 'Educational': str(form.Educational.data),
                 'logo': str(form.Logo.data)
             }
+            if form.Logo.data:
+                image_data = request.FILES[form.image.name].read()
+                open(os.path.join(current_dir + "/logo/", form.image.data), 'w').write(image_data)
+
+
             print(registration_data)
             registration_users.add_user(registration_data)
             return redirect('/')
