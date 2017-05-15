@@ -7,21 +7,73 @@
  <h1>Registration</h1>
     {{form.hidden_tag()}}
     <p>
-        <h3>Please enter your Login:</h3><br>
+        <h5>Please enter your Login:</h5>
         {{form.Login(size=40)}}<br>
 
         {% for error in form.errors.Login %}
         <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+
+        <h5>Please enter your Password:</h5>
+        {{form.Password(size=40)}}<br>
+
+        {% for error in form.errors.Password %}
+        <span style="color: red;">[{{error}}]</span>
         {% endfor %}<br>
 
+        <h5>Please repeat you password:</h5>
+        {{form.Repeat_password(size=40)}}<br>
 
-        <h3>Please enter your Email:</h3><br>
+        {% for error in form.errors.Repeat_password %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        <h5>Please enter your Name:</h5>
+        {{form.Name(size=40)}}<br>
+
+        {% for error in form.errors.Name %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        <h5>Please enter your Patronymic:</h5>
+        {{form.Patronymic(size=40)}}<br>
+
+        {% for error in form.errors.Patronymic %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        <h5>Please enter your Email:</h5>
         {{form.Email(size=40)}}<br>
 
+        {% for error in form.errors.Email %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
 
-        <h3>Please enter your Password:</h3><br>
-        {{form.Password(size=40)}}<br>
-        {% for error in form.errors.Password %}
+        <h5>Please enter your Sex:</h5>
+        {{form.Sex(size=1)}}<br>
+
+        {% for error in form.errors.Sex %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        <h5>Please enter your City:</h5>
+        {{form.City(size=40)}}<br>
+
+        {% for error in form.errors.City %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        <h5>Please enter your Educational:</h5>
+        {{form.Educational(size=40)}}<br>
+
+        {% for error in form.errors.Educational %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        <h5>Please enter your Logo:</h5>
+        {{form.Logo(size=40)}}<br>
+
+        {% for error in form.errors.Logo %}
         <span style="color: red;">[{{error}}]</span>
         {% endfor %}<br>
 
