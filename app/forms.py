@@ -1,8 +1,7 @@
 # coding: utf-8
 from flask_wtf import Form
-from wtforms import TextField, BooleanField, StringField, validators, FileField, SelectField
-from wtforms.validators import Required
-import re
+from wtforms import BooleanField, StringField, validators, FileField, SelectField
+
 
 class LoginForm(Form):
     Login = StringField('Login', [validators.required()])
@@ -13,6 +12,7 @@ class LoginForm(Form):
 class RegForm(Form):
     Login = StringField('Login', [validators.required()])
     Password = StringField('Password', [validators.required()])
+    Repeat_password = StringField('Repeat_password', [validators.required()])
     Name = StringField('Name', [validators.required()])
     Patronymic = StringField('Patronymic', [validators.required()])
     Email = StringField('Email', [validators.email(), validators.required()])
@@ -21,9 +21,6 @@ class RegForm(Form):
     Educational = StringField('Educational', [validators.required()])
     Logo = FileField('Logo')
 
-    def validate_image(form, field):
-        if field.data:
-            field.data = re.sub(r'[^a-z0-9_.-]', '_', field.data)
 
 class CreateForm(Form):
     Name = StringField('Name', [validators.required()])

@@ -1,12 +1,12 @@
 # coding: utf-8
-from app import app
-
-from app.database import get_user, registration_users
-from flask import render_template, flash, redirect, session, url_for, request
-from app.forms import LoginForm, RegForm, CreateForm
-from werkzeug.utils import secure_filename
 import os
-import sqlite3
+
+from flask import render_template, flash, redirect, session, url_for, request
+from werkzeug.utils import secure_filename
+
+from app import app
+from app.api.database import get_user, registration_users
+from app.forms import LoginForm, RegForm, CreateForm
 
 
 @app.after_request
@@ -23,7 +23,8 @@ def index():
 
 @app.route('/tasks')
 def tasks():
-    """тут будут таски, пока просто приветсвие пользователя
+    """
+    
     """
     user_login = None
     if session["login"]:
@@ -31,14 +32,10 @@ def tasks():
     return render_template("tasks.html", login=user_login)
 
 
-
-
 @app.route('/login', methods=['GET', 'POST'])       # вход пользователей
 def login():
-    """вход пользователей
-    сейчас тут 3 поля Login, email, password
-    проверяется на правильность введенных данных через функцию get_table
-    запоминаем в сессию
+    """
+    
     """
     form = LoginForm()
     if form.validate_on_submit():
@@ -71,11 +68,11 @@ def logout():
     session.pop("login", None)
     return redirect(url_for('login'))
 
+
 @app.route("/registration", methods=["GET", "POST"])
 def reg():
-    """регистрация пользователей
-    проверка на наличие пользователя через функцию getdb,
-    а создание пользователя через add_user
+    """
+    
     """
     current_dir = os.path.abspath(os.curdir)
     form = RegForm()
@@ -83,38 +80,34 @@ def reg():
         print(form.Login.data)
         print(get_user.get_table(form.Login.data))
         flash("Login requested for Login=\"" + form.Login.data)
+        if form.Password.data != form.Repeat_password.data:
+            return "Sorry, passwords do not match"
         if get_user.get_table(form.Login.data) > 0:
             return "A user with this address already exists"
-        else:
-
-
-            registration_data = {
-                'login': str(form.Login.data),
-                'password': str(form.Password.data),
-                'name': str(form.Name.data),
-                'patronymic': str(form.Patronymic.data),
-                'email': str(form.Email.data),
-                'sex': str(form.Sex.data),
-                'city': str(form.City.data),
-                'Educational': str(form.Educational.data),
-                'logo': str(form.Logo.data)
-            }
-            if form.Logo.data:
-                image_data = request.FILES[form.image.name].read()
-                open(os.path.join(current_dir + "/logo/", form.image.data), 'w').write(image_data)
-
-
-            print(registration_data)
-            registration_users.add_user(registration_data)
-            return redirect('/')
-    print("Nooooononononono")
+        registration_data = {
+            'login': str(form.Login.data),
+            'password': str(form.Password.data),
+            'name': str(form.Name.data),
+            'patronymic': str(form.Patronymic.data),
+            'email': str(form.Email.data),
+            'sex': str(form.Sex.data),
+            'city': str(form.City.data),
+            'Educational': str(form.Educational.data),
+            'logo': str(form.Logo.data)
+        }
+        if form.Logo.data:
+            image_data = request.FILES[form.image.name].read()
+            open(os.path.join(current_dir + "/logo/", form.image.data), 'w').write(image_data)
+        print(registration_data)
+        registration_users.add_user(registration_data)
+        return redirect('/')
     return render_template('reg.html', title='Sign In', form=form)
 
 
 @app.route("/create_task", methods=['GET', 'POST'])
 def create():
-    """создание таска 2 поля название таска, описание, и возможность загрузить файл
-    создается попка uploads, в ней папка с названием таска, в ней файл с описанием и файлом
+    """
+    
     """
     current_dir = os.path.abspath(os.curdir)
     check_uploads = 0
@@ -158,20 +151,23 @@ def create():
 
 @app.route("/uploads/<filename>")
 def uploaded_file():
-    """функция по идее показывает загруженный файл, сейчас заглушка
+    """
+    
     """
     return "file was uploaded"
 
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
-    """панель админа создание, изменение, удаления таска
+    """
+    
     """
     return render_template('adminpanel.html')
 
 
 @app.route("/remove_task", methods=['GET', 'POST'])
 def remove_task():
-    """удаление таска, пока ничего
+    """
+    
     """
     return render_template('remove_task.html')

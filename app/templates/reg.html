@@ -21,6 +21,13 @@
         <span style="color: red;">[{{error}}]</span>
         {% endfor %}<br>
 
+        <h5>Please repeat you password:</h5>
+        {{form.Repeat_password(size=40)}}<br>
+
+        {% for error in form.errors.Repeat_password %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
         <h5>Please enter your Name:</h5>
         {{form.Name(size=40)}}<br>
 
