@@ -32,7 +32,7 @@ def tasks():
     return render_template("tasks.html", login=user_login)
 
 
-@app.route('/login', methods=['GET', 'POST'])       # вход пользователей
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     """
     
@@ -62,8 +62,8 @@ def login():
 
 @app.route("/logout")
 def logout():
-    """функция для выхода из системы
-    жмем на ссылку, нас отправляет на страницу login
+    """
+    
     """
     session.pop("login", None)
     return redirect(url_for('login'))
