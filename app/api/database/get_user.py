@@ -6,9 +6,11 @@ def get_table(login):
     
     """
     try:
-        connect = pymysql.connect(host='localhost', user='root', password='#', db='life_game_service',
+        connect = pymysql.connect(host='5.137.232.44',
+                                  user='dev_life_user',
+                                  password='pinlox123',
+                                  db='life_game_service_database',
                                   cursorclass=pymysql.cursors.DictCursor)
-        cur = connect.cursor()
     except:
         #print('Got error {!r}, errno is {}'.format(e, e.args[0]))
         return 1

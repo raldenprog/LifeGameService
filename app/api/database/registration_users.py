@@ -8,7 +8,10 @@ def add_user(user_data):
     """
     print(1)
     try:
-        connect = pymysql.connect(host='localhost', user='root', password='#', db='life_game_service',
+        connect = pymysql.connect(host='5.137.232.44',
+                                  user='dev_life_user',
+                                  password='pinlox123',
+                                  db='life_game_service_database',
                                   cursorclass=pymysql.cursors.DictCursor)
         current_connect = connect.cursor()
     except:
