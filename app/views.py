@@ -5,7 +5,7 @@ from flask import render_template, flash, redirect, session, url_for, request
 from werkzeug.utils import secure_filename
 
 from app import app
-from app.api.database import get_user, registration_users
+from app.api.database import login_user, registration_users
 from app.forms import LoginForm, RegForm, CreateForm
 
 
@@ -42,7 +42,7 @@ def login():
         flash("Login requested for Login=\"" + form.Login.data + "\", remember_me=" + str(form.remember_me.data))
         check_pass = 0
         check_user = 0
-        users = get_user.get_table("users")
+        users = login_user.get_table("users")
         # Оставляю пока так, позже нужно переписать
         if users is not None:
             for user in users:
@@ -78,11 +78,11 @@ def reg():
     form = RegForm()
     if form.validate_on_submit():
         print(form.Login.data)
-        print(get_user.get_table(form.Login.data))
+        print(login_user.get_table(form.Login.data))
         flash("Login requested for Login=\"" + form.Login.data)
         if form.Password.data != form.Repeat_password.data:
             return "Sorry, passwords do not match"
-        if get_user.get_table(form.Login.data) > 0:
+        if login_user.get_table(form.Login.data) > 0:
             return "A user with this address already exists"
         registration_data = {
             'login': str(form.Login.data),
