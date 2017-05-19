@@ -1,7 +1,7 @@
 import pymysql
 import hashlib
 import logging
-
+import os
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
@@ -27,9 +27,9 @@ def add_user(user_data):
         except:
             logging.error('Fatal error in function fun, param ' + data)
             return {"answer": "Error"}
-    # with open('../../resources/logo_users/{}'.format(user_data['logo_name']), 'w') as logo_file:
-    #    logo_file.write(user_data['logo'])
-    #    registration_data['logo'] = 'True'
+    with open('../app/resources/logo_users/{}'.format(user_data['logo_name']), 'w') as logo_file:
+        logo_file.write(user_data['logo'])
+        registration_data['logo'] = 'True'
     return input_user_table(registration_data)
 
 
