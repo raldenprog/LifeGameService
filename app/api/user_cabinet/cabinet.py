@@ -8,7 +8,28 @@ logging.basicConfig(filename='logger.log',
 
 def user_cabinet(data):
     """
-    получает json, проверка есть ли id, подключается к бд, возвращает инфу о пользователе
+    Входные данные:
+    json{"id": "Value"
+        }
+        
+    Выходные данные:
+    json{"id": "Value",
+        "login": "Value",
+        "password": "Value",
+        "name": "Value",
+        "patronymic": "Value",
+        "email": "Value",
+        "sex": "Value",
+        "city": "Value",
+        "Educational": "Value",
+        "logo": "Value",
+        "is_admin": "Value",
+        "is_captain": "Value",
+        "is_moderator": "Value",
+        }
+        
+        Функция подключается к базе данных,находит пользователя по id, который был получен на вход.
+        Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     try:
         if data["id"] is None:
@@ -38,9 +59,10 @@ def user_cabinet(data):
             ))
             connect.commit()
             result = current_connect.fetchall()
-            return {"Answer": "Success",
+            return {"Answer": "Ok",
                     "data": result}
         except:
             logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
+
 
