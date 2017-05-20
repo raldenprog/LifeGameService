@@ -2,19 +2,16 @@ import pymysql
 import hashlib
 import logging
 
+
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
 
 
-def add_user(user_data):
-    check = ['login', 'password', 'name',
-             'patronymic', 'email', 'sex',
-             'city', 'Educational', 'logo_name', 'logo']
+def login_verification(user_data):
+    check = ['login', 'password']
     registration_data = {
-        'login': '', 'password': '', 'name': '',
-        'patronymic': '', 'email': '', 'sex': '',
-        'city': '', 'Educational': '', 'logo_name': '', 'logo': ''
+        'login': '', 'password': ''
     }
     for data in check:
         try:
@@ -26,13 +23,10 @@ def add_user(user_data):
         except:
             logging.error('Fatal error in function fun, param ' + data)
             return {"Answer": "Error"}
-    with open('../app/resources/logo_users/{}'.format(user_data['logo_name']), 'w') as logo_file:
-        logo_file.write(user_data['logo'])
-        registration_data['logo'] = 'True'
-    return input_user_table(registration_data)
+    return get_user(registration_data)
 
 
-def input_user_table(user_data):
+def get_user(user_data):
     try:
         connect = pymysql.connect(host='5.137.232.44',
                                   user='dev_life_user',
@@ -42,23 +36,21 @@ def input_user_table(user_data):
         current_connect = connect.cursor()
     except:
         logging.error('Fatal error in function input_user_table, connect database')
-        return {'Answer': 'Error'}
+        return {"Answer": "Error"}
     else:
-        password_hash = hashlib.md5()
-        password_hash.update(user_data['password'].encode())
-        user_data['password'] = password_hash.hexdigest()
         try:
-            sql = "INSERT INTO users" \
-                " VALUES (null,\"{login}\",\"{password}\",\"{name}\"," \
-                "\"{patronymic}\",\"{email}\",\"{sex}\",\"{city}\"," \
-                "\"{Educational}\",\"{logo}\", 1, 1, 1)".format(**user_data)
-            print(sql)
-            current_connect.execute(sql)
+            password_hash = hashlib.md5()
+            password_hash.update(user_data['password'].encode())
+            user_data['password'] = password_hash.hexdigest()
+            current_connect.execute("SELECT * FROM users where login = '{}' and password = '{}'".format(
+                user_data['login'], user_data['password']
+            ))
             connect.commit()
-            connect.close()
         except:
             logging.error('Fatal error in function input_user_table, execute database')
-            return {'Answer': 'Error'}
-
-        return {'Answer': 'Success'}
-
+            return {"Answer": "Error"}
+        result = current_connect.fetchall()
+        connect.close()
+        if len(result) != 0:
+            return {"Answer": "Success"}
+        return {"Answer": "Error"}
