@@ -6,18 +6,6 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 
-def get_user():
-    """
-    тест функция возвращает json с id и login
-    """
-    return {"id": "1",
-            "login": "Anton",
-            }
-
-
-print(get_user())
-
-
 def user_cabinet(data):
     """
     получает json, проверка есть ли id, подключается к бд, возвращает инфу о пользователе
@@ -50,11 +38,9 @@ def user_cabinet(data):
             ))
             connect.commit()
             result = current_connect.fetchall()
-            return {"Answer": "Ok",
+            return {"Answer": "Success",
                     "data": result}
         except:
             logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
 
-
-print(user_cabinet(get_user()))

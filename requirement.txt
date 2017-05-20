@@ -2,3 +2,5 @@ flask
 flask_login
 flask_wtf
 pymysql
+logging
+hashlib
