@@ -59,6 +59,7 @@ def create_one_task(data):
         return {"answer": "Error",
                 "data": check_data}
     try:
+        # Заменить на функцию
         connect = pymysql.connect(host='5.137.227.36',
                                   user='dev_life_user',
                                   password='pinlox123',
@@ -159,5 +160,8 @@ json = {    "id" :              "1",
             "task_solve" :      84,
             "task_link" :       95
             }
+
+def get_task(data):
+    
 
 print create_few_tasks(json)

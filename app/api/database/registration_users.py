@@ -16,16 +16,21 @@ def add_user(user_data):
         'patronymic': '', 'email': '', 'sex': '',
         'city': '', 'Educational': '', 'logo_name': '', 'logo': ''
     }
+    flag = False
     for data in check:
         try:
             if user_data[data] is None:
                 logging.info('Incorrect parameter ' + data)
-                return {"Answer": "Error"}
+                registration_data[data] = 'Error'
+                flag = True
             else:
                 registration_data[data] = user_data[data]
         except:
-            logging.error('Fatal error in function fun, param ' + data)
-            return {"Answer": "Error"}
+            logging.error('Fatal error: param ' + data)
+            registration_data[data] = 'Error'
+            flag = True
+    if flag:
+        return {"Answer": "Error", 'Data': registration_data}
     with open('../app/resources/logo_users/{}'.format(user_data['logo_name']), 'w') as logo_file:
         logo_file.write(user_data['logo'])
         registration_data['logo'] = 'True'
@@ -34,14 +39,14 @@ def add_user(user_data):
 
 def input_user_table(user_data):
     try:
-        connect = pymysql.connect(host='5.137.232.44',
+        connect = pymysql.connect(host='5.137.227.36',
                                   user='dev_life_user',
                                   password='pinlox123',
                                   db='life_game_service_database',
                                   cursorclass=pymysql.cursors.DictCursor)
         current_connect = connect.cursor()
     except:
-        logging.error('Fatal error in function input_user_table, connect database')
+        logging.error('Fatal error: connect database')
         return {'Answer': 'Error'}
     else:
         password_hash = hashlib.md5()
@@ -57,7 +62,7 @@ def input_user_table(user_data):
             connect.commit()
             connect.close()
         except:
-            logging.error('Fatal error in function input_user_table, execute database')
+            logging.error('Fatal error: execute database')
             return {'Answer': 'Error'}
 
         return {'Answer': 'Success'}

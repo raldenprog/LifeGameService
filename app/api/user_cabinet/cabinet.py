@@ -6,31 +6,40 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 
-def get_user():
-    """
-    тест функция возвращает json с id и login
-    """
-    return {"id": "1",
-            "login": "Anton",
-            }
-
-
-print(get_user())
-
-
 def user_cabinet(data):
     """
-    получает json, проверка есть ли id, подключается к бд, возвращает инфу о пользователе
+    Входные данные:
+    json{"id": "Value"
+        }
+        
+    Выходные данные:
+    json{"id": "Value",
+        "login": "Value",
+        "password": "Value",
+        "name": "Value",
+        "patronymic": "Value",
+        "email": "Value",
+        "sex": "Value",
+        "city": "Value",
+        "Educational": "Value",
+        "logo": "Value",
+        "is_admin": "Value",
+        "is_captain": "Value",
+        "is_moderator": "Value",
+        }
+        
+        Функция подключается к базе данных,находит пользователя по id, который был получен на вход.
+        Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     try:
         if data["id"] is None:
             logging.info('Incorrect parameter id - None')
             data["id"] = "Empty"
-            return {"answer": "Error",
+            return {"Answer": "Error",
                     "data": data}
     except:
-        logging.error('Fatal error in function user_cabinet, param id')
-        return {"answer": "Error",
+        logging.error('Fatal error: param id')
+        return {"Answer": "Error",
                 "data": data}
     try:
         connect = pymysql.connect(host='5.137.227.36',
@@ -40,8 +49,8 @@ def user_cabinet(data):
                                   cursorclass=pymysql.cursors.DictCursor)
         current_connect = connect.cursor()
     except:
-        logging.error('Fatal error in function user_cabinet, connect database')
-        return {"answer": "Error",
+        logging.error('Fatal error: connect database')
+        return {"Answer": "Error",
                 "data": data}
     else:
         try:
@@ -50,11 +59,10 @@ def user_cabinet(data):
             ))
             connect.commit()
             result = current_connect.fetchall()
-            return {"answer": "Ok",
+            return {"Answer": "Ok",
                     "data": result}
         except:
-            logging.error('Fatal error in function user_cabinet, execute database')
+            logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
 
 
-print(user_cabinet(get_user()))
