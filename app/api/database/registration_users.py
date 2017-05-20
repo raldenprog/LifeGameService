@@ -24,7 +24,7 @@ def add_user(user_data):
             else:
                 registration_data[data] = user_data[data]
         except:
-            logging.error('Fatal error in function fun, param ' + data)
+            logging.error('Fatal error: param ' + data)
             return {"Answer": "Error"}
     with open('../app/resources/logo_users/{}'.format(user_data['logo_name']), 'w') as logo_file:
         logo_file.write(user_data['logo'])
@@ -41,7 +41,7 @@ def input_user_table(user_data):
                                   cursorclass=pymysql.cursors.DictCursor)
         current_connect = connect.cursor()
     except:
-        logging.error('Fatal error in function input_user_table, connect database')
+        logging.error('Fatal error: connect database')
         return {'Answer': 'Error'}
     else:
         password_hash = hashlib.md5()
@@ -57,7 +57,7 @@ def input_user_table(user_data):
             connect.commit()
             connect.close()
         except:
-            logging.error('Fatal error in function input_user_table, execute database')
+            logging.error('Fatal error: execute database')
             return {'Answer': 'Error'}
 
         return {'Answer': 'Success'}

@@ -26,11 +26,11 @@ def user_cabinet(data):
         if data["id"] is None:
             logging.info('Incorrect parameter id - None')
             data["id"] = "Empty"
-            return {"answer": "Error",
+            return {"Answer": "Error",
                     "data": data}
     except:
-        logging.error('Fatal error in function user_cabinet, param id')
-        return {"answer": "Error",
+        logging.error('Fatal error: param id')
+        return {"Answer": "Error",
                 "data": data}
     try:
         connect = pymysql.connect(host='5.137.227.36',
@@ -40,8 +40,8 @@ def user_cabinet(data):
                                   cursorclass=pymysql.cursors.DictCursor)
         current_connect = connect.cursor()
     except:
-        logging.error('Fatal error in function user_cabinet, connect database')
-        return {"answer": "Error",
+        logging.error('Fatal error: connect database')
+        return {"Answer": "Error",
                 "data": data}
     else:
         try:
@@ -50,10 +50,10 @@ def user_cabinet(data):
             ))
             connect.commit()
             result = current_connect.fetchall()
-            return {"answer": "Ok",
+            return {"Answer": "Ok",
                     "data": result}
         except:
-            logging.error('Fatal error in function user_cabinet, execute database')
+            logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
 
 

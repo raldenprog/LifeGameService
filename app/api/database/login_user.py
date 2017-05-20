@@ -21,7 +21,7 @@ def login_verification(user_data):
             else:
                 registration_data[data] = user_data[data]
         except:
-            logging.error('Fatal error in function fun, param ' + data)
+            logging.error('Fatal error: param ' + data)
             return {"Answer": "Error"}
     return get_user(registration_data)
 
@@ -35,7 +35,7 @@ def get_user(user_data):
                                   cursorclass=pymysql.cursors.DictCursor)
         current_connect = connect.cursor()
     except:
-        logging.error('Fatal error in function input_user_table, connect database')
+        logging.error('Fatal error: connect database')
         return {"Answer": "Error"}
     else:
         try:
@@ -47,7 +47,7 @@ def get_user(user_data):
             ))
             connect.commit()
         except:
-            logging.error('Fatal error in function input_user_table, execute database')
+            logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
         result = current_connect.fetchall()
         connect.close()
