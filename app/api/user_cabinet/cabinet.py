@@ -1,5 +1,21 @@
-import pymysql
 import logging
+import hashlib
+
+#for other OS
+from app.api.database.connect_db import db_connect
+
+#for Linux
+'''
+import sys
+import os
+directory_user_cabinet= os.getcwd()
+directory_user_cabinet=directory_user_cabinet.split("user_cabinet")[0]
+directory_user_cabinet+="database"
+sys.path.insert(0, directory_user_cabinet)
+from connect_db import db_connect
+'''
+
+
 
 logging.basicConfig(filename='logger.log',
                     format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
@@ -15,7 +31,7 @@ def user_cabinet(data):
     Выходные данные:
     json{"id": "Value",
         "login": "Value",
-        "password": "Value",
+        "password": "anton",
         "name": "Value",
         "patronymic": "Value",
         "email": "Value",
@@ -42,12 +58,7 @@ def user_cabinet(data):
         return {"Answer": "Error",
                 "data": data}
     try:
-        connect = pymysql.connect(host='5.137.227.36',
-                                  user='dev_life_user',
-                                  password='pinlox123',
-                                  db='life_game_service_database',
-                                  cursorclass=pymysql.cursors.DictCursor)
-        current_connect = connect.cursor()
+        current_connect = db_connect().cursor()
     except:
         logging.error('Fatal error: connect database')
         return {"Answer": "Error",
@@ -57,12 +68,78 @@ def user_cabinet(data):
             current_connect.execute("SELECT * FROM users where id = '{}'".format(
                 data['id']
             ))
-            connect.commit()
+            db_connect().commit()
             result = current_connect.fetchall()
-            return {"Answer": "Ok",
+            return {"Answer": "Success",
                     "data": result}
         except:
             logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
 
 
+def change_password(data):
+    """
+    Входные данные:
+     data = {"id": "1",
+        "old_password": "pinlox123",
+        "new_password": "qwerty"
+        }
+
+    Выходные данные:
+    "Answer": "Succes"
+
+    Функция получает json с id пользователя, старым паролем и новым.
+    Проверяет элементы data, None или нет.
+    Покдлючается к базе данных с помощью функции db_connect(), получает хеш пароля в базе по id.
+    Если хеш от old_password==паролю в базе, то записывает в базу хеш new_password.
+    Если все успешно, то функция вернет {'Answer': 'Succes'}, если не верный пароль - {'Answer': 'Wrong password'}
+
+    """
+    try:
+        for i in data:
+            if data[i] is None:
+                logging.info('Incorrect parameter '+i+' - None')
+                data[i] = "Empty"
+                return {"Answer": "Error",
+                        "data": data}
+    except:
+        logging.error('Fatal error: check data is None')
+        return {"Answer": "Error",
+                "data": data}
+    try:
+        connect = db_connect()
+        current_connect = connect.cursor()
+    except:
+        logging.error('Fatal error: connect database')
+        return {"Answer": "Error",
+            "data": data}
+    else:
+        try:
+            current_connect.execute("SELECT password FROM users where id = '{}'".format(
+                data['id']
+            ))
+            result = current_connect.fetchall()
+        except:
+            logging.error('Fatal error: execute database')
+            return {"Answer": "Error"}
+        else:
+            try:
+                password_hash = hashlib.md5()
+                password_hash.update(data['old_password'].encode())
+                data['old_password'] = password_hash.hexdigest()
+                if data['old_password'] == result[0]['password']:
+                    password_hash = hashlib.md5()
+                    password_hash.update(data['new_password'].encode())
+                    data['new_password'] = password_hash.hexdigest()
+                    sql = "UPDATE users SET password='{}' WHERE id='1'".format(
+                        data["new_password"]
+                    )
+                    current_connect.execute(sql)
+                    connect.commit()
+                    connect.close()
+                    return {"Answer": "Succes"}
+                else:
+                    return {"Answer": "Wrong password"}
+            except:
+                logging.error('Fatal error: Password comparison')
+                return {"Answer": "Error"}
