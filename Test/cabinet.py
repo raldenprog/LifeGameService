@@ -1,5 +1,5 @@
 #for other OS
-from app.api.user_cabinet.cabinet import user_cabinet
+from app.api.user_cabinet.cabinet import user_cabinet, change_password
 
 #for Linux
 '''
@@ -17,7 +17,7 @@ def cabinet_done():
     data = {
         "id": "2"
     }
-    print(user_cabinet(data))
+    user_cabinet(data)
 
 
 def cabinet_error():
@@ -27,5 +27,14 @@ def cabinet_error():
     print(user_cabinet(data))
 
 
+def check_change_password():
+    data = {"id": "1",
+            "login": "Value",
+            "old_password": "pinlox123",
+            "new_password": "qwerty"
+            }
+    print (change_password(data))
+
 cabinet_done()
-cabinet_error()
+#cabinet_error()
+#check_change_password()
