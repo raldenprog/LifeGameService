@@ -15,10 +15,8 @@ def db_connect():
                                   password='pinlox123',
                                   db='life_game_service_database',
                                   cursorclass=pymysql.cursors.DictCursor)
-        current_connect = connect.cursor()
         return (connect)
     except:
         logging.error('Fatal error: connect database')
-        return {"Answer": "Error",
-                "data": data}
+        return {"Answer": "Error"}
 
