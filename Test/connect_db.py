@@ -23,7 +23,8 @@ def test_connect_db(data):
         current_connect.execute("SELECT * FROM users where id = '{}'".format(
                         data['id']
                     ))
-        db_connect().commit()
+        connect.commit()
+        connect.close()
         result = current_connect.fetchall()
         return {"Answer": "Ok",
                 "data": result}
