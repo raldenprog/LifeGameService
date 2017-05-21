@@ -1,6 +1,7 @@
 import logging
 
-def check_id(id, current_connect):
+
+def check_id(id_user, current_connect):
     '''
     Входные параметры:
     id
@@ -14,10 +15,10 @@ def check_id(id, current_connect):
     Возвращает 1 если id есть, 0 если id нет
     '''
     try:
-        sql = "SELECT id FROM users"
+        sql = "SELECT * FROM users where id = '{}'".format(id_user)
         current_connect.execute(sql)
-        result = current_connect.fetchall()
-        if len(result) >= id:
+        result = current_connect.fetchall()[0]
+        if len(result['password']) != 0:
             return 1
         else:
             return 0

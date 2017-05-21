@@ -16,15 +16,9 @@ from connect_db import db_connect
 '''
 
 
-
 logging.basicConfig(filename='logger.log',
                     format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
                     level=logging.INFO)
-
-
-
-
-
 
 
 def user_cabinet(data):
@@ -62,33 +56,28 @@ def user_cabinet(data):
         logging.error('Fatal error: param id')
         return {"Answer": "Error",
                 "data": data}
+    connect, current_connect = db_connect()
+    if connect == -1:
+        return {"Answer": "Error"}
     try:
-        connect = db_connect()
-        current_connect = connect.cursor()
-    except:
-        logging.error('Fatal error: connect database')
-        return {"Answer": "Error",
-                "data": data}
-    try:
-        if (check_id(int(data["id"]), current_connect)) == 0:
+        if check_id(data["id"], current_connect) == 0:
             return {"Answer": "Id not found",
                     "data": data}
     except:
         logging.error('Fatal error: check id')
         return {"Answer": "Error",
                 "data": data}
-    else:
-        try:
-            current_connect.execute("SELECT * FROM users where id = '{}'".format(
-                data['id']
-            ))
-            connect.commit()
-            result = current_connect.fetchall()
-            return {"Answer": "Success",
-                    "data": result}
-        except:
-            logging.error('Fatal error: execute database')
-            return {"Answer": "Error"}
+    try:
+        current_connect.execute("SELECT * FROM users where id = '{}'".format(
+            data['id']
+        ))
+        connect.commit()
+        result = current_connect.fetchall()[0]
+        return {"Answer": "Success",
+                "data": result}
+    except:
+        logging.error('Fatal error: execute database')
+        return {"Answer": "Error"}
 
 
 def change_password(data):
@@ -233,8 +222,10 @@ def edit_cabinet(data):
                     "data": data}
         else:
             try:
-                sql = "UPDATE users SET name='{}', patronymic='{}', email='{}', sex='{}', city='{}', Educational='{}', logo='{}' WHERE id='{}'".format(
-                    data["name"], data["patronymic"], data["email"], data["sex"], data["city"], data["Educational"], data["logo"], data["id"]
+                sql = "UPDATE users SET name='{}', patronymic='{}', email='{}', sex='{}', city='{}'," \
+                      " Educational='{}', logo='{}' WHERE id='{}'".format(
+                    data["name"], data["patronymic"], data["email"], data["sex"], data["city"],
+                    data["Educational"], data["logo"], data["id"]
                     )
                 current_connect.execute(sql)
                 connect.commit()

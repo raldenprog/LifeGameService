@@ -16,19 +16,19 @@ data = {
         "id": "1"
         }
 
-def test_connect_db(data):
+
+def connect_db(data):
     try:
-        connect = db_connect()
-        current_connect = connect.cursor()
+        connect, current_connect = db_connect()
         current_connect.execute("SELECT * FROM users where id = '{}'".format(
                         data['id']
                     ))
         connect.commit()
         connect.close()
-        result = current_connect.fetchall()
+        result = current_connect.fetchall()[0]
         return {"Answer": "Ok",
                 "data": result}
     except:
         return {"Answer": "Error"}
 
-print (test_connect_db(data))
+print (connect_db(data))

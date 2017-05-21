@@ -12,9 +12,10 @@ sys.path.insert(0, directory_user_cabinet)
 from cabinet import user_cabinet
 '''
 
+
 def cabinet_done():
     data = {
-        "id": "1"
+        "id": "2"
     }
     print(user_cabinet(data))
 
