@@ -110,8 +110,7 @@ def change_password(data):
         return {"Answer": "Error",
                 "data": data}
     try:
-        connect = db_connect()
-        current_connect = connect.cursor()
+        connect, current_connect = db_connect()
     except:
         logging.error('Fatal error: connect database')
         return {"Answer": "Error",
@@ -205,8 +204,7 @@ def edit_cabinet(data):
         return {"Answer": "Error",
                 "data": data}
     try:
-        connect = db_connect()
-        current_connect = connect.cursor()
+        connect, current_connect = db_connect()
     except:
         logging.error('Fatal error: connect database')
         return {"Answer": "Error",
@@ -236,20 +234,3 @@ def edit_cabinet(data):
             except:
                 logging.error('Fatal error: Password comparison')
                 return {"Answer": "Error"}
-
-data={"id": "12",
-        "login": "Value",
-        "password": "anton",
-        "name": "Value1",
-        "patronymic": "Value2",
-        "email": "Value3",
-        "sex": "Value4",
-        "city": "Value5",
-        "Educational": "Value6",
-        "logo": "Value7",
-        "is_admin": "Value",
-        "is_captain": "Value",
-        "is_moderator": "Value",
-        }
-
-print (edit_cabinet(data))
