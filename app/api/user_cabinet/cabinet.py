@@ -86,7 +86,7 @@ def change_password(data):
         }
 
     Выходные данные:
-    "Answer": "Succes"
+    {"Answer": "Succes"}
 
     Функция получает json с id пользователя, старым паролем и новым.
     Проверяет элементы data, None или нет.
@@ -131,8 +131,8 @@ def change_password(data):
                     password_hash = hashlib.md5()
                     password_hash.update(data['new_password'].encode())
                     data['new_password'] = password_hash.hexdigest()
-                    sql = "UPDATE users SET password='{}' WHERE id='1'".format(
-                        data["new_password"]
+                    sql = "UPDATE users SET password='{}' WHERE id='{}'".format(
+                        data["new_password"], data["id"]
                     )
                     current_connect.execute(sql)
                     connect.commit()
@@ -140,6 +140,92 @@ def change_password(data):
                     return {"Answer": "Succes"}
                 else:
                     return {"Answer": "Wrong password"}
+            except:
+                logging.error('Fatal error: Password comparison')
+                return {"Answer": "Error"}
+
+
+def edit_cabinet(data):
+    """
+        Входные данные:
+         json{"id": "Value",
+            "name": "Value",
+            "patronymic": "Value",
+            "email": "Value",
+            "sex": "Value",
+            "city": "Value",
+            "Educational": "Value",
+            "logo": "Value",
+            }
+
+        Выходные данные:
+        {"Answer": "Succes"}
+        json{"id": "Value",
+            "login": "Value",
+            "password": "anton",
+            "name": "Value",
+            "patronymic": "Value",
+            "email": "Value",
+            "sex": "Value",
+            "city": "Value",
+            "Educational": "Value",
+            "logo": "Value",
+            "is_admin": "Value",
+            "is_captain": "Value",
+            "is_moderator": "Value",
+            }
+
+             Функция получает json с id пользователя, и информацией о пользователе.
+             Проверяет элементы data, None или нет.
+             Покдлючается к базе данных с помощью функции db_connect(),
+             Получает количество id в базе и если data["id"]<= количеству, то данный id есть.
+             Получает информацию о пользователе и перезаписывает поля в базе на те, что функция получила на вход
+             Если все успешно, то функция вернет {'Answer': 'Succes'} и data.
+        """
+    try:
+        for i in data:
+            if data[i] is None:
+                logging.info('Incorrect parameter '+i+' - None')
+                data[i] = "Empty"
+                return {"Answer": "Error",
+                        "data": data}
+    except:
+        logging.error('Fatal error: check data is None')
+        return {"Answer": "Error",
+                "data": data}
+    try:
+        connect = db_connect()
+        current_connect = connect.cursor()
+    except:
+        logging.error('Fatal error: connect database')
+        return {"Answer": "Error",
+                "data": data}
+    else:
+        try:
+            check_id=0
+            sql = "SELECT id FROM users"
+            current_connect.execute(sql)
+            result = current_connect.fetchall()
+            if len(result) >= int(data["id"]):
+                check_id=1
+            if check_id==0:
+                return {"Answer": "Id not found",
+                        "data": data}
+        except:
+            logging.error('Fatal error: check id')
+            return {"Answer": "Error",
+                    "data": data}
+        else:
+            try:
+                sql = "UPDATE users SET name='{}', patronymic='{}', email='{}', sex='{}', city='{}', Educational='{}', logo='{}' WHERE id='{}'".format(
+                    data["name"], data["patronymic"], data["email"], data["sex"], data["city"], data["Educational"], data["logo"], data["id"]
+                    )
+                current_connect.execute(sql)
+                connect.commit()
+                connect.close()
+                return {"Answer": "Succes",
+                        "data": data
+                        }
             except:
                 logging.error('Fatal error: Password comparison')
                 return {"Answer": "Error"}
