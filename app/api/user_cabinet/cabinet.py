@@ -1,8 +1,8 @@
 import logging
 import hashlib
-
 #for other OS
 from app.api.database.connect_db import db_connect
+from app.api.user_cabinet.id_check import check_id
 
 #for Linux
 '''
@@ -20,6 +20,11 @@ from connect_db import db_connect
 logging.basicConfig(filename='logger.log',
                     format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
                     level=logging.INFO)
+
+
+
+
+
 
 
 def user_cabinet(data):
@@ -65,13 +70,7 @@ def user_cabinet(data):
         return {"Answer": "Error",
                 "data": data}
     try:
-        check_id = 0
-        sql = "SELECT id FROM users"
-        current_connect.execute(sql)
-        result = current_connect.fetchall()
-        if len(result) >= int(data["id"]):
-            check_id = 1
-        if check_id == 0:
+        if (check_id(int(data["id"]), current_connect)) == 0:
             return {"Answer": "Id not found",
                     "data": data}
     except:
@@ -129,13 +128,7 @@ def change_password(data):
         return {"Answer": "Error",
             "data": data}
     try:
-        check_id = 0
-        sql = "SELECT id FROM users"
-        current_connect.execute(sql)
-        result = current_connect.fetchall()
-        if len(result) >= int(data["id"]):
-            check_id = 1
-        if check_id == 0:
+        if (check_id(int(data["id"]), current_connect)) == 0:
             return {"Answer": "Id not found",
                     "data": data}
     except:
@@ -206,8 +199,8 @@ def edit_cabinet(data):
 
              Функция получает json с id пользователя, и информацией о пользователе.
              Проверяет элементы data, None или нет.
-             Покдлючается к базе данных с помощью функции db_connect(),
-             Получает количество id в базе и если data["id"]<= количеству, то данный id есть.
+             Покдлючается к базе данных с помощью функции db_connect().
+             Проверка есть ли id в с помощью функции check_id
              Получает информацию о пользователе и перезаписывает поля в базе на те, что функция получила на вход
              Если все успешно, то функция вернет {'Answer': 'Succes'} и data.
         """
@@ -231,13 +224,7 @@ def edit_cabinet(data):
                 "data": data}
     else:
         try:
-            check_id=0
-            sql = "SELECT id FROM users"
-            current_connect.execute(sql)
-            result = current_connect.fetchall()
-            if len(result) >= int(data["id"]):
-                check_id=1
-            if check_id==0:
+            if (check_id(int(data["id"]), current_connect)) == 0:
                 return {"Answer": "Id not found",
                         "data": data}
         except:
