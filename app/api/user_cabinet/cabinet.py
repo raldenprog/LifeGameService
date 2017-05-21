@@ -58,9 +58,24 @@ def user_cabinet(data):
         return {"Answer": "Error",
                 "data": data}
     try:
-        current_connect = db_connect().cursor()
+        connect = db_connect()
+        current_connect = connect.cursor()
     except:
         logging.error('Fatal error: connect database')
+        return {"Answer": "Error",
+                "data": data}
+    try:
+        check_id = 0
+        sql = "SELECT id FROM users"
+        current_connect.execute(sql)
+        result = current_connect.fetchall()
+        if len(result) >= int(data["id"]):
+            check_id = 1
+        if check_id == 0:
+            return {"Answer": "Id not found",
+                    "data": data}
+    except:
+        logging.error('Fatal error: check id')
         return {"Answer": "Error",
                 "data": data}
     else:
@@ -68,7 +83,7 @@ def user_cabinet(data):
             current_connect.execute("SELECT * FROM users where id = '{}'".format(
                 data['id']
             ))
-            db_connect().commit()
+            connect.commit()
             result = current_connect.fetchall()
             return {"Answer": "Success",
                     "data": result}
@@ -113,6 +128,20 @@ def change_password(data):
         logging.error('Fatal error: connect database')
         return {"Answer": "Error",
             "data": data}
+    try:
+        check_id = 0
+        sql = "SELECT id FROM users"
+        current_connect.execute(sql)
+        result = current_connect.fetchall()
+        if len(result) >= int(data["id"]):
+            check_id = 1
+        if check_id == 0:
+            return {"Answer": "Id not found",
+                    "data": data}
+    except:
+        logging.error('Fatal error: check id')
+        return {"Answer": "Error",
+                "data": data}
     else:
         try:
             current_connect.execute("SELECT password FROM users where id = '{}'".format(
