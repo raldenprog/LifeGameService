@@ -17,7 +17,7 @@ from connect_db import db_connect
 
 
 logging.basicConfig(filename='logger.log',
-                    format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
+                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',
                     level=logging.INFO)
 
 
@@ -114,9 +114,9 @@ def change_password(data):
     except:
         logging.error('Fatal error: connect database')
         return {"Answer": "Error",
-            "data": data}
+                "data": data}
     try:
-        if (check_id(int(data["id"]), current_connect)) == 0:
+        if (check_id(data["id"], current_connect)) == 0:
             return {"Answer": "Id not found",
                     "data": data}
     except:
@@ -128,16 +128,17 @@ def change_password(data):
             current_connect.execute("SELECT password FROM users where id = '{}'".format(
                 data['id']
             ))
-            result = current_connect.fetchall()
+            result = current_connect.fetchall()[0]
         except:
             logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
         else:
             try:
+
                 password_hash = hashlib.md5()
                 password_hash.update(data['old_password'].encode())
                 data['old_password'] = password_hash.hexdigest()
-                if data['old_password'] == result[0]['password']:
+                if data['old_password'] == result['password']:
                     password_hash = hashlib.md5()
                     password_hash.update(data['new_password'].encode())
                     data['new_password'] = password_hash.hexdigest()
@@ -147,7 +148,7 @@ def change_password(data):
                     current_connect.execute(sql)
                     connect.commit()
                     connect.close()
-                    return {"Answer": "Succes"}
+                    return {"Answer": "Success"}
                 else:
                     return {"Answer": "Wrong password"}
             except:
