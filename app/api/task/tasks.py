@@ -1,7 +1,7 @@
 # coding: utf-8
 import pymysql
 import logging
-
+from app.api.database.connect_db import db_connect
 
 logging.basicConfig(filename='logger.log',
                     format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
@@ -17,6 +17,9 @@ def empty_task_data():
             "task_hint" :       "Unchecked",
             "task_solve" :      "Unchecked",
             "task_link" :       "Unchecked",
+            "status"    :       "Unchecked",
+            "puplic_status" :   "Unchecked",
+            "event"         :   "Unchecked",
             "database" :        "Unchecked"
             }
 
@@ -39,7 +42,8 @@ Unrecorded - таск не залит в базу
 
 def create_one_task(data):
     check_field = ["id", "task_category", "task_name", "task_flag", "task_description",
-                   "task_point", "task_hint", "task_solve", "task_link"]
+                   "task_point", "task_hint", "task_solve", "task_link", "status",
+                   "public_status", "event"]
 
     error_flag = 0
     check_data = empty_task_data()
@@ -59,13 +63,7 @@ def create_one_task(data):
         return {"answer": "Error",
                 "data": check_data}
     try:
-        # Заменить на функцию
-        connect = pymysql.connect(host='5.137.227.36',
-                                  user='dev_life_user',
-                                  password='pinlox123',
-                                  db='life_game_service_database',
-                                  cursorclass=pymysql.cursors.DictCursor)
-        current_connect = connect.cursor()
+        connect, current_connect = db_connect()
         check_data["database"] = "Connected"
     except:
         check_data["database"] = "Disconnected"
@@ -77,7 +75,7 @@ def create_one_task(data):
             sql = "INSERT INTO task" \
                 " VALUES (null,\"{id}\",\"{task_category}\",\"{task_name}\"," \
                 "\"{task_flag}\",\"{task_description}\",\"{task_point}\",\"{task_hint}\"," \
-                "\"{task_solve}\",\"{task_link}\")".format(**data)
+                "\"{task_solve}\",\"{task_link}\",\"{status}\",\"{public_status}\",\"{event}\")".format(**data)
             print(sql)
             current_connect.execute(sql)
             connect.commit()
@@ -150,7 +148,8 @@ json = {    "id" :              "1",
             "task_hint" :       7,
             "task_solve" :      8,
             "task_link" :       9
-        },{    "id" :              "11",
+        },\
+       {    "id" :              "11",
             "task_category" :   21,
             "task_name" :       31,
             "task_flag" :       41,
@@ -161,7 +160,42 @@ json = {    "id" :              "1",
             "task_link" :       95
             }
 
-def get_task(data):
-    
+def get_task_event_name(data):
+    connect, current_connect = db_connect()
+    sql = "SELECT event, name FROM task".format(data)
+
+    try:
+        current_connect.execute(sql)
+        result = current_connect.fetchall()
+    except:
+        logging.error('Fatal error: execute database')
+        return {'Answer': 'Error'}
+    return {'Answer': 'Success', 'data': result}
+
+def get_task_event_category(data):
+    connect, current_connect = db_connect()
+    sql = "SELECT event, task_category FROM task".format(data)
+
+    try:
+        current_connect.execute(sql)
+        result = current_connect.fetchall()
+    except:
+        logging.error('Fatal error: execute database')
+        return {'Answer': 'Error'}
+    return {'Answer': 'Success', 'data': result}
+
+def get_task_event(data):
+    connect, current_connect = db_connect()
+
+    sql = "SELECT event FROM task".format(data)
+
+    try:
+        current_connect.execute(sql)
+        result = current_connect.fetchall()
+    except:
+        logging.error('Fatal error: execute database')
+        return {'Answer': 'Error'}
+    return {'Answer': 'Success', 'data': result}
+
 
 print create_few_tasks(json)

@@ -80,6 +80,9 @@ def create_table_task():
           "task_hint varchar(1024) NOT NULL," \
           "task_solve varchar(1024) NOT NULL," \
           "task_link varchar(512) NOT NULL," \
+          "status int(1) NOT NULL" \
+          "public_status int(1) NOT NULL" \
+          "event varchar(255) NOT NULL" \
           "PRIMARY KEY (id)" \
           ") " \
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
