@@ -73,6 +73,7 @@ def user_cabinet(data):
         ))
         connect.commit()
         result = current_connect.fetchall()[0]
+        connect.close()
         return {"Answer": "Success",
                 "data": result}
     except:
@@ -229,7 +230,7 @@ def edit_cabinet(data):
                 current_connect.execute(sql)
                 connect.commit()
                 connect.close()
-                return {"Answer": "Succes",
+                return {"Answer": "Success",
                         "data": data
                         }
             except:
