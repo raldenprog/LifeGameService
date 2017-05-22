@@ -12,15 +12,23 @@ print (directory_user_cabinet)
 sys.path.insert(0, directory_user_cabinet)
 from connect_db import db_connect
 '''
-
 data = {
         "id": "1"
         }
-current_connect = db_connect().cursor()
-current_connect.execute("SELECT * FROM users where id = '{}'".format(
-                data['id']
-            ))
-db_connect().commit()
-result = current_connect.fetchall()
-print (result)
-print ("OK")
+
+
+def connect_db(data):
+    try:
+        connect, current_connect = db_connect()
+        current_connect.execute("SELECT * FROM users where id = '{}'".format(
+                        data['id']
+                    ))
+        connect.commit()
+        connect.close()
+        result = current_connect.fetchall()[0]
+        return {"Answer": "Ok",
+                "data": result}
+    except:
+        return {"Answer": "Error"}
+
+print (connect_db(data))
