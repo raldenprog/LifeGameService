@@ -1,0 +1,74 @@
+registration_users.py[LINE:17] ERROR    Fatal error in function fun, param 'name' 2017-05-18 21:49:51,104
+registration_users.py[LINE:19] ERROR    Fatal error in function fun, param Education 2017-05-18 21:57:15,479
+registration_users.py[LINE:19] ERROR    Fatal error in function fun, param login 2017-05-18 21:57:15,480
+registration_users.py[LINE:19] ERROR    Fatal error in function fun, param login 2017-05-18 21:57:27,932
+registration_users.py[LINE:34] ERROR    Fatal error in function fun, param login 2017-05-18 22:05:06,487
+registration_users.py[LINE:34] ERROR    Fatal error in function fun, param login 2017-05-18 22:06:03,157
+registration_users.py[LINE:34] ERROR    Fatal error in function fun, param login 2017-05-18 22:06:03,158
+registration_users.py[LINE:34] ERROR    Fatal error in function fun, param login 2017-05-18 22:06:16,265
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param logo_name 2017-05-18 23:27:57,610
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param login 2017-05-18 23:27:57,633
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param logo_name 2017-05-18 23:28:42,489
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param login 2017-05-18 23:28:42,489
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param login 2017-05-19 01:36:47,926
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param login 2017-05-19 17:13:09,772
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param login 2017-05-19 17:13:42,381
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param login 2017-05-19 17:14:30,019
+registration_users.py[LINE:28] ERROR    Fatal error in function fun, param login 2017-05-19 17:14:58,064
+login_user.py[LINE:24] ERROR    Fatal error in function fun, param login 2017-05-19 19:58:56,004
+registration_users.py[LINE:29] ERROR    Fatal error: param login 2017-05-21 22:21:35,909
+registration_users.py[LINE:29] ERROR    Fatal error: param login 2017-05-21 22:22:57,727
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:35:38,482
+id_check.py [LINE:26] ERROR    Fatal error: check id 2017-05-21 22:45:22,967
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:45:22,971
+id_check.py [LINE:26] ERROR    Fatal error: check id 2017-05-21 22:45:46,939
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:45:46,943
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:48:27,139
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:48:27,145
+id_check.py [LINE:28] ERROR    Fatal error: check id 2017-05-21 22:48:43,866
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:48:43,873
+id_check.py [LINE:28] ERROR    Fatal error: check id 2017-05-21 22:49:32,170
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:49:32,177
+id_check.py [LINE:28] ERROR    Fatal error: check id 2017-05-21 22:50:37,659
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:50:37,664
+id_check.py [LINE:28] ERROR    Fatal error: check id 2017-05-21 22:50:51,279
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:50:51,284
+id_check.py [LINE:28] ERROR    Fatal error: check id 2017-05-21 22:52:27,456
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:52:27,460
+id_check.py [LINE:28] ERROR    Fatal error: check id 2017-05-21 22:53:39,597
+id_check.py [LINE:28] ERROR    Fatal error: check id 2017-05-21 22:53:39,601
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:53:39,606
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:54:10,590
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:54:49,956
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:54:57,844
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:55:25,645
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:55:51,971
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:55:51,974
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:55:51,982
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:07,514
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:07,519
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:56:07,526
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:18,315
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:18,319
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:56:18,322
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:32,384
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:32,387
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:56:32,392
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:38,637
+id_check.py [LINE:27] ERROR    Fatal error: check id 2017-05-21 22:56:38,640
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:56:38,645
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 22:57:29,993
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:00:28,925
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:02:02,060
+id_check.py [LINE:26] ERROR    Fatal error: check id 2017-05-21 23:02:15,750
+cabinet.py  [LINE:80] ERROR    Fatal error: execute database 2017-05-21 23:02:15,751
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:02:15,752
+id_check.py [LINE:26] ERROR    Fatal error: check id 2017-05-21 23:02:19,415
+cabinet.py  [LINE:80] ERROR    Fatal error: execute database 2017-05-21 23:02:19,419
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:02:19,419
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:02:24,588
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:02:38,120
+cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:04:19,296
+login_user.py[LINE:35] ERROR    Fatal error: connect database 2017-05-21 23:04:45,954
+login_user.py[LINE:24] ERROR    Fatal error: param login 2017-05-21 23:04:45,954
+

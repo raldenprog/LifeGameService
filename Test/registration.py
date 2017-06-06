@@ -12,6 +12,7 @@ sys.path.insert(0, directory_user_cabinet)
 from registration_users import add_user
 '''
 
+
 def registration_done():
     data = {
         'login': 'Anton',

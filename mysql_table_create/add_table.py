@@ -1,12 +1,9 @@
 import pymysql
-
+from app.api.database.connect_db import db_connect
 
 def create_table_user():
-    connect = pymysql.connect(host='5.137.232.44',
-                              user='dev_life_user',
-                              password='pinlox123',
-                              db='life_game_service_database',
-                              cursorclass=pymysql.cursors.DictCursor)
+
+    connect, current_connect = db_connect()
 
     sql = "CREATE TABLE users (" \
         "id int(11) NOT NULL AUTO_INCREMENT," \
@@ -27,7 +24,6 @@ def create_table_user():
         "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
     print(sql)
     try:
-        current_connect = connect.cursor()
         current_connect.execute(sql)
         current_connect.close()
     except:
@@ -35,11 +31,7 @@ def create_table_user():
 
 
 def create_table_event():
-    connect = pymysql.connect(host='5.137.232.44',
-                              user='dev_life_user',
-                              password='pinlox123',
-                              db='life_game_service_database',
-                              cursorclass=pymysql.cursors.DictCursor)
+    connect, current_connect = db_connect()
 
     sql = "CREATE TABLE event (" \
         "id int(11) NOT NULL AUTO_INCREMENT," \
@@ -56,7 +48,6 @@ def create_table_event():
         "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
     print(sql)
     try:
-        current_connect = connect.cursor()
         current_connect.execute(sql)
         current_connect.close()
     except:
@@ -64,11 +55,7 @@ def create_table_event():
 
 
 def create_table_task():
-    connect = pymysql.connect(host='5.137.232.44',
-                              user='dev_life_user',
-                              password='pinlox123',
-                              db='life_game_service_database',
-                                  cursorclass=pymysql.cursors.DictCursor)
+    connect, current_connect = db_connect()
 
     sql = "CREATE TABLE task (" \
           "id int(11) NOT NULL AUTO_INCREMENT," \
@@ -85,7 +72,6 @@ def create_table_task():
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
     print(sql)
     try:
-        current_connect = connect.cursor()
         current_connect.execute(sql)
         current_connect.close()
     except:
