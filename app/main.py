@@ -49,20 +49,40 @@ async def main_server(reader, writer):
 
 def quest(data, conn):
     print('Action = ', data['Action'])
-    if data['Action'] == 'Login':
+    if data['Action'] == 'Add_user':
         thread = threading.Thread(target=func1, args=(data['Data'], conn))
-    elif data['Action'] == 'Registration':
+    elif data['Action'] == 'Registration_user':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Update_event':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Scoreboard_all_user':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Scoreboard_event_users':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Task_create_one_task':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Task_create_few_tasks':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Task_get_task_event_name':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Task_get_task_event_category':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'User_cabinet':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Change_password':
+        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+    elif data['Action'] == 'Edit_cabinet':
         thread = threading.Thread(target=func2, args=(data['Data'], conn))
     else:
-        ans = "Error"
+        ans = {"Error": "Action error"}
     thread.start()
 
 
 if __name__ == "__main__":
     sock = socket.socket()
     try:
-        sock.bind(("127.0.0.1", 7778))
-        sock.listen(20)
+        sock.bind(("127.0.0.1", 7777))
+        sock.listen(10)
         while True:
             conn, addr = sock.accept()
             data = conn.recv(2048)
