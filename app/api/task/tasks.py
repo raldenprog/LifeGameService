@@ -135,7 +135,7 @@ def create_few_tasks(batch_data):
                 "data": None,
                 "number": 0}
 
-    return {"answer": "Ok",
+    return {"answer": "Success",
             "data": answers,
             "number": len(batch_data)}
 
