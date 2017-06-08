@@ -19,4 +19,3 @@ def db_connect():
     except:
         logging.error('Fatal error: connect database')
         return -1, -1
-

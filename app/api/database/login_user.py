@@ -9,10 +9,8 @@ logging.basicConfig(filename='logger.log',
 
 
 def login_verification(user_data):
-    check = ['login', 'password']
-    registration_data = {
-        'login': '', 'password': ''
-    }
+    check = ['Login', 'Password']
+    registration_data = {'Login': '', 'Password': ''}
     for data in check:
         try:
             if user_data[data] is None:
@@ -37,11 +35,9 @@ def get_user(user_data):
     else:
         try:
             password_hash = hashlib.md5()
-            password_hash.update(user_data['password'].encode())
-            user_data['password'] = password_hash.hexdigest()
-            current_connect.execute("SELECT * FROM users where login = '{}' and password = '{}'".format(
-                user_data['login'], user_data['password']
-            ))
+            password_hash.update(user_data['Password'].encode())
+            user_data['Password'] = password_hash.hexdigest()
+            current_connect.execute("SELECT * FROM users WHERE login = '{}' AND password = '{}'".format(user_data['login'], user_data['password']))
             connect.commit()
         except:
             logging.error('Fatal error: execute database')

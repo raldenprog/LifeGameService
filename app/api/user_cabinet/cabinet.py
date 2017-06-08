@@ -1,20 +1,7 @@
 import logging
 import hashlib
-#for other OS
 from app.api.database.connect_db import db_connect
 from app.api.user_cabinet.id_check import check_id
-
-#for Linux
-'''
-import sys
-import os
-directory_user_cabinet= os.getcwd()
-directory_user_cabinet=directory_user_cabinet.split("user_cabinet")[0]
-directory_user_cabinet+="database"
-sys.path.insert(0, directory_user_cabinet)
-from connect_db import db_connect
-'''
-
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',
@@ -23,129 +10,83 @@ logging.basicConfig(filename='logger.log',
 
 def user_cabinet(data):
     """
-    Входные данные:
-    json{"id": "Value"
-        }
-        
-    Выходные данные:
-    json{"id": "Value",
-        "login": "Value",
-        "password": "anton",
-        "name": "Value",
-        "patronymic": "Value",
-        "email": "Value",
-        "sex": "Value",
-        "city": "Value",
-        "Educational": "Value",
-        "logo": "Value",
-        "is_admin": "Value",
-        "is_captain": "Value",
-        "is_moderator": "Value",
-        }
-        
-        Функция подключается к базе данных,находит пользователя по id, который был получен на вход.
-        Проверяет, что id не пустой. Возвращает json с данными о пользователе.
+    Функция подключается к базе данных,находит пользователя по id, который был получен на вход.
+    Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     try:
-        if data["id"] is None:
+        if data["ID"] is None:
             logging.info('Incorrect parameter id - None')
-            data["id"] = "Empty"
-            return {"Answer": "Error",
-                    "data": data}
+            data["ID"] = "Empty"
+            return {"Answer": "Error", "Data": data}
     except:
         logging.error('Fatal error: param id')
-        return {"Answer": "Error",
-                "data": data}
+        return {"Answer": "Error", "Data": data}
     connect, current_connect = db_connect()
     if connect == -1:
         return {"Answer": "Error"}
     try:
-        if check_id(data["id"], current_connect) == 0:
-            return {"Answer": "Id not found",
-                    "data": data}
+        if check_id(data["ID"], current_connect) == 0:
+            return {"Answer": "Id not found", "Data": data}
     except:
         logging.error('Fatal error: check id')
-        return {"Answer": "Error",
-                "data": data}
+        return {"Answer": "Error", "Data": data}
     try:
         current_connect.execute("SELECT * FROM users where id = '{}'".format(
-            data['id']
+            data['ID']
         ))
         connect.commit()
         result = current_connect.fetchall()[0]
         connect.close()
-        return {"Answer": "Success",
-                "data": result}
+        return {"Answer": "Success", "Data": result}
     except:
         logging.error('Fatal error: execute database')
         return {"Answer": "Error"}
 
-
 def change_password(data):
     """
-    Входные данные:
-     data = {"id": "1",
-        "old_password": "pinlox123",
-        "new_password": "qwerty"
-        }
-
-    Выходные данные:
-    {"Answer": "Succes"}
-
     Функция получает json с id пользователя, старым паролем и новым.
     Проверяет элементы data, None или нет.
     Покдлючается к базе данных с помощью функции db_connect(), получает хеш пароля в базе по id.
     Если хеш от old_password==паролю в базе, то записывает в базу хеш new_password.
     Если все успешно, то функция вернет {'Answer': 'Succes'}, если не верный пароль - {'Answer': 'Wrong password'}
-
     """
     try:
         for i in data:
             if data[i] is None:
-                logging.info('Incorrect parameter '+i+' - None')
+                logging.info('Incorrect parameter ' + i + ' - None')
                 data[i] = "Empty"
-                return {"Answer": "Error",
-                        "data": data}
+                return {"Answer": "Error", "Data": data}
     except:
         logging.error('Fatal error: check data is None')
-        return {"Answer": "Error",
-                "data": data}
+        return {"Answer": "Error", "Data": data}
     try:
         connect, current_connect = db_connect()
     except:
         logging.error('Fatal error: connect database')
-        return {"Answer": "Error",
-                "data": data}
+        return {"Answer": "Error", "Data": data}
     try:
         if (check_id(data["id"], current_connect)) == 0:
-            return {"Answer": "Id not found",
-                    "data": data}
+            return {"Answer": "Id not found", "Data": data}
     except:
         logging.error('Fatal error: check id')
-        return {"Answer": "Error",
-                "data": data}
+        return {"Answer": "Error", "Data": data}
     else:
         try:
-            current_connect.execute("SELECT password FROM users where id = '{}'".format(
-                data['id']
-            ))
+            current_connect.execute("SELECT Password FROM Users where ID = '{}'".format(data['ID']))
             result = current_connect.fetchall()[0]
         except:
             logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
         else:
             try:
-
                 password_hash = hashlib.md5()
-                password_hash.update(data['old_password'].encode())
-                data['old_password'] = password_hash.hexdigest()
-                if data['old_password'] == result['password']:
+                password_hash.update(data['Old_password'].encode())
+                data['Old_password'] = password_hash.hexdigest()
+                if data['Old_password'] == result['Password']:
                     password_hash = hashlib.md5()
-                    password_hash.update(data['new_password'].encode())
-                    data['new_password'] = password_hash.hexdigest()
-                    sql = "UPDATE users SET password='{}' WHERE id='{}'".format(
-                        data["new_password"], data["id"]
-                    )
+                    password_hash.update(data['New_password'].encode())
+                    data['New_password'] = password_hash.hexdigest()
+                    sql = "UPDATE Users SET Password='{}' WHERE ID='{}'".format(data["New_password"], data["ID"])
                     current_connect.execute(sql)
                     connect.commit()
                     connect.close()
@@ -156,37 +97,8 @@ def change_password(data):
                 logging.error('Fatal error: Password comparison')
                 return {"Answer": "Error"}
 
-
 def edit_cabinet(data):
     """
-        Входные данные:
-         json{"id": "Value",
-            "name": "Value",
-            "patronymic": "Value",
-            "email": "Value",
-            "sex": "Value",
-            "city": "Value",
-            "Educational": "Value",
-            "logo": "Value",
-            }
-
-        Выходные данные:
-        {"Answer": "Succes"}
-        json{"id": "Value",
-            "login": "Value",
-            "password": "anton",
-            "name": "Value",
-            "patronymic": "Value",
-            "email": "Value",
-            "sex": "Value",
-            "city": "Value",
-            "Educational": "Value",
-            "logo": "Value",
-            "is_admin": "Value",
-            "is_captain": "Value",
-            "is_moderator": "Value",
-            }
-
              Функция получает json с id пользователя, и информацией о пользователе.
              Проверяет элементы data, None или нет.
              Покдлючается к базе данных с помощью функции db_connect().
@@ -200,39 +112,37 @@ def edit_cabinet(data):
                 logging.info('Incorrect parameter '+i+' - None')
                 data[i] = "Empty"
                 return {"Answer": "Error",
-                        "data": data}
+                        "Data": data}
     except:
         logging.error('Fatal error: check data is None')
         return {"Answer": "Error",
-                "data": data}
+                "Data": data}
     try:
         connect, current_connect = db_connect()
     except:
         logging.error('Fatal error: connect database')
         return {"Answer": "Error",
-                "data": data}
+                "Data": data}
     else:
         try:
-            if (check_id(int(data["id"]), current_connect)) == 0:
+            if (check_id(int(data["ID"]), current_connect)) == 0:
                 return {"Answer": "Id not found",
-                        "data": data}
+                        "Data": data}
         except:
             logging.error('Fatal error: check id')
             return {"Answer": "Error",
-                    "data": data}
+                    "Data": data}
         else:
             try:
-                sql = "UPDATE users SET name='{}', patronymic='{}', email='{}', sex='{}', city='{}'," \
-                      " Educational='{}', logo='{}' WHERE id='{}'".format(
-                    data["name"], data["patronymic"], data["email"], data["sex"], data["city"],
-                    data["Educational"], data["logo"], data["id"]
+                sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
+                      " Educational='{}', Logo='{}' WHERE ID='{}'".format(
+                    data["Name"], data["Patronymic"], data["Email"], data["Sex"], data["City"],
+                    data["Educational"], data["Logo"], data["ID"]
                     )
                 current_connect.execute(sql)
                 connect.commit()
                 connect.close()
-                return {"Answer": "Success",
-                        "data": data
-                        }
+                return {"Answer": "Success", "Data": data}
             except:
                 logging.error('Fatal error: Password comparison')
                 return {"Answer": "Error"}

@@ -8,22 +8,15 @@ logging.basicConfig(filename='logger.log',
 
 def check_id(id_user, current_connect):
     """
-    Входные параметры:
-    id
-    current_connect
-
-    Выходные:
-    1 OR 0
-
     Передаем функции искомый id и соединение с базой данных
     Получает количество id в базе и если data["id"]<= количеству, то данный id есть.
     Возвращает 1 если id есть, 0 если id нет
     """
     try:
-        sql = "SELECT * FROM users where id = '{}'".format(id_user)
+        sql = "SELECT * FROM Users where ID = '{}'".format(id_user)
         current_connect.execute(sql)
         result = current_connect.fetchall()[0]
-        if len(result['password']) != 0:
+        if len(result['Password']) != 0:
             return 1
         else:
             return 0

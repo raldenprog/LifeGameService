@@ -7,14 +7,12 @@ logging.basicConfig(filename='logger.log',
 
 
 def add_user(user_data):
-    check = ['login', 'password', 'name',
-             'patronymic', 'email', 'sex',
-             'city', 'Educational', 'logo_name', 'logo']
-    registration_data = {
-        'login': '', 'password': '', 'name': '',
-        'patronymic': '', 'email': '', 'sex': '',
-        'city': '', 'Educational': '', 'logo_name': '', 'logo': ''
-    }
+    check = ['Login', 'Password', 'Name',
+             'Patronymic', 'Email', 'Sex',
+             'City', 'Educational', 'Logo_name', 'Logo']
+    registration_data = {'Login': '', 'Password': '', 'Name': '',
+        'Patronymic': '', 'Email': '', 'Sex': '',
+        'City': '', 'Educational': '', 'Logo_name': '', 'Logo': ''}
     flag = False
     for data in check:
         try:
@@ -30,9 +28,9 @@ def add_user(user_data):
             flag = True
     if flag:
         return {"Answer": "Error", 'Data': registration_data}
-    with open('../app/resources/logo_users/{}'.format(user_data['logo_name']), 'w') as logo_file:
-        logo_file.write(user_data['logo'])
-        registration_data['logo'] = 'True'
+    with open('../app/resources/logo_users/{}'.format(user_data['Logo_name']), 'w') as logo_file:
+        logo_file.write(user_data['Logo'])
+        registration_data['Logo'] = 'True'
     return input_user_table(registration_data)
 
 
@@ -41,13 +39,13 @@ def input_user_table(user_data):
     if connect == -1:
         return {"Answer": "Error"}
     password_hash = hashlib.md5()
-    password_hash.update(user_data['password'].encode())
-    user_data['password'] = password_hash.hexdigest()
+    password_hash.update(user_data['Password'].encode())
+    user_data['Password'] = password_hash.hexdigest()
     try:
         sql = "INSERT INTO users" \
-            " VALUES (null,\"{login}\",\"{password}\",\"{name}\"," \
-            "\"{patronymic}\",\"{email}\",\"{sex}\",\"{city}\"," \
-            "\"{Educational}\",\"{logo}\", 1, 1, 1)".format(**user_data)
+            " VALUES (null,\"{Login}\",\"{Password}\",\"{Name}\"," \
+            "\"{Patronymic}\",\"{Email}\",\"{Sex}\",\"{City}\"," \
+            "\"{Educational}\",\"{Logo}\", 1, 1, 1)".format(**user_data)
         print(sql)
         current_connect.execute(sql)
         connect.commit()
@@ -57,4 +55,3 @@ def input_user_table(user_data):
         return {'Answer': 'Error'}
 
     return {'Answer': 'Success'}
-

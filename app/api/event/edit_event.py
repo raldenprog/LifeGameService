@@ -8,14 +8,12 @@ logging.basicConfig(filename='logger.log',
 
 
 def registration_event(user_data):
-    check = ['name', 'description', 'logo',
-             'status', 'date_start', 'date_end',
-             'date_stop', 'date_continue']
-    registration_data = {
-        'name': '', 'description': '', 'logo': '',
-        'status': '', 'date_start': '', 'date_end': '',
-        'date_stop': '', 'date_continue': ''
-    }
+    check = ['Name', 'Description', 'Logo',
+             'Status', 'Date_start', 'Date_end',
+             'Date_stop', 'Date_continue']
+    registration_data = {'Name': '', 'Description': '', 'Logo': '',
+        'Status': '', 'Date_start': '', 'Date_end': '',
+        'Date_stop': '', 'Date_continue': ''}
     flag = False
     for data in check:
         try:
@@ -39,11 +37,7 @@ def input_event_table(user_data):
     if connect == -1:
         return {"Answer": "Error"}
     try:
-        sql = "INSERT INTO event" \
-            " VALUES (null,\"{name}\",\"{description}\",\"{logo}\"," \
-            "\"{status}\",{date_start},{date_end},{date_stop}," \
-            "{date_continue})".format(**user_data)
-        print(sql)
+        sql = "INSERT INTO event VALUES (null, \"{Name}\", \"{Description}\", \"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, {Date_stop}, {Date_continue})".format(**user_data)
         current_connect.execute(sql)
         connect.commit()
         connect.close()
@@ -55,14 +49,12 @@ def input_event_table(user_data):
 
 
 def update_event(user_data):
-    check = ['id', 'name', 'description', 'logo',
-             'status', 'date_start', 'date_end',
-             'date_stop', 'date_continue']
-    update_data = {
-        'id': '', 'name': '', 'description': '', 'logo': '',
-        'status': '', 'date_start': '', 'date_end': '',
-        'date_stop': '', 'date_continue': ''
-    }
+    check = ['ID', 'Name', 'Description', 'Logo',
+             'Status', 'Date_start', 'Date_end',
+             'Date_stop', 'Date_continue']
+    update_data = {'ID': '', 'Name': '', 'Description': '', 'Logo': '',
+        'Status': '', 'Date_start': '', 'Date_end': '',
+        'Date_stop': '', 'Date_continue': ''}
     flag = False
     for data in check:
         try:
@@ -80,23 +72,18 @@ def update_event(user_data):
         return {"Answer": "Error", 'Data': update_data}
     return update_event_table(update_data)
 
-
 def update_event_table(user_data):
     connect, current_connect = db_connect()
     if connect == -1:
         return {"Answer": "Error"}
     try:
-        sql = "UPDATE event SET" \
-            "name='{name}', description='{description}', logo='{logo}', status='{status}', date_start='{date_start}'," \
-            " date_end='{date_end}', date_stop='{date_stop}', date_continue='{date_continue}' WHERE id='{id}'".format(**user_data)
-        print(sql)
+        sql = "UPDATE event SET Name='{Name}', Description='{Description}', Logo='{Logo}', Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'".format(**user_data)
         current_connect.execute(sql)
         connect.commit()
         connect.close()
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
-
     return {'Answer': 'Success'}
 
 
