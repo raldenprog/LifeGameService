@@ -1,6 +1,6 @@
 #for other OS
 from app.api.database.login_user import login_verification
-
+import json
 #for Linux
 '''
 import sys
@@ -28,5 +28,20 @@ def login_error():
     print(login_verification(data))
 
 
+def login_user():
+    file = open('data.data', 'r')
+    d = file.readline().split(':')
+    file.close()
+    data = {
+        "Action": "Login",
+        "Data": {
+            "login": d[0],
+            "password": d[1][:-2:]
+        }
+    }
+    return json.dumps(data)
+    #print(login_verification(data))
+"""
 login_done()
 login_error()
+"""

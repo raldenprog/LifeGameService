@@ -1,6 +1,8 @@
 #for other OS
 from app.api.database.registration_users import add_user
-
+import random
+import string
+import json
 #for Linux
 '''
 import sys
@@ -45,5 +47,38 @@ def registration_error():
     print(add_user(data))
 
 
+def registration_user_data():
+    a = string.ascii_lowercase+string.ascii_uppercase+string.digits
+    login = ''.join(random.choice(a) for i in range(random.randint(5, 30)))
+    password = ''.join(random.choice(a) for i in range(random.randint(5, 30)))
+    name = ''.join(random.choice(a) for i in range(random.randint(5, 30)))
+    patronymic = ''.join(random.choice(a) for i in range(random.randint(5, 30)))
+    email = ''.join(random.choice(a) for i in range(random.randint(5, 10)))+'@' + \
+            ''.join(random.choice(a) for i in range(random.randint(5, 10)))+'.' + \
+            ''.join(random.choice(a) for i in range(random.randint(5, 10)))
+
+    file = open('data.data', 'a')
+    file.write(login+':'+password+'\n')
+    file.close()
+    data = {
+        "Action": "Registration",
+        "Data": {
+            'login': login,
+            'password': password,
+            'name': name,
+            'patronymic': patronymic,
+            'email': email,
+            'sex': 'male',
+            'city': 'Nsk',
+            'Educational': 'Sibsutis',
+            'logo_name': '1',
+            'logo': 'logooo'
+        }
+    }
+    return json.dumps(data)
+    #print(add_user(data))
+
+"""
 registration_done()
 registration_error()
+"""
