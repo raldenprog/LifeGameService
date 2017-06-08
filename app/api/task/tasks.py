@@ -118,7 +118,7 @@ def create_few_tasks(batch_data):
                     "data": None,
                     "number": 0}
     except:
-        print "Except 1"
+        print ("Except 1")
         logging.error('Fatal error in function \'create_few_tasks\', param \'batch_data\'')
         return {"answer": "Error",
                 "data": None,
@@ -129,7 +129,7 @@ def create_few_tasks(batch_data):
             answer = create_one_task(data)
             answers.append(answer)
     except:
-        print "Except 2"
+        print ("Except 2")
         logging.error('Fatal error in function \'create_few_tasks\', param \'data\'')
         return {"answer": "Error",
                 "data": None,
@@ -198,4 +198,4 @@ def get_task_event(data):
     return {'Answer': 'Success', 'data': result}
 
 
-print create_few_tasks(json)
+#print (create_few_tasks(json))
