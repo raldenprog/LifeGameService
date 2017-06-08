@@ -90,7 +90,7 @@ def create_one_task(data):
         return {"answer": "Error",
                 "data": check_data}
     else:
-        return {"answer": "Ok",
+        return {"answer": "Success",
                 "data": check_data}
 
 '''
@@ -135,7 +135,7 @@ def create_few_tasks(batch_data):
                 "data": None,
                 "number": 0}
 
-    return {"answer": "Ok",
+    return {"answer": "Success",
             "data": answers,
             "number": len(batch_data)}
 
