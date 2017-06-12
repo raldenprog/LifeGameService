@@ -10,7 +10,7 @@ logging.basicConfig(filename='logger.log',
 def all_users(count):
     connect, current_connect = db_connect()
     # TODO: Добавить в базу users количество очков и добавить это поле в SELECT
-    sql = "SELECT name, id FROM users LIMIT 10 OFFSET {}".format(count)
+    sql = "SELECT Name, ID FROM Users LIMIT 10 OFFSET {}".format(count)
     try:
         current_connect.execute(sql)
         result = current_connect.fetchall()
@@ -23,7 +23,7 @@ def event_users(count, event):
     connect, current_connect = db_connect()
     # TODO: Добавить в базу users количество очков и добавить это поле в SELECT
     # TODO: Добавить условие WHERE для фильтрации по event'ам
-    sql = "SELECT name, id FROM users WHERE {} LIMIT 10 OFFSET {}".format(event, count)
+    sql = "SELECT Name, ID FROM Users WHERE event={} LIMIT 10 OFFSET {}".format(event, count)
     try:
         current_connect.execute(sql)
         result = current_connect.fetchall()

@@ -160,9 +160,9 @@ json = {    "id" :              "1",
             "task_link" :       95
             }
 
-def get_task_event_name(data):
+def get_task_event_name(event, task_name):
     connect, current_connect = db_connect()
-    sql = "SELECT event, name FROM task".format(data)
+    sql = "SELECT ID, task_name, task_category, event FROM task WHERE event={} AND task_name={}".format(event, task_name)
 
     try:
         current_connect.execute(sql)
@@ -172,9 +172,9 @@ def get_task_event_name(data):
         return {'Answer': 'Error'}
     return {'Answer': 'Success', 'data': result}
 
-def get_task_event_category(data):
+def get_task_event_category(event, task_category):
     connect, current_connect = db_connect()
-    sql = "SELECT event, task_category FROM task".format(data)
+    sql = "SELECT ID, task_name, task_category, event FROM task WHERE event={} AND task_category={}".format(event, task_category)
 
     try:
         current_connect.execute(sql)
@@ -187,7 +187,7 @@ def get_task_event_category(data):
 def get_task_event(data):
     connect, current_connect = db_connect()
 
-    sql = "SELECT event FROM task".format(data)
+    sql = "SELECT ID, task_name, task_category, event FROM task WHERE event={}".format(data)
 
     try:
         current_connect.execute(sql)
