@@ -1,8 +1,10 @@
 #for other OS
-from app.api.database.registration_users import add_user
+import json
 import random
 import string
-import json
+
+from app.api.auth.registration_users import add_user
+
 #for Linux
 '''
 import sys

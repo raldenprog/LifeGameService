@@ -4,7 +4,7 @@ import json
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
-import app.api as api
+import app.api.auth.login_user as auth
 
 
 class Server(object):
@@ -43,26 +43,19 @@ class Server(object):
     def on_auth(self, request):
         error = None
         url = ''
-        r = {
-            'a': 10,
-            'b': 15,
-            'c': [
-                1, 2, 3, 4, 5, 6
-            ],
-            'd': {
-                'a': 1
-            }
-        }
+        answer = dict()
         if request.method == 'POST':
             url = json.loads(request.form['data'])
             print(url)
+            answer = auth.login_verification(url)
+            print(answer)
         elif request.method == 'ADD':
             pass
         elif request.method == 'DELETE':
             pass
         elif request.method == 'UPDATE':
             pass
-        return Response(json.dumps(r))
+        return Response(json.dumps(answer))
 
     def error_404(self):
         status_code = 404

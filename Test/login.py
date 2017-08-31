@@ -1,6 +1,8 @@
 #for other OS
-from app.api.database.login_user import login_verification
 import json
+
+from app.api.auth.login_user import login_verification
+
 #for Linux
 '''
 import sys

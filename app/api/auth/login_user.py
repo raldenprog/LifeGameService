@@ -12,16 +12,20 @@ def login_verification(user_data):
     check = ['Login', 'Password']
     registration_data = {'Login': '', 'Password': ''}
     for data in check:
+        print(data)
         try:
             if user_data[data] is None:
                 logging.info('Incorrect parameter ' + data)
-                return {"Answer": "Error"}
+                return {"Answer": "Error",
+                        'Data': 'Incorrect parameter ' + data}
             else:
                 registration_data[data] = user_data[data]
         except:
             logging.error('Fatal error: param ' + data)
-            return {"Answer": "Error"}
-    return get_user(registration_data)
+            return {"Answer": "Error",
+                    'Data': 'Fatal error: param ' + data}
+    return {'Answer': 'Ok'}
+    # get_user(registration_data)
 
 
 def get_user(user_data):

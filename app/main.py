@@ -1,11 +1,13 @@
-import logging
 import json
-import threading
+import logging
 import os
-from app.Server import Server
-from app.api.database.registration_users import add_user
-from app.api.database.login_user import login_verification
+import threading
+
 from werkzeug.wsgi import SharedDataMiddleware
+
+from app.Server import Server
+from app.api.auth.login_user import login_verification
+from app.api.auth.registration_users import add_user
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',
