@@ -2,3 +2,5 @@ pymysql
 logging
 hashlib
 urlparse
+redis
+urlparse
