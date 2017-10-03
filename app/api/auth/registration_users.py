@@ -28,10 +28,10 @@ def registration_user(user_data):
         logo_file.write(user_data['Logo'])
         registration_data['Logo'] = 'True'
     """
-    Answer = input_auth_table(registration_data)
-    if Answer.get('Answer') is not "Success":
+    answer = input_auth_table(registration_data)
+    if answer.get('Answer') is not "Success":
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
-    return Answer
+    return answer
 
 
 def input_auth_table(user_data):
@@ -89,7 +89,7 @@ def input_user_table(id_user, user_data, connect, current_connect):
 def input_session_table(id_user, connect, current_connect):
     UUID = uuid.uuid4()
     sql = "INSERT INTO Session" \
-        " VALUES (null, {id}, \"{UUID}\")".format(id=id_user, UUID=uuid.uuid4())
+        " VALUES (null, {id}, \"{UUID}\")".format(id=id_user, UUID=UUID)
     print(sql)
     try:
         current_connect.execute(sql)

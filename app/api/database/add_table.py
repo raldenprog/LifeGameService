@@ -62,7 +62,7 @@ def create_table_session():
     sql = "CREATE TABLE Session (" \
           "Session int(11) NOT NULL AUTO_INCREMENT," \
           "User int(11) NOT NULL," \
-          "GUID varchar(256) NOT NULL UNIQUE," \
+          "UUID varchar(256) NOT NULL UNIQUE," \
           "PRIMARY KEY (Session)" \
           ") " \
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
