@@ -5,6 +5,7 @@ from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
 import app.api.auth.login_user as auth
+import app.api.auth.registration_users as registration_user
 
 
 class Server(object):
@@ -12,7 +13,7 @@ class Server(object):
         self.redis = redis.Redis(config['redis_host'], config['redis_port'])
         self.url_map = Map([
             Rule('/', endpoint='index'),
-            Rule('/auth', endpoint='auth'),
+            Rule('/registration', endpoint='registration'),
         ])
 
     def on_index(self, request):
@@ -40,7 +41,7 @@ class Server(object):
 
         return Response(json.dumps(r))
 
-    def on_auth(self, request):
+    def on_registration(self, request):
         error = None
         url = ''
         answer = dict()

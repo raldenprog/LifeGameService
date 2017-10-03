@@ -14,53 +14,35 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 
-def func1(data, writer):
-    print('func1 -> ', data)
-    data = login_verification(data)
-    print(data)
-    data = json.dumps(data)
-    writer.send(data.encode())
-    writer.close()
-
-
-def func2(data, writer):
-    print('func2 -> ', data)
-    data = add_user(data)
-    print(data)
-    data = json.dumps(data)
-    writer.send(data.encode())
-    writer.close()
-
-
+# TODO: отсюда будет расходиться логика
 def quest(data, conn):
     print('Action = ', data['Action'])
     if data['Action'] == 'Add_user':
-        thread = threading.Thread(target=func1, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Registration_user':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Update_event':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Scoreboard_all_user':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Scoreboard_event_users':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Task_create_one_task':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Task_create_few_tasks':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Task_get_task_event_name':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Task_get_task_event_category':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'User_cabinet':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Change_password':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     elif data['Action'] == 'Edit_cabinet':
-        thread = threading.Thread(target=func2, args=(data['Data'], conn))
+        pass
     else:
         ans = {"Error": "Action error"}
-    thread.start()
 
 
 def create_app(redis_host='localhost', redis_port=6379, with_static=True):
