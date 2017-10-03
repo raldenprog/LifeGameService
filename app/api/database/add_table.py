@@ -13,10 +13,7 @@ def create_table_user():
         "City varchar(64), " \
         "Educational varchar(255), " \
         "Logo varchar(256), " \
-        "PRIMARY KEY (User), " \
-        "foreign key (User) references Auth (User) " \
-        "on delete cascade " \
-        "on update cascade " \
+        "PRIMARY KEY (User) " \
         ") " \
         "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
     print(sql)
@@ -49,10 +46,7 @@ def create_table_access():
     sql = "CREATE TABLE Access (" \
           "User int(11) NOT NULL AUTO_INCREMENT," \
           "Access int(1) NOT NULL DEFAULT 0," \
-          "PRIMARY KEY (User)," \
-          "foreign key (User) references Auth (User) " \
-          "on delete cascade " \
-          "on update cascade" \
+          "PRIMARY KEY (User)" \
           ") " \
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
     print(sql)
@@ -69,10 +63,7 @@ def create_table_session():
           "Session int(11) NOT NULL AUTO_INCREMENT," \
           "User int(11) NOT NULL," \
           "GUID varchar(256) NOT NULL UNIQUE," \
-          "PRIMARY KEY (Session)," \
-          "foreign key (User) references Auth (User) " \
-          "on delete cascade " \
-          "on update cascade" \
+          "PRIMARY KEY (Session)" \
           ") " \
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
     print(sql)
@@ -150,10 +141,10 @@ def create_users():
             current_connect.close()
 
 
-# create_table_auth()
-# create_table_user()
-# create_table_access()
-# create_table_session()
+create_table_auth()
+create_table_user()
+create_table_access()
+create_table_session()
 # create_table_event()
 # create_table_task()
 # create_users()
