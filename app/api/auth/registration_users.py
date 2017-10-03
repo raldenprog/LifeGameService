@@ -83,10 +83,10 @@ def input_user_table(id_user, user_data, connect, current_connect):
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
-    return input_session_table(id_user, user_data, connect, current_connect)
+    return input_session_table(id_user, connect, current_connect)
 
 
-def input_session_table(id_user, user_data, connect, current_connect):
+def input_session_table(id_user, connect, current_connect):
     UUID = uuid.uuid4()
     sql = "INSERT INTO Session" \
         " VALUES (null, {id}, \"{UUID}\")".format(id=id_user, UUID=uuid.uuid4())
@@ -98,4 +98,4 @@ def input_session_table(id_user, user_data, connect, current_connect):
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
-    return {'Answer': 'Success', 'Data': {"UUID": UUID} }
+    return {'Answer': 'Success', 'Data': {"UUID": UUID}}

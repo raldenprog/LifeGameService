@@ -3,7 +3,7 @@ import json
 import random
 import string
 
-from app.api.auth.registration_users import add_user
+from app.api.auth.registration_users import registration_user
 
 #for Linux
 '''
@@ -19,18 +19,18 @@ from registration_users import add_user
 
 def registration_done():
     data = {
-        'login': 'Anton',
-        'password': 'qwerty',
-        'name': 'anton123',
-        'patronymic': 'ch',
-        'email': 'a@a.ru',
-        'sex': 'male',
-        'city': 'Nsk',
+        'Login': 'Anton451241',
+        'Password': 'qwerty',
+        'Name': 'anton123',
+        'Surname': 'ch',
+        'Email': 'a@a.ru',
+        'Sex': 'male',
+        'City': 'Nsk',
         'Educational': 'Sibsutis',
-        'logo_name': '1',
-        'logo': 'logooo'
+        'Logo_name': '1',
+        'Logo': 'logooo'
     }
-    print(add_user(data))
+    registration_user(data)
 
 
 def registration_error():
@@ -46,7 +46,7 @@ def registration_error():
         'logo_name': '1',
         'logo': 'logooo'
     }
-    print(add_user(data))
+    #print(registration_user(data))
 
 
 def registration_user_data():
@@ -80,7 +80,7 @@ def registration_user_data():
     return json.dumps(data)
     #print(add_user(data))
 
-"""
+
 registration_done()
 registration_error()
-"""
+
