@@ -1,6 +1,8 @@
 #for other OS
-from app.api.database.login_user import login_verification
 import json
+
+from app.api.auth.login_user import login_verification
+
 #for Linux
 '''
 import sys
@@ -12,10 +14,11 @@ sys.path.insert(0, directory_user_cabinet)
 from login_user import login_verification
 '''
 
+
 def login_done():
     data = {
-        'login': 'Anton',
-        'password': 'qwerty'
+        'Login': 'Anton45121',
+        'Password': 'qwerty'
     }
     print(login_verification(data))
 
@@ -41,7 +44,8 @@ def login_user():
     }
     return json.dumps(data)
     #print(login_verification(data))
-"""
+
 login_done()
+"""
 login_error()
 """
