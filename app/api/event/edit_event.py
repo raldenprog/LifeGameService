@@ -11,23 +11,16 @@ def registration_event(user_data):
     check = ['Name', 'Description', 'Logo',
              'Status', 'Date_start', 'Date_end',
              'Date_stop', 'Date_continue']
-    registration_data = {'Name': '', 'Description': '', 'Logo': '',
-        'Status': '', 'Date_start': '', 'Date_end': '',
-        'Date_stop': '', 'Date_continue': ''}
-    flag = False
+    registration_data = dict.fromkeys(check, '')
+    error = False
     for data in check:
-        try:
-            if user_data[data] is None:
-                logging.info('Incorrect parameter ' + data)
-                registration_data[data] = 'Error'
-                flag = True
-            else:
-                registration_data[data] = user_data[data]
-        except:
-            logging.error('Fatal error: param ' + data)
-            registration_data[data] = 'Error'
-            flag = True
-    if flag:
+        if user_data.get(data, None) is None:
+            logging.info('Incorrect parameter ' + data)
+            registration_data[data] = 'Пустой параметр!'
+            error = True
+        else:
+            registration_data[data] = user_data[data]
+    if error:
         return {"Answer": "Error", 'Data': registration_data}
     return input_event_table(registration_data)
 
@@ -71,6 +64,7 @@ def update_event(user_data):
     if flag:
         return {"Answer": "Error", 'Data': update_data}
     return update_event_table(update_data)
+
 
 def update_event_table(user_data):
     connect, current_connect = db_connect()

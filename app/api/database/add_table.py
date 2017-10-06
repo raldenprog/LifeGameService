@@ -80,12 +80,12 @@ def create_table_event():
         "Event int(11) NOT NULL AUTO_INCREMENT, " \
         "Name varchar(255) NOT NULL, " \
         "Description varchar(2048) NOT NULL, " \
-        "Logo varchar(30) NOT NULL, " \
+        "Logo varchar(256) NOT NULL, " \
         "Status varchar(30) NOT NULL, "\
-        "Date_start date NOT NULL, " \
-        "Date_end date NOT NULL, " \
-        "Date_stop date NOT NULL, " \
-        "Date_continue date NOT NULL, " \
+        "Date_start int(11) NOT NULL, " \
+        "Date_end int(11) NOT NULL, " \
+        "Date_stop int(11) NOT NULL, " \
+        "Date_continue int(11) NOT NULL, " \
         "PRIMARY KEY (Event)" \
         ") " \
         "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
@@ -141,10 +141,10 @@ def create_users():
             current_connect.close()
 
 
-create_table_auth()
-create_table_user()
-create_table_access()
-create_table_session()
-# create_table_event()
+# create_table_auth()
+# create_table_user()
+# create_table_access()
+# create_table_session()
+create_table_event()
 # create_table_task()
 # create_users()
