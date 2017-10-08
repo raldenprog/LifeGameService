@@ -1,4 +1,4 @@
-import pymysql
+# coding: utf8
 from api.database.connect_db import db_connect
 
 

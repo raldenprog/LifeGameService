@@ -1,3 +1,4 @@
+# coding: utf8
 import logging
 import hashlib
 from api.database.connect_db import db_connect
