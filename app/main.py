@@ -5,7 +5,7 @@ import threading
 
 from werkzeug.wsgi import SharedDataMiddleware
 
-from app.Server import Server
+from Server import Server
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',

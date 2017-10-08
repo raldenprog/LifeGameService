@@ -1,7 +1,7 @@
 #for other OS
 import json
 
-from app.api.auth.login_user import login_verification
+from api.auth.login_user import login_verification
 
 #for Linux
 '''

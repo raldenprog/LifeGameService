@@ -1,7 +1,7 @@
 import hashlib
 import logging
-from app.api.database.connect_db import db_connect
-from app.api.auth.registration_users import input_session_table
+from api.database.connect_db import db_connect
+from api.auth.registration_users import input_session_table
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',

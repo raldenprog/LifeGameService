@@ -4,8 +4,8 @@ import json
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
-import app.api.auth.login_user as auth
-from app.api.auth.registration_users import registration_user
+import api.auth.login_user as auth
+from api.auth.registration_users import registration_user
 
 
 class Server(object):

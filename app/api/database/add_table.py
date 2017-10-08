@@ -1,5 +1,5 @@
 import pymysql
-from app.api.database.connect_db import db_connect
+from api.database.connect_db import db_connect
 
 
 def create_table_user():

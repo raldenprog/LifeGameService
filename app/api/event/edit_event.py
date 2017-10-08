@@ -1,5 +1,5 @@
 import logging
-from app.api.database.connect_db import db_connect
+from api.database.connect_db import db_connect
 
 
 logging.basicConfig(filename='logger.log',

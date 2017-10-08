@@ -1,7 +1,7 @@
 import hashlib
 import logging
 import uuid
-from app.api.database.connect_db import db_connect
+from api.database.connect_db import db_connect
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)

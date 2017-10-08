@@ -72,3 +72,99 @@ cabinet.py  [LINE:56] ERROR    Fatal error: param id 2017-05-21 23:04:19,296
 login_user.py[LINE:35] ERROR    Fatal error: connect database 2017-05-21 23:04:45,954
 login_user.py[LINE:24] ERROR    Fatal error: param login 2017-05-21 23:04:45,954
 
+registration_users.py[LINE:28] ERROR    Fatal error: param Login 2017-10-03 21:17:17,759 
+registration_users.py[LINE:28] ERROR    Fatal error: param Password 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Name 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Patronymic 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Email 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Sex 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param City 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Logo_name 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Logo 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Login 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Password 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Name 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Patronymic 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Email 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Sex 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param City 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Logo_name 2017-10-03 21:17:17,809 
+registration_users.py[LINE:28] ERROR    Fatal error: param Logo 2017-10-03 21:17:17,809 
+registration_users.py[LINE:29] ERROR    Fatal error: param Login 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Password 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Name 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Patronymic 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Email 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Sex 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param City 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Logo_name 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Logo 2017-10-03 21:18:42,309 
+registration_users.py[LINE:29] ERROR    Fatal error: param Login 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Password 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Name 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Patronymic 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Email 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Sex 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param City 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Logo_name 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Logo 2017-10-03 21:18:42,319 
+registration_users.py[LINE:29] ERROR    Fatal error: param Login 2017-10-03 21:18:52,673 
+registration_users.py[LINE:29] ERROR    Fatal error: param Password 2017-10-03 21:18:52,673 
+registration_users.py[LINE:29] ERROR    Fatal error: param Name 2017-10-03 21:18:52,673 
+registration_users.py[LINE:29] ERROR    Fatal error: param Patronymic 2017-10-03 21:18:52,674 
+registration_users.py[LINE:29] ERROR    Fatal error: param Email 2017-10-03 21:18:52,674 
+registration_users.py[LINE:29] ERROR    Fatal error: param Sex 2017-10-03 21:18:52,674 
+registration_users.py[LINE:29] ERROR    Fatal error: param City 2017-10-03 21:18:52,675 
+registration_users.py[LINE:29] ERROR    Fatal error: param Logo_name 2017-10-03 21:18:52,675 
+registration_users.py[LINE:29] ERROR    Fatal error: param Logo 2017-10-03 21:18:52,675 
+registration_users.py[LINE:17] INFO     Incorrect parameter Login 2017-10-03 21:29:19,564 
+registration_users.py[LINE:17] INFO     Incorrect parameter Password 2017-10-03 21:29:19,564 
+registration_users.py[LINE:17] INFO     Incorrect parameter Name 2017-10-03 21:29:19,565 
+registration_users.py[LINE:17] INFO     Incorrect parameter Patronymic 2017-10-03 21:29:19,565 
+registration_users.py[LINE:17] INFO     Incorrect parameter Email 2017-10-03 21:29:19,565 
+registration_users.py[LINE:17] INFO     Incorrect parameter Sex 2017-10-03 21:29:19,565 
+registration_users.py[LINE:17] INFO     Incorrect parameter City 2017-10-03 21:29:19,565 
+registration_users.py[LINE:17] INFO     Incorrect parameter Logo_name 2017-10-03 21:29:19,566 
+registration_users.py[LINE:17] INFO     Incorrect parameter Logo 2017-10-03 21:29:19,566 
+registration_users.py[LINE:17] INFO     Incorrect parameter Login 2017-10-03 21:29:34,936 
+registration_users.py[LINE:17] INFO     Incorrect parameter Password 2017-10-03 21:29:34,938 
+registration_users.py[LINE:17] INFO     Incorrect parameter Name 2017-10-03 21:29:34,938 
+registration_users.py[LINE:17] INFO     Incorrect parameter Patronymic 2017-10-03 21:29:34,939 
+registration_users.py[LINE:17] INFO     Incorrect parameter Email 2017-10-03 21:29:34,939 
+registration_users.py[LINE:17] INFO     Incorrect parameter Sex 2017-10-03 21:29:34,940 
+registration_users.py[LINE:17] INFO     Incorrect parameter City 2017-10-03 21:29:34,940 
+registration_users.py[LINE:17] INFO     Incorrect parameter Logo_name 2017-10-03 21:29:34,940 
+registration_users.py[LINE:17] INFO     Incorrect parameter Logo 2017-10-03 21:29:34,941 
+registration_users.py[LINE:50] ERROR    error: Ошибка запроса к базе данных 2017-10-03 21:41:32,098 
+registration_users.py[LINE:50] ERROR    error: Ошибка запроса к базе данных 2017-10-03 21:41:36,238 
+registration_users.py[LINE:50] ERROR    error: Ошибка запроса к базе данных 2017-10-03 21:41:49,183 
+registration_users.py[LINE:50] ERROR    error: Ошибка запроса к базе данных 2017-10-03 21:42:01,363 
+registration_users.py[LINE:51] ERROR    error: Ошибка запроса к базе данных 2017-10-03 21:46:56,867 
+registration_users.py[LINE:70] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:41:50,150 
+registration_users.py[LINE:71] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:42:48,298 
+registration_users.py[LINE:71] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:43:08,750 
+registration_users.py[LINE:71] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:43:51,831 
+registration_users.py[LINE:84] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:44:20,351 
+registration_users.py[LINE:71] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:44:39,503 
+registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:44:52,904 
+registration_users.py[LINE:55] ERROR    error: Ошибка запроса к базе данных 2017-10-03 22:51:14,465 
+login_user.py[LINE:17] INFO     Incorrect parameter Login 2017-10-03 23:44:18,991 
+login_user.py[LINE:17] INFO     Incorrect parameter Password 2017-10-03 23:44:18,991 
+login_user.py[LINE:41] ERROR    Fatal error: execute database 2017-10-03 23:44:28,252 
+login_user.py[LINE:40] ERROR    Fatal error: execute database 2017-10-03 23:44:56,156 
+login_user.py[LINE:40] ERROR    Fatal error: execute database 2017-10-03 23:45:06,776 
+login_user.py[LINE:40] ERROR    Fatal error: execute database 2017-10-03 23:45:41,517 
+login_user.py[LINE:40] ERROR    Fatal error: execute database 2017-10-03 23:46:13,654 
+login_user.py[LINE:40] ERROR    Fatal error: execute database 2017-10-03 23:46:19,997 
+login_user.py[LINE:40] ERROR    Fatal error: execute database 2017-10-03 23:46:38,178 
+login_user.py[LINE:42] ERROR    Fatal error: execute database 2017-10-03 23:47:35,771 
+login_user.py[LINE:43] ERROR    Fatal error: execute database 2017-10-03 23:47:49,280 
+login_user.py[LINE:42] ERROR    Fatal error: execute database 2017-10-03 23:48:55,011 
+login_user.py[LINE:42] ERROR    Fatal error: execute database 2017-10-03 23:50:07,742 
+login_user.py[LINE:42] ERROR    Fatal error: execute database 2017-10-03 23:50:58,053 
+registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-03 23:54:46,907 
+registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-03 23:55:49,919 
+registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-03 23:55:53,460 
+registration_users.py[LINE:55] ERROR    error: Ошибка запроса к базе данных 2017-10-03 23:57:30,901 
+registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-03 23:58:22,390 
+registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-04 00:00:31,655 

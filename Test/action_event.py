@@ -1,5 +1,5 @@
 #for other OS
-from app.api.event.edit_event import registration_event, update_event
+from api.event.edit_event import registration_event, update_event
 
 #for Linux
 '''
