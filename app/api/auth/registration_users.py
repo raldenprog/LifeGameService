@@ -98,4 +98,5 @@ def input_session_table(id_user, connect, current_connect):
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
-    return {'Answer': 'Success', 'Data': {"UUID": UUID}}
+    print(UUID)
+    return {'Answer': 'Success', 'Data': {"UUID": str(UUID)}}

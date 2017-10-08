@@ -5,7 +5,7 @@ from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
 import app.api.auth.login_user as auth
-import app.api.auth.registration_users as registration_user
+from app.api.auth.registration_users import registration_user
 
 
 class Server(object):
@@ -14,11 +14,13 @@ class Server(object):
         self.url_map = Map([
             Rule('/', endpoint='index'),
             Rule('/registration', endpoint='registration'),
+            Rule('/auth', endpoint='auth'),
         ])
 
     def on_index(self, request):
         error = None
         url = ''
+        answer = {}
         r = {
             'a': 10,
             'b': 15,
@@ -29,24 +31,44 @@ class Server(object):
                 'a': 1
             }
         }
-        if request.method == 'POST':
+        print(request.method)
+        if request.method == 'ADD':
             url = json.loads(request.form['data'])
             print(url)
-        elif request.method == 'ADD':
-            pass
         elif request.method == 'DELETE':
             pass
         elif request.method == 'UPDATE':
             pass
+        else:
+            answer = {'Answer': 'Error', 'Data': 'Некорректный запрос'}
 
-        return Response(json.dumps(r))
+        return Response(json.dumps(answer))
 
     def on_registration(self, request):
         error = None
         url = ''
         answer = dict()
+        print(request.method)
+        if request.method == 'ADD':
+            url = json.loads(request.form['Data'])
+            answer = registration_user(url)
+        elif request.method == 'DELETE':
+            pass
+        elif request.method == 'UPDATE':
+            pass
+        else:
+            answer = {'Answer': 'Error', 'Data': 'Некорректный запрос'}
+        print(answer)
+        print(json.dumps(answer))
+        return Response(json.dumps(answer))
+
+    def on_auth(self, request):
+        error = None
+        url = ''
+        answer = dict()
+        print(request.method)
         if request.method == 'POST':
-            url = json.loads(request.form['data'])
+            url = json.loads(request.form['Data'])
             print(url)
             answer = auth.login_verification(url)
             print(answer)
