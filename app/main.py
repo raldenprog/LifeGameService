@@ -35,5 +35,13 @@ class authentication(Resource):
 api.add_resource(registration, '/registration')  # Route_1
 api.add_resource(authentication, '/auth')  # Route_2
 
+
+def main():
+    try:
+        _app.run(host='127.0.0.1', port='13451', threaded=True)
+    except:
+        main()
+
 if __name__ == '__main__':
-    _app.run(host='127.0.0.1', port='13451', threaded=True)
+    main()
+
