@@ -7,7 +7,9 @@ from api.auth.registration_users import registration_user
 _app = Flask(__name__)
 api = Api(_app)
 
-HEADER = {'Access-Control-Allow-Origin': '*'}
+HEADER = {'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+          'Access-Control-Allow-Methods': 'GET,POST'}
 
 class registration(Resource):
     def get(self):
