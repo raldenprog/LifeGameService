@@ -1,10 +1,11 @@
 import socket
 import random
 import json
+import requests
 from Test.registration import registration_user_data
 from Test.login import login_user
 
-
+"""
 sock = [0]*100000
 
 for i in range(100000):
@@ -23,5 +24,19 @@ for i in range(100000):
     print(i, ' -> ', json.loads(data.decode()))
 
     sock[i].close()
-
-
+"""
+URL = "http://127.0.0.1:13451"
+data = json.dumps({
+            'Login': 'anton2',
+            'Password': '2',
+            'Name': '3',
+            'Surname': '4',
+            'Email': 'a@a.ru',
+            'Sex': '5',
+            'City': '6',
+            'Educational': '7',
+            'Logo_name': '8',
+            'Logo': '9'
+        })
+data = requests.request('POST', '%s/registration' % URL, data={'Data': data})
+print(data.text)
