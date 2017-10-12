@@ -7,9 +7,12 @@ from api.auth.registration_users import registration_user
 _app = Flask(__name__)
 api = Api(_app)
 
-HEADER = {'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-          'Access-Control-Allow-Methods': 'GET,POST'}
+HEADER = {'Access-Control-Allow-Origin': '*'}
+
+
+@_app.errorhandler(404)
+def not_found(error):
+    return {'error': 'Not found'}, 404
 
 class registration(Resource):
     def get(self):
@@ -23,10 +26,16 @@ class registration(Resource):
         print('POST /registration')
         print(request.headers)
         print('cookies = ', request.cookies)
-        print('ARGS = ', request.args)
+        print('ARGS = ', request.form)
         url = json.loads(request.form['Data'])
+        print(url)
         answer = registration_user(url)
         return answer, 200, HEADER
+
+    def options(self):
+        return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
+                                        'Access-Control-Allow-Methods': 'POST,GET',
+                                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, X-Custom-Header'}
 
 
 class authentication(Resource):
@@ -34,19 +43,26 @@ class authentication(Resource):
         print('GET /')
         print(request.headers)
         print('cookies = ', request.cookies)
-        print('ARGS = ', request.args)
+        print('ARGS = ', request.form)
         return {'test': 'test'}, 200, HEADER
 
     def post(self):
         print('POST /auth')
         print(request.headers)
         print('cookies = ', request.cookies)
-        print('ARGS = ', request.args)
-        url = json.loads(request.form['Data'])
+        print('ARGS = ', request.form)
+        url = json.loads(request.data.decode())['Data']
+
         print(url)
         answer = auth.login_verification(url)
-        print(answer)
-        return answer, 200, HEADER
+        return answer, 200, {'Access-Control-Allow-Origin': '*'}
+
+    def options(self):
+        return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
+                                        'Access-Control-Allow-Methods': 'POST,GET',
+                                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, '
+                                                                        'Content-Type, '
+                                                                        'X-Custom-Header'}
 
 class index(Resource):
     def get(self):
