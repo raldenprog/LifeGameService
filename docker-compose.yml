@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: PINLOX!@#
+      MYSQL_DATABASE: life_game_service
+      MYSQL_USER: dev_life_user
+      MYSQL_PASSWORD: PINLOX!@#
+    ports:
+      - "3306:3306"
+  api:
+    build: app/
+    volumes:
+      - ./app/ :/app/
+    ports:
+      - "13451:13451"
+    depends_on:
+      - db
+    links:
+      - db
