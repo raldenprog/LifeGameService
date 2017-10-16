@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello World</title>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/javascript">
+
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    xhr = null;
+  }
+  return xhr;
+}
+function authorisation(login, pass)
+{
+var str = {
+		Login: login,
+		Password: pass
+	};
+var data = JSON.stringify({Data: str});
+
+var xhr = createCORSRequest('POST', 'http://192.168.1.26:13451/auth');
+xhr.setRequestHeader(
+    'X-Custom-Header', 'value');
+xhr.setRequestHeader(
+    'Content-Type', 'application/json; charset=utf-8');	
+xhr.setRequestHeader(
+    'Access-Control-Allow-Origin', '*');	
+xhr.send(data);
+
+xhr.onload = function() {
+  alert( this.responseText );
+}
+
+xhr.onerror = function() {
+  alert( 'Ошибка ' + this.status );
+}
+} 
+authorisation("anton", "2")
+  
+</script>
+</body>
+</html>
