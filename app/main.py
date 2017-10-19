@@ -1,13 +1,13 @@
 # coding=utf-8
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 import api.auth.login_user as auth
 import json
 from api.auth.registration_users import registration_user
 
 _app = Flask(__name__)
+_app.config['JSON_AS_ASCII'] = False
 api = Api(_app)
-
 HEADER = {'Access-Control-Allow-Origin': '*'}
 
 
@@ -28,7 +28,7 @@ class registration(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.form['Data'])
+        url = json.loads(request.data.decode())['Data']
         print(url)
         answer = registration_user(url)
         print(answer)
@@ -55,7 +55,7 @@ class authentication(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.form['Data'])
+        url = json.loads(request.data.decode())['Data']
         print(url)
         answer = auth.login_verification(url)
         print(answer)
@@ -66,7 +66,8 @@ class authentication(Resource):
                                         'Access-Control-Allow-Methods': 'POST,GET',
                                         'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, '
                                                                         'Content-Type, '
-                                                                        'X-Custom-Header'}
+                                                                        'X-Custom-Header',
+                             'Content-Type': 'application/json; charset=utf-8'}
 
 class index(Resource):
     def get(self):
