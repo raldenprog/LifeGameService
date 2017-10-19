@@ -1,3 +1,4 @@
+# coding=utf-8
 from flask import Flask, request
 from flask_restful import Resource, Api
 import api.auth.login_user as auth
@@ -46,6 +47,7 @@ class authentication(Resource):
         print('ARGS = ', request.form)
         return {'test': 'test'}, 200, HEADER
 
+    @property
     def post(self):
         print('POST /auth')
         print(request.headers)
