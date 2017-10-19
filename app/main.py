@@ -28,7 +28,7 @@ class registration(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())['Data']
+        url = json.loads(request.form['Data'])
         print(url)
         answer = registration_user(url)
         print(answer)
@@ -55,7 +55,7 @@ class authentication(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())['Data']
+        url = json.loads(request.form['Data'])
         print(url)
         answer = auth.login_verification(url)
         print(answer)
