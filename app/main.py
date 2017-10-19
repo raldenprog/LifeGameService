@@ -28,11 +28,11 @@ class registration(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.form['Data'])
+        url = json.loads(request.data.decode())['Data']
         print(url)
         answer = registration_user(url)
         print(answer)
-        return answer, 200, HEADER
+        return answer, 200, {'Access-Control-Allow-Origin': '*'}
 
     def options(self):
         return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
@@ -55,11 +55,11 @@ class authentication(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.form['Data'])
+        url = json.loads(request.data.decode())['Data']
         print(url)
         answer = auth.login_verification(url)
         print(answer)
-        return answer, 200, HEADER
+        return answer, 200, {'Access-Control-Allow-Origin': '*'}
 
     def options(self):
         return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
