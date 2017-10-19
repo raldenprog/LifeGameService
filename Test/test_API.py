@@ -1,3 +1,4 @@
+# coding=utf-8
 import json
 import unittest
 import requests as req
@@ -11,7 +12,7 @@ URL = "http://127.0.0.1:13451"
 class TestRegistration(unittest.TestCase):
     def test_registration(self):
         data = json.dumps({
-            'Login': ''.join(choice(ascii_lowercase) for i in range(12)),
+            'Login': 'anton',#.join(choice(ascii_lowercase) for i in range(12)),
             'Password': '2',
             'Name': '3',
             'Surname': '4',

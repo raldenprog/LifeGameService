@@ -35,10 +35,9 @@ def auth_user(user_data):
     password_hash.update(user_data['Password'].encode())
     user_data['Password'] = password_hash.hexdigest()
     try:
-        sql = "SELECT User FROM Auth WHERE Login = %s and Password = %s"
-        print(sql)
-        current_connect.execute(sql,
-                                (user_data['Login'], user_data['Password']))
+        sql = "SELECT User FROM Auth WHERE Login = '{}' and Password = '{}'"
+        print(sql.format(user_data['Login'], user_data['Password']))
+        current_connect.execute(sql.format(user_data['Login'], user_data['Password']))
         connect.commit()
     except:
         logging.error('Fatal error: execute database')
@@ -46,10 +45,10 @@ def auth_user(user_data):
     result = current_connect.fetchone()
     try:
         if len(result) == 0:
-            return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
+            return {'Answer': 'Warning', "Data": "Данного пользователя нет в базе данных"}
     except:
         return {'Answer': 'Warning', "Data": "Логин или пароль не правильные"}
     answer = input_session_table(result.get('User'), connect, current_connect)
     if answer.get('Answer') is not "Success":
-        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
+        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных. Неудача"}
     return answer

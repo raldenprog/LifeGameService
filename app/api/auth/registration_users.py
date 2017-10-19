@@ -53,8 +53,8 @@ def input_auth_table(user_data):
         current_connect.execute("select last_insert_id()")
         id_user = current_connect.fetchone()
     except:
-        logging.error('error: Ошибка запроса к базе данных')
-        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
+        logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
+        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных. Возможно такой пользователь уже есть"}
     return input_access_table(id_user.get('last_insert_id()'), user_data, connect, current_connect)
 
 
