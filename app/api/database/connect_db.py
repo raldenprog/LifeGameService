@@ -15,7 +15,8 @@ def db_connect():
                                   user='dev_life_user',
                                   password='PINLOX!@#',
                                   db='life_game_service',
-                                  cursorclass=pymysql.cursors.DictCursor)
+                                  cursorclass=pymysql.cursors.DictCursor,
+                                  charset='utf8')
         return connect, connect.cursor()
     except:
         logging.error('Fatal error: connect database')

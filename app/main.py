@@ -1,9 +1,11 @@
 # coding=utf-8
+import json
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
-import api.auth.login_user as auth
-import json
-from api.auth.registration_users import registration_user
+from route.registration import Registration
+from route.Authentication import Authentication
+from route.Task import Task
+from route.Logout import Logout
 
 _app = Flask(__name__)
 _app.config['JSON_AS_ASCII'] = False
@@ -15,59 +17,6 @@ HEADER = {'Access-Control-Allow-Origin': '*'}
 def not_found(error):
     return {'error': 'Not found'}, 404
 
-class registration(Resource):
-    def get(self):
-        print('GET /')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.args)
-        return {'test': 'test'}, 200, HEADER
-
-    def post(self):
-        print('POST /registration')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())['Data']
-        print(url)
-        answer = registration_user(url)
-        print(answer)
-        return answer, 200, {'Access-Control-Allow-Origin': '*'}
-
-    def options(self):
-        return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
-                                        'Access-Control-Allow-Methods': 'POST,GET',
-                                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, '
-                                                                        'Content-Type, '
-                                                                        'X-Custom-Header'}
-
-
-class authentication(Resource):
-    def get(self):
-        print('GET /')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.form)
-        return {'test': 'test'}, 200, HEADER
-
-    def post(self):
-        print('POST /auth')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())['Data']
-        print(url)
-        answer = auth.login_verification(url)
-        print(answer)
-        return answer, 200, {'Access-Control-Allow-Origin': '*'}
-
-    def options(self):
-        return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
-                                        'Access-Control-Allow-Methods': 'POST,GET',
-                                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, '
-                                                                        'Content-Type, '
-                                                                        'X-Custom-Header',
-                             'Content-Type': 'application/json; charset=utf-8'}
 
 class index(Resource):
     def get(self):
@@ -77,8 +26,11 @@ class index(Resource):
         print('ARGS = ', request.args)
         return {'test': 'test'}, 200, HEADER
 
-api.add_resource(registration, '/registration')
-api.add_resource(authentication, '/auth')
+
+api.add_resource(Registration, '/registration')
+api.add_resource(Authentication, '/auth')
+api.add_resource(Task, '/task')
+api.add_resource(Logout, 'logout')
 api.add_resource(index, '/')
 
 

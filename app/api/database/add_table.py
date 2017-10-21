@@ -9,7 +9,7 @@ def create_table_user():
         "Name varchar(32), " \
         "Surname varchar(32), "\
         "Email varchar(64), " \
-        "Sex varchar(6), " \
+        "Sex varchar(8), " \
         "City varchar(64), " \
         "Educational varchar(255), " \
         "Logo varchar(256), " \
@@ -102,19 +102,19 @@ def create_table_task():
     connect, current_connect = db_connect()
 
     sql = "CREATE TABLE task (" \
-          "Task int(11) NOT NULL AUTO_INCREMENT, " \
+          "ID_Task int(11) NOT NULL AUTO_INCREMENT, " \
           "Task_category varchar(30) NOT NULL, " \
-          "Task_name varchar(255) NOT NULL, " \
+          "Task_name varchar(255) NOT NULL UNIQUE, " \
           "Task_flag varchar(255) NOT NULL, " \
           "Task_description varchar(2048) NOT NULL, " \
           "Task_point int(4) NOT NULL, " \
           "Task_hint varchar(1024) NOT NULL," \
-          "Task_solve varchar(1024) NOT NULL, " \
-          "Task_link varchar(512) NOT NULL, " \
-          "Status int(1) NOT NULL, " \
-          "Public_status int(1) NOT NULL, " \
-          "Event varchar(255) NOT NULL, " \
-          "PRIMARY KEY (Task)" \
+          "Task_solve varchar(1024), " \
+          "Task_link varchar(512), " \
+          "Status int(1), " \
+          "Public_status int(1), " \
+          "id_Event int(11), " \
+          "PRIMARY KEY (ID_Task)" \
           ") " \
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
     print(sql)
@@ -124,6 +124,24 @@ def create_table_task():
     except:
         return
 
+
+def create_table_task_acc():
+
+    connect, current_connect = db_connect()
+
+    sql = "CREATE TABLE task_acc (" \
+          "id int(11) NOT NULL AUTO_INCREMENT, " \
+          "id_task int(11) NOT NULL, " \
+          "id_user int(11) NOT NULL, " \
+          "PRIMARY KEY (id)" \
+          ") " \
+          "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    print(sql)
+    try:
+        current_connect.execute(sql)
+        current_connect.close()
+    except:
+        return
 
 def create_users():
 
@@ -141,10 +159,11 @@ def create_users():
             current_connect.close()
 
 
-create_table_auth()
-create_table_user()
-create_table_access()
-create_table_session()
+# create_table_auth()
+# create_table_user()
+# create_table_access()
+# create_table_session()
 # create_table_event()
-# create_table_task()
+create_table_task()
+#create_table_task_acc()
 # create_users()

@@ -168,3 +168,92 @@ registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017
 registration_users.py[LINE:55] ERROR    error: Ошибка запроса к базе данных 2017-10-03 23:57:30,901 
 registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-03 23:58:22,390 
 registration_users.py[LINE:99] ERROR    error: Ошибка запроса к базе данных 2017-10-04 00:00:31,655 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:21:04,596 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:21:04,628 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:21:04,644 
+tasks.py    [LINE:198] ERROR    Fatal error: execute database 2017-10-19 22:21:54,365 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:23:56,788 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:23:56,808 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:23:56,825 
+tasks.py    [LINE:198] ERROR    Fatal error: execute database 2017-10-19 22:23:56,848 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:25:00,279 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:25:00,294 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:25:00,310 
+tasks.py    [LINE:198] ERROR    Fatal error: execute database 2017-10-19 22:25:00,334 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:25:40,720 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:25:40,736 
+tasks.py    [LINE:86] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:25:40,752 
+tasks.py    [LINE:198] ERROR    Fatal error: execute database 2017-10-19 22:25:40,776 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:26:48,634 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:26:48,650 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:26:48,666 
+tasks.py    [LINE:199] ERROR    Fatal error: execute database 2017-10-19 22:26:48,690 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:27:08,056 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:27:08,072 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:27:08,088 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:29:47,990 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:29:48,006 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:29:48,022 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:32:51,082 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:32:51,122 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:32:51,142 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:38:10,850 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:38:10,870 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:38:10,890 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:41:13,792 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:41:13,807 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 22:41:13,823 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:08:07,888 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:08:07,951 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:08:07,997 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:08:51,215 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:08:51,277 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:08:51,293 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:15:37,421 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:15:37,530 
+tasks.py    [LINE:85] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:15:37,608 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:18:11,632 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:18:13,208 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:18:27,528 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:18:27,606 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-19 23:18:27,700 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:33:34,177 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:33:34,216 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:33:34,241 
+connectionpool.py[LINE:214] INFO     Starting new HTTP connection (1): 87.103.243.110 2017-10-21 23:33:34,325 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:34:06,110 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:34:06,151 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:34:06,188 
+connectionpool.py[LINE:214] INFO     Starting new HTTP connection (1): 127.0.0.1 2017-10-21 23:34:06,245 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:34:35,629 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:34:35,649 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:34:35,669 
+connectionpool.py[LINE:214] INFO     Starting new HTTP connection (1): 127.0.0.1 2017-10-21 23:34:35,716 
+auth.py     [LINE:21] ERROR    Fatal error: execute database 2017-10-21 23:34:35,923 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:36:43,432 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:36:43,475 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-21 23:36:43,517 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:07:46,244 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:07:46,296 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:07:46,329 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:08:02,528 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:08:02,568 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:08:02,608 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:08:35,085 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:08:35,126 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:08:35,165 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:09:13,509 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:09:13,546 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:09:13,577 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:09:41,870 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:09:41,894 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:09:41,919 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:25:58,833 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:25:59,426 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:26:01,461 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:27:45,737 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:27:45,769 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:27:45,804 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:28:11,872 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:28:11,909 
+tasks.py    [LINE:88] ERROR    Fatal error: param 'sql' can't create new record 2017-10-22 00:28:11,944 

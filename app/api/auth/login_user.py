@@ -52,3 +52,24 @@ def auth_user(user_data):
     if answer.get('Answer') is not "Success":
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных. Неудача"}
     return answer
+
+
+def logout_user(session):
+    connect, current_connect = db_connect()
+    if connect == -1:
+        return {"Answer": "Warning"}
+    try:
+        sql = "DELETE FROM Session WHERE UUID = '{}'".format(session)
+        print(sql)
+        current_connect.execute(sql)
+        connect.commit()
+    except:
+        logging.error('Fatal error: execute database')
+        return {"Answer": "Ошибка запроса к базе данных"}
+    result = current_connect.fetchone()
+    try:
+        if len(result) == 0:
+            return {'Answer': 'Warning', "Data": "Такой сессии нет в базе"}
+    except:
+        return {'Answer': 'Warning', "Data": "Сессия неверная"}
+    return result['User']

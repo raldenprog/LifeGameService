@@ -1,26 +1,26 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 import pymysql
 import logging
-from .api.database.connect_db import db_connect
+from api.database.connect_db import db_connect
 
 logging.basicConfig(filename='logger.log',
                     format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
                     level=logging.INFO)
 
 def empty_task_data():
-    return { "id" :             "Unchecked",
+    return {
             "task_category" :   "Unchecked",
             "task_name" :       "Unchecked",
             "task_flag" :       "Unchecked",
             "task_description" :"Unchecked",
             "task_point" :      "Unchecked",
             "task_hint" :       "Unchecked",
-            "task_solve" :      "Unchecked",
-            "task_link" :       "Unchecked",
-            "status"    :       "Unchecked",
-            "puplic_status" :   "Unchecked",
-            "event"         :   "Unchecked",
-            "database" :        "Unchecked"
+            #"task_solve" :      "Unchecked",
+            "task_link" :       "Unchecked"
+            #"status"    :       "Unchecked",
+            #"puplic_status" :   "Unchecked",
+            #"event"         :   "Unchecked",
+            #"database" :        "Unchecked"
             }
 
 '''
@@ -40,10 +40,11 @@ Recorded - таск успешно записан в базу,
 Unrecorded - таск не залит в базу
 '''
 
+
 def create_one_task(data):
-    check_field = ["id", "task_category", "task_name", "task_flag", "task_description",
-                   "task_point", "task_hint", "task_solve", "task_link", "status",
-                   "public_status", "event"]
+    check_field = ["task_category", "task_name", "task_flag", "task_description",
+                   "task_point", "task_hint", "task_link"]#, "task_solve", "status",
+                   #"public_status", "event"]
 
     error_flag = 0
     check_data = empty_task_data()
@@ -64,34 +65,37 @@ def create_one_task(data):
                 "data": check_data}
     try:
         connect, current_connect = db_connect()
-        check_data["database"] = "Connected"
+        #check_data["database"] = "Connected"
     except:
-        check_data["database"] = "Disconnected"
+        #check_data["database"] = "Disconnected"
         logging.error('Fatal error: param \'database\' disconnected')
         return {"answer": "Error",
                 "data": check_data}
     else:
         try:
             sql = "INSERT INTO task" \
-                " VALUES (null,\"{id}\",\"{task_category}\",\"{task_name}\"," \
-                "\"{task_flag}\",\"{task_description}\",\"{task_point}\",\"{task_hint}\"," \
-                "\"{task_solve}\",\"{task_link}\",\"{status}\",\"{public_status}\",\"{event}\")".format(**data)
+                " VALUES (null,\"{task_category}\",\"{task_name}\"," \
+                "\"{task_flag}\",\"{task_description}\",{task_point},\"{task_hint}\"," \
+                "null, \"{task_link}\",1,1,1)".format(**data)
             print(sql)
             current_connect.execute(sql)
             connect.commit()
-            connect.close()
-            check_data["database"] = "Recorded"
-        except:
+            #check_data["database"] = "Recorded"
+        except Exception as e:
+            if e == 1062:
+                return {"Answer": "Warning",
+                        "Data": 'Duplicate task'}
             logging.error('Fatal error: param \'sql\' can\'t create new record')
-            check_data["database"] = "Unrecorded"
-            return {"answer": "Error",
-                    "data": check_data}
+            #check_data["database"] = "Unrecorded"
+            return {"Answer": "Warning",
+                    "Data": check_data}
+        finally:
+            connect.close()
     if error_flag:
-        return {"answer": "Error",
-                "data": check_data}
+        return {"Answer": "Error",
+                "Data": check_data}
     else:
-        return {"answer": "Success",
-                "data": check_data}
+        return {"Answer": "Success"}
 
 '''
 Данная функция принимает на вход массив из JSON записей
@@ -160,9 +164,10 @@ json = {    "id" :              "1",
             "task_link" :       95
             }
 
+
 def get_task_event_name(event, task_name):
     connect, current_connect = db_connect()
-    sql = "SELECT ID, task_name, task_category, event FROM task WHERE event={} AND task_name={}".format(event, task_name)
+    sql = "SELECT ID_Task, Task_name, Task_category, Task_description FROM task WHERE event={} AND ID_Task={}".format(event, task_name)
 
     try:
         current_connect.execute(sql)
@@ -171,6 +176,7 @@ def get_task_event_name(event, task_name):
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
     return {'Answer': 'Success', 'data': result}
+
 
 def get_task_event_category(event, task_category):
     connect, current_connect = db_connect()
@@ -184,18 +190,67 @@ def get_task_event_category(event, task_category):
         return {'Answer': 'Error'}
     return {'Answer': 'Success', 'data': result}
 
+
+def get_task_acc(id_task, id_user):
+    connect, current_connect = db_connect()
+    sql = "SELECT 1 FROM task_acc WHERE id_task = {} and id_user = {}".format(id_task, id_user)
+    print(sql)
+    try:
+        current_connect.execute(sql)
+        result = current_connect.fetchone()
+    except:
+        logging.error('Fatal error: execute database')
+        return False
+    try:
+        if len(result) == 1:
+            return True
+    except:
+        return False
+
+
+def preparation_result(data, id_user):
+    result = []
+    print(data)
+    for item in data:
+        temp = dict()
+        for id, value in item.items():
+            if id == 'ID_Task':
+                temp['Close'] = get_task_acc(value, id_user)
+            else:
+                temp[id] = value
+            #print(id, value)
+        result.append(temp)
+    return result
+
+
 def get_task_event(data):
     connect, current_connect = db_connect()
-
-    sql = "SELECT ID, task_name, task_category, event FROM task WHERE event={}".format(data)
-
+    sql = "SELECT ID_Task, Task_name, Task_category, Task_point, " \
+          "Task_description, Task_hint, Task_link FROM task WHERE id_event={}".format(data['id_event'])
+    print(sql)
     try:
         current_connect.execute(sql)
         result = current_connect.fetchall()
     except:
         logging.error('Fatal error: execute database')
-        return {'Answer': 'Error'}
-    return {'Answer': 'Success', 'data': result}
+        return {'Answer': 'Error connect db'}
+    return {'Answer': 'Success', 'Data': preparation_result(result, data['id_user'])}
 
+
+def check_task(data):
+    connect, current_connect = db_connect()
+    sql = "SELECT 1 FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(data['Task_name'], data['Task_flag'])
+    print(sql)
+    try:
+        current_connect.execute(sql)
+        result = current_connect.fetchone()
+    except:
+        logging.error('Fatal error: execute database')
+        return {'Answer': 'Error connect db'}
+    try:
+        if len(result) == 1:
+            return {'Answer': 'Success', 'Data': True}
+    except:
+        return {'Answer': 'Warning', 'Data': False}
 
 #print (create_few_tasks(json))
