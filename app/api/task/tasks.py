@@ -217,7 +217,10 @@ def preparation_result(data, id_user):
             if id == 'ID_Task':
                 temp['Close'] = get_task_acc(value, id_user)
             else:
-                temp[id] = value
+                if isinstance(value, str):
+                    temp[id] = value.encode('UTF-8').decode('UTF-8')
+                else:
+                    temp[id] = value
             #print(id, value)
         result.append(temp)
     return result
@@ -237,9 +240,28 @@ def get_task_event(data):
     return {'Answer': 'Success', 'Data': preparation_result(result, data['id_user'])}
 
 
+def input_task_acc(user_data):
+    connect, current_connect = db_connect()
+    if connect == -1:
+        return {"Answer": "Warning", "Data": "Ошибка доступа к базе данных, повторить позже"}
+
+    sql = "INSERT INTO task_acc" \
+        " VALUES (null,{},{},{})".format(user_data['ID_Task'], user_data['id_user'], user_data['Task_point'])
+    print(sql)
+    try:
+        current_connect.execute(sql)
+        connect.commit()
+    except:
+        logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
+        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных."}
+    return True
+
+
 def check_task(data):
     connect, current_connect = db_connect()
-    sql = "SELECT 1 FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(data['Task_name'], data['Task_flag'])
+    sql = "SELECT ID_Task, Task_point FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(
+        data['Task_name'],
+        data['Task_flag'])
     print(sql)
     try:
         current_connect.execute(sql)
@@ -248,7 +270,9 @@ def check_task(data):
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error connect db'}
     try:
-        if len(result) == 1:
+        if len(result) == 2:
+            result['id_user'] = data['id_user']
+            input_task_acc(result)
             return {'Answer': 'Success', 'Data': True}
     except:
         return {'Answer': 'Warning', 'Data': False}

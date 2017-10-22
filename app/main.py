@@ -6,6 +6,7 @@ from route.registration import Registration
 from route.Authentication import Authentication
 from route.Task import Task
 from route.Logout import Logout
+from route.Scoreboard import Scoreboard
 
 _app = Flask(__name__)
 _app.config['JSON_AS_ASCII'] = False
@@ -30,7 +31,8 @@ class index(Resource):
 api.add_resource(Registration, '/registration')
 api.add_resource(Authentication, '/auth')
 api.add_resource(Task, '/task')
-api.add_resource(Logout, 'logout')
+api.add_resource(Scoreboard, '/scoreboard')
+api.add_resource(Logout, '/logout')
 api.add_resource(index, '/')
 
 

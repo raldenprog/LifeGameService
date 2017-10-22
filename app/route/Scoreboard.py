@@ -3,10 +3,10 @@ import json
 from flask_restful import Resource, reqparse
 from flask import request
 from api.config import HEADER
-import api.auth.login_user as auth
+import api.scoreboard.get_scoreboard as score
 
 
-class Logout(Resource):
+class Scoreboard(Resource):
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('session', action='append')
@@ -15,6 +15,6 @@ class Logout(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', args)
-        session = args.get('session')
-        auth.logout_user(session)
-        return {'Answer': 'Success'}, 200, HEADER
+        answer = score.get_scoreboard()
+        print(answer)
+        return answer, 200, HEADER

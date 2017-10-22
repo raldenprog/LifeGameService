@@ -75,6 +75,7 @@ class TestRegistration(unittest.TestCase):
         for task in data:
             print(tasks.create_one_task(task))
 
+    @unittest.skip
     def test_get_task(self):
         data = {
             'id_event': 1,
@@ -101,3 +102,12 @@ class TestRegistration(unittest.TestCase):
             'Task_flag': 'flag{flag1flag2}'
         }
         print(tasks.check_task(data))
+
+    def test_requests(self):
+        from requests import get
+        print(get('{}/task?session=12'.format(URL)).text.encode('utf-8'))
+
+    def test_check_task_http(self):
+        from requests import get
+        text = '/task?session=12&Task_name=Task2&Task_flag=flag{flag1flag1}'
+        print(get('{}{}'.format(URL, text)).text.encode('utf-8'))

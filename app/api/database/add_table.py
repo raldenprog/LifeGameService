@@ -131,8 +131,9 @@ def create_table_task_acc():
 
     sql = "CREATE TABLE task_acc (" \
           "id int(11) NOT NULL AUTO_INCREMENT, " \
-          "id_task int(11) NOT NULL, " \
-          "id_user int(11) NOT NULL, " \
+          "id_task int(11) NOT NULL UNIQUE, " \
+          "id_user int(11) NOT NULL UNIQUE, " \
+          "point int(4) NOT NULL, " \
           "PRIMARY KEY (id)" \
           ") " \
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
@@ -164,6 +165,6 @@ def create_users():
 # create_table_access()
 # create_table_session()
 # create_table_event()
-create_table_task()
-#create_table_task_acc()
+# create_table_task()
+create_table_task_acc()
 # create_users()
