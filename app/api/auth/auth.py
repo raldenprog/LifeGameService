@@ -16,7 +16,7 @@ def session_verification(session):
     """
     connect, current_connect = db_connect()
     if connect == -1:
-        return {"Answer": "Warning"}
+        return None
     try:
         sql = "SELECT User FROM Session WHERE UUID = '{}'".format(session)
         print(sql)
@@ -24,11 +24,37 @@ def session_verification(session):
         connect.commit()
     except:
         logging.error('Fatal error: execute database')
-        return {"Answer": "Ошибка запроса к базе данных"}
+        return None
     result = current_connect.fetchone()
     try:
         if len(result) == 0:
-            return {'Answer': 'Warning', "Data": "Такой сессии нет в базе"}
+            return None
     except:
-        return {'Answer': 'Warning', "Data": "Сессия неверная"}
+        return None
     return result['User']
+
+
+def get_login(id_user):
+    """
+    Возвращает Login пользователя 
+    :param session: 
+    :return: 
+    """
+    connect, current_connect = db_connect()
+    if connect == -1:
+        return None
+    try:
+        sql = "SELECT Login FROM Auth WHERE User = '{}'".format(id_user)
+        print(sql)
+        current_connect.execute(sql)
+        connect.commit()
+    except:
+        logging.error('Fatal error: execute database')
+        return None
+    result = current_connect.fetchone()
+    try:
+        if len(result) == 0:
+            return None
+    except:
+        return None
+    return result['Login']

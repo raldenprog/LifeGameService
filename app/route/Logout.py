@@ -9,7 +9,7 @@ import api.auth.login_user as auth
 class Logout(Resource):
     def get(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('session', action='append')
+        parser.add_argument('session')
         args = parser.parse_args()
         print('GET /')
         print(request.headers)

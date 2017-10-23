@@ -10,9 +10,9 @@ import api.auth.auth as auth
 class Task(Resource):
     def get(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('session', action='append')
-        parser.add_argument('Task_name', action='append')
-        parser.add_argument('Task_flag', action='append')
+        parser.add_argument('session')
+        parser.add_argument('Task_name')
+        parser.add_argument('Task_flag')
         args = parser.parse_args()
         print('GET /')
         print(request.headers)
@@ -33,4 +33,6 @@ class Task(Resource):
             data = {'id_event': 1, 'id_user': id_user} \
                 if session is not None and isinstance(id_user, int) else {'id_event': 1, 'id_user': 0}
             answer = tasks.get_task_event(data)
+        login = auth.get_login(id_user)
+        answer['Login'] = login
         return answer, 200, HEADER
