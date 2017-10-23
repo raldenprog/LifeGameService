@@ -21,9 +21,6 @@ class Task(Resource):
         session = args.get('session', None)
         Task_name = args.get('Task_name', None)
         Task_flag = args.get('Task_flag', None)
-        session = session[0] if session is not None else None
-        Task_name = Task_name[0] if Task_name is not None else None
-        Task_flag = Task_flag[0] if Task_flag is not None else None
         id_user = auth.session_verification(session)
         answer = None
         if Task_name is not None and Task_flag is not None and session is not None:
