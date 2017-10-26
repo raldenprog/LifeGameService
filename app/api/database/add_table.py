@@ -1,6 +1,6 @@
 # coding=utf-8
 from api.database.connect_db import db_connect
-
+from api.auth.registration_users import registration_user
 
 def create_table_user():
     connect, current_connect = db_connect()
@@ -160,11 +160,28 @@ def create_users():
             current_connect.close()
 
 
-# create_table_auth()
-# create_table_user()
-# create_table_access()
-# create_table_session()
+def SCTF():
+    check = ['Login', 'Password', 'Name',
+             'Surname', 'Email', 'Sex',
+             'City', 'Educational', 'Logo_name', 'Logo']
+    d = ['Make society (h)acked again', 'Без пафоса', 'Лицей7', 'HackSQUAD',
+         'Jackzkers', 'd34dl1n3', 'rm404', 'Фезе юнезе', 'Difensori',
+         'ОвощиV2.0', 'Not Found', 'CLAY', 'Трисомия по хромосоме',
+         'Грядка Хокинга', 'FoXXeS', 'Колбаса по рубль двадцать']
+
+    registration_data = dict.fromkeys(check, '-')
+    for i in range(len(d)):
+        registration_data['Login'] = d[i]
+        registration_data['Password'] = str(i)
+        registration_user(registration_data)
+
+
+create_table_auth()
+create_table_user()
+create_table_access()
+create_table_session()
+SCTF()
 # create_table_event()
 # create_table_task()
-create_table_task_acc()
+# create_table_task_acc()
 # create_users()

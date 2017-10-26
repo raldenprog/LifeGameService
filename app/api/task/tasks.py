@@ -229,7 +229,8 @@ def preparation_result(data, id_user):
 def get_task_event(data):
     connect, current_connect = db_connect()
     sql = "SELECT ID_Task, Task_name, Task_category, Task_point, " \
-          "Task_description, Task_hint, Task_link FROM task WHERE id_event={}".format(data['id_event'])
+          "Task_description, Task_hint, Task_link FROM task WHERE id_event={} " \
+          "order by Task_category, Task_point".format(data['id_event'])
     print(sql)
     try:
         current_connect.execute(sql)

@@ -38,8 +38,13 @@ def event_users(count, event):
 
 def get_scoreboard():
     connect, current_connect = db_connect()
-    sql = "select * from (select Login, (" \
-          "Select sum(point) as points from task_acc b where a.User = b.id_user) as point from Auth a) as T2;"
+    sql = """select * from
+              (select Login,
+                 (Select sum(point) as points
+                  from task_acc b
+                  where a.User = b.id_user) as point
+               from Auth a) as T2
+            order by point desc;"""
     try:
         current_connect.execute(sql)
         result = current_connect.fetchall()

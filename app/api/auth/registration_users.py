@@ -72,11 +72,11 @@ def input_access_table(id_user, user_data, connect, current_connect):
 
 
 def input_user_table(id_user, user_data, connect, current_connect):
-
+    user_data['id_user'] = id_user
     sql = "INSERT INTO Users" \
         " VALUES ({id_user},\"{Name}\",\"{Surname}\",\"{Email}\"," \
         "\"{Sex}\",\"{City}\",\"{Educational}\",\"{Logo}\"" \
-        ")".format(**user_data, id_user=id_user)
+        ")".format(**user_data)
     print(sql)
     try:
         current_connect.execute(sql)

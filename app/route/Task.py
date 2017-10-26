@@ -29,7 +29,14 @@ class Task(Resource):
         else:
             data = {'id_event': 1, 'id_user': id_user} \
                 if session is not None and isinstance(id_user, int) else {'id_event': 1, 'id_user': 0}
-            answer = tasks.get_task_event(data)
+            temp = tasks.get_task_event(data)
+            answer = {'Answer': temp['Answer']}
+            for i in temp['Data']:
+                print(i)
+                if answer.get(i['Task_category'], None) is not None:
+                    answer[i['Task_category']].append(i)
+                else:
+                    answer[i['Task_category']] = [i]
         login = auth.get_login(id_user)
         answer['Login'] = login
         return answer, 200, HEADER
