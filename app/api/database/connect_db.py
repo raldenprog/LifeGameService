@@ -11,7 +11,7 @@ def db_connect():
     Функция подключается к базе данных life_game_service_database и возвращает подключение к ней
     """
     try:
-        connect = pymysql.connect(host='localhost',
+        connect = pymysql.connect(host='172.18.0.1',
                                   user='dev_life_user',
                                   password='PINLOX!@#',
                                   db='life_game_service',

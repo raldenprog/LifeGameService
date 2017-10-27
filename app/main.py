@@ -1,5 +1,8 @@
 # coding=utf-8
 import json
+import sys
+import os
+sys.path.append(os.getcwd())
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from route.registration import Registration

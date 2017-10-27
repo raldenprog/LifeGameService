@@ -1,4 +1,8 @@
 # coding=utf-8
+import sys
+import os
+print(os.getcwd())
+sys.path.append(os.getcwd()+'/../../')
 from api.database.connect_db import db_connect
 from api.auth.registration_users import registration_user
 
@@ -181,7 +185,7 @@ create_table_user()
 create_table_access()
 create_table_session()
 SCTF()
-# create_table_event()
-# create_table_task()
-# create_table_task_acc()
+create_table_event()
+create_table_task()
+create_table_task_acc()
 # create_users()
