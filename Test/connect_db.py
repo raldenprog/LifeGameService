@@ -1,5 +1,5 @@
 #for other OS
-from app.api.database.connect_db import db_connect
+from api.database.connect_db import db_connect
 
 #for Linux
 '''

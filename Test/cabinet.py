@@ -1,5 +1,5 @@
 #for other OS
-from app.api.user_cabinet.cabinet import user_cabinet, change_password
+from api.user_cabinet.cabinet import user_cabinet, change_password
 
 #for Linux
 '''

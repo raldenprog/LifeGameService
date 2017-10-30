@@ -3,7 +3,7 @@ import json
 import random
 import string
 
-from app.api.auth.registration_users import registration_user
+from api.auth.registration_users import registration_user
 
 #for Linux
 '''

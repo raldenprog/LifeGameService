@@ -1,7 +1,7 @@
 #for other OS
 import json
 
-from app.api.auth.login_user import login_verification
+from api.auth.login_user import login_verification
 
 #for Linux
 '''
@@ -17,8 +17,8 @@ from login_user import login_verification
 
 def login_done():
     data = {
-        'Login': 'Anton45121',
-        'Password': 'qwerty'
+        'Login': 'Anton',
+        'Password': '2'
     }
     print(login_verification(data))
 

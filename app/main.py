@@ -1,62 +1,46 @@
+# coding=utf-8
 import json
-import logging
+import sys
 import os
-import threading
+sys.path.append(os.getcwd())
+from flask import Flask, request, jsonify
+from flask_restful import Resource, Api
+from route.registration import Registration
+from route.Authentication import Authentication
+from route.Task import Task
+from route.Logout import Logout
+from route.Scoreboard import Scoreboard
 
-from werkzeug.wsgi import SharedDataMiddleware
-
-from app.Server import Server
-from app.api.auth.login_user import login_verification
-from app.api.auth.registration_users import add_user
-
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',
-                    level=logging.INFO)
-
-
-# TODO: отсюда будет расходиться логика
-def quest(data, conn):
-    print('Action = ', data['Action'])
-    if data['Action'] == 'Add_user':
-        pass
-    elif data['Action'] == 'Registration_user':
-        pass
-    elif data['Action'] == 'Update_event':
-        pass
-    elif data['Action'] == 'Scoreboard_all_user':
-        pass
-    elif data['Action'] == 'Scoreboard_event_users':
-        pass
-    elif data['Action'] == 'Task_create_one_task':
-        pass
-    elif data['Action'] == 'Task_create_few_tasks':
-        pass
-    elif data['Action'] == 'Task_get_task_event_name':
-        pass
-    elif data['Action'] == 'Task_get_task_event_category':
-        pass
-    elif data['Action'] == 'User_cabinet':
-        pass
-    elif data['Action'] == 'Change_password':
-        pass
-    elif data['Action'] == 'Edit_cabinet':
-        pass
-    else:
-        ans = {"Error": "Action error"}
+_app = Flask(__name__)
+_app.config['JSON_AS_ASCII'] = False
+api = Api(_app)
+HEADER = {'Access-Control-Allow-Origin': '*'}
 
 
-def create_app(redis_host='localhost', redis_port=6379, with_static=True):
-    app = Server({
-        'redis_host':       redis_host,
-        'redis_port':       redis_port
-    })
-    if with_static:
-        app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-            '/static':  os.path.join(os.path.dirname(__file__), 'static')
-        })
-    return app
+@_app.errorhandler(404)
+def not_found(error):
+    return {'error': 'Not found'}, 404
 
-if __name__ == "__main__":
-    from werkzeug.serving import run_simple
-    app = create_app()
-    run_simple('127.0.0.1', 5000, app, use_debugger=False, use_reloader=True)
+
+class index(Resource):
+    def get(self):
+        print('GET /')
+        print(request.headers)
+        print('cookies = ', request.cookies)
+        print('ARGS = ', request.args)
+        return {'test': 'test'}, 200, HEADER
+
+
+api.add_resource(Registration, '/registration')
+api.add_resource(Authentication, '/auth')
+api.add_resource(Task, '/task')
+api.add_resource(Scoreboard, '/scoreboard')
+api.add_resource(Logout, '/logout')
+api.add_resource(index, '/')
+
+
+if __name__ == '__main__':
+    try:
+        _app.run(host='0.0.0.0', port='13451', threaded=True)
+    except Exception as e:
+        print(e)

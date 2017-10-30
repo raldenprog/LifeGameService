@@ -1,3 +1,4 @@
+# coding=utf-8
 import pymysql
 import logging
 
@@ -10,11 +11,12 @@ def db_connect():
     Функция подключается к базе данных life_game_service_database и возвращает подключение к ней
     """
     try:
-        connect = pymysql.connect(host='87.103.243.110',
+        connect = pymysql.connect(host='172.18.0.1',
                                   user='dev_life_user',
                                   password='PINLOX!@#',
                                   db='life_game_service',
-                                  cursorclass=pymysql.cursors.DictCursor)
+                                  cursorclass=pymysql.cursors.DictCursor,
+                                  charset='utf8')
         return connect, connect.cursor()
     except:
         logging.error('Fatal error: connect database')

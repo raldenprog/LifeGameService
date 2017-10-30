@@ -1,7 +1,8 @@
+# coding=utf-8
 import hashlib
 import logging
 import uuid
-from app.api.database.connect_db import db_connect
+from api.database.connect_db import db_connect
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
@@ -52,8 +53,8 @@ def input_auth_table(user_data):
         current_connect.execute("select last_insert_id()")
         id_user = current_connect.fetchone()
     except:
-        logging.error('error: Ошибка запроса к базе данных')
-        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
+        logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
+        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных. Возможно такой пользователь уже есть"}
     return input_access_table(id_user.get('last_insert_id()'), user_data, connect, current_connect)
 
 
@@ -71,11 +72,11 @@ def input_access_table(id_user, user_data, connect, current_connect):
 
 
 def input_user_table(id_user, user_data, connect, current_connect):
-
+    user_data['id_user'] = id_user
     sql = "INSERT INTO Users" \
         " VALUES ({id_user},\"{Name}\",\"{Surname}\",\"{Email}\"," \
         "\"{Sex}\",\"{City}\",\"{Educational}\",\"{Logo}\"" \
-        ")".format(**user_data, id_user=id_user)
+        ")".format(**user_data)
     print(sql)
     try:
         current_connect.execute(sql)
@@ -98,4 +99,5 @@ def input_session_table(id_user, connect, current_connect):
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
-    return {'Answer': 'Success', 'Data': {"UUID": UUID}}
+    print(UUID)
+    return {'Answer': 'Success', 'Data': {"UUID": str(UUID)}}

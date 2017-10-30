@@ -1,7 +1,8 @@
+# coding: utf8
 import logging
 import hashlib
-from app.api.database.connect_db import db_connect
-from app.api.user_cabinet.id_check import check_id
+from api.database.connect_db import db_connect
+from api.user_cabinet.id_check import check_id
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',

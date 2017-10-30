@@ -1,5 +1,5 @@
 # coding: utf-8
-from app.api.task.tasks import create_one_task, create_few_tasks
+from api.task.tasks import create_one_task, create_few_tasks
 
 def create_one_task_success():
     data = {"id": "Unchecked",
