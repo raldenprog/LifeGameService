@@ -1,3 +1,2 @@
 pymysql
-urlparse
 flask_restful
