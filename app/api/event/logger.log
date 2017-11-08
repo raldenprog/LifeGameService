@@ -1,0 +1,51 @@
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-07 19:41:56,789 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:42:15,576 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:42:41,179 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:42:50,401 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:43:25,186 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:43:34,629 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:43:41,984 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:43:50,172 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:44:01,026 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:44:10,369 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-07 19:44:12,490 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:44:33,220 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_start 2017-11-07 19:54:23,416 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_end 2017-11-07 19:54:23,416 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_stop 2017-11-07 19:54:23,416 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_continue 2017-11-07 19:54:23,416 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_end 2017-11-07 19:55:05,449 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_stop 2017-11-07 19:55:05,449 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_continue 2017-11-07 19:55:05,450 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_end 2017-11-07 19:55:22,492 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_stop 2017-11-07 19:55:22,492 
+edit_event.py[LINE:23] INFO     Incorrect parameter Date_continue 2017-11-07 19:55:22,492 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 19:55:30,090 
+edit_event.py[LINE:49] ERROR    Fatal error: execute database 2017-11-07 20:03:47,296 
+edit_event.py[LINE:49] ERROR    Fatal error: execute database 2017-11-07 20:03:54,064 
+edit_event.py[LINE:50] ERROR    Fatal error: execute database 2017-11-07 20:03:58,793 
+edit_event.py[LINE:49] ERROR    Fatal error: execute database 2017-11-07 20:04:01,727 
+edit_event.py[LINE:49] ERROR    Fatal error: execute database 2017-11-07 20:04:12,732 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 20:04:16,128 
+edit_event.py[LINE:49] ERROR    Fatal error: execute database 2017-11-07 20:04:19,950 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-07 20:04:28,623 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-07 20:04:31,950 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-07 20:05:16,146 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-07 20:05:18,443 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-07 20:06:35,660 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-07 20:06:41,860 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-08 19:50:35,903 
+edit_event.py[LINE:47] ERROR    Fatal error: execute database 2017-11-08 19:50:50,547 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-08 19:51:18,873 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-08 19:52:38,522 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-08 19:54:19,468 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-08 19:54:41,872 
+edit_event.py[LINE:48] ERROR    Fatal error: execute database 2017-11-08 19:57:38,199 
+edit_event.py[LINE:71] ERROR    Fatal error: param ID 2017-11-08 20:04:28,822 
+edit_event.py[LINE:71] ERROR    Fatal error: param ID 2017-11-08 20:04:48,238 
+edit_event.py[LINE:88] ERROR    Fatal error: execute database 2017-11-08 20:05:22,515 
+edit_event.py[LINE:88] ERROR    Fatal error: execute database 2017-11-08 20:05:40,278 
+edit_event.py[LINE:89] ERROR    Fatal error: execute database 2017-11-08 20:05:47,512 
+edit_event.py[LINE:88] ERROR    Fatal error: execute database 2017-11-08 20:05:51,402 
+edit_event.py[LINE:88] ERROR    Fatal error: execute database 2017-11-08 20:06:11,760 
+edit_event.py[LINE:88] ERROR    Fatal error: execute database 2017-11-08 20:06:13,690 

@@ -64,3 +64,4 @@ def page_event(count):  # Пустышка
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
     return {'Answer': 'Success', 'Data': result}
+

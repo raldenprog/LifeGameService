@@ -38,7 +38,8 @@ def input_event_table(user_data):
     if connect == -1:
         return {"Answer": "Error"}
     try:
-        sql = "INSERT INTO event VALUES (null, \"{Name}\", \"{Description}\", \"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, {Date_stop}, {Date_continue})".format(**user_data)
+        sql = "INSERT INTO Event VALUES (null, \"{Name}\", \"{Description}\", \"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, {Date_stop}, {Date_continue})".format(**user_data)
+        print(sql)
         current_connect.execute(sql)
         connect.commit()
         connect.close()
@@ -78,7 +79,7 @@ def update_event_table(user_data):
     if connect == -1:
         return {"Answer": "Error"}
     try:
-        sql = "UPDATE event SET Name='{Name}', Description='{Description}', Logo='{Logo}', Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'".format(**user_data)
+        sql = "UPDATE Event SET Name='{Name}', Description='{Description}', Logo='{Logo}', Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE Event='{ID}'".format(**user_data)
         current_connect.execute(sql)
         connect.commit()
         connect.close()
