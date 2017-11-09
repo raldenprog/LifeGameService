@@ -1,0 +1,39 @@
+@import "mixin";
+
+.legend {
+  .background;
+
+  &__title {
+    .modal-window-title;
+  }
+
+  &__text {
+    .modal-window-text;
+    margin-bottom: 32px;
+  }
+
+  @media screen and (max-width:1500px) {
+    &__title {
+      font-size: 40px;
+      margin: 0 0 20px;
+    }
+
+    &__text {
+      max-height: 300px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .legend-container {
+      width: 420px;
+      margin-top: 0;
+      border: 8px solid rgba(253, 113, 0, 0.32)
+    }
+  }
+}
+
+.legend-container {
+  .modal-window-container;
+  margin-top: 50px;
+}
+

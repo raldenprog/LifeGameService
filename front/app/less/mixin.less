@@ -1,0 +1,72 @@
+@orange-color: #fd7100;
+@orange-transparent-color: rgba(253,113,0,0.32);
+
+@main-font: minionpro-regular;
+
+.background {
+  padding-top: 133px;
+  width: 100%;
+  min-height: calc(100vh - 133px);
+  background: url(../img/background.jpg) no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.btn {
+  font-family: gautami;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-sizing: border-box;
+  border: 10px solid @orange-transparent-color;
+  background-color: transparent;
+  color: @orange-transparent-color;
+  transition: 0.3s all;
+
+  &:hover {
+    color: @orange-color;
+    border-color: @orange-color;
+  }
+}
+
+.modal-window-container {
+  width: 630px;
+  background: url(../img/task_description_background.jpg);
+  margin: 184px auto 0;
+  border: 15px solid @orange-transparent-color;
+  padding: 15px;
+  position: relative;
+  z-index: 20;
+}
+
+.modal-window-title {
+  font-family: @main-font;
+  font-size: 60px;
+  color: @orange-color;
+  margin: 32px 0 36px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.modal-window-text {
+  color: @orange-color;
+  font-family: @main-font;
+  font-size: 24px;
+  max-height: 400px;
+  text-align: justify;
+}
+
+.container-scroll-y {
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+@media screen and (max-width:1500px) {
+  .modal-window-container {
+    width: 420px;
+  }
+
+  .modal-window-text {
+    max-height: 200px;
+    font-size: 16px;
+  }
+}

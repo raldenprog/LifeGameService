@@ -1,7 +1,2 @@
 pymysql
-logging
-hashlib
-urlparse
-redis
-urlparse
 flask_restful

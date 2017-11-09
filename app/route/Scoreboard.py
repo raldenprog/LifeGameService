@@ -17,9 +17,12 @@ class Scoreboard(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', args)
-        id_user = auth.session_verification(session)
         answer = score.get_scoreboard()
-        login = auth.get_login(id_user)
-        answer['Login'] = login
+        try:
+            id_user = auth.session_verification(session)
+            login = auth.get_login(id_user)
+            answer['Login'] = login
+        except:
+            pass
         print(answer)
         return answer, 200, HEADER

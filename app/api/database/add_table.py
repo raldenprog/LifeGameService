@@ -1,4 +1,8 @@
 # coding=utf-8
+import sys
+import os
+print(os.getcwd())
+sys.path.append(os.getcwd()+'/../../')
 from api.database.connect_db import db_connect
 from api.auth.registration_users import registration_user
 
@@ -165,7 +169,6 @@ def SCTF():
     check = ['Login', 'Password', 'Name',
              'Surname', 'Email', 'Sex',
              'City', 'Educational', 'Logo_name', 'Logo']
-    """
     d = ['Make society (h)acked again', 'Без пафоса', 'Лицей7', 'HackSQUAD',
          'Jackzkers', 'd34dl1n3', 'rm404', 'GSV', 'Difensori',
          'ОвощиV2.0', 'Not Found', 'CLAY', 'Трисомия по хромосоме',
@@ -192,3 +195,4 @@ SCTF()
 # create_table_event()
 # create_table_task()
 # create_table_task_acc()
+# create_users()

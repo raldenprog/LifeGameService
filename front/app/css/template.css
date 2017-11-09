@@ -1,0 +1,11 @@
+﻿form div.step {
+     display: none;
+ }
+
+a.back {
+    display: none;
+}
+
+form input[type=button] {
+    display: none;
+}

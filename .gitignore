@@ -4,3 +4,11 @@
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/vcs.xml
+
+app/api/auth/__pycache__/__init__\.cpython-35\.pyc
+
+app/api/auth/__pycache__/registration_users\.cpython-35\.pyc
+
+app/api/database/__pycache__/__init__\.cpython-35\.pyc
+
+app/api/database/__pycache__/connect_db\.cpython-35\.pyc

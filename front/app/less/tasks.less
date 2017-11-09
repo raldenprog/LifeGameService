@@ -1,0 +1,59 @@
+@import "mixin";
+
+.tasks {
+  .background;
+
+  &__link {
+    .btn;
+    display: block;
+    width: 152px;
+    height: 82px;
+    line-height: 80px;
+    margin-bottom: 35px;
+    margin-left: 35px;
+    font-size: 26px;
+    text-align: center;
+    border: 8px solid @orange-color;
+    color: @orange-color;
+
+    &--done {
+      border: 8px solid @orange-transparent-color;
+      color: @orange-transparent-color;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  @media screen and (max-width: 1500px) {
+    &__link {
+      border: 5px solid #fd7100;
+      font-size: 18px;
+      width: 120px;
+      height: 50px;
+      line-height: 50px;
+
+      &--done {
+        border: 5px solid @orange-transparent-color;
+      }
+    }
+  }
+  .tasks-container {
+    margin-top: 0;
+  }
+}
+
+.tasks-container {
+  margin: 50px 0 0 166px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  z-index: 5;
+}
+
+.tasks-col-wrapper {
+  display: flex;
+  flex-direction: row;
+}
