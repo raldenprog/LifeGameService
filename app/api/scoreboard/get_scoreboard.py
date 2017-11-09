@@ -37,14 +37,17 @@ def event_users(count, event):
 
 
 def get_scoreboard():
+	#TODO: Временное решение. Номер события
+    id_event = 1
     connect, current_connect = db_connect()
     sql = """select * from
               (select Login,
                  (Select sum(point) as points
                   from task_acc b
-                  where a.User = b.id_user) as point
-               from Auth a) as T2
-            order by point desc;"""
+                  where a.User = b.id_user and b.id_event = {}) as point
+               from Auth a) as T2 where point is not NULL
+            order by point desc;""".format(id_event)
+    print(sql)
     try:
         current_connect.execute(sql)
         result = current_connect.fetchall()

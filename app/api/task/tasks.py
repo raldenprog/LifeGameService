@@ -193,37 +193,38 @@ def get_task_event_category(event, task_category):
 
 def get_task_acc(id_task, id_user):
     connect, current_connect = db_connect()
-    sql = "SELECT 1 FROM task_acc WHERE id_task = {} and id_user = {}".format(id_task, id_user)
+    sql = "SELECT id_task FROM task_acc WHERE id_task in {} and id_user = {}".format(id_task, id_user)
     print(sql)
     try:
         current_connect.execute(sql)
-        result = current_connect.fetchone()
+        result = current_connect.fetchall()
     except:
         logging.error('Fatal error: execute database')
-        return False
+        return {}
     try:
-        if len(result) == 1:
-            return True
+        print(result)
+        if len(result) > 0:
+            return result
     except:
-        return False
+        return {}
 
 
 def preparation_result(data, id_user):
     result = []
-    print(data)
+    temp = dict()
+    id_task = list()
     for item in data:
-        temp = dict()
-        for id, value in item.items():
-            if id == 'ID_Task':
-                temp['Close'] = get_task_acc(value, id_user)
-            else:
-                if isinstance(value, str):
-                    temp[id] = value.encode('UTF-8').decode('UTF-8')
-                else:
-                    temp[id] = value
-            #print(id, value)
-        result.append(temp)
-    return result
+        item['Close'] = 'False'
+        id_task_temp = item.get('ID_Task')
+        temp[id_task_temp] = item
+        id_task.append(id_task_temp)
+    #TODO: временное решение
+    id_task = tuple(id_task)
+    close_status = get_task_acc(id_task, id_user)
+    for i in close_status:
+        id_task = i['id_task']
+        temp[id_task]['Close'] = 'True'
+    return data
 
 
 def get_task_event(data):
