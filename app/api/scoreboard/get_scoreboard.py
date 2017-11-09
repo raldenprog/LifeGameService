@@ -40,9 +40,9 @@ def get_scoreboard():
     #TODO: Временное решение. Номер события
     id_event = 1
     connect, current_connect = db_connect()
-    sql = """select * from
+    sql = """select T2.login, T2.point from
   (
-    select a.Login, sum(point) as point, max(b.time) as user_time
+    select a.Login as login, sum(point) as point, max(b.time) as user_time
    from Auth a, task_acc b
    where a.User = b.id_user and b.id_event = {}
     GROUP BY a.Login
