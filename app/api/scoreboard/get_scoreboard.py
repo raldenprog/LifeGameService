@@ -37,7 +37,7 @@ def event_users(count, event):
 
 
 def get_scoreboard():
-	#TODO: Временное решение. Номер события
+    #TODO: Временное решение. Номер события
     id_event = 1
     connect, current_connect = db_connect()
     sql = """select * from
