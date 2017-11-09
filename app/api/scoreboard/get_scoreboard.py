@@ -41,12 +41,14 @@ def get_scoreboard():
     id_event = 1
     connect, current_connect = db_connect()
     sql = """select * from
-              (select Login,
-                 (Select sum(point) as points
-                  from task_acc b
-                  where a.User = b.id_user and b.id_event = {}) as point
-               from Auth a) as T2 where point is not NULL
-            order by point desc;""".format(id_event)
+  (
+    select a.Login, sum(point) as point, max(b.time) as user_time
+   from Auth a, task_acc b
+   where a.User = b.id_user and b.id_event = {}
+    GROUP BY a.Login
+  ) as T2
+where point is not NULL
+order by point desc, user_time desc;""".format(id_event)
     print(sql)
     try:
         current_connect.execute(sql)

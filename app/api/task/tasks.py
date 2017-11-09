@@ -250,7 +250,7 @@ def input_task_acc(user_data):
     #TODO: Временное решение.
     id_event = 1
     sql = "INSERT INTO task_acc" \
-        " VALUES (null,{},{},{},{})".format(user_data['ID_Task'], user_data['id_user'], id_event, user_data['Task_point'])
+        " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data['id_user'], id_event, user_data['Task_point'])
     print(sql)
     try:
         current_connect.execute(sql)
