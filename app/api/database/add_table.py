@@ -131,9 +131,10 @@ def create_table_task_acc():
 
     sql = "CREATE TABLE task_acc (" \
           "id int(11) NOT NULL AUTO_INCREMENT, " \
-          "id_task int(11) NOT NULL UNIQUE, " \
-          "id_user int(11) NOT NULL UNIQUE, " \
+          "id_task int(11) NOT NULL, " \
+          "id_user int(11) NOT NULL, " \
           "point int(4) NOT NULL, " \
+          "UNIQUE(id_task, id_user), " \
           "PRIMARY KEY (id)" \
           ") " \
           "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
@@ -164,24 +165,30 @@ def SCTF():
     check = ['Login', 'Password', 'Name',
              'Surname', 'Email', 'Sex',
              'City', 'Educational', 'Logo_name', 'Logo']
+    """
     d = ['Make society (h)acked again', 'Без пафоса', 'Лицей7', 'HackSQUAD',
-         'Jackzkers', 'd34dl1n3', 'rm404', 'Фезе юнезе', 'Difensori',
+         'Jackzkers', 'd34dl1n3', 'rm404', 'GSV', 'Difensori',
          'ОвощиV2.0', 'Not Found', 'CLAY', 'Трисомия по хромосоме',
          'Грядка Хокинга', 'FoXXeS', 'Колбаса по рубль двадцать']
-
+    password = ['ozpbjhhssc', 'xorbpconpb', 'bbcyhqphrb', 'tcpbptuyke',
+                'wimgygepek', 'ffornthbxq', 'njjwpmgzpy', 'hcxleuhdxf',
+                'zsednvqteg', 'ldsyaprlrs', 'lantvvwsrn', 'nwnutdkyow',
+                'sdzjjhjfnb', 'yylopsahxa', 'advrcgfhca', 'bxjpmgcejx']
+    """
+    d = ['test3']
+    password = ['test3']
     registration_data = dict.fromkeys(check, '-')
     for i in range(len(d)):
         registration_data['Login'] = d[i]
-        registration_data['Password'] = str(i)
+        registration_data['Password'] = password[i]
         registration_user(registration_data)
 
 
-create_table_auth()
-create_table_user()
-create_table_access()
-create_table_session()
+#  create_table_auth()
+# create_table_user()
+# create_table_access()
+# create_table_session()
 SCTF()
 # create_table_event()
 # create_table_task()
 # create_table_task_acc()
-# create_users()
