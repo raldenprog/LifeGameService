@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    <SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="js/jquery.cookie.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="js/check-cookie.js"></SCRIPT>
+    <title>Tasks</title>
+</head>
+<body>
+
+<div class="tasks-page">
+    <header class="header">
+        <div class="header-menu-container">
+            <a href="index.html" class="header__link header__link--about">abou</a>
+            <a href="scoreboard.html" class="header__link header__link--score">scor</a>
+            <a href="tasks.html" class="header__link header__link--tasks">task</a>
+        </div>
+        <a href="#" class="header__link header__link--logout" onclick="logout()">LOG OUT</a>
+    </header>
+
+    <div class="tasks">
+        <img src="img/S.png" class="background__s-img">
+        <div class="tasks-container">
+            <div class="tasks-col-wrapper" id="web">
+                <div class="tasks__link">Web</div>
+            </div>
+            <div class="tasks-col-wrapper" id="crypto">
+                <div class="tasks__link">Crypto</div>
+            </div>
+            <div class="tasks-col-wrapper" id="stego">
+                <div class="tasks__link">stego</div>
+            </div>
+            <div class="tasks-col-wrapper" id="ppc">
+                <div class="tasks__link">ppc</div>
+            </div>
+            <div class="tasks-col-wrapper" id="exploit">
+                <div class="tasks__link">exploit</div>
+            </div>
+            <div class="tasks-col-wrapper" id="joy">
+                <div class="tasks__link">joy</div>
+            </div>
+            <div class="tasks-col-wrapper" id="Recon">
+                <div class="tasks__link">recon</div>
+            </div>
+            <div class="tasks-col-wrapper" id="Forensic">
+                <div class="tasks__link">forensic</div>
+            </div>
+            <div class="tasks-col-wrapper" id="teacher">
+                <div class="tasks__link">teacher</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<SCRIPT type="text/javascript" src="js/json-action.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="js/main.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="js/task.js"></SCRIPT>
+</body>
+</html>

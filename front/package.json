@@ -1,0 +1,19 @@
+{
+  "name": "ctf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "less": "^3.0.0-alpha.3"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "less": "^3.0.0-alpha.3"
+  }
+}

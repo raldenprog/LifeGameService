@@ -1,0 +1,150 @@
+@import "mixin";
+
+.authorization {
+  .background;
+
+  &__title {
+    font-size: 36px;
+    text-align: center;
+    color: #39291e;
+    margin: 0 auto 70px;
+    letter-spacing: 0.03em;
+    padding-top: 40px;
+  }
+
+  &__form-line {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    margin: 0 auto 30px;
+
+    select {
+      width: 200px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 5px;
+      width: 140px;
+    }
+
+    span {
+      font-weight: 400;
+      color: #C02D2C;
+    }
+  }
+
+  &__star {
+    display: none;
+  }
+
+  &__input {
+    height: 108px;
+    width: 275px;
+    padding: 20px 28px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border: 10px solid @orange-transparent-color;
+    background-color: transparent;
+    color: @orange-transparent-color;
+    font-size: 52px;
+    transition: 0.3s all;
+
+    &::placeholder {
+      color: @orange-transparent-color;
+    }
+
+    &:focus {
+      color: @orange-color;
+      border-color: @orange-color;
+    }
+
+    &--warning {
+      border-color: #C02D2C;
+    }
+  }
+
+  &__steps-links {
+    width: 420px;
+    margin: 55px auto 0;
+    display: flex;
+    justify-content: flex-end;
+
+    .login-page & {
+      justify-content: space-between;
+    }
+  }
+
+  &__prev-step, &__next-step, &__login, &__login-reg-link {
+    padding: 15px 0;
+    height: 80px;
+    text-align: center;
+    font-size: 27px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    box-sizing: border-box;
+    border: 10px solid @orange-transparent-color;
+    background-color: transparent;
+    color: @orange-transparent-color;
+    transition: 0.3s all;
+
+    &:hover {
+      cursor: pointer;
+      color: @orange-color;
+      border-color: @orange-color;
+    }
+  }
+
+  &__prev-step {
+    width: 140px;
+    color: black;
+    border: 1px solid #a7a7a7;
+
+    &:hover {
+      background-color: #f3f6f9;
+    }
+  }
+
+  &__login-reg-link {
+    line-height: 50px;
+    padding: 0 25px;
+  }
+
+  &__next-step, &__login {
+    width: 198px;
+    padding: 0 25px;
+    color: @orange-transparent-color;
+  }
+
+  &__login {
+    margin: 0 auto;
+  }
+}
+
+.authorization-container {
+  padding-top: 150px;
+  width: 590px;
+  margin: 0 auto;
+  box-shadow: 0 9px 46px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 5;
+}
+
+@media screen and (max-width: 1500px) {
+  .authorization {
+    &__input {
+      border-width: 6px;
+      font-size: 40px;
+    }
+
+    &__login {
+      border-width: 6px;
+    }
+  }
+
+  .authorization-container {
+    padding-top: 50px;
+  }
+}
