@@ -214,7 +214,7 @@ def preparation_result(data, id_user):
     temp = dict()
     id_task = list()
     for item in data:
-        item['Close'] = 'False'
+        item['Close'] = False
         id_task_temp = item.get('ID_Task')
         temp[id_task_temp] = item
         id_task.append(id_task_temp)
@@ -224,7 +224,7 @@ def preparation_result(data, id_user):
     if close_status is not None:
         for i in close_status:
             id_task = i['id_task']
-            temp[id_task]['Close'] = 'True'
+            temp[id_task]['Close'] = True
     return data
 
 
