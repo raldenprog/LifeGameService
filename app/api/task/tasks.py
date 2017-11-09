@@ -221,9 +221,10 @@ def preparation_result(data, id_user):
     #TODO: временное решение
     id_task = tuple(id_task)
     close_status = get_task_acc(id_task, id_user)
-    for i in close_status:
-        id_task = i['id_task']
-        temp[id_task]['Close'] = 'True'
+    if close_status is not None:
+        for i in close_status:
+            id_task = i['id_task']
+            temp[id_task]['Close'] = 'True'
     return data
 
 
