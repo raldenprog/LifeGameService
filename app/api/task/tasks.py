@@ -247,9 +247,10 @@ def input_task_acc(user_data):
     connect, current_connect = db_connect()
     if connect == -1:
         return {"Answer": "Warning", "Data": "Ошибка доступа к базе данных, повторить позже"}
-
+    #TODO: Временное решение.
+    id_event = 1
     sql = "INSERT INTO task_acc" \
-        " VALUES (null,{},{},{})".format(user_data['ID_Task'], user_data['id_user'], user_data['Task_point'])
+        " VALUES (null,{},{},{},{})".format(user_data['ID_Task'], user_data['id_user'], id_event, user_data['Task_point'])
     print(sql)
     try:
         current_connect.execute(sql)
