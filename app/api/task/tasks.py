@@ -76,7 +76,7 @@ def create_one_task(data):
             sql = "INSERT INTO task" \
                 " VALUES (null,\"{task_category}\",\"{task_name}\"," \
                 "\"{task_flag}\",\"{task_description}\",{task_point},\"{task_hint}\"," \
-                "null, \"{task_link}\",1,1,1)".format(**data)
+                "null, \"{task_link}\",1,1,2)".format(**data)
             print(sql)
             current_connect.execute(sql)
             connect.commit()
@@ -248,7 +248,7 @@ def input_task_acc(user_data):
     if connect == -1:
         return {"Answer": "Warning", "Data": "Ошибка доступа к базе данных, повторить позже"}
     #TODO: Временное решение.
-    id_event = 1
+    id_event = 2
     sql = "INSERT INTO task_acc" \
         " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data['id_user'], id_event, user_data['Task_point'])
     print(sql)
