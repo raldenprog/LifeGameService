@@ -15,9 +15,9 @@ def user_cabinet(data):
     Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     try:
-        if data["ID"] is None:
+        if data["id"] is None:
             logging.info('Incorrect parameter id - None')
-            data["ID"] = "Empty"
+            data["id"] = "Empty"
             return {"Answer": "Error", "Data": data}
     except:
         logging.error('Fatal error: param id')
@@ -26,14 +26,14 @@ def user_cabinet(data):
     if connect == -1:
         return {"Answer": "Error"}
     try:
-        if check_id(data["ID"], current_connect) == 0:
+        if check_id(data["id"], current_connect) == 0:
             return {"Answer": "Id not found", "Data": data}
     except:
         logging.error('Fatal error: check id')
         return {"Answer": "Error", "Data": data}
     try:
-        current_connect.execute("SELECT * FROM users where id = '{}'".format(
-            data['ID']
+        current_connect.execute("SELECT * FROM Users where user = '{}'".format(
+            data['id']
         ))
         connect.commit()
         result = current_connect.fetchall()[0]
