@@ -15,25 +15,25 @@ def user_cabinet(data):
     Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     try:
-        if data["id"] is None:
-            logging.info('Incorrect parameter id - None')
-            data["id"] = "Empty"
+        if data["id_user"] is None:
+            logging.info('Incorrect parameter id_user - None')
+            data["id_user"] = "Empty"
             return {"Answer": "Error", "Data": data}
     except:
-        logging.error('Fatal error: param id')
+        logging.error('Fatal error: param id_user')
         return {"Answer": "Error", "Data": data}
     connect, current_connect = db_connect()
     if connect == -1:
         return {"Answer": "Error"}
     try:
-        if check_id(data["id"], current_connect) == 0:
-            return {"Answer": "Id not found", "Data": data}
+        if check_id(data["id_user"], current_connect) == 0:
+            return {"Answer": "id_user not found", "Data": data}
     except:
-        logging.error('Fatal error: check id')
+        logging.error('Fatal error: check id_user')
         return {"Answer": "Error", "Data": data}
     try:
         current_connect.execute("SELECT * FROM Users where user = '{}'".format(
-            data['id']
+            data['id_user']
         ))
         connect.commit()
         result = current_connect.fetchall()[0]
@@ -42,6 +42,7 @@ def user_cabinet(data):
     except:
         logging.error('Fatal error: execute database')
         return {"Answer": "Error"}
+
 
 def change_password(data):
     """
@@ -126,24 +127,17 @@ def edit_cabinet(data):
                 "Data": data}
     else:
         try:
-            if (check_id(int(data["ID"]), current_connect)) == 0:
-                return {"Answer": "Id not found",
-                        "Data": data}
+            data = data['data']
+            sql = "UPDATE Users SET Name='{}', Surname='{}', Email='{}', Sex='{}', City='{}'," \
+                    " Educational='{}', Logo='{}' WHERE user='{}'".format(
+                data["Name"], data["Surname"], data["Email"], data["Sex"], data["City"],
+                data["Educational"], data["Logo"], data["id_user"]
+                )
+            current_connect.execute(sql)
+            connect.commit()
+            connect.close()
+            return {"Answer": "Success", "Data": data}
         except:
-            logging.error('Fatal error: check id')
-            return {"Answer": "Error",
-                    "Data": data}
-        else:
-            try:
-                sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
-                      " Educational='{}', Logo='{}' WHERE ID='{}'".format(
-                    data["Name"], data["Patronymic"], data["Email"], data["Sex"], data["City"],
-                    data["Educational"], data["Logo"], data["ID"]
-                    )
-                current_connect.execute(sql)
-                connect.commit()
-                connect.close()
-                return {"Answer": "Success", "Data": data}
-            except:
-                logging.error('Fatal error: Password comparison')
-                return {"Answer": "Error"}
+            logging.error('Fatal error: Password comparison')
+            return {"Answer": "Error"}
+
