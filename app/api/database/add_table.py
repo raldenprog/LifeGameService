@@ -177,7 +177,7 @@ def SCTF():
                 'wimgygepek', 'ffornthbxq', 'njjwpmgzpy', 'hcxleuhdxf',
                 'zsednvqteg', 'ldsyaprlrs', 'lantvvwsrn', 'nwnutdkyow',
                 'sdzjjhjfnb', 'yylopsahxa', 'advrcgfhca', 'bxjpmgcejx']
-    """
+
     d = ['test3']
     password = ['test3']
     registration_data = dict.fromkeys(check, '-')
