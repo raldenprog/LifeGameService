@@ -3,6 +3,7 @@ import hashlib
 import logging
 import uuid
 from api.database.connect_db import db_connect
+from api.sql import SqlQuery
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
@@ -87,15 +88,13 @@ def input_user_table(id_user, user_data, connect, current_connect):
     return input_session_table(id_user, connect, current_connect)
 
 
-def input_session_table(id_user, connect, current_connect):
+def input_session_table(id_user, connect=None, current_connect=None):
     UUID = uuid.uuid4()
     sql = "INSERT INTO Session" \
         " VALUES (null, {id}, \"{UUID}\")".format(id=id_user, UUID=UUID)
     print(sql)
     try:
-        current_connect.execute(sql)
-        connect.commit()
-        connect.close()
+        SqlQuery(sql)
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных"}
