@@ -1,6 +1,5 @@
-import socket
-import random
 import json
+
 import requests
 from Test.registration import registration_user_data
 from Test.login import login_user
