@@ -12,7 +12,7 @@ def session_verification(session):
     :return: 
     """
     try:
-        sql = "SELECT User FROM Session WHERE UUID = '{}'".format(session)
+        sql = "SELECT id_user FROM Session WHERE UUID = '{}'".format(session)
         result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')

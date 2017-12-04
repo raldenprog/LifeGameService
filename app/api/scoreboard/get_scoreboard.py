@@ -50,9 +50,4 @@ order by point desc, user_time desc;""".format(id_event)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
-    for i in result:
-        if issubclass(i['point'].__class__, decimal.Decimal):
-            i['point'] = int(i.get('point'))
-        else:
-            i['point'] = 0
     return {'Answer': 'Success', 'data': result}

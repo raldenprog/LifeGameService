@@ -35,7 +35,7 @@ def registration_event(user_data):
 
 def input_event_table(user_data):
     try:
-        sql = "INSERT INTO event VALUES (null, \"{Name}\", \"{Description}\", \"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, {Date_stop}, {Date_continue})".format(**user_data)
+        sql = "INSERT INTO id_event VALUES (null, \"{Name}\", \"{Description}\", \"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, {Date_stop}, {Date_continue})".format(**user_data)
         SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
@@ -70,7 +70,7 @@ def update_event(user_data):
 
 def update_event_table(user_data):
     try:
-        sql = "UPDATE event SET Name='{Name}', Description='{Description}', Logo='{Logo}', Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'".format(**user_data)
+        sql = "UPDATE id_event SET Name='{Name}', Description='{Description}', Logo='{Logo}', Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'".format(**user_data)
         SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')

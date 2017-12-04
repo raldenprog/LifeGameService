@@ -33,7 +33,7 @@ def auth_user(user_data):
     password_hash.update(user_data['Password'].encode())
     user_data['Password'] = password_hash.hexdigest()
     try:
-        sql = "SELECT User FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data['Login'], user_data['Password'])
+        sql = "SELECT id_user FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data['Login'], user_data['Password'])
         result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
