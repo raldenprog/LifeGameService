@@ -17,8 +17,8 @@ from login_user import login_verification
 
 def login_done():
     data = {
-        'Login': 'Anton',
-        'Password': '2'
+        'Login': 'test',
+        'Password': 'test'
     }
     print(login_verification(data))
 
