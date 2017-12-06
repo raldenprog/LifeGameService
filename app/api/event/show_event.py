@@ -1,7 +1,6 @@
-# coding: utf8
+
 import logging
 import time
-from api.database.connect_db import db_connect
 from api.sql import SqlQuery
 
 logging.basicConfig(filename='logger.log',
@@ -9,9 +8,13 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 def all_event(count):
-    sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
     try:
-        result = SqlQuery(sql)
+        sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
+        if type(count) is not int or count < 0 or count is None:
+            logging.error('Fatal error: execute database')
+            return {'Answer': 'Error'}
+        else:
+            result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
