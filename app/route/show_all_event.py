@@ -14,7 +14,6 @@ class Show_all_event(Resource):
         print('cookies = ', request.cookies)
         print('ARGS = ', args)
         id = args.get('id_event', None)
-        print("id = ", id)
         try:
             answer = converter(show.all_event(int(id)))
         except:
