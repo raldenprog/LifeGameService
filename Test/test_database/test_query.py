@@ -30,3 +30,8 @@ class TestRegistration(unittest.TestCase):
         result = SqlQuery(sql_query[2])
         SqlQuery(sql_query[3])
         self.assertEqual(result[0][0], True)
+
+    def test_users_query(self):
+        sql = """SELECT * FROM users;"""
+        result = SqlQuery(sql)
+        print(result)
