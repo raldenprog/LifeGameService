@@ -38,7 +38,7 @@ api.add_resource(Task, '/task')
 api.add_resource(Scoreboard, '/scoreboard')
 api.add_resource(Logout, '/logout')
 api.add_resource(index, '/')
-api.add_resource(Show_all_event, '/allevents')
+api.add_resource(Show_all_event, '/event')
 
 
 if __name__ == '__main__':
