@@ -65,6 +65,3 @@ def filter_by_status(count, status):
         return {'Answer': 'Error'}
     return {'Answer': 'Success', 'Data': result}
 
-
-print(filter_by_status(0,1))
-
