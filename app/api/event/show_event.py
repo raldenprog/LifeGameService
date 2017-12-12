@@ -55,3 +55,16 @@ def page_event(count):  # Пустышка
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
     return {'Answer': 'Success', 'Data': result}
+
+def filter_by_status(count, status):
+    sql = "SELECT Name, Description, Date_start, Date_end FROM Event where status='{}' LIMIT 10 OFFSET {}".format(status, count)
+    try:
+        result = SqlQuery(sql)
+    except:
+        logging.error('Fatal error: execute database')
+        return {'Answer': 'Error'}
+    return {'Answer': 'Success', 'Data': result}
+
+
+print(filter_by_status(0,1))
+
