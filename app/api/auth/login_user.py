@@ -43,7 +43,7 @@ def auth_user(user_data):
             return {'Answer': 'Warning', "Data": "Данного пользователя нет в базе данных"}
     except:
         return {'Answer': 'Warning', "Data": "Логин или пароль не правильные"}
-    answer = input_session_table(result.get('User'))
+    answer = input_session_table(result[0].get('id_user'))
     if answer.get('Answer') is not "Success":
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных. Неудача"}
     return answer

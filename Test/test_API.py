@@ -8,7 +8,7 @@ from random import choice
 from string import ascii_lowercase
 
 #URL = 'http://127.0.0.1:13451'
-URL = 'http://87.103.243.110:13451'
+URL = 'http://0.0.0.0:13451'
 
 
 class TestRegistration(unittest.TestCase):
