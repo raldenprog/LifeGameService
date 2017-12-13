@@ -1,4 +1,4 @@
-
+# coding: utf8
 import logging
 import time
 from api.sql import SqlQuery
