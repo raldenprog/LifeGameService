@@ -3,7 +3,7 @@ import pprint
 import requests
 
 def all_event_OK():
-    dataOK = {'id_event': 0}
+    dataOK = {'page': 0}
     r = requests.get('http://0.0.0.0:13451/event', data=dataOK)
     pprint.pprint(json.loads(r.text))
 
