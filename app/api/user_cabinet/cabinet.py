@@ -3,6 +3,7 @@ import logging
 import hashlib
 from api.database.connect_db import db_connect
 from api.user_cabinet.id_check import check_id
+from api.sql import SqlQuery
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',
@@ -22,22 +23,15 @@ def user_cabinet(data):
     except:
         logging.error('Fatal error: param id')
         return {"Answer": "Error", "Data": data}
-    connect, current_connect = db_connect()
-    if connect == -1:
-        return {"Answer": "Error"}
     try:
-        if check_id(data["ID"], current_connect) == 0:
+        if check_id(data["ID"]) == 0:
             return {"Answer": "Id not found", "Data": data}
     except:
         logging.error('Fatal error: check id')
         return {"Answer": "Error", "Data": data}
     try:
-        current_connect.execute("SELECT * FROM users where id = '{}'".format(
-            data['ID']
-        ))
-        connect.commit()
-        result = current_connect.fetchall()[0]
-        connect.close()
+        sql = "SELECT * FROM users where id = '{}'".format(data['ID'])
+        result = SqlQuery(sql)
         return {"Answer": "Success", "Data": result}
     except:
         logging.error('Fatal error: execute database')
@@ -61,20 +55,15 @@ def change_password(data):
         logging.error('Fatal error: check data is None')
         return {"Answer": "Error", "Data": data}
     try:
-        connect, current_connect = db_connect()
-    except:
-        logging.error('Fatal error: connect database')
-        return {"Answer": "Error", "Data": data}
-    try:
-        if (check_id(data["id"], current_connect)) == 0:
+        if (check_id(data["id"])) == 0:
             return {"Answer": "Id not found", "Data": data}
     except:
         logging.error('Fatal error: check id')
         return {"Answer": "Error", "Data": data}
     else:
         try:
-            current_connect.execute("SELECT Password FROM Users where ID = '{}'".format(data['ID']))
-            result = current_connect.fetchall()[0]
+            sql = "SELECT Password FROM Users where ID = '{}'".format(data['ID'])
+            result = SqlQuery(sql)
         except:
             logging.error('Fatal error: execute database')
             return {"Answer": "Error"}
@@ -88,9 +77,7 @@ def change_password(data):
                     password_hash.update(data['New_password'].encode())
                     data['New_password'] = password_hash.hexdigest()
                     sql = "UPDATE Users SET Password='{}' WHERE ID='{}'".format(data["New_password"], data["ID"])
-                    current_connect.execute(sql)
-                    connect.commit()
-                    connect.close()
+                    SqlQuery(sql)
                     return {"Answer": "Success"}
                 else:
                     return {"Answer": "Wrong password"}
@@ -119,31 +106,22 @@ def edit_cabinet(data):
         return {"Answer": "Error",
                 "Data": data}
     try:
-        connect, current_connect = db_connect()
+        if (check_id(int(data["ID"]))) == 0:
+            return {"Answer": "Id not found",
+                    "Data": data}
     except:
-        logging.error('Fatal error: connect database')
+        logging.error('Fatal error: check id')
         return {"Answer": "Error",
                 "Data": data}
     else:
         try:
-            if (check_id(int(data["ID"]), current_connect)) == 0:
-                return {"Answer": "Id not found",
-                        "Data": data}
+            sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
+                  " Educational='{}', Logo='{}' WHERE ID='{}'".format(
+                data["Name"], data["Patronymic"], data["Email"], data["Sex"], data["City"],
+                data["Educational"], data["Logo"], data["ID"]
+                )
+            SqlQuery(sql)
+            return {"Answer": "Success", "Data": data}
         except:
-            logging.error('Fatal error: check id')
-            return {"Answer": "Error",
-                    "Data": data}
-        else:
-            try:
-                sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
-                      " Educational='{}', Logo='{}' WHERE ID='{}'".format(
-                    data["Name"], data["Patronymic"], data["Email"], data["Sex"], data["City"],
-                    data["Educational"], data["Logo"], data["ID"]
-                    )
-                current_connect.execute(sql)
-                connect.commit()
-                connect.close()
-                return {"Answer": "Success", "Data": data}
-            except:
-                logging.error('Fatal error: Password comparison')
-                return {"Answer": "Error"}
+            logging.error('Fatal error: Password comparison')
+            return {"Answer": "Error"}

@@ -1,7 +1,7 @@
 # coding: utf8
 import logging
 from api.database.connect_db import db_connect
-
+from api.sql import SqlQuery
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
@@ -34,14 +34,9 @@ def registration_event(user_data):
 
 
 def input_event_table(user_data):
-    connect, current_connect = db_connect()
-    if connect == -1:
-        return {"Answer": "Error"}
     try:
-        sql = "INSERT INTO event VALUES (null, \"{Name}\", \"{Description}\", \"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, {Date_stop}, {Date_continue})".format(**user_data)
-        current_connect.execute(sql)
-        connect.commit()
-        connect.close()
+        sql = "INSERT INTO id_event VALUES (null, \"{Name}\", \"{Description}\", \"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, {Date_stop}, {Date_continue})".format(**user_data)
+        SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
@@ -74,14 +69,9 @@ def update_event(user_data):
     return update_event_table(update_data)
 
 def update_event_table(user_data):
-    connect, current_connect = db_connect()
-    if connect == -1:
-        return {"Answer": "Error"}
     try:
-        sql = "UPDATE event SET Name='{Name}', Description='{Description}', Logo='{Logo}', Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'".format(**user_data)
-        current_connect.execute(sql)
-        connect.commit()
-        connect.close()
+        sql = "UPDATE id_event SET Name='{Name}', Description='{Description}', Logo='{Logo}', Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'".format(**user_data)
+        SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}

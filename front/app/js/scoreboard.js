@@ -1,7 +1,7 @@
 var tasks;
 
 function getScoreboard() {
-    var xhr = createCORSRequest('GET', 'http://87.103.243.110:13451/scoreboard');
+    var xhr = createCORSRequest('GET', 'http://90.189.132.25:13451/scoreboard');
     xhr.send();
     xhr.onload = function () {
         data = $.parseJSON(this.responseText);

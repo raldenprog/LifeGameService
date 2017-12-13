@@ -1,5 +1,5 @@
 function getTasks() {
-    str = "http://87.103.243.110:13451/task?session=" + $.cookie('UUID');
+    str = "http://90.189.132.25:13451/task?session=" + $.cookie('UUID');
     var xhr = createCORSRequest('GET', str);
     xhr.send();
     xhr.onload = function () {
@@ -35,7 +35,7 @@ function getTasks() {
 }
 
 function submitTask(task) {
-    var str = 'http://87.103.243.110:13451/task?session=' + $.cookie('UUID') + '&Task_name=' + task + '&Task_flag=' + $("#flag").val();
+    var str = 'http://90.189.132.25:13451/task?session=' + $.cookie('UUID') + '&Task_name=' + task + '&Task_flag=' + $("#flag").val();
     var xhr = createCORSRequest('GET', str);
     xhr.send();
     xhr.onload = function () {

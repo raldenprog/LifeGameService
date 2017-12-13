@@ -28,10 +28,10 @@ $(document).ready(function() {
             Logo: '9'
         };
 
-        setJson(str, 'http://87.103.243.110:13451/registration');
+        setJson(str, 'http://90.189.132.25:13451/registration');
 
         var data = JSON.stringify({Data: str});
-        var xhr = createCORSRequest('POST', 'http://87.103.243.110:13451/registration');
+        var xhr = createCORSRequest('POST', 'http://90.189.132.25:13451/registration');
         xhr.setRequestHeader(
             'X-Custom-Header', 'value');
         xhr.setRequestHeader(

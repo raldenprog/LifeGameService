@@ -3,23 +3,22 @@ import sys
 import os
 print(os.getcwd())
 sys.path.append(os.getcwd()+'/../../')
-from api.database.connect_db import db_connect
+from api.database.connect_db import db_connect_new as db_connect
 from api.auth.registration_users import registration_user
 
 def create_table_user():
     connect, current_connect = db_connect()
-    sql = "CREATE TABLE Users (" \
-        "User int(11) AUTO_INCREMENT, " \
-        "Name varchar(32), " \
-        "Surname varchar(32), "\
-        "Email varchar(64), " \
-        "Sex varchar(8), " \
-        "City varchar(64), " \
-        "Educational varchar(255), " \
-        "Logo varchar(256), " \
-        "PRIMARY KEY (User) " \
-        ") " \
-        "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    sql = """CREATE TABLE Users (
+        id_user SERIAL NOT NULL,
+        Name char(32),
+        Surname char(32),
+        Email char(64),
+        Sex char(8),
+        City char(64),
+        Educational char(255),
+        Logo char(256),
+        PRIMARY KEY (id_user)
+        );"""
     print(sql)
     try:
         current_connect.execute(sql)
@@ -30,13 +29,12 @@ def create_table_user():
 
 def create_table_auth():
     connect, current_connect = db_connect()
-    sql = "CREATE TABLE Auth (" \
-        "User int(11) auto_increment," \
-        "Login varchar(30) NOT NULL UNIQUE," \
-        "Password varchar(40) NOT NULL," \
-        "PRIMARY KEY (User)" \
-        ") " \
-        "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    sql = """CREATE TABLE Auth (
+        id_user bigint NOT NULL,
+        Login char(30) NOT NULL UNIQUE,
+        Password char(40) NOT NULL,
+        PRIMARY KEY (id_user)
+        ) """
     print(sql)
     try:
         current_connect.execute(sql)
@@ -47,12 +45,11 @@ def create_table_auth():
 
 def create_table_access():
     connect, current_connect = db_connect()
-    sql = "CREATE TABLE Access (" \
-          "User int(11) NOT NULL AUTO_INCREMENT," \
-          "Access int(1) NOT NULL DEFAULT 0," \
-          "PRIMARY KEY (User)" \
-          ") " \
-          "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    sql = """CREATE TABLE Access (
+          id_user int NOT NULL,
+          Access integer NOT NULL DEFAULT 0,
+          PRIMARY KEY (id_user)
+          ) """
     print(sql)
     try:
         current_connect.execute(sql)
@@ -63,13 +60,12 @@ def create_table_access():
 
 def create_table_session():
     connect, current_connect = db_connect()
-    sql = "CREATE TABLE Session (" \
-          "Session int(11) NOT NULL AUTO_INCREMENT," \
-          "User int(11) NOT NULL," \
-          "UUID varchar(256) NOT NULL UNIQUE," \
-          "PRIMARY KEY (Session)" \
-          ") " \
-          "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    sql = """CREATE TABLE Session (
+          Session SERIAL NOT NULL,
+          id_user integer NOT NULL,
+          UUID char(256) NOT NULL UNIQUE,
+          PRIMARY KEY (Session)
+          ) """
     print(sql)
     try:
         current_connect.execute(sql)
@@ -80,19 +76,18 @@ def create_table_session():
 
 def create_table_event():
     connect, current_connect = db_connect()
-    sql = "CREATE TABLE Event (" \
-        "Event int(11) NOT NULL AUTO_INCREMENT, " \
-        "Name varchar(255) NOT NULL, " \
-        "Description varchar(2048) NOT NULL, " \
-        "Logo varchar(30) NOT NULL, " \
-        "Status varchar(30) NOT NULL, "\
-        "Date_start date NOT NULL, " \
-        "Date_end date NOT NULL, " \
-        "Date_stop date NOT NULL, " \
-        "Date_continue date NOT NULL, " \
-        "PRIMARY KEY (Event)" \
-        ") " \
-        "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    sql = """CREATE TABLE Event (
+        id_event SERIAL NOT NULL,
+        Name char(255) NOT NULL,
+        Description varchar(2048) NOT NULL,
+        Logo char(30) NOT NULL,
+        Status char(30) NOT NULL,
+        Date_start date NOT NULL,
+        Date_end date NOT NULL,
+        Date_stop date NOT NULL,
+        Date_continue date NOT NULL,
+        PRIMARY KEY (id_event)
+        );"""
     print(sql)
     try:
         current_connect.execute(sql)
@@ -105,22 +100,21 @@ def create_table_task():
 
     connect, current_connect = db_connect()
 
-    sql = "CREATE TABLE task (" \
-          "ID_Task int(11) NOT NULL AUTO_INCREMENT, " \
-          "Task_category varchar(30) NOT NULL, " \
-          "Task_name varchar(255) NOT NULL UNIQUE, " \
-          "Task_flag varchar(255) NOT NULL, " \
-          "Task_description varchar(2048) NOT NULL, " \
-          "Task_point int(4) NOT NULL, " \
-          "Task_hint varchar(1024) NOT NULL," \
-          "Task_solve varchar(1024), " \
-          "Task_link varchar(512), " \
-          "Status int(1), " \
-          "Public_status int(1), " \
-          "id_Event int(11), " \
-          "PRIMARY KEY (ID_Task)" \
-          ") " \
-          "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    sql = """CREATE TABLE task (
+          id_task SERIAL NOT NULL,
+          Task_category varchar(30) NOT NULL,
+          Task_name varchar(255) NOT NULL UNIQUE,
+          Task_flag varchar(255) NOT NULL,
+          Task_description varchar(2048) NOT NULL,
+          Task_point integer NOT NULL,
+          Task_hint varchar(1024) NOT NULL,
+          Task_solve varchar(1024),
+          Task_link varchar(512),
+          Status integer,
+          Public_status integer,
+          id_event integer,
+          PRIMARY KEY (id_task)
+          )"""
     print(sql)
     try:
         current_connect.execute(sql)
@@ -133,15 +127,14 @@ def create_table_task_acc():
 
     connect, current_connect = db_connect()
 
-    sql = "CREATE TABLE task_acc (" \
-          "id int(11) NOT NULL AUTO_INCREMENT, " \
-          "id_task int(11) NOT NULL, " \
-          "id_user int(11) NOT NULL, " \
-          "point int(4) NOT NULL, " \
-          "UNIQUE(id_task, id_user), " \
-          "PRIMARY KEY (id)" \
-          ") " \
-          "ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;"
+    sql = """CREATE TABLE task_acc (
+          id SERIAL NOT NULL,
+          id_task integer NOT NULL,
+          id_user integer NOT NULL,
+          point integer NOT NULL,
+          UNIQUE(id_task, id_user),
+          PRIMARY KEY (id)
+          );"""
     print(sql)
     try:
         current_connect.execute(sql)
@@ -186,13 +179,13 @@ def SCTF():
         registration_data['Password'] = password[i]
         registration_user(registration_data)
 
+create_table_auth()
+create_table_user()
+create_table_access()
+create_table_session()
+# SCTF()
+create_table_event()
+create_table_task()
+create_table_task_acc()
+#create_users()
 
-#  create_table_auth()
-# create_table_user()
-# create_table_access()
-# create_table_session()
-SCTF()
-# create_table_event()
-# create_table_task()
-# create_table_task_acc()
-# create_users()

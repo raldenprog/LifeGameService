@@ -180,7 +180,7 @@ def get_task_event_name(event, task_name):
 
 def get_task_event_category(event, task_category):
     connect, current_connect = db_connect()
-    sql = "SELECT ID, task_name, task_category, event FROM task WHERE event={} AND task_category={}".format(event, task_category)
+    sql = "SELECT id_task, task_name, task_category, event FROM task WHERE event={} AND task_category={}".format(event, task_category)
 
     try:
         current_connect.execute(sql)
