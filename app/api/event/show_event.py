@@ -10,11 +10,11 @@ logging.basicConfig(filename='logger.log',
 def all_event(count):
     try:
         sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
-        if type(count) is not int or count < 0 or count is None:
+        if isinstance(count, int) and count >= 0 and count is not None:
+            result = SqlQuery(sql)
+        else:
             logging.error('Fatal error: execute database')
             return {'Answer': 'Error'}
-        else:
-            result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
