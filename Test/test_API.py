@@ -2,8 +2,8 @@
 import json
 import unittest
 import requests as req
-import api.task.tasks as tasks
-import api.auth.auth as auth
+import app.api.task.tasks as tasks
+import app.api.auth.auth as auth
 from random import choice
 from string import ascii_lowercase
 

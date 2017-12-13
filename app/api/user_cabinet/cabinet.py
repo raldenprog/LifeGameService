@@ -1,7 +1,6 @@
 # coding: utf8
 import logging
 import hashlib
-from api.database.connect_db import db_connect
 from api.user_cabinet.id_check import check_id
 from api.sql import SqlQuery
 

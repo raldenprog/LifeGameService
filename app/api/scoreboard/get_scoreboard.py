@@ -1,6 +1,5 @@
 # coding: utf-8
 import logging
-from api.database.connect_db import db_connect
 import decimal
 from api.sql import SqlQuery
 

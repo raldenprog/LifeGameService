@@ -1,9 +1,14 @@
 __author__ = 'ar.chusovitin'
 import json
+import sys
+import os
+sys.path.append(os.getcwd())
+sys.path.append(os.getcwd()+'/../app/api')
+sys.path.append(os.getcwd()+'/../app/route')
 import unittest
 import requests as req
-from api.sql import SqlQuery
-from api.database.connect_db import db_connect_new as db
+from app.api.sql import SqlQuery
+from app.api.database.connect_db import db_connect_new as db
 
 #URL = 'http://127.0.0.1:13451'
 #URL = 'http://87.103.243.110:13451'

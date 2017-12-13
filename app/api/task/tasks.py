@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-import pymysql
 import logging
-from api.database.connect_db import db_connect
 
+from api.sql import SqlQuery
 logging.basicConfig(filename='logger.log',
                     format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
                     level=logging.INFO)
@@ -64,33 +63,21 @@ def create_one_task(data):
         return {"answer": "Error",
                 "data": check_data}
     try:
-        connect, current_connect = db_connect()
-        #check_data["database"] = "Connected"
-    except:
-        #check_data["database"] = "Disconnected"
-        logging.error('Fatal error: param \'database\' disconnected')
-        return {"answer": "Error",
-                "data": check_data}
-    else:
-        try:
-            sql = "INSERT INTO task" \
-                " VALUES (null,\"{task_category}\",\"{task_name}\"," \
-                "\"{task_flag}\",\"{task_description}\",{task_point},\"{task_hint}\"," \
-                "null, \"{task_link}\",1,1,2)".format(**data)
-            print(sql)
-            current_connect.execute(sql)
-            connect.commit()
-            #check_data["database"] = "Recorded"
-        except Exception as e:
-            if e == 1062:
-                return {"Answer": "Warning",
-                        "Data": 'Duplicate task'}
-            logging.error('Fatal error: param \'sql\' can\'t create new record')
-            #check_data["database"] = "Unrecorded"
+        sql = "INSERT INTO task" \
+            " VALUES (null,\"{task_category}\",\"{task_name}\"," \
+            "\"{task_flag}\",\"{task_description}\",{task_point},\"{task_hint}\"," \
+            "null, \"{task_link}\",1,1,2)".format(**data)
+        print(sql)
+        SqlQuery(sql)
+        #check_data["database"] = "Recorded"
+    except Exception as e:
+        if e == 1062:
             return {"Answer": "Warning",
-                    "Data": check_data}
-        finally:
-            connect.close()
+                    "Data": 'Duplicate task'}
+        logging.error('Fatal error: param \'sql\' can\'t create new record')
+        #check_data["database"] = "Unrecorded"
+        return {"Answer": "Warning",
+                "Data": check_data}
     if error_flag:
         return {"Answer": "Error",
                 "Data": check_data}
@@ -166,12 +153,10 @@ json = {    "id" :              "1",
 
 
 def get_task_event_name(event, task_name):
-    connect, current_connect = db_connect()
     sql = "SELECT ID_Task, Task_name, Task_category, Task_description FROM task WHERE event={} AND ID_Task={}".format(event, task_name)
 
     try:
-        current_connect.execute(sql)
-        result = current_connect.fetchall()
+        result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
@@ -179,12 +164,10 @@ def get_task_event_name(event, task_name):
 
 
 def get_task_event_category(event, task_category):
-    connect, current_connect = db_connect()
     sql = "SELECT id_task, task_name, task_category, event FROM task WHERE event={} AND task_category={}".format(event, task_category)
 
     try:
-        current_connect.execute(sql)
-        result = current_connect.fetchall()
+        result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
@@ -192,12 +175,10 @@ def get_task_event_category(event, task_category):
 
 
 def get_task_acc(id_task, id_user):
-    connect, current_connect = db_connect()
     sql = "SELECT id_task FROM task_acc WHERE id_task in {} and id_user = {}".format(id_task, id_user)
     print(sql)
     try:
-        current_connect.execute(sql)
-        result = current_connect.fetchall()
+        result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {}
@@ -229,14 +210,12 @@ def preparation_result(data, id_user):
 
 
 def get_task_event(data):
-    connect, current_connect = db_connect()
     sql = "SELECT ID_Task, Task_name, Task_category, Task_point, " \
           "Task_description, Task_hint, Task_link FROM task WHERE id_event={} " \
           "order by Task_category, Task_point".format(data['id_event'])
     print(sql)
     try:
-        current_connect.execute(sql)
-        result = current_connect.fetchall()
+        result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error connect db'}
@@ -244,17 +223,13 @@ def get_task_event(data):
 
 
 def input_task_acc(user_data):
-    connect, current_connect = db_connect()
-    if connect == -1:
-        return {"Answer": "Warning", "Data": "Ошибка доступа к базе данных, повторить позже"}
     #TODO: Временное решение.
     id_event = 2
     sql = "INSERT INTO task_acc" \
         " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data['id_user'], id_event, user_data['Task_point'])
     print(sql)
     try:
-        current_connect.execute(sql)
-        connect.commit()
+        SqlQuery(sql)
     except:
         logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
         return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных."}
@@ -262,14 +237,12 @@ def input_task_acc(user_data):
 
 
 def check_task(data):
-    connect, current_connect = db_connect()
     sql = "SELECT ID_Task, Task_point FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(
         data['Task_name'],
         data['Task_flag'])
     print(sql)
     try:
-        current_connect.execute(sql)
-        result = current_connect.fetchone()
+        result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error connect db'}
@@ -280,5 +253,3 @@ def check_task(data):
             return {'Answer': 'Success', 'Data': True}
     except:
         return {'Answer': 'Warning', 'Data': False}
-
-#print (create_few_tasks(json))

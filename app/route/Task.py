@@ -31,6 +31,7 @@ class Task(Resource):
                 if session is not None and isinstance(id_user, int) else {'id_event': 1, 'id_user': 0}
             temp = tasks.get_task_event(data)
             answer = {'Data': [], 'Answer': temp['Answer']}
+            print(temp)
             for i in temp['Data']:
                 answer['Data'].append(i)
         if id is not None:

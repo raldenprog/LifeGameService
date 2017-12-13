@@ -1,6 +1,5 @@
 # coding: utf8
 import logging
-from api.database.connect_db import db_connect
 from api.sql import SqlQuery
 
 logging.basicConfig(filename='logger.log',

@@ -1,9 +1,10 @@
 # coding=utf-8
-import json
 import sys
 import os
 sys.path.append(os.getcwd())
-from flask import Flask, request, jsonify
+sys.path.append(os.getcwd()+'/api')
+sys.path.append(os.getcwd()+'/route')
+from flask import Flask, request
 from flask_restful import Resource, Api
 from route.registration import Registration
 from route.Authentication import Authentication
@@ -43,6 +44,6 @@ api.add_resource(show_all_event, '/show_all')
 
 if __name__ == '__main__':
     try:
-        _app.run(host='0.0.0.0', port='13451', threaded=True)
+        _app.run(host='0.0.0.0', port=13451, threaded=True)
     except Exception as e:
         print(e)
