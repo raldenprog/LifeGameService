@@ -10,7 +10,7 @@ logging.basicConfig(filename='logger.log',
 def check_id(id_user):
     """
     Передаем функции искомый id.
-    Возвращает 1 если id есть, 0 если id нет
+    Возвращает True если id есть, False если id нет
     """
     try:
         sql = "select exists(select 1 from users where id_user = {})".format(id_user)
