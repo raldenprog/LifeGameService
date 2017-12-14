@@ -15,21 +15,22 @@ def user_cabinet(data):
     Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     try:
-        if data["ID"] is None:
+        if data["id_user"] is None:
             logging.info('Incorrect parameter id - None')
-            data["ID"] = "Empty"
+            data["id_user"] = "Empty"
             return {"Answer": "Error", "Data": data}
     except:
         logging.error('Fatal error: param id')
         return {"Answer": "Error", "Data": data}
     try:
-        if check_id(data["ID"]) == 0:
+        if check_id(data["id_user"]) == False:
             return {"Answer": "Id not found", "Data": data}
     except:
         logging.error('Fatal error: check id')
         return {"Answer": "Error", "Data": data}
     try:
-        sql = "SELECT * FROM users where id = '{}'".format(data['ID'])
+        sql = "SELECT Name, City, Sex, Email, Logo, Educational FROM users " \
+              "where id_user = '{}'".format(data['id_user'])
         result = SqlQuery(sql)
         return {"Answer": "Success", "Data": result}
     except:
