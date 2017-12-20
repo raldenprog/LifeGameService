@@ -1,10 +1,10 @@
-from datetime import datetime
+from datetime import date
 import json
 
 
-def __converter_data(date):
-    if isinstance(date, datetime):
-        return date.strftime('%d.%m.%Y')
+def __converter_data(param):
+    if isinstance(param, date):
+        return param.strftime('%d.%m.%Y')
 
 
 def converter(js):
