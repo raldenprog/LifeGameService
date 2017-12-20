@@ -13,7 +13,7 @@ URL = 'http://127.0.0.1:13451'
 #URL = 'http://87.103.243.110:13451'
 
 
-class TestRegistration(unittest.TestCase):
+class TestEventRoute(unittest.TestCase):
 
     def test_event_get(self):
         data = json.loads(json.loads(rq.get('{url}/event'.format(url=URL)).text))
