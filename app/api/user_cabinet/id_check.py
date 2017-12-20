@@ -7,19 +7,14 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 
-def check_id(id_user, current_connect=None):
+def check_id(id_user):
     """
-    Передаем функции искомый id и соединение с базой данных
-    Получает количество id в базе и если data["id"]<= количеству, то данный id есть.
-    Возвращает 1 если id есть, 0 если id нет
+    Передаем функции искомый id.
+    Возвращает True если id есть, False если id нет
     """
     try:
-        sql = "SELECT * FROM Users where ID = '{}'".format(id_user)
-        result = SqlQuery(sql)
-        if len(result['Password']) != 0:
-            return 1
-        else:
-            return 0
+        sql = "select exists(select 1 from users where id_user = {})".format(id_user)
+        return SqlQuery(sql)[0].get('exists', False)
     except:
         logging.error('Fatal error: check id')
         return {"Answer": "Error"}
