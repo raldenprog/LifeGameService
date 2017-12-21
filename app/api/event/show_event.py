@@ -8,7 +8,6 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 def all_event(count):
-    sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
     try:
         sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
         if isinstance(count, int) and count >= 0 and count is not None:
