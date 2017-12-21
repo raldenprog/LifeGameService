@@ -1,4 +1,5 @@
 # coding=utf-8
+import json
 import sys
 import os
 sys.path.append(os.getcwd())
@@ -11,7 +12,7 @@ from route.Authentication import Authentication
 from route.Task import Task
 from route.Logout import Logout
 from route.Scoreboard import Scoreboard
-from route.show_all_event import show_all_event
+from route.Event import Event
 from route.Cabinet import Cabinet
 
 _app = Flask(__name__)
@@ -40,7 +41,7 @@ api.add_resource(Task, '/task')
 api.add_resource(Scoreboard, '/scoreboard')
 api.add_resource(Logout, '/logout')
 api.add_resource(index, '/')
-api.add_resource(show_all_event, '/show_all')
+api.add_resource(Event, '/event')
 api.add_resource(Cabinet, '/cabinet')
 
 
