@@ -13,6 +13,7 @@ from route.Task import Task
 from route.Logout import Logout
 from route.Scoreboard import Scoreboard
 from route.Event import Event
+from route.Cabinet import Cabinet
 
 _app = Flask(__name__)
 _app.config['JSON_AS_ASCII'] = False
@@ -41,6 +42,7 @@ api.add_resource(Scoreboard, '/scoreboard')
 api.add_resource(Logout, '/logout')
 api.add_resource(index, '/')
 api.add_resource(Event, '/event')
+api.add_resource(Cabinet, '/cabinet')
 
 
 if __name__ == '__main__':

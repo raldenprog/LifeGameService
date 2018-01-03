@@ -23,6 +23,12 @@ def user_cabinet(data):
         logging.error('Fatal error: param id')
         return {"Answer": "Error", "Data": data}
     try:
+        if data["id_user"].isdigit() == False:
+            return {"Answer": "Error", "Data": data}
+    except:
+        logging.error('Fatal error: type id')
+        return {"Answer": "Error", "Data": data}
+    try:
         if check_id(data["id_user"]) == False:
             return {"Answer": "Id not found", "Data": data}
     except:
