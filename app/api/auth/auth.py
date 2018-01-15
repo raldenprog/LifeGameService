@@ -1,5 +1,6 @@
 import logging
-from api.sql import SqlQuery
+from api.service import GameService as gs
+import api.base_name as names
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
@@ -7,13 +8,13 @@ logging.basicConfig(filename='logger.log',
 
 def session_verification(session):
     """
-    Возвращает ID пользователя к которому привязан UUID
-    :param session: 
-    :return: 
+    Метод проверяет, существует ли пользовательская сессия
+    :param session: UUID сессии
+    :return: int Возвращает ID пользователя
     """
     try:
         sql = "SELECT id_user FROM Session WHERE UUID = '{}'".format(session)
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return None
@@ -27,13 +28,13 @@ def session_verification(session):
 
 def get_login(id_user):
     """
-    Возвращает Login пользователя 
-    :param session: 
-    :return: 
+    Метод получает логин по ID пользователя
+    :param id_user: ID пользователя
+    :return: str Логин пользователя
     """
     try:
         sql = "SELECT Login FROM Auth WHERE User = '{}'".format(id_user)
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return None
@@ -42,4 +43,4 @@ def get_login(id_user):
             return None
     except:
         return None
-    return result['Login']
+    return result[names.LOGIN]

@@ -17,7 +17,7 @@ from login_user import login_verification
 
 def login_done():
     data = {
-        'Login': 'Anton',
+        names.LOGIN: 'Anton',
         'Password': '2'
     }
     print(login_verification(data))
@@ -25,7 +25,7 @@ def login_done():
 
 def login_error():
     data = {
-        # 'login': 'Anton',
+        # names.LOGIN: 'Anton',
         'password': 'qwerty'
     }
     print(login_verification(data))
@@ -36,9 +36,9 @@ def login_user():
     d = file.readline().split(':')
     file.close()
     data = {
-        "Action": "Login",
+        "Action": names.LOGIN,
         "Data": {
-            "login": d[0],
+            names.LOGIN: d[0],
             "password": d[1][:-2:]
         }
     }

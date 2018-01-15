@@ -4,6 +4,7 @@ from flask_restful import Resource
 from flask import request
 from api.config import HEADER
 import api.auth.login_user as auth
+import api.base_name as names
 
 
 class Authentication(Resource):

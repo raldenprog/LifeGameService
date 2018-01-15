@@ -22,7 +22,7 @@ def cabinet_done():
 
 def cabinet_error():
     data = {
-        'login': 'Anton'
+        names.LOGIN: 'Anton'
     }
     print(user_cabinet(data))
 
@@ -33,18 +33,18 @@ def check_change_password():
             "new_password": "pinlox123"
             }
     check = change_password(data)
-    if check['Answer'] == 'Success':
+    if check[names.ANSWER] == 'Success':
         data = {"id": "3",
                 "old_password": "pinlox123",
                 "new_password": "qwerty"
                 }
         check = change_password(data)
-        if check['Answer'] == 'Success':
+        if check[names.ANSWER] == 'Success':
             print("Ok")
         else:
-            print("Error")
+            print(names.ERROR)
     else:
-        print("Error")
+        print(names.ERROR)
 
 cabinet_done()
 cabinet_error()

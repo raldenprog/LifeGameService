@@ -1,9 +1,9 @@
 # coding=utf-8
-import json
 from flask_restful import Resource, reqparse
 from flask import request
 from api.config import HEADER
 import api.auth.login_user as auth
+import api.base_name as names
 
 
 class Logout(Resource):
@@ -17,4 +17,4 @@ class Logout(Resource):
         print('ARGS = ', args)
         session = args.get('session')
         auth.logout_user(session)
-        return {'Answer': 'Success'}, 200, HEADER
+        return {names.ANSWER: 'Success'}, 200, HEADER

@@ -26,9 +26,9 @@ def connect_db(data):
         connect.commit()
         connect.close()
         result = current_connect.fetchall()[0]
-        return {"Answer": "Ok",
+        return {names.ANSWER: "Ok",
                 "data": result}
     except:
-        return {"Answer": "Error"}
+        return {names.ANSWER: names.ERROR}
 
 print (connect_db(data))

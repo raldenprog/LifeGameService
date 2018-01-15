@@ -16,7 +16,7 @@ class TestRegistration(unittest.TestCase):
     @unittest.skip
     def test_registration(self):
         data = json.dumps({
-            'Login': 'anton',#.join(choice(ascii_lowercase) for i in range(12)),
+            names.LOGIN: 'anton',#.join(choice(ascii_lowercase) for i in range(12)),
             'Password': '2',
             'Name': '3',
             'Surname': '4',
@@ -36,7 +36,7 @@ class TestRegistration(unittest.TestCase):
     @unittest.skip
     def test_auth(self):
         data = json.dumps({
-            'Login': 'anton',
+            names.LOGIN: 'anton',
             'Password': '2'
         })
         data = req.request('POST', '%s/auth' % URL, data={'Data': data})
@@ -330,7 +330,7 @@ class TestRegistration(unittest.TestCase):
     @unittest.skip
     def test_session(self):
         data = json.dumps({
-            'Login': 'anton',
+            names.LOGIN: 'anton',
             'Password': '2'
         })
         #data = req.request('POST', '%s/auth' % URL, data={'Data': data})

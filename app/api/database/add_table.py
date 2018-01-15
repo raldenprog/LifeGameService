@@ -159,7 +159,7 @@ def create_users():
 
 
 def SCTF():
-    check = ['Login', 'Password', 'Name',
+    check = [names.LOGIN, 'Password', 'Name',
              'Surname', 'Email', 'Sex',
              'City', 'Educational', 'Logo_name', 'Logo']
     d = ['Make society (h)acked again', 'Без пафоса', 'Лицей7', 'HackSQUAD',
@@ -175,7 +175,7 @@ def SCTF():
     password = ['test3']
     registration_data = dict.fromkeys(check, '-')
     for i in range(len(d)):
-        registration_data['Login'] = d[i]
+        registration_data[names.LOGIN] = d[i]
         registration_data['Password'] = password[i]
         registration_user(registration_data)
 

@@ -3,6 +3,7 @@ from flask_restful import Resource, reqparse
 from flask import request
 from api.config import HEADER
 from api.user_cabinet.cabinet import user_cabinet
+import api.base_name as names
 
 
 class Cabinet(Resource):

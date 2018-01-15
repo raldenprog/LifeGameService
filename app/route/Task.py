@@ -5,6 +5,7 @@ from flask import request
 from api.config import HEADER
 import api.task.tasks as tasks
 import api.auth.auth as auth
+import api.base_name as names
 
 
 class Task(Resource):
@@ -30,11 +31,11 @@ class Task(Resource):
             data = {'id_event': 1, 'id_user': id_user} \
                 if session is not None and isinstance(id_user, int) else {'id_event': 1, 'id_user': 0}
             temp = tasks.get_task_event(data)
-            answer = {'Data': [], 'Answer': temp['Answer']}
+            answer = {'Data': [], names.ANSWER: temp[names.ANSWER]}
             print(temp)
             for i in temp['Data']:
                 answer['Data'].append(i)
         if id is not None:
             login = auth.get_login(id_user)
-            answer['Login'] = login
+            answer[names.LOGIN] = login
         return answer, 200, HEADER

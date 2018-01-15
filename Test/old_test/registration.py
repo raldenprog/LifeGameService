@@ -19,7 +19,7 @@ from registration_users import add_user
 
 def registration_done():
     data = {
-        'Login': 'Anton451241',
+        names.LOGIN: 'Anton451241',
         'Password': 'qwerty',
         'Name': 'anton123',
         'Surname': 'ch',
@@ -35,7 +35,7 @@ def registration_done():
 
 def registration_error():
     data = {
-        # 'login': 'Anton',
+        # names.LOGIN: 'Anton',
         'password': 'qwerty',
         'name': 'anton123',
         'patronymic': 'ch',
@@ -65,7 +65,7 @@ def registration_user_data():
     data = {
         "Action": "Registration",
         "Data": {
-            'login': login,
+            names.LOGIN: login,
             'password': password,
             'name': name,
             'patronymic': patronymic,

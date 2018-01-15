@@ -4,6 +4,7 @@ from flask_restful import Resource
 from flask import request
 from api.config import HEADER
 from api.auth.registration_users import registration_user
+import api.base_name as names
 
 
 class Registration(Resource):
