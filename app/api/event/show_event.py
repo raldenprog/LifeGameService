@@ -42,13 +42,15 @@ def end_event(count):
 
 def find_event(alf, count):
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
-          "FROM Event LIKE '{}%' LIMIT 10 OFFSET {}".format(alf, count)
+          "FROM Event WHERE Name LIKE '%{}%' LIMIT 10 OFFSET {}".format(alf, count)
     try:
         result = SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {'Answer': 'Error'}
     return {'Answer': 'Success', 'Data': result}
+
+
 
 def page_event(count):  # Пустышка
     sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event"
