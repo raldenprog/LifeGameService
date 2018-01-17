@@ -4,6 +4,7 @@ from flask_restful import Resource
 from flask import request
 from api.config import HEADER
 import api.auth.login_user as auth
+import api.base_name as names
 
 
 class Authentication(Resource):
@@ -19,7 +20,7 @@ class Authentication(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())['Data']
+        url = json.loads(request.data.decode())[names.DATA]
         print(url)
         answer = auth.login_verification(url)
         print(answer)

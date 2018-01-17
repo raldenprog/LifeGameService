@@ -2,7 +2,8 @@
 from flask_restful import Resource, reqparse
 from flask import request
 import api.event.show_event as show  # show_event
-from api.converter_json import converter
+from api.service import GameService as gs
+import api.base_name as names
 from api.event.show_event import find_event
 
 
@@ -27,5 +28,5 @@ class Event(Resource):
             else:
                 answer = converter(show.all_event(int(page)))
         except:
-            return {'Answer': "Error"}, 200, {'Access-Control-Allow-Origin': '*'}
+            return {names.ANSWER: names.ERROR}, 200, {'Access-Control-Allow-Origin': '*'}
         return answer, 200, {'Access-Control-Allow-Origin': '*'}

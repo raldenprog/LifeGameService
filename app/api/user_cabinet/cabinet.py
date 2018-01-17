@@ -1,9 +1,8 @@
 # coding: utf8
 import logging
 import hashlib
-from api.user_cabinet.id_check import check_id
-from api.sql import SqlQuery
-
+from api.service import GameService as gs
+import api.base_name as names
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',
                     level=logging.INFO)
@@ -15,33 +14,34 @@ def user_cabinet(data):
     Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     try:
-        if data["id_user"] is None:
+        if data[names.ID_USER] is None:
             logging.info('Incorrect parameter id - None')
-            data["id_user"] = "Empty"
-            return {"Answer": "Error", "Data": data}
+            data[names.ID_USER] = "Empty"
+            return {names.ANSWER: names.ERROR, names.DATA: data}
     except:
         logging.error('Fatal error: param id')
-        return {"Answer": "Error", "Data": data}
+        return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
-        if data["id_user"].isdigit() == False:
-            return {"Answer": "Error", "Data": data}
+        if data[names.ID_USER].isdigit() == False:
+            return {names.ANSWER: names.ERROR, names.DATA: data}
     except:
         logging.error('Fatal error: type id')
-        return {"Answer": "Error", "Data": data}
+        return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
-        if check_id(data["id_user"]) == False:
-            return {"Answer": "Id not found", "Data": data}
+        if gs.check_id(data[names.ID_USER]) == False:
+            return {names.ANSWER: "Id not found", names.DATA: data}
     except:
         logging.error('Fatal error: check id')
-        return {"Answer": "Error", "Data": data}
+        return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
         sql = "SELECT Name, City, Sex, Email, Logo, Educational FROM users " \
-              "where id_user = '{}'".format(data['id_user'])
-        result = SqlQuery(sql)
-        return {"Answer": "Success", "Data": result}
+              "where id_user = '{}'".format(data[names.ID_USER])
+        result = gs.SqlQuery(sql)
+        return {names.ANSWER: names.SUCCESS, names.DATA: result}
     except:
-        logging.error('Fatal error: execute database')
-        return {"Answer": "Error"}
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+
 
 def change_password(data):
     """
@@ -49,47 +49,48 @@ def change_password(data):
     Проверяет элементы data, None или нет.
     Покдлючается к базе данных с помощью функции db_connect(), получает хеш пароля в базе по id.
     Если хеш от old_password==паролю в базе, то записывает в базу хеш new_password.
-    Если все успешно, то функция вернет {'Answer': 'Succes'}, если не верный пароль - {'Answer': 'Wrong password'}
+    Если все успешно, то функция вернет {names.ANSWER: 'Succes'}, если не верный пароль - {names.ANSWER: 'Wrong password'}
     """
     try:
         for i in data:
             if data[i] is None:
                 logging.info('Incorrect parameter ' + i + ' - None')
                 data[i] = "Empty"
-                return {"Answer": "Error", "Data": data}
+                return {names.ANSWER: names.ERROR, names.DATA: data}
     except:
         logging.error('Fatal error: check data is None')
-        return {"Answer": "Error", "Data": data}
+        return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
-        if (check_id(data["id"])) == 0:
-            return {"Answer": "Id not found", "Data": data}
+        if (gs.check_id(data[names.ID])) == 0:
+            return {names.ANSWER: "Id not found", names.DATA: data}
     except:
         logging.error('Fatal error: check id')
-        return {"Answer": "Error", "Data": data}
+        return {names.ANSWER: names.ERROR, names.DATA: data}
     else:
         try:
-            sql = "SELECT Password FROM Users where ID = '{}'".format(data['ID'])
-            result = SqlQuery(sql)
+            sql = "SELECT Password FROM Users where ID = '{}'".format(data[names.ID])
+            result = gs.SqlQuery(sql)
         except:
-            logging.error('Fatal error: execute database')
-            return {"Answer": "Error"}
+            logging.error(names.ERROR_EXECUTE_DATABASE)
+            return {names.ANSWER: names.ERROR}
         else:
             try:
                 password_hash = hashlib.md5()
                 password_hash.update(data['Old_password'].encode())
                 data['Old_password'] = password_hash.hexdigest()
-                if data['Old_password'] == result['Password']:
+                if data['Old_password'] == result[names.PASSWORD]:
                     password_hash = hashlib.md5()
                     password_hash.update(data['New_password'].encode())
                     data['New_password'] = password_hash.hexdigest()
-                    sql = "UPDATE Users SET Password='{}' WHERE ID='{}'".format(data["New_password"], data["ID"])
-                    SqlQuery(sql)
-                    return {"Answer": "Success"}
+                    sql = "UPDATE Users SET Password='{}' WHERE ID='{}'".format(data["New_password"], data[names.ID])
+                    gs.SqlQuery(sql)
+                    return {names.ANSWER: names.SUCCESS}
                 else:
-                    return {"Answer": "Wrong password"}
+                    return {names.ANSWER: "Wrong password"}
             except:
                 logging.error('Fatal error: Password comparison')
-                return {"Answer": "Error"}
+                return {names.ANSWER: names.ERROR}
+
 
 def edit_cabinet(data):
     """
@@ -98,36 +99,36 @@ def edit_cabinet(data):
              Покдлючается к базе данных с помощью функции db_connect().
              Проверка есть ли id в с помощью функции check_id
              Получает информацию о пользователе и перезаписывает поля в базе на те, что функция получила на вход
-             Если все успешно, то функция вернет {'Answer': 'Succes'} и data.
+             Если все успешно, то функция вернет {names.ANSWER: 'Succes'} и data.
         """
     try:
         for i in data:
             if data[i] is None:
                 logging.info('Incorrect parameter '+i+' - None')
                 data[i] = "Empty"
-                return {"Answer": "Error",
-                        "Data": data}
+                return {names.ANSWER: names.ERROR,
+                        names.DATA: data}
     except:
         logging.error('Fatal error: check data is None')
-        return {"Answer": "Error",
-                "Data": data}
+        return {names.ANSWER: names.ERROR,
+                names.DATA: data}
     try:
-        if (check_id(int(data["ID"]))) == 0:
-            return {"Answer": "Id not found",
-                    "Data": data}
+        if (gs.check_id(int(data[names.ID]))) == 0:
+            return {names.ANSWER: "Id not found",
+                    names.DATA: data}
     except:
         logging.error('Fatal error: check id')
-        return {"Answer": "Error",
-                "Data": data}
+        return {names.ANSWER: names.ERROR,
+                names.DATA: data}
     else:
         try:
             sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
                   " Educational='{}', Logo='{}' WHERE ID='{}'".format(
-                data["Name"], data["Patronymic"], data["Email"], data["Sex"], data["City"],
-                data["Educational"], data["Logo"], data["ID"]
+                data[names.NAME], data["Patronymic"], data[names.EMAIL], data[names.SEX], data[names.CITY],
+                data[names.EDUCATION], data[names.LOGO], data[names.ID]
                 )
-            SqlQuery(sql)
-            return {"Answer": "Success", "Data": data}
+            gs.SqlQuery(sql)
+            return {names.ANSWER: names.SUCCESS, names.DATA: data}
         except:
             logging.error('Fatal error: Password comparison')
-            return {"Answer": "Error"}
+            return {names.ANSWER: names.ERROR}

@@ -7,7 +7,7 @@ sys.path.append(os.getcwd()+'/../app/api')
 sys.path.append(os.getcwd()+'/../app/route')
 import unittest
 import requests as req
-from app.api.sql import SqlQuery
+from app.api.service import GameService as gs
 from app.api.database.connect_db import db_connect_new as db
 
 #URL = 'http://127.0.0.1:13451'
@@ -29,14 +29,14 @@ class TestRegistration(unittest.TestCase):
                  """DROP TABLE test;"""]
         for i in range(2):
             try:
-                SqlQuery(sql_query[i])
+                gs.SqlQuery(sql_query[i])
             except:
                 raise
-        result = SqlQuery(sql_query[2])
-        SqlQuery(sql_query[3])
+        result = gs.SqlQuery(sql_query[2])
+        gs.SqlQuery(sql_query[3])
         self.assertEqual(result[0][0], True)
 
     def test_users_query(self):
         sql = """SELECT * FROM users;"""
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
         print(result)

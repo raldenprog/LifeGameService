@@ -13,7 +13,7 @@ sys.path.insert(0, directory_user_cabinet)
 from connect_db import db_connect
 '''
 data = {
-        "id": "1"
+        names.ID: "1"
         }
 
 
@@ -21,14 +21,14 @@ def connect_db(data):
     try:
         connect, current_connect = db_connect()
         current_connect.execute("SELECT * FROM users where id = '{}'".format(
-                        data['id']
+                        data[names.ID]
                     ))
         connect.commit()
         connect.close()
         result = current_connect.fetchall()[0]
-        return {"Answer": "Ok",
-                "data": result}
+        return {names.ANSWER: "Ok",
+                names.DATA: result}
     except:
-        return {"Answer": "Error"}
+        return {names.ANSWER: names.ERROR}
 
 print (connect_db(data))

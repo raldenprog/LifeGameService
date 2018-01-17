@@ -16,18 +16,18 @@ class TestRegistration(unittest.TestCase):
     @unittest.skip
     def test_registration(self):
         data = json.dumps({
-            'Login': 'anton',#.join(choice(ascii_lowercase) for i in range(12)),
-            'Password': '2',
-            'Name': '3',
-            'Surname': '4',
-            'Email': 'a@a.ru',
-            'Sex': '5',
-            'City': '6',
-            'Educational': '7',
-            'Logo_name': '8',
-            'Logo': '9'
+            names.LOGIN: 'anton',#.join(choice(ascii_lowercase) for i in range(12)),
+            names.PASSWORD: '2',
+            names.NAME: '3',
+            names.SURNAME: '4',
+            names.EMAIL: 'a@a.ru',
+            names.SEX: '5',
+            names.CITY: '6',
+            names.EDUCATION: '7',
+            names.LOGO_NAME: '8',
+            names.LOGO: '9'
         })
-        data = req.request('POST', '%s/registration' % URL, data={'Data': data})
+        data = req.request('POST', '%s/registration' % URL, data={names.DATA: data})
         print('registration')
         print(data.text)
         print(data)
@@ -36,10 +36,10 @@ class TestRegistration(unittest.TestCase):
     @unittest.skip
     def test_auth(self):
         data = json.dumps({
-            'Login': 'anton',
-            'Password': '2'
+            names.LOGIN: 'anton',
+            names.PASSWORD: '2'
         })
-        data = req.request('POST', '%s/auth' % URL, data={'Data': data})
+        data = req.request('POST', '%s/auth' % URL, data={names.DATA: data})
         print('auth')
         print(data.text)
         print(data)
@@ -322,7 +322,7 @@ class TestRegistration(unittest.TestCase):
     def test_get_task(self):
         data = {
             'id_event': 1,
-            'id_user': 1
+            names.ID_USER: 1
         }
         data = tasks.get_task_event(data)
         print(data)
@@ -330,10 +330,10 @@ class TestRegistration(unittest.TestCase):
     @unittest.skip
     def test_session(self):
         data = json.dumps({
-            'Login': 'anton',
-            'Password': '2'
+            names.LOGIN: 'anton',
+            names.PASSWORD: '2'
         })
-        #data = req.request('POST', '%s/auth' % URL, data={'Data': data})
+        #data = req.request('POST', '%s/auth' % URL, data={names.DATA: data})
         data = 'c2f57e8d-bb8a-43c7-aeac-339dc311de71'
         print(data)
         print(auth.session_verification(data))

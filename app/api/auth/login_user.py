@@ -1,8 +1,8 @@
 # coding=utf-8
 import hashlib
 import logging
-from api.sql import SqlQuery
-from api.database.connect_db import db_connect_new
+from api.service import GameService as gs
+import api.base_name as names
 from api.auth.registration_users import input_session_table
 
 logging.basicConfig(filename='logger.log',
@@ -11,7 +11,12 @@ logging.basicConfig(filename='logger.log',
 
 
 def login_verification(user_data):
-    check = ['Login', 'Password']
+    """
+    Метод проверяет корректность параметров и если всё корректно, передает в метод auth_user
+    :param user_data: dict хранит информацию о пользователе
+    :return: UUID сессии
+    """
+    check = [names.LOGIN, names.PASSWORD]
     user_info = dict.fromkeys(check, '')
     error = False
     for data in check:
@@ -22,43 +27,50 @@ def login_verification(user_data):
         else:
             user_info[data] = user_data[data]
     if error:
-        return {"Answer": "Warning", 'Data': user_info}
-    #return {'Answer': 'Ok'}
+        return {names.ANSWER: names.WARNING, names.DATA: user_info}
+    #return {names.Answer: 'Ok'}
     return auth_user(user_info)
 
 
 def auth_user(user_data):
-    # TODO: Необходимо делать на стороне фронта
+    """
+    Метод авторизирует пользователя, присваивая ему UUID сессии
+    :param user_data: dict хранит информацию о пользователе
+    :return: UUID сессии
+    """
     password_hash = hashlib.md5()
-    password_hash.update(user_data['Password'].encode())
-    user_data['Password'] = password_hash.hexdigest()
+    password_hash.update(user_data[names.PASSWORD].encode())
+    user_data[names.PASSWORD] = password_hash.hexdigest()
     try:
-        sql = "SELECT id_user FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data['Login'], user_data['Password'])
-        result = SqlQuery(sql)
+        sql = "SELECT id_user FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data[names.LOGIN], user_data[names.PASSWORD])
+        result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
-        return {"Answer": "Ошибка запроса к базе данных"}
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: "Ошибка запроса к базе данных"}
     try:
         if len(result) == 0:
-            return {'Answer': 'Warning', "Data": "Данного пользователя нет в базе данных"}
+            return {names.ANSWER: names.WARNING, names.DATA: "Данного пользователя нет в базе данных"}
     except:
-        return {'Answer': 'Warning', "Data": "Логин или пароль не правильные"}
-    answer = input_session_table(result[0].get('id_user'))
-    if answer.get('Answer') is not "Success":
-        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных. Неудача"}
+        return {names.ANSWER: names.WARNING, names.DATA: "Логин или пароль не правильные"}
+    answer = input_session_table(result[0].get(names.ID_USER))
+    if answer.get(names.ANSWER) is not names.SUCCESS:
+        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных. Неудача"}
     return answer
 
 
 def logout_user(session):
+    """
+    Метод закрывает сессию пользователя
+    :param session: UUID сессии, которую нужно закрыть
+    """
     try:
         sql = "DELETE FROM Session WHERE UUID = '{}'".format(session)
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
-        return {"Answer": "Ошибка запроса к базе данных"}
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: "Ошибка запроса к базе данных"}
     try:
         if len(result) == 0:
-            return {'Answer': 'Warning', "Data": "Такой сессии нет в базе"}
+            return {names.ANSWER: names.WARNING, names.DATA: "Такой сессии нет в базе"}
     except:
-        return {'Answer': 'Warning', "Data": "Сессия неверная"}
-    return result['User']
+        return {names.ANSWER: names.WARNING, names.DATA: "Сессия неверная"}

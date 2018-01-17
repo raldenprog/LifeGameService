@@ -1,10 +1,10 @@
 # coding=utf-8
-import json
 from flask_restful import Resource, reqparse
 from flask import request
 from api.config import HEADER
 import api.scoreboard.get_scoreboard as score
 import api.auth.auth as auth
+import api.base_name as names
 
 
 class Scoreboard(Resource):
@@ -21,7 +21,7 @@ class Scoreboard(Resource):
         try:
             id_user = auth.session_verification(session)
             login = auth.get_login(id_user)
-            answer['Login'] = login
+            answer[names.LOGIN] = login
         except:
             pass
         print(answer)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
-
-from api.sql import SqlQuery
+from api.service import GameService as gs
+import api.base_name as names
 logging.basicConfig(filename='logger.log',
                     format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
                     level=logging.INFO)
@@ -52,37 +52,37 @@ def create_one_task(data):
             if data[check] is None:
                 error_flag = 1
                 logging.info('Incorrect parameter \'%s\' - None' % check)
-                check_data[check] = "Error"
+                check_data[check] = names.ERROR
             else:
-                check_data[check] = "Success"
+                check_data[check] = names.SUCCESS
         except:
             error_flag = 1
             logging.error('Fatal error param \'%s\'' % check)
 
     if error_flag:
-        return {"answer": "Error",
-                "data": check_data}
+        return {names.ANSWER: names.ERROR,
+                names.DATA: check_data}
     try:
         sql = "INSERT INTO task" \
             " VALUES (null,\"{task_category}\",\"{task_name}\"," \
             "\"{task_flag}\",\"{task_description}\",{task_point},\"{task_hint}\"," \
             "null, \"{task_link}\",1,1,2)".format(**data)
         print(sql)
-        SqlQuery(sql)
+        gs.SqlQuery(sql)
         #check_data["database"] = "Recorded"
     except Exception as e:
         if e == 1062:
-            return {"Answer": "Warning",
-                    "Data": 'Duplicate task'}
+            return {names.ANSWER: names.WARNING,
+                    names.DATA: 'Duplicate task'}
         logging.error('Fatal error: param \'sql\' can\'t create new record')
         #check_data["database"] = "Unrecorded"
-        return {"Answer": "Warning",
-                "Data": check_data}
+        return {names.ANSWER: names.WARNING,
+                names.DATA: check_data}
     if error_flag:
-        return {"Answer": "Error",
-                "Data": check_data}
+        return {names.ANSWER: names.ERROR,
+                names.DATA: check_data}
     else:
-        return {"Answer": "Success"}
+        return {names.ANSWER: names.SUCCESS}
 
 '''
 Данная функция принимает на вход массив из JSON записей
@@ -105,14 +105,14 @@ def create_few_tasks(batch_data):
     try:
         if len(batch_data) <= 0:
             print (len(batch_data))
-            return {"answer": "Error",
-                    "data": None,
+            return {names.ANSWER: names.ERROR,
+                    names.DATA: None,
                     "number": 0}
     except:
         print ("Except 1")
         logging.error('Fatal error in function \'create_few_tasks\', param \'batch_data\'')
-        return {"answer": "Error",
-                "data": None,
+        return {names.ANSWER: names.ERROR,
+                names.DATA: None,
                 "number": 0}
 
     try:
@@ -122,15 +122,15 @@ def create_few_tasks(batch_data):
     except:
         print ("Except 2")
         logging.error('Fatal error in function \'create_few_tasks\', param \'data\'')
-        return {"answer": "Error",
-                "data": None,
+        return {names.ANSWER: names.ERROR,
+                names.DATA: None,
                 "number": 0}
 
-    return {"answer": "Success",
-            "data": answers,
+    return {names.ANSWER: names.SUCCESS,
+            names.DATA: answers,
             "number": len(batch_data)}
 
-json = {    "id" :              "1",
+json = {    names.ID :              "1",
             "task_category" :   2,
             "task_name" :       3,
             "task_flag" :       4,
@@ -140,7 +140,7 @@ json = {    "id" :              "1",
             "task_solve" :      8,
             "task_link" :       9
         },\
-       {    "id" :              "11",
+       {    names.ID :              "11",
             "task_category" :   21,
             "task_name" :       31,
             "task_flag" :       41,
@@ -156,31 +156,31 @@ def get_task_event_name(event, task_name):
     sql = "SELECT ID_Task, Task_name, Task_category, Task_description FROM task WHERE event={} AND ID_Task={}".format(event, task_name)
 
     try:
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
-        return {'Answer': 'Error'}
-    return {'Answer': 'Success', 'data': result}
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def get_task_event_category(event, task_category):
     sql = "SELECT id_task, task_name, task_category, event FROM task WHERE event={} AND task_category={}".format(event, task_category)
 
     try:
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
-        return {'Answer': 'Error'}
-    return {'Answer': 'Success', 'data': result}
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def get_task_acc(id_task, id_user):
     sql = "SELECT id_task FROM task_acc WHERE id_task in {} and id_user = {}".format(id_task, id_user)
     print(sql)
     try:
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {}
     try:
         print(result)
@@ -215,24 +215,24 @@ def get_task_event(data):
           "order by Task_category, Task_point".format(data['id_event'])
     print(sql)
     try:
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
-        return {'Answer': 'Error connect db'}
-    return {'Answer': 'Success', 'Data': preparation_result(result, data['id_user'])}
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: 'Error connect db'}
+    return {names.ANSWER: names.SUCCESS, names.DATA: preparation_result(result, data[names.ID_USER])}
 
 
 def input_task_acc(user_data):
     #TODO: Временное решение.
     id_event = 2
     sql = "INSERT INTO task_acc" \
-        " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data['id_user'], id_event, user_data['Task_point'])
+        " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data[names.ID_USER], id_event, user_data['Task_point'])
     print(sql)
     try:
-        SqlQuery(sql)
+        gs.SqlQuery(sql)
     except:
         logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
-        return {'Answer': 'Warning', "Data": "Ошибка запроса к базе данных."}
+        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных."}
     return True
 
 
@@ -242,14 +242,14 @@ def check_task(data):
         data['Task_flag'])
     print(sql)
     try:
-        result = SqlQuery(sql)
+        result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
-        return {'Answer': 'Error connect db'}
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: 'Error connect db'}
     try:
         if len(result) == 2:
-            result['id_user'] = data['id_user']
+            result[names.ID_USER] = data[names.ID_USER]
             input_task_acc(result)
-            return {'Answer': 'Success', 'Data': True}
+            return {names.ANSWER: names.SUCCESS, names.DATA: True}
     except:
-        return {'Answer': 'Warning', 'Data': False}
+        return {names.ANSWER: names.WARNING, names.DATA: False}

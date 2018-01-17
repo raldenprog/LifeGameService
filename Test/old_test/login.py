@@ -17,16 +17,16 @@ from login_user import login_verification
 
 def login_done():
     data = {
-        'Login': 'Anton',
-        'Password': '2'
+        names.LOGIN: 'Anton',
+        names.PASSWORD: '2'
     }
     print(login_verification(data))
 
 
 def login_error():
     data = {
-        # 'login': 'Anton',
-        'password': 'qwerty'
+        # names.LOGIN: 'Anton',
+        names.PASSWORD: 'qwerty'
     }
     print(login_verification(data))
 
@@ -36,10 +36,10 @@ def login_user():
     d = file.readline().split(':')
     file.close()
     data = {
-        "Action": "Login",
-        "Data": {
-            "login": d[0],
-            "password": d[1][:-2:]
+        "Action": names.LOGIN,
+        names.DATA: {
+            names.LOGIN: d[0],
+            names.PASSWORD: d[1][:-2:]
         }
     }
     return json.dumps(data)

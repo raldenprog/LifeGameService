@@ -15,9 +15,9 @@ from registration_users import add_user
 
 def registration_done():
     data = {
-        'name': 'Anton',
+        names.NAME: 'Anton',
         'description': 'qwerty',
-        'logo': '****',
+        names.LOGO: '****',
         'status': 'Close',
         'date_start': '12',
         'date_end': '20',
@@ -29,9 +29,9 @@ def registration_done():
 
 def registration_error():
     data = {
-        'name': 'Anton',
+        names.NAME: 'Anton',
         'description': 'qwerty',
-        'logo': '****',
+        names.LOGO: '****',
         'date_start': '12',
         'date_end': '20',
         'date_stop': '13',
@@ -42,9 +42,9 @@ def registration_error():
 
 def update_done():
     data = {
-        'name': 'anton',
+        names.NAME: 'anton',
         'description': 'Qwerty',
-        'logo': '****',
+        names.LOGO: '****',
         'status': '1',
         'date_start': '12',
         'date_end': '20',
@@ -56,9 +56,9 @@ def update_done():
 
 def update_error():
     data = {
-        #'name': 'Anton',
+        #names.NAME: 'Anton',
         'description': 'qwerty',
-        'logo': '****',
+        names.LOGO: '****',
         'date_start': '12',
         'date_end': '20',
         'date_stop': '13',
