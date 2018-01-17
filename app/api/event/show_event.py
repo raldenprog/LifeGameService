@@ -19,10 +19,10 @@ def all_event(count):
         if count and isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
-            logging.error('Fatal error: execute database')
+            logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -39,10 +39,10 @@ def current_event(count):
         if count and isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
-            logging.error('Fatal error: execute database')
+            logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -59,10 +59,10 @@ def end_event(count):
         if count and isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
-            logging.error('Fatal error: execute database')
+            logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -80,10 +80,10 @@ def find_event(alf, count):
         if count and isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
-            logging.error('Fatal error: execute database')
+            logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -94,10 +94,10 @@ def page_event(count):  # Пустышка
         if count and isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
-            logging.error('Fatal error: execute database')
+            logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -114,9 +114,9 @@ def filter_by_status(count, status):
         if count and isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
-            logging.error('Fatal error: execute database')
+            logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}

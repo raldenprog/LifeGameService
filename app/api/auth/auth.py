@@ -16,7 +16,7 @@ def session_verification(session):
         sql = "SELECT id_user FROM Session WHERE UUID = '{}'".format(session)
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return None
     try:
         if len(result) == 0:
@@ -36,7 +36,7 @@ def get_login(id_user):
         sql = "SELECT Login FROM Auth WHERE User = '{}'".format(id_user)
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return None
     try:
         if len(result) == 0:

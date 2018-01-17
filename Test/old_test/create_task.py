@@ -2,7 +2,7 @@
 from api.task.tasks import create_one_task, create_few_tasks
 
 def create_one_task_success():
-    data = {"id": "Unchecked",
+    data = {names.ID: "Unchecked",
         "task_category": "Unchecked",
         "task_name": "Unchecked",
         "task_flag": "Unchecked",
@@ -18,7 +18,7 @@ def create_one_task_success():
 
 
 def create_few_tasks_success():
-    data = {"id": "1",
+    data = {names.ID: "1",
             "task_category": "crypto",
             "task_name": "town",
             "task_flag": "1234567890",
@@ -27,7 +27,7 @@ def create_few_tasks_success():
             "task_hint": "Don't use it",
             "task_solve": "?",
             "task_link": "http://google.com"
-            },{"id": "2",
+            },{names.ID: "2",
         "task_category": "crypto",
         "task_name": "downtown",
         "task_flag": "0987654321",
@@ -43,7 +43,7 @@ def create_few_tasks_success():
 
 def create_one_task_denied():
     data = {
-            #"id": "Unchecked",
+            #names.ID: "Unchecked",
             "task_category": "Unchecked",
             "task_name": "Unchecked",
             "task_flag": "Unchecked",
@@ -56,7 +56,7 @@ def create_one_task_denied():
             }
 
     data_1 = {
-         "id": None,
+         names.ID: None,
         "task_category": "Unchecked",
         "task_name": "Unchecked",
         "task_flag": "Unchecked",
@@ -77,7 +77,7 @@ def create_few_tasks_denied():
     # и вывести сообщение об ошибке, информацию об обработке каждого элемента и номер
     # ошибочного блока, в лог запишется проблемный элемент. Это может произойти в случае
     # отсутствия элемента или неверного имени JSON'a
-    data = {"id": "1",
+    data = {names.ID: "1",
             "task_category": "crypto",
             "task_name": "town",
             # Проблемный элемент - снизу
@@ -87,7 +87,7 @@ def create_few_tasks_denied():
             "task_hint": "Don't use it",
             "task_solve": "?",
             "task_link": "http://google.com"
-            }, {"id": "2",
+            }, {names.ID: "2",
                 "task_category": "crypto",
                 "task_name": "downtown",
                 "task_flag": "0987654321",
@@ -99,7 +99,7 @@ def create_few_tasks_denied():
                 }
     # Второй тест для того, чтобы выявить ошибку во втором блоке, прекратить обработку
     # и вывести сообщение об ошибке, информацию об обработке каждого элемента
-    data_1 = {"id": "1",
+    data_1 = {names.ID: "1",
             "task_category": "crypto",
             "task_name": "town",
             "task_flag": "1234567890",
@@ -108,7 +108,7 @@ def create_few_tasks_denied():
             "task_hint": "Don't use it",
             "task_solve": "?",
             "task_link": "http://google.com"
-            }, {"id": "2",
+            }, {names.ID: "2",
                 "task_category": "crypto",
                 "task_name": None,
                 "task_flag": "0987654321",

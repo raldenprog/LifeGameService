@@ -6,6 +6,7 @@ ANSWER = "Answer"
 
 DATA = "Data"
 
+ID = "ID"
 LOGIN = "Login"
 PASSWORD = "Password"
 ID_USER = "id_user"
@@ -18,3 +19,5 @@ EDUCATION = "Educational"
 LOGO_NAME = "Logo_name"
 LOGO = "Logo"
 UUID = "UUID"
+
+ERROR_EXECUTE_DATABASE = "Fatal error: execute database"

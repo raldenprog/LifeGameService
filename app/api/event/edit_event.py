@@ -50,7 +50,7 @@ VALUES (null, \"{Name}\", \"{Description}\",
 {Date_stop}, {Date_continue})""".format(**event_data)
         gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
 
     return {names.ANSWER: names.SUCCESS}
@@ -62,10 +62,10 @@ def update_event(event_data):
     :param event_data: dict информация о событии
     :return: {names.ANSWER: ответ}
     """
-    check = ['ID', names.NAME, 'Description', names.LOGO,
+    check = [names.ID, names.NAME, 'Description', names.LOGO,
              'Status', 'Date_start', 'Date_end',
              'Date_stop', 'Date_continue']
-    update_data = {'ID': '', names.NAME: '', 'Description': '', names.LOGO: '',
+    update_data = {names.ID: '', names.NAME: '', 'Description': '', names.LOGO: '',
         'Status': '', 'Date_start': '', 'Date_end': '',
         'Date_stop': '', 'Date_continue': ''}
     flag = False
@@ -99,7 +99,7 @@ Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}',
 Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'""".format(**user_data)
         gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS}
 

@@ -9,10 +9,10 @@ import api.base_name as names
 class Cabinet(Resource):
     def get(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('id')
+        parser.add_argument(names.ID)
         args = parser.parse_args()
         print('GET /cabinet')
-        id_user = args.get('id', None)
+        id_user = args.get(names.ID, None)
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)

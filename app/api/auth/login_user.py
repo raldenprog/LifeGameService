@@ -45,7 +45,7 @@ def auth_user(user_data):
         sql = "SELECT id_user FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data[names.LOGIN], user_data[names.PASSWORD])
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: "Ошибка запроса к базе данных"}
     try:
         if len(result) == 0:
@@ -67,7 +67,7 @@ def logout_user(session):
         sql = "DELETE FROM Session WHERE UUID = '{}'".format(session)
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: "Ошибка запроса к базе данных"}
     try:
         if len(result) == 0:

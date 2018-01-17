@@ -130,7 +130,7 @@ def create_few_tasks(batch_data):
             names.DATA: answers,
             "number": len(batch_data)}
 
-json = {    "id" :              "1",
+json = {    names.ID :              "1",
             "task_category" :   2,
             "task_name" :       3,
             "task_flag" :       4,
@@ -140,7 +140,7 @@ json = {    "id" :              "1",
             "task_solve" :      8,
             "task_link" :       9
         },\
-       {    "id" :              "11",
+       {    names.ID :              "11",
             "task_category" :   21,
             "task_name" :       31,
             "task_flag" :       41,
@@ -158,7 +158,7 @@ def get_task_event_name(event, task_name):
     try:
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -169,7 +169,7 @@ def get_task_event_category(event, task_category):
     try:
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -180,7 +180,7 @@ def get_task_acc(id_task, id_user):
     try:
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {}
     try:
         print(result)
@@ -217,7 +217,7 @@ def get_task_event(data):
     try:
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: 'Error connect db'}
     return {names.ANSWER: names.SUCCESS, names.DATA: preparation_result(result, data[names.ID_USER])}
 
@@ -244,7 +244,7 @@ def check_task(data):
     try:
         result = gs.SqlQuery(sql)
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: 'Error connect db'}
     try:
         if len(result) == 2:

@@ -39,7 +39,7 @@ def user_cabinet(data):
         result = gs.SqlQuery(sql)
         return {names.ANSWER: names.SUCCESS, names.DATA: result}
     except:
-        logging.error('Fatal error: execute database')
+        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
 
 
@@ -61,17 +61,17 @@ def change_password(data):
         logging.error('Fatal error: check data is None')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
-        if (gs.check_id(data["id"])) == 0:
+        if (gs.check_id(data[names.ID])) == 0:
             return {names.ANSWER: "Id not found", names.DATA: data}
     except:
         logging.error('Fatal error: check id')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     else:
         try:
-            sql = "SELECT Password FROM Users where ID = '{}'".format(data['ID'])
+            sql = "SELECT Password FROM Users where ID = '{}'".format(data[names.ID])
             result = gs.SqlQuery(sql)
         except:
-            logging.error('Fatal error: execute database')
+            logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
         else:
             try:
@@ -82,7 +82,7 @@ def change_password(data):
                     password_hash = hashlib.md5()
                     password_hash.update(data['New_password'].encode())
                     data['New_password'] = password_hash.hexdigest()
-                    sql = "UPDATE Users SET Password='{}' WHERE ID='{}'".format(data["New_password"], data["ID"])
+                    sql = "UPDATE Users SET Password='{}' WHERE ID='{}'".format(data["New_password"], data[names.ID])
                     gs.SqlQuery(sql)
                     return {names.ANSWER: names.SUCCESS}
                 else:
@@ -113,7 +113,7 @@ def edit_cabinet(data):
         return {names.ANSWER: names.ERROR,
                 names.DATA: data}
     try:
-        if (gs.check_id(int(data["ID"]))) == 0:
+        if (gs.check_id(int(data[names.ID]))) == 0:
             return {names.ANSWER: "Id not found",
                     names.DATA: data}
     except:
@@ -125,7 +125,7 @@ def edit_cabinet(data):
             sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
                   " Educational='{}', Logo='{}' WHERE ID='{}'".format(
                 data[names.NAME], data["Patronymic"], data[names.EMAIL], data[names.SEX], data[names.CITY],
-                data[names.EDUCATION], data[names.LOGO], data["ID"]
+                data[names.EDUCATION], data[names.LOGO], data[names.ID]
                 )
             gs.SqlQuery(sql)
             return {names.ANSWER: names.SUCCESS, names.DATA: data}
