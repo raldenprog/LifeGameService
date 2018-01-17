@@ -17,7 +17,7 @@ def auth():
     result = Query(sql)
     for i in result:
         sql = '''INSERT INTO auth(id_user, login, password)
-        VALUES ({id_user},\'{login}\',\'{password}\')'''.format(id_user=i['User'], login=i[names.LOGIN], password=i['Password'])
+        VALUES ({id_user},\'{login}\',\'{password}\')'''.format(id_user=i['User'], login=i[names.LOGIN], password=i[names.PASSWORD])
         print(sql)
         gs.SqlQuery(sql)
 
@@ -37,7 +37,7 @@ def Event():
     result = Query(sql)
     for i in result:
         sql = '''INSERT INTO event
-        VALUES ({id_event},'{name}','{description}','1','1',now(),now(),now(),now())'''.format(id_event=i['Event'], name=i['Name'], description=i['Description'])
+        VALUES ({id_event},'{name}','{description}','1','1',now(),now(),now(),now())'''.format(id_event=i['Event'], name=i[names.NAME], description=i['Description'])
         print(sql)
         gs.SqlQuery(sql)
 

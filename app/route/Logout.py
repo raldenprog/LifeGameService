@@ -17,4 +17,4 @@ class Logout(Resource):
         print('ARGS = ', args)
         session = args.get('session')
         auth.logout_user(session)
-        return {names.ANSWER: 'Success'}, 200, HEADER
+        return {names.ANSWER: names.SUCCESS}, 200, HEADER

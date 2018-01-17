@@ -33,13 +33,13 @@ def check_change_password():
             "new_password": "pinlox123"
             }
     check = change_password(data)
-    if check[names.ANSWER] == 'Success':
+    if check[names.ANSWER] == names.SUCCESS:
         data = {"id": "3",
                 "old_password": "pinlox123",
                 "new_password": "qwerty"
                 }
         check = change_password(data)
-        if check[names.ANSWER] == 'Success':
+        if check[names.ANSWER] == names.SUCCESS:
             print("Ok")
         else:
             print(names.ERROR)

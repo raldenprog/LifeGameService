@@ -13,10 +13,10 @@ def registration_event(event_data):
     :param event_data: dict информация о событии
     :return: {names.ANSWER: ответ}
     """
-    check = ['Name', 'Description', 'Logo',
+    check = [names.NAME, 'Description', names.LOGO,
              'Status', 'Date_start', 'Date_end',
              'Date_stop', 'Date_continue']
-    registration_data = {'Name': '', 'Description': '', 'Logo': '',
+    registration_data = {names.NAME: '', 'Description': '', names.LOGO: '',
         'Status': '', 'Date_start': '', 'Date_end': '',
         'Date_stop': '', 'Date_continue': ''}
     flag = False
@@ -33,7 +33,7 @@ def registration_event(event_data):
             registration_data[data] = names.ERROR
             flag = True
     if flag:
-        return {names.ANSWER: names.ERROR, 'Data': registration_data}
+        return {names.ANSWER: names.ERROR, names.DATA: registration_data}
     return input_event_table(registration_data)
 
 
@@ -53,7 +53,7 @@ VALUES (null, \"{Name}\", \"{Description}\",
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
 
-    return {names.ANSWER: 'Success'}
+    return {names.ANSWER: names.SUCCESS}
 
 
 def update_event(event_data):
@@ -62,10 +62,10 @@ def update_event(event_data):
     :param event_data: dict информация о событии
     :return: {names.ANSWER: ответ}
     """
-    check = ['ID', 'Name', 'Description', 'Logo',
+    check = ['ID', names.NAME, 'Description', names.LOGO,
              'Status', 'Date_start', 'Date_end',
              'Date_stop', 'Date_continue']
-    update_data = {'ID': '', 'Name': '', 'Description': '', 'Logo': '',
+    update_data = {'ID': '', names.NAME: '', 'Description': '', names.LOGO: '',
         'Status': '', 'Date_start': '', 'Date_end': '',
         'Date_stop': '', 'Date_continue': ''}
     flag = False
@@ -82,7 +82,7 @@ def update_event(event_data):
             update_data[data] = names.ERROR
             flag = True
     if flag:
-        return {names.ANSWER: names.ERROR, 'Data': update_data}
+        return {names.ANSWER: names.ERROR, names.DATA: update_data}
     return update_event_table(update_data)
 
 
@@ -101,7 +101,7 @@ Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'""".form
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success'}
+    return {names.ANSWER: names.SUCCESS}
 
 
 def delete_event(user_data):

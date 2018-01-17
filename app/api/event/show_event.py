@@ -12,7 +12,7 @@ def all_event(count):
     """
     Метод возвращает 10 событий, начиная с заданного номера
     :param count: int номер события, с которого начинать вывод
-    :return: {names.ANSWER: 'Success', 'Data': result}
+    :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     try:
         sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
@@ -24,14 +24,14 @@ def all_event(count):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'Data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def current_event(count):
     """
     Метод возвращает 10 событий, начиная с заданного номера и если они еще не начались
     :param count: int номер события, с которого начинать вывод
-    :return: {names.ANSWER: 'Success', 'Data': result}
+    :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Date_start < {} LIMIT 10 OFFSET {}".format(time.time(), count)
@@ -44,14 +44,14 @@ def current_event(count):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'Data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def end_event(count):
     """
     Метод возвращает 10 событий, начиная с заданного номера и если они закончились
     :param count: int номер события, с которого начинать вывод
-    :return: {names.ANSWER: 'Success', 'Data': result}
+    :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Date_end > {} LIMIT 10 OFFSET {}".format(time.time(), count)
@@ -64,7 +64,7 @@ def end_event(count):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'Data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def find_event(alf, count):
@@ -72,7 +72,7 @@ def find_event(alf, count):
     Метод возвращает 10 событий, начиная с заданного номера и если они закончились
     :param alf: str Символы, которые встречаются в названии события
     :param count: int номер события, с которого начинать вывод
-    :return: {names.ANSWER: 'Success', 'Data': result}
+    :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event LIKE '{}%' LIMIT 10 OFFSET {}".format(alf, count)
@@ -85,7 +85,7 @@ def find_event(alf, count):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'Data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def page_event(count):  # Пустышка
@@ -99,7 +99,7 @@ def page_event(count):  # Пустышка
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'Data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def filter_by_status(count, status):
@@ -107,7 +107,7 @@ def filter_by_status(count, status):
     Метод возвращает 10 событий, начиная с заданного номера и если они закончились
     :param count: int номер события, с которого начинать вывод
     :param status: int Признак завершенного или активного события
-    :return: {names.ANSWER: 'Success', 'Data': result}
+    :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     sql = "SELECT Name, Description, Date_start, Date_end FROM Event where status='{}' LIMIT 10 OFFSET {}".format(status, count)
     try:
@@ -119,4 +119,4 @@ def filter_by_status(count, status):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'Data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}

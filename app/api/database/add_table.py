@@ -159,9 +159,9 @@ def create_users():
 
 
 def SCTF():
-    check = [names.LOGIN, 'Password', 'Name',
-             'Surname', 'Email', 'Sex',
-             'City', 'Educational', 'Logo_name', 'Logo']
+    check = [names.LOGIN, names.PASSWORD, names.NAME,
+             names.SURNAME, names.EMAIL, names.SEX,
+             names.CITY, names.EDUCATION, names.LOGO_NAME, names.LOGO]
     d = ['Make society (h)acked again', 'Без пафоса', 'Лицей7', 'HackSQUAD',
          'Jackzkers', 'd34dl1n3', 'rm404', 'GSV', 'Difensori',
          'ОвощиV2.0', 'Not Found', 'CLAY', 'Трисомия по хромосоме',
@@ -176,7 +176,7 @@ def SCTF():
     registration_data = dict.fromkeys(check, '-')
     for i in range(len(d)):
         registration_data[names.LOGIN] = d[i]
-        registration_data['Password'] = password[i]
+        registration_data[names.PASSWORD] = password[i]
         registration_user(registration_data)
 
 create_table_auth()

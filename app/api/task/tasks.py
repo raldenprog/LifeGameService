@@ -54,14 +54,14 @@ def create_one_task(data):
                 logging.info('Incorrect parameter \'%s\' - None' % check)
                 check_data[check] = names.ERROR
             else:
-                check_data[check] = "Success"
+                check_data[check] = names.SUCCESS
         except:
             error_flag = 1
             logging.error('Fatal error param \'%s\'' % check)
 
     if error_flag:
         return {names.ANSWER: names.ERROR,
-                "data": check_data}
+                names.DATA: check_data}
     try:
         sql = "INSERT INTO task" \
             " VALUES (null,\"{task_category}\",\"{task_name}\"," \
@@ -73,16 +73,16 @@ def create_one_task(data):
     except Exception as e:
         if e == 1062:
             return {names.ANSWER: names.WARNING,
-                    "Data": 'Duplicate task'}
+                    names.DATA: 'Duplicate task'}
         logging.error('Fatal error: param \'sql\' can\'t create new record')
         #check_data["database"] = "Unrecorded"
         return {names.ANSWER: names.WARNING,
-                "Data": check_data}
+                names.DATA: check_data}
     if error_flag:
         return {names.ANSWER: names.ERROR,
-                "Data": check_data}
+                names.DATA: check_data}
     else:
-        return {names.ANSWER: "Success"}
+        return {names.ANSWER: names.SUCCESS}
 
 '''
 Данная функция принимает на вход массив из JSON записей
@@ -106,13 +106,13 @@ def create_few_tasks(batch_data):
         if len(batch_data) <= 0:
             print (len(batch_data))
             return {names.ANSWER: names.ERROR,
-                    "data": None,
+                    names.DATA: None,
                     "number": 0}
     except:
         print ("Except 1")
         logging.error('Fatal error in function \'create_few_tasks\', param \'batch_data\'')
         return {names.ANSWER: names.ERROR,
-                "data": None,
+                names.DATA: None,
                 "number": 0}
 
     try:
@@ -123,11 +123,11 @@ def create_few_tasks(batch_data):
         print ("Except 2")
         logging.error('Fatal error in function \'create_few_tasks\', param \'data\'')
         return {names.ANSWER: names.ERROR,
-                "data": None,
+                names.DATA: None,
                 "number": 0}
 
-    return {names.ANSWER: "Success",
-            "data": answers,
+    return {names.ANSWER: names.SUCCESS,
+            names.DATA: answers,
             "number": len(batch_data)}
 
 json = {    "id" :              "1",
@@ -160,7 +160,7 @@ def get_task_event_name(event, task_name):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def get_task_event_category(event, task_category):
@@ -171,7 +171,7 @@ def get_task_event_category(event, task_category):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def get_task_acc(id_task, id_user):
@@ -219,20 +219,20 @@ def get_task_event(data):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: 'Error connect db'}
-    return {names.ANSWER: 'Success', 'Data': preparation_result(result, data['id_user'])}
+    return {names.ANSWER: names.SUCCESS, names.DATA: preparation_result(result, data[names.ID_USER])}
 
 
 def input_task_acc(user_data):
     #TODO: Временное решение.
     id_event = 2
     sql = "INSERT INTO task_acc" \
-        " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data['id_user'], id_event, user_data['Task_point'])
+        " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data[names.ID_USER], id_event, user_data['Task_point'])
     print(sql)
     try:
         gs.SqlQuery(sql)
     except:
         logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
-        return {names.ANSWER: names.WARNING, "Data": "Ошибка запроса к базе данных."}
+        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных."}
     return True
 
 
@@ -248,8 +248,8 @@ def check_task(data):
         return {names.ANSWER: 'Error connect db'}
     try:
         if len(result) == 2:
-            result['id_user'] = data['id_user']
+            result[names.ID_USER] = data[names.ID_USER]
             input_task_acc(result)
-            return {names.ANSWER: 'Success', 'Data': True}
+            return {names.ANSWER: names.SUCCESS, names.DATA: True}
     except:
-        return {names.ANSWER: names.WARNING, 'Data': False}
+        return {names.ANSWER: names.WARNING, names.DATA: False}

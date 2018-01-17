@@ -20,7 +20,7 @@ class Authentication(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())['Data']
+        url = json.loads(request.data.decode())[names.DATA]
         print(url)
         answer = auth.login_verification(url)
         print(answer)

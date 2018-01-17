@@ -11,7 +11,7 @@ def all_users(count):
     """
     Метод возвращает список пользователей из 10 начиная с переданного параметра
     :param count: int Номер с которого начинать вывод пользователей
-    :return: {names.ANSWER: 'Success', 'data': result}
+    :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     # TODO: Добавить в базу users количество очков и добавить это поле в SELECT
     sql = "SELECT Name, id_user FROM Users LIMIT 10 OFFSET {}".format(count)
@@ -24,7 +24,7 @@ def all_users(count):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def event_users(count, event):
@@ -36,7 +36,7 @@ def event_users(count, event):
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def get_scoreboard(id_event=None):
@@ -60,4 +60,4 @@ order by point desc, user_time desc;""".format(id_event)
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: 'Success', 'data': result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}

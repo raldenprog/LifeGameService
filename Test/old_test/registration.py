@@ -20,15 +20,15 @@ from registration_users import add_user
 def registration_done():
     data = {
         names.LOGIN: 'Anton451241',
-        'Password': 'qwerty',
-        'Name': 'anton123',
-        'Surname': 'ch',
-        'Email': 'a@a.ru',
-        'Sex': 'male',
-        'City': 'Nsk',
-        'Educational': 'Sibsutis',
-        'Logo_name': '1',
-        'Logo': 'logooo'
+        names.PASSWORD: 'qwerty',
+        names.NAME: 'anton123',
+        names.SURNAME: 'ch',
+        names.EMAIL: 'a@a.ru',
+        names.SEX: 'male',
+        names.CITY: 'Nsk',
+        names.EDUCATION: 'Sibsutis',
+        names.LOGO_NAME: '1',
+        names.LOGO: 'logooo'
     }
     registration_user(data)
 
@@ -36,15 +36,15 @@ def registration_done():
 def registration_error():
     data = {
         # names.LOGIN: 'Anton',
-        'password': 'qwerty',
-        'name': 'anton123',
+        names.PASSWORD: 'qwerty',
+        names.NAME: 'anton123',
         'patronymic': 'ch',
-        'email': 'a@a.ru',
-        'sex': 'male',
-        'city': 'Nsk',
-        'Educational': 'Sibsutis',
-        'logo_name': '1',
-        'logo': 'logooo'
+        names.EMAIL: 'a@a.ru',
+        names.SEX: 'male',
+        names.CITY: 'Nsk',
+        names.EDUCATION: 'Sibsutis',
+        names.LOGO_NAME: '1',
+        names.LOGO: 'logooo'
     }
     #print(registration_user(data))
 
@@ -64,17 +64,17 @@ def registration_user_data():
     file.close()
     data = {
         "Action": "Registration",
-        "Data": {
+        names.DATA: {
             names.LOGIN: login,
-            'password': password,
-            'name': name,
+            names.PASSWORD: password,
+            names.NAME: name,
             'patronymic': patronymic,
-            'email': email,
-            'sex': 'male',
-            'city': 'Nsk',
-            'Educational': 'Sibsutis',
-            'logo_name': '1',
-            'logo': 'logooo'
+            names.EMAIL: email,
+            names.SEX: 'male',
+            names.CITY: 'Nsk',
+            names.EDUCATION: 'Sibsutis',
+            names.LOGO_NAME: '1',
+            names.LOGO: 'logooo'
         }
     }
     return json.dumps(data)

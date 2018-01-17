@@ -16,7 +16,7 @@ def login_verification(user_data):
     :param user_data: dict хранит информацию о пользователе
     :return: UUID сессии
     """
-    check = [names.LOGIN, 'Password']
+    check = [names.LOGIN, names.PASSWORD]
     user_info = dict.fromkeys(check, '')
     error = False
     for data in check:
@@ -27,7 +27,7 @@ def login_verification(user_data):
         else:
             user_info[data] = user_data[data]
     if error:
-        return {names.ANSWER: names.WARNING, 'Data': user_info}
+        return {names.ANSWER: names.WARNING, names.DATA: user_info}
     #return {names.Answer: 'Ok'}
     return auth_user(user_info)
 
@@ -39,22 +39,22 @@ def auth_user(user_data):
     :return: UUID сессии
     """
     password_hash = hashlib.md5()
-    password_hash.update(user_data['Password'].encode())
-    user_data['Password'] = password_hash.hexdigest()
+    password_hash.update(user_data[names.PASSWORD].encode())
+    user_data[names.PASSWORD] = password_hash.hexdigest()
     try:
-        sql = "SELECT id_user FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data[names.LOGIN], user_data['Password'])
+        sql = "SELECT id_user FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data[names.LOGIN], user_data[names.PASSWORD])
         result = gs.SqlQuery(sql)
     except:
         logging.error('Fatal error: execute database')
         return {names.ANSWER: "Ошибка запроса к базе данных"}
     try:
         if len(result) == 0:
-            return {names.ANSWER: names.WARNING, "Data": "Данного пользователя нет в базе данных"}
+            return {names.ANSWER: names.WARNING, names.DATA: "Данного пользователя нет в базе данных"}
     except:
-        return {names.ANSWER: names.WARNING, "Data": "Логин или пароль не правильные"}
-    answer = input_session_table(result[0].get('id_user'))
-    if answer.get(names.ANSWER) is not "Success":
-        return {names.ANSWER: names.WARNING, "Data": "Ошибка запроса к базе данных. Неудача"}
+        return {names.ANSWER: names.WARNING, names.DATA: "Логин или пароль не правильные"}
+    answer = input_session_table(result[0].get(names.ID_USER))
+    if answer.get(names.ANSWER) is not names.SUCCESS:
+        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных. Неудача"}
     return answer
 
 
@@ -71,6 +71,6 @@ def logout_user(session):
         return {names.ANSWER: "Ошибка запроса к базе данных"}
     try:
         if len(result) == 0:
-            return {names.ANSWER: names.WARNING, "Data": "Такой сессии нет в базе"}
+            return {names.ANSWER: names.WARNING, names.DATA: "Такой сессии нет в базе"}
     except:
-        return {names.ANSWER: names.WARNING, "Data": "Сессия неверная"}
+        return {names.ANSWER: names.WARNING, names.DATA: "Сессия неверная"}

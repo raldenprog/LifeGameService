@@ -18,7 +18,7 @@ from login_user import login_verification
 def login_done():
     data = {
         names.LOGIN: 'Anton',
-        'Password': '2'
+        names.PASSWORD: '2'
     }
     print(login_verification(data))
 
@@ -26,7 +26,7 @@ def login_done():
 def login_error():
     data = {
         # names.LOGIN: 'Anton',
-        'password': 'qwerty'
+        names.PASSWORD: 'qwerty'
     }
     print(login_verification(data))
 
@@ -37,9 +37,9 @@ def login_user():
     file.close()
     data = {
         "Action": names.LOGIN,
-        "Data": {
+        names.DATA: {
             names.LOGIN: d[0],
-            "password": d[1][:-2:]
+            names.PASSWORD: d[1][:-2:]
         }
     }
     return json.dumps(data)

@@ -18,10 +18,10 @@ class TestEventRoute(unittest.TestCase):
 
     def test_event_filter_by_status_0(self):
         data = filter_by_status(10, 0)
-        self.assertEqual(data[names.ANSWER], 'Success')
+        self.assertEqual(data[names.ANSWER], names.SUCCESS)
         # Дописать тест, когда поправится задача
 
     def test_event_filter_by_status_1(self):
         data = filter_by_status(10, 1)
-        self.assertEqual(data[names.ANSWER], 'Success')
+        self.assertEqual(data[names.ANSWER], names.SUCCESS)
         # Дописать тест, когда поправится задача

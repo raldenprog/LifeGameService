@@ -16,6 +16,6 @@ class Cabinet(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        answer = user_cabinet({'id_user' : id_user})
+        answer = user_cabinet({names.ID_USER : id_user})
         print(answer)
         return answer, 200, HEADER

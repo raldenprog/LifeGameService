@@ -27,7 +27,7 @@ def connect_db(data):
         connect.close()
         result = current_connect.fetchall()[0]
         return {names.ANSWER: "Ok",
-                "data": result}
+                names.DATA: result}
     except:
         return {names.ANSWER: names.ERROR}
 

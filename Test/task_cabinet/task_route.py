@@ -17,7 +17,7 @@ class TestRegistration(unittest.TestCase):
 
     def test_get(self):
         data = json.loads(rq.get('{url}/cabinet'.format(url=URL)).text)
-        self.assertEqual(data[names.ANSWER], 'Success')
+        self.assertEqual(data[names.ANSWER], names.SUCCESS)
 
     def test_event_get_page_error(self):
         data = json.loads(rq.get('{url}/cabinet?id=text'.format(url=URL)).text)
