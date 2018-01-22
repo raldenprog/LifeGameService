@@ -74,11 +74,13 @@ def find_event(alf, count):
     :param count: int номер события, с которого начинать вывод
     :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
-    sql = "SELECT Name, Description, Status, Date_start, Date_end " \
-          "FROM Event WHERE Name LIKE '%{}%' LIMIT 10 OFFSET {}".format(alf, count)
+    sql = "SELECT id_event, Name, Description, Status, Date_start, Date_end " \
+          "FROM Event WHERE Name LIKE '%{}%' ORDER BY id_event LIMIT 10 OFFSET {}".format(alf, count)
+    print(sql)
     try:
-        if count and isinstance(count, int) and count >= 0:
+        if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
+            print(result)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
@@ -86,8 +88,6 @@ def find_event(alf, count):
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
-
-
 
 
 def page_event(count):  # Пустышка

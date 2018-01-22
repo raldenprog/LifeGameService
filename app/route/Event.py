@@ -23,10 +23,10 @@ class Event(Resource):
         name = args.get('name', None)
         try:
             if param == "find" and name is not None:
-                answer = converter(find_event(name, int(page)))
+                answer = gs.converter(find_event(name, int(page)))
                 return answer, 200, {'Access-Control-Allow-Origin': '*'}
             else:
-                answer = converter(show.all_event(int(page)))
+                answer = gs.converter(show.all_event(int(page)))
         except:
             return {names.ANSWER: names.ERROR}, 200, {'Access-Control-Allow-Origin': '*'}
         return answer, 200, {'Access-Control-Allow-Origin': '*'}
