@@ -13,6 +13,7 @@ class Task(Resource):
         parser.add_argument('session')
         parser.add_argument('Task_name')
         parser.add_argument('Task_flag')
+        parser.add_argument('id_event')
         args = parser.parse_args()
         print('GET /')
         print(request.headers)
@@ -21,14 +22,15 @@ class Task(Resource):
         session = args.get('session', None)
         Task_name = args.get('Task_name', None)
         Task_flag = args.get('Task_flag', None)
+        id_event = args.get('id_event', None)
         id_user = auth.session_verification(session)
         answer = None
         if Task_name is not None and Task_flag is not None and session is not None:
-            data = {'Task_name': Task_name, 'Task_flag': Task_flag, 'id_user': id_user}
+            data = {'Task_name': Task_name, 'Task_flag': Task_flag, 'id_user': id_user, 'id_event': id_event}
             answer = tasks.check_task(data)
         else:
-            data = {'id_event': 1, 'id_user': id_user} \
-                if session is not None and isinstance(id_user, int) else {'id_event': 1, 'id_user': 0}
+            data = {'id_event': id_event, 'id_user': id_user} \
+                if session is not None and isinstance(id_user, int) else {'id_event': id_event, 'id_user': 0}
             temp = tasks.get_task_event(data)
             answer = {'Data': [], 'Answer': temp['Answer']}
             print(temp)
