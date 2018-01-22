@@ -15,36 +15,36 @@ from cabinet import user_cabinet
 
 def cabinet_done():
     data = {
-        "id": "1"
+        names.ID: "1"
     }
     print (user_cabinet(data))
 
 
 def cabinet_error():
     data = {
-        'login': 'Anton'
+        names.LOGIN: 'Anton'
     }
     print(user_cabinet(data))
 
 
 def check_change_password():
-    data = {"id": "3",
+    data = {names.ID: "3",
             "old_password": "qwerty",
             "new_password": "pinlox123"
             }
     check = change_password(data)
-    if check['Answer'] == 'Success':
-        data = {"id": "3",
+    if check[names.ANSWER] == names.SUCCESS:
+        data = {names.ID: "3",
                 "old_password": "pinlox123",
                 "new_password": "qwerty"
                 }
         check = change_password(data)
-        if check['Answer'] == 'Success':
+        if check[names.ANSWER] == names.SUCCESS:
             print("Ok")
         else:
-            print("Error")
+            print(names.ERROR)
     else:
-        print("Error")
+        print(names.ERROR)
 
 cabinet_done()
 cabinet_error()

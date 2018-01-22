@@ -1,0 +1,23 @@
+WARNING = "Warning"
+ERROR = "Error"
+OK = "Ok"
+SUCCESS = "Success"
+ANSWER = "Answer"
+
+DATA = "Data"
+
+ID = "ID"
+LOGIN = "Login"
+PASSWORD = "Password"
+ID_USER = "id_user"
+NAME = "Name"
+SURNAME = "Surname"
+EMAIL = "Email"
+SEX = "Sex"
+CITY = "City"
+EDUCATION = "Educational"
+LOGO_NAME = "Logo_name"
+LOGO = "Logo"
+UUID = "UUID"
+
+ERROR_EXECUTE_DATABASE = "Fatal error: execute database"

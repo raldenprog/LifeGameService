@@ -1,6 +1,6 @@
 __author__ = 'ar.chusovitin'
 
-import api.sql as s
+from api.service import GameService as gs
 import api.database.connect_db as cd
 
 
@@ -17,9 +17,9 @@ def auth():
     result = Query(sql)
     for i in result:
         sql = '''INSERT INTO auth(id_user, login, password)
-        VALUES ({id_user},\'{login}\',\'{password}\')'''.format(id_user=i['User'], login=i['Login'], password=i['Password'])
+        VALUES ({id_user},\'{login}\',\'{password}\')'''.format(id_user=i['User'], login=i[names.LOGIN], password=i[names.PASSWORD])
         print(sql)
-        s.SqlQuery(sql)
+        gs.SqlQuery(sql)
 
 
 def auth():
@@ -29,7 +29,7 @@ def auth():
         sql = '''INSERT INTO access
         VALUES ({id_user},{access})'''.format(id_user=i['User'], access=i['Access'])
         print(sql)
-        s.SqlQuery(sql)
+        gs.SqlQuery(sql)
 
 
 def Event():
@@ -37,9 +37,9 @@ def Event():
     result = Query(sql)
     for i in result:
         sql = '''INSERT INTO event
-        VALUES ({id_event},'{name}','{description}','1','1',now(),now(),now(),now())'''.format(id_event=i['Event'], name=i['Name'], description=i['Description'])
+        VALUES ({id_event},'{name}','{description}','1','1',now(),now(),now(),now())'''.format(id_event=i['Event'], name=i[names.NAME], description=i['Description'])
         print(sql)
-        s.SqlQuery(sql)
+        gs.SqlQuery(sql)
 
 
 def session():
@@ -49,7 +49,7 @@ def session():
         sql = '''INSERT INTO session
         VALUES ({session},'{id_user}','{uuid}')'''.format(session=i['Session'], id_user=i['User'], uuid=i['UUID'])
         print(sql)
-        s.SqlQuery(sql)
+        gs.SqlQuery(sql)
 
 
 
@@ -61,7 +61,7 @@ def task():
         VALUES ({ID_Task},'{Task_category}','{Task_name}','{Task_flag}',
         '{Task_description}','{Task_point}','{Task_hint}','{Task_solve}','{Task_link}',{Status}, {Public_status}, {id_Event})'''.format(**i)
         print(sql)
-        s.SqlQuery(sql)
+        gs.SqlQuery(sql)
 
 
 def task_acc():
@@ -72,7 +72,7 @@ def task_acc():
         VALUES ({id},{id_task},{id_user},{id_event},
         {point},'{time}')'''.format(**i)
         print(sql)
-        s.SqlQuery(sql)
+        gs.SqlQuery(sql)
 
 def user():
     sql = """select * from Users"""
@@ -83,5 +83,5 @@ def user():
         VALUES ({User},'{Name}','{Surname}','{Email}',
         '{Sex}','{City}','{Educational}','{Logo}')'''.format(**i)
         print(sql)
-        s.SqlQuery(sql)
+        gs.SqlQuery(sql)
 user()

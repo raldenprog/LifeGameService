@@ -1,7 +1,7 @@
 # coding: utf8
 import logging
-from api.sql import SqlQuery
-
+from api.service import GameService as gs
+import api.base_name as names
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
@@ -14,7 +14,7 @@ def check_id(id_user):
     """
     try:
         sql = "select exists(select 1 from users where id_user = {})".format(id_user)
-        return SqlQuery(sql)[0].get('exists', False)
+        return gs.SqlQuery(sql).get('exists', False)
     except:
         logging.error('Fatal error: check id')
-        return {"Answer": "Error"}
+        return {names.ANSWER: names.ERROR}

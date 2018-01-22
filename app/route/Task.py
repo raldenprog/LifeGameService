@@ -5,6 +5,7 @@ from flask import request
 from api.config import HEADER
 import api.task.tasks as tasks
 import api.auth.auth as auth
+import api.base_name as names
 
 
 class Task(Resource):
@@ -24,17 +25,17 @@ class Task(Resource):
         id_user = auth.session_verification(session)
         answer = None
         if Task_name is not None and Task_flag is not None and session is not None:
-            data = {'Task_name': Task_name, 'Task_flag': Task_flag, 'id_user': id_user}
+            data = {'Task_name': Task_name, 'Task_flag': Task_flag, names.ID_USER: id_user}
             answer = tasks.check_task(data)
         else:
-            data = {'id_event': 1, 'id_user': id_user} \
-                if session is not None and isinstance(id_user, int) else {'id_event': 1, 'id_user': 0}
+            data = {'id_event': 1, names.ID_USER: id_user} \
+                if session is not None and isinstance(id_user, int) else {'id_event': 1, names.ID_USER: 0}
             temp = tasks.get_task_event(data)
-            answer = {'Data': [], 'Answer': temp['Answer']}
+            answer = {names.DATA: [], names.ANSWER: temp[names.ANSWER]}
             print(temp)
-            for i in temp['Data']:
-                answer['Data'].append(i)
+            for i in temp[names.DATA]:
+                answer[names.DATA].append(i)
         if id is not None:
             login = auth.get_login(id_user)
-            answer['Login'] = login
+            answer[names.LOGIN] = login
         return answer, 200, HEADER

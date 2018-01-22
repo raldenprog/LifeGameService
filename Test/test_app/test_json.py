@@ -1,7 +1,7 @@
 __author__ = 'ar.chusovitin'
 import unittest
 from datetime import datetime
-import api.converter_json as cj
+import api.converter as cj
 
 
 class TestConverter(unittest.TestCase):
