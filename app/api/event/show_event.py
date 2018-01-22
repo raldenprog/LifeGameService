@@ -36,7 +36,7 @@ def current_event(count):
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Date_start < {} LIMIT 10 OFFSET {}".format(time.time(), count)
     try:
-        if count and isinstance(count, int) and count >= 0:
+        if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -56,7 +56,7 @@ def end_event(count):
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Date_end > {} LIMIT 10 OFFSET {}".format(time.time(), count)
     try:
-        if count and isinstance(count, int) and count >= 0:
+        if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -93,7 +93,7 @@ def find_event(alf, count):
 def page_event(count):  # Пустышка
     sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event"
     try:
-        if count and isinstance(count, int) and count >= 0:
+        if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -113,7 +113,7 @@ def filter_by_status(count, status):
     """
     sql = "SELECT Name, Description, Date_start, Date_end FROM Event where status='{}' LIMIT 10 OFFSET {}".format(status, count)
     try:
-        if count and isinstance(count, int) and count >= 0:
+        if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
