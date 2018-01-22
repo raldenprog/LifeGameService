@@ -1,8 +1,7 @@
 # coding=utf-8
 from flask_restful import Resource, reqparse
 from flask import request
-from api.config import HEADER
-from api.user_cabinet.cabinet import user_cabinet
+from api.user_cabinet.cabinet import edit_cabinet
 import api.base_name as names
 
 
@@ -16,6 +15,12 @@ class Cabinet(Resource):
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.form)
-        answer = user_cabinet({names.ID_USER : id_user})
-        print(answer)
-        return answer, 200, HEADER
+
+        param = args.get('param', None)
+        try:
+            if param == "edit" and id_user is not None:
+                answer = edit_cabinet({names.ID_USER: id_user})
+                return answer, 200, {'Access-Control-Allow-Origin': '*'}
+        except:
+            return {names.ANSWER: names.ERROR}, 200, {'Access-Control-Allow-Origin': '*'}
+        return answer, 200, {'Access-Control-Allow-Origin': '*'}
