@@ -16,7 +16,7 @@ def all_event(count):
     """
     try:
         sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
-        if count and isinstance(count, int) and count >= 0:
+            if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
