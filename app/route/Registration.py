@@ -9,26 +9,10 @@ import api.base_name as names
 
 class Registration(Resource):
     def get(self):
-        print('GET /')
+        print('GET /registration')
         print(request.headers)
         print('cookies = ', request.cookies)
         print('ARGS = ', request.args)
-        return {'test': 'test'}, 200, HEADER
-
-    def post(self):
-        print('POST /registration')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())[names.DATA]
-        print(url)
-        answer = registration_user(url)
-        print(answer)
+        data = args.get(names.DATA, None)
+        answer = registration_user(data)
         return answer, 200, {'Access-Control-Allow-Origin': '*'}
-
-    def options(self):
-        return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
-                                        'Access-Control-Allow-Methods': 'POST,GET',
-                                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, '
-                                                                        'Content-Type, '
-                                                                        'X-Custom-Header'}
