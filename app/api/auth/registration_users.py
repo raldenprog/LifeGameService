@@ -6,6 +6,7 @@ import uuid
 from api.database.connect_db import db_connect_new
 from api.service import GameService as gs
 import api.base_name as names
+
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
@@ -56,20 +57,23 @@ def input_auth_table(user_data):
     password_hash = hashlib.md5()
     password_hash.update(user_data[names.PASSWORD].encode())
     user_data[names.PASSWORD] = password_hash.hexdigest()
-    sql = "INSERT INTO Auth" \
-        " VALUES (null,\"{Login}\",\"{Password}\")".format(
-            Login=user_data.get(names.LOGIN),
-            Password=user_data.get(names.PASSWORD))
+    sql = "INSERT INTO Auth (login, password)" \
+          " VALUES (\'{Login}\',\'{Password}\')".format(
+        Login=user_data.get(names.LOGIN),
+        Password=user_data.get(names.PASSWORD))
     print(sql)
     try:
         current_connect.execute(sql)
         connect.commit()
-        current_connect.execute("select last_insert_id()")
+        current_connect.execute("SELECT lastval()")
         id_user = current_connect.fetchone()
+        id_user = id_user['lastval']
+        print(id_user)
     except:
         logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
-        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных. Возможно такой пользователь уже есть"}
-    return input_access_table(id_user.get('last_insert_id()'), user_data, connect, current_connect)
+        return {names.ANSWER: names.WARNING,
+                names.DATA: "Ошибка запроса к базе данных. Возможно такой пользователь уже есть"}
+    return input_access_table(id_user, user_data, connect, current_connect)
 
 
 def input_access_table(id_user, user_data, connect, current_connect):
@@ -82,7 +86,7 @@ def input_access_table(id_user, user_data, connect, current_connect):
     :return: UUID сессии
     """
     sql = "INSERT INTO Access" \
-        " VALUES ({id},0)".format(id=id_user)
+          " VALUES ({id},0)".format(id=id_user)
     print(sql)
     try:
         current_connect.execute(sql)
@@ -104,9 +108,9 @@ def input_user_table(id_user, user_data, connect, current_connect):
     """
     user_data[names.ID_USER] = id_user
     sql = "INSERT INTO Users" \
-        " VALUES ({id_user},\"{Name}\",\"{Surname}\",\"{Email}\"," \
-        "\"{Sex}\",\"{City}\",\"{Educational}\",\"{Logo}\"" \
-        ")".format(**user_data)
+          " VALUES ({id_user},\'{Name}\',\'{Surname}\',\'{Email}\'," \
+          "\'{Sex}\',\'{City}\',\'{Educational}\',\'{Logo}\'" \
+          ")".format(**user_data)
     print(sql)
     try:
         current_connect.execute(sql)
@@ -126,8 +130,8 @@ def input_session_table(id_user, connect=None, current_connect=None):
     :return: UUID сессии
     """
     UUID = uuid.uuid4()
-    sql = "INSERT INTO Session" \
-        " VALUES (null, {id}, \"{UUID}\")".format(id=id_user, UUID=UUID)
+    sql = "INSERT INTO Session (id_user, uuid)" \
+          " VALUES ({id}, \'{UUID}\')".format(id=id_user, UUID=UUID)
     print(sql)
     try:
         gs.SqlQuery(sql)
@@ -136,3 +140,20 @@ def input_session_table(id_user, connect=None, current_connect=None):
         return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных"}
     print(UUID)
     return {names.ANSWER: names.SUCCESS, names.DATA: {"UUID": str(UUID)}}
+
+
+
+
+data = {"Login": "test_user10",
+        "Password": "test_password",
+        "Name": "test_name",
+        "Surname": "test_Surname",
+        "Email": "test_email@email.com",
+        "Sex": "man",
+        "City": "test_City",
+        "Educational": "test_Educational",
+        "Logo_name": "test_Logo_name",
+        "Logo": "test_Logo"
+        }
+print(registration_user(data))
+#print(gs.SqlQuery("SELECT lastval('аuth_id_user_seq')"))
