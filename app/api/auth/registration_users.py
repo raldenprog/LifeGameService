@@ -58,17 +58,11 @@ def input_auth_table(user_data):
     password_hash.update(user_data[names.PASSWORD].encode())
     user_data[names.PASSWORD] = password_hash.hexdigest()
     sql = "INSERT INTO Auth (login, password)" \
-          " VALUES (\'{Login}\',\'{Password}\')".format(
+          " VALUES (\'{Login}\',\'{Password}\') RETURNING id_user".format(
         Login=user_data.get(names.LOGIN),
         Password=user_data.get(names.PASSWORD))
-    print(sql)
     try:
-        current_connect.execute(sql)
-        connect.commit()
-        current_connect.execute("SELECT lastval()")
-        id_user = current_connect.fetchone()
-        id_user = id_user['lastval']
-        print(id_user)
+        id_user = gs.SqlQuery(sql)[0]['id_user']
     except:
         logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
         return {names.ANSWER: names.WARNING,
@@ -87,10 +81,8 @@ def input_access_table(id_user, user_data, connect, current_connect):
     """
     sql = "INSERT INTO Access" \
           " VALUES ({id},0)".format(id=id_user)
-    print(sql)
     try:
-        current_connect.execute(sql)
-        connect.commit()
+        gs.SqlQuery(sql)
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных"}
@@ -111,10 +103,8 @@ def input_user_table(id_user, user_data, connect, current_connect):
           " VALUES ({id_user},\'{Name}\',\'{Surname}\',\'{Email}\'," \
           "\'{Sex}\',\'{City}\',\'{Educational}\',\'{Logo}\'" \
           ")".format(**user_data)
-    print(sql)
     try:
-        current_connect.execute(sql)
-        connect.commit()
+        gs.SqlQuery(sql)
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных"}
@@ -132,28 +122,9 @@ def input_session_table(id_user, connect=None, current_connect=None):
     UUID = uuid.uuid4()
     sql = "INSERT INTO Session (id_user, uuid)" \
           " VALUES ({id}, \'{UUID}\')".format(id=id_user, UUID=UUID)
-    print(sql)
     try:
         gs.SqlQuery(sql)
     except:
         logging.error('error: Ошибка запроса к базе данных')
         return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных"}
-    print(UUID)
     return {names.ANSWER: names.SUCCESS, names.DATA: {"UUID": str(UUID)}}
-
-
-
-
-data = {"Login": "test_user10",
-        "Password": "test_password",
-        "Name": "test_name",
-        "Surname": "test_Surname",
-        "Email": "test_email@email.com",
-        "Sex": "man",
-        "City": "test_City",
-        "Educational": "test_Educational",
-        "Logo_name": "test_Logo_name",
-        "Logo": "test_Logo"
-        }
-print(registration_user(data))
-#print(gs.SqlQuery("SELECT lastval('аuth_id_user_seq')"))
