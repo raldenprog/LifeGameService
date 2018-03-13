@@ -113,7 +113,7 @@ def edit_cabinet(data):
         return {names.ANSWER: names.ERROR,
                 names.DATA: data}
     try:
-        if (gs.check_id(int(data[names.ID_USER]))) == 0:
+        if gs.check_id(data[names.ID_USER]) == False:
             return {names.ANSWER: "Id not found",
                     names.DATA: data}
     except:
@@ -122,20 +122,21 @@ def edit_cabinet(data):
                 names.DATA: data}
     else:
         try:
-            sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
-                  " Educational='{}', Logo='{}' WHERE ID='{}'".format(
-                data[names.NAME], data["Patronymic"], data[names.EMAIL], data[names.SEX], data[names.CITY],
-                data[names.EDUCATION], data[names.LOGO], data[names.ID_USER]
+            sql = "UPDATE users SET Name='{}', Email='{}', Sex='{}', City='{}'," \
+                  " Educational='{}', Logo='{}', surname = '{}' WHERE id_user='{}'".format(
+                data[names.NAME], data[names.EMAIL], data[names.SEX], data[names.CITY],
+                data[names.EDUCATION], data[names.LOGO], data['Surname'], data[names.ID_USER]
                 )
+            print(sql)
             gs.SqlQuery(sql)
             return {names.ANSWER: names.SUCCESS, names.DATA: data}
         except:
             logging.error('Fatal error: Password comparison')
             return {names.ANSWER: names.ERROR}
+
 data = {"Login": "test_user15",
-        "New_password": "new_password",
-        "Old_password": "test_password",
-        "Name": "test_name",
+        names.PASSWORD: "new_password",
+        "Name": "new_name",
         "Surname": "test_Surname",
         "Email": "test_email@email.com",
         "Sex": "man",
@@ -146,4 +147,4 @@ data = {"Login": "test_user15",
         names.ID_USER: "15"
         }
 
-print(change_password(data))
+print(edit_cabinet(data))
