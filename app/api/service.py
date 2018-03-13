@@ -3,7 +3,7 @@ import json
 import logging
 from datetime import date
 from api.database.connect_db import db_connect_new as db
-
+import api.base_name as names
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
