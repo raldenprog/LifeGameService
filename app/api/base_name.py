@@ -8,7 +8,7 @@ DATA = "Data"
 
 ID = "ID"
 LOGIN = "Login"
-PASSWORD = "Password"
+PASSWORD = "password"
 ID_USER = "id_user"
 NAME = "Name"
 SURNAME = "Surname"
