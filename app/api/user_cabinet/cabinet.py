@@ -127,24 +127,8 @@ def edit_cabinet(data):
                 data[names.NAME], data[names.EMAIL], data[names.SEX], data[names.CITY],
                 data[names.EDUCATION], data[names.LOGO], data['Surname'], data[names.ID_USER]
                 )
-            print(sql)
             gs.SqlQuery(sql)
             return {names.ANSWER: names.SUCCESS, names.DATA: data}
         except:
             logging.error('Fatal error: Password comparison')
             return {names.ANSWER: names.ERROR}
-
-data = {"Login": "test_user15",
-        names.PASSWORD: "new_password",
-        "Name": "new_name",
-        "Surname": "test_Surname",
-        "Email": "test_email@email.com",
-        "Sex": "man",
-        "City": "test_City",
-        "Educational": "test_Educational",
-        "Logo_name": "test_Logo_name",
-        "Logo": "test_Logo",
-        names.ID_USER: "15"
-        }
-
-print(edit_cabinet(data))
