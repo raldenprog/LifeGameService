@@ -213,7 +213,7 @@ def get_task_event(data):
     sql = "SELECT ID_Task, Task_name, Task_category, Task_point, " \
           "Task_description, Task_hint, Task_link FROM task WHERE id_event={} " \
           "order by Task_category, Task_point".format(data['id_event'])
-    print(sql)
+    #print(sql)
     try:
         result = gs.SqlQuery(sql)
     except:
@@ -225,9 +225,9 @@ def get_task_event(data):
 def input_task_acc(user_data):
     #TODO: Временное решение.
     id_event = 2
-    sql = "INSERT INTO task_acc" \
-        " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data[names.ID_USER], id_event, user_data['Task_point'])
-    print(sql)
+    sql = "INSERT INTO task_acc (id_task, id_user, id_event, point, time)" \
+        " VALUES ({}, {}, {}, {}, NOW())".format(user_data['id_task'], user_data[names.ID_USER], id_event, user_data['task_point'])
+    #print(sql)
     try:
         gs.SqlQuery(sql)
     except:
@@ -237,18 +237,20 @@ def input_task_acc(user_data):
 
 
 def check_task(data):
-    sql = "SELECT ID_Task, Task_point FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(
+    sql = "SELECT id_Task, Task_point FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(
         data['Task_name'],
         data['Task_flag'])
-    print(sql)
+    #print(sql)
     try:
-        result = gs.SqlQuery(sql)
+        result = gs.SqlQuery(sql)[0]
+        #print(result)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: 'Error connect db'}
     try:
         if len(result) == 2:
             result[names.ID_USER] = data[names.ID_USER]
+            #print(result)
             input_task_acc(result)
             return {names.ANSWER: names.SUCCESS, names.DATA: True}
     except:
