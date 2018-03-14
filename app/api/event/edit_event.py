@@ -6,7 +6,6 @@ logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
 
-
 def registration_event(event_data):
     """
     Метод регистрирует событие
@@ -44,17 +43,17 @@ def input_event_table(event_data):
     :return: {names.ANSWER: ответ}
     """
     try:
-        sql = """INSERT INTO id_event 
-VALUES (null, \"{Name}\", \"{Description}\", 
-\"{Logo}\", \"{Status}\", {Date_start}, {Date_end}, 
-{Date_stop}, {Date_continue})""".format(**event_data)
+        sql = """INSERT INTO event ("name", description, logo, status, date_start, date_end, date_stop, date_continue) 
+VALUES (\'{Name}\', \'{Description}\', 
+\'{Logo}\', \'{Status}\', \'{Date_start}\', \'{Date_end}\', 
+\'{Date_stop}\', \'{Date_continue}\')""".format(**event_data)
+        print(sql)
         gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
 
     return {names.ANSWER: names.SUCCESS}
-
 
 def update_event(event_data):
     """
