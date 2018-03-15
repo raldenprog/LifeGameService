@@ -92,10 +92,10 @@ def update_event_table(user_data):
     :return: {names.ANSWER: ответ}
     """
     try:
-        sql = """UPDATE id_event 
+        sql = """UPDATE event 
 SET Name='{Name}', Description='{Description}', Logo='{Logo}', 
 Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', 
-Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'""".format(**user_data)
+Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE id_event='{id_event}'""".format(**user_data)
         gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -105,3 +105,4 @@ Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE ID='{ID}'""".form
 
 def delete_event(user_data):
     pass
+
