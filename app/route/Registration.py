@@ -1,34 +1,55 @@
 # coding=utf-8
-import json
-from flask_restful import Resource
-from flask import request
-from api.config import HEADER
-from api.auth.registration_users import registration_user
+from flask_restful import Resource, reqparse
+import api.auth.registration_users as reg
 import api.base_name as names
+from api.service import GameService as gs
 
 
 class Registration(Resource):
+    def __init__(self):
+        self.__parser = reqparse.RequestParser()
+        self.__parser.add_argument('data')
+        self.__args = self.__parser.parse_args()
+        self.data = None
+
+    def parse_data(self):
+        self.data = self.__args.get('data', None)
+        self.data = gs.converter(self.data)
+
+        return
+
+    def check_data(self):
+        if self.data[names.LOGIN] is None:
+            return False
+        if self.data[names.PASSWORD] is None:
+            return False
+        if self.data[names.NAME] is None:
+            return False
+        if self.data[names.SURNAME] is None:
+            return False
+        if self.data[names.EMAIL] is None:
+            return False
+        if self.data[names.SEX] is None:
+            return False
+        if self.data[names.CITY] is None:
+            return False
+        if self.data[names.EDUCATION] is None:
+            return False
+        if self.data[names.LOGO_NAME] is None:
+            return False
+        if self.data[names.LOGO] is None:
+            return False
+        return True
+
+    def switch(self):
+        answer = reg.registration_user(self.data)
+        return answer
+
     def get(self):
-        print('GET /')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.args)
-        return {'test': 'test'}, 200, HEADER
-
-    def post(self):
-        print('POST /registration')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())[names.DATA]
-        print(url)
-        answer = registration_user(url)
-        print(answer)
-        return answer, 200, {'Access-Control-Allow-Origin': '*'}
-
-    def options(self):
-        return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
-                                        'Access-Control-Allow-Methods': 'POST,GET',
-                                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, '
-                                                                        'Content-Type, '
-                                                                        'X-Custom-Header'}
+        self.parse_data()
+        check = self.check_data()
+        if check:
+            answer = self.switch()
+            print(answer)
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
+        return "Error",  200, {'Access-Control-Allow-Origin': '*'}
