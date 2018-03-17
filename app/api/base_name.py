@@ -20,5 +20,6 @@ EDUCATION = "Educational"
 LOGO_NAME = "Logo_name"
 LOGO = "Logo"
 UUID = "UUID"
+PAGE = "Page"
 
 ERROR_EXECUTE_DATABASE = "Fatal error: execute database"

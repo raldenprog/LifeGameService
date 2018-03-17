@@ -18,6 +18,7 @@ def all_event(count):
         sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
         if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
+            #print(result)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
@@ -55,6 +56,7 @@ def end_event(count):
     """
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Date_end > {} LIMIT 10 OFFSET {}".format(time.time(), count)
+    #print(sql)
     try:
         if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
@@ -68,6 +70,7 @@ def end_event(count):
 
 
 def find_event(alf, count):
+
     """
     Метод возвращает 10 событий, начиная с заданного номера и если они закончились
     :param alf: str Символы, которые встречаются в названии события
@@ -76,11 +79,11 @@ def find_event(alf, count):
     """
     sql = "SELECT id_event, Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Name LIKE '%{}%' ORDER BY id_event LIMIT 10 OFFSET {}".format(alf, count)
-    print(sql)
+    #print(sql)
     try:
         if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
-            print(result)
+            #print(result)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
