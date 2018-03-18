@@ -1,8 +1,7 @@
 # coding=utf-8
 from flask_restful import Resource, reqparse
 from flask import request
-from api.user_cabinet.cabinet import edit_cabinet
-from api.user_cabinet.cabinet import user_cabinet
+import api.user_cabinet.cabinet as cabinet
 import api.base_name as names
 from api.service import GameService as gs
 
@@ -25,9 +24,12 @@ class Cabinet(Resource):
     def switch(self):
         print(self.param)
         if self.param == "edit" and self.data is not None:
-            answer = edit_cabinet(self.data)
+            answer = cabinet.edit_cabinet(self.data)
+        elif self.param == "new_password" and self.data is not None:
+            answer = cabinet.change_password(self.data)
+            print(answer)
         else:
-            answer = user_cabinet(self.data)
+            answer = cabinet.user_cabinet(self.data)
         return answer
 
     def get(self):
