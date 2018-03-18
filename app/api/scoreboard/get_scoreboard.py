@@ -46,15 +46,26 @@ def get_scoreboard(id_event=None):
     """
     #TODO: Временное решение. Номер события
     id_event = id_event or 2
-    sql = """select T2.Login, T2.point from
-  (
-    select a.Login as Login, sum(point) as point, max(b.time) as user_time
-   from Auth a, task_acc b
-   where a.id_user = b.id_user and b.id_event = {}
-    GROUP BY a.Login
-  ) as T2
-where point is not NULL
-order by point desc, user_time desc;""".format(id_event)
+    sql = """with
+user_participation_event as (
+  select us.id_user
+  , us.name 
+  from users us
+  inner join participation part 
+    on part.id_user = us.id_user
+),
+sumit_acc as (
+  select upe.*
+  , sum(tacc.point) as point
+  , max(tacc.time) as time
+  from task_acc tacc, 
+  user_participation_event upe
+  where tacc.id_event = {id_event}
+  and tacc.id_user = upe.id_user
+  group by upe.id_user, upe.name
+)
+
+select * from sumit_acc order by point desc, time desc""".format(id_event=id_event)
     try:
         result = gs.SqlQuery(sql)
     except:
