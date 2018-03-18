@@ -1,13 +1,14 @@
 # coding: utf8
 import logging
 import time
+import datetime
 from api.service import GameService as gs
 import api.base_name as names
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
 
-
+#print(time.time())
 def all_event(count):
     """
     Метод возвращает 10 событий, начиная с заданного номера
@@ -55,8 +56,8 @@ def end_event(count):
     :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
-          "FROM Event WHERE Date_end > {} LIMIT 10 OFFSET {}".format(time.time(), count)
-    #print(sql)
+          "FROM Event WHERE Date_end > {} LIMIT 10 OFFSET {}".format(datetime.datetime.now().strftime('%d.%m.%Y'), count)
+    print(sql)
     try:
         if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
@@ -67,7 +68,6 @@ def end_event(count):
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
-
 
 def find_event(alf, count):
 

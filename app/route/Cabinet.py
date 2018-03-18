@@ -33,7 +33,9 @@ class Cabinet(Resource):
         return answer
 
     def get(self):
-        self.parse_data()
-        answer = self.switch()
-        return answer, 200, {'Access-Control-Allow-Origin': '*'}
-#        return "Error", 200, {'Access-Control-Allow-Origin': '*'}
+        try:
+            self.parse_data()
+            answer = self.switch()
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
+        except:
+            return "Error", 200, {'Access-Control-Allow-Origin': '*'}
