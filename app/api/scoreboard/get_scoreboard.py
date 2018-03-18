@@ -81,8 +81,9 @@ def get_top_task(id_event=None):
     """
     sql = """with
 get_task as (
-  select id_task, task_name, task_point, task_category from task
-	where id_event = {id_event}
+  select id_task, task_name, task_point, task_category 
+  from task
+  where id_event = {id_event}
 ),
 get_stat as (
   select distinct tacc.id_task
@@ -115,6 +116,39 @@ inner join task t
  order by (result).id_task, (result).time
 )
 select * from extract_arr stat""".format(id_event=id_event)
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
+
+
+def get_stat_task(id_task=None, id_event=None):
+    """
+    Метод выводит для каждого таска события топ 3 сдавших флаги
+    :return:
+    """
+    sql = """with
+get_task_acc as (
+  select id_task, id_user, time
+  from task_acc
+  where id_event = {id_event}
+    and id_task = {id_task}
+  order by time
+),
+main as (
+ select t.task_name as task_name
+  , us.name as user_name 
+  , tc.id_user 
+  , tc.time 
+ from get_task_acc tc
+inner join users us 
+    on us.id_user = tc.id_user
+inner join task t 
+    on t.id_task = tc.id_task
+)
+select * from main""".format(id_task=id_task, id_event=id_event)
     try:
         result = gs.SqlQuery(sql)
     except:
