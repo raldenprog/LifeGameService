@@ -126,7 +126,7 @@ select * from extract_arr stat""".format(id_event=id_event)
 
 def get_stat_task(id_task=None, id_event=None):
     """
-    Метод выводит для каждого таска события топ 3 сдавших флаги
+    Метод выводит для конкретного таска информацию, кто сдал и в какой момент
     :return:
     """
     sql = """with
@@ -135,7 +135,7 @@ get_task_acc as (
   from task_acc
   where id_event = {id_event}
     and id_task = {id_task}
-  order by time
+  order by time desc
 ),
 main as (
  select t.task_name as task_name
