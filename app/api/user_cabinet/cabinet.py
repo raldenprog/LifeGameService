@@ -78,7 +78,7 @@ def change_password(data):
                 password_hash = hashlib.md5()
                 password_hash.update(data['Old_password'].encode())
                 data['Old_password'] = password_hash.hexdigest()
-                if data['Old_password'] == result[0][names.PASSWORD]:
+                if data['Old_password'] == result[0]["password"]:
                     password_hash = hashlib.md5()
                     password_hash.update(data['New_password'].encode())
                     data['New_password'] = password_hash.hexdigest()
@@ -91,7 +91,7 @@ def change_password(data):
                 logging.error('Fatal error: Password comparison')
                 return {names.ANSWER: names.ERROR}
 
-
+print(change_password({"id_user":"34", "Old_password":"new_password", "New_password":"new_password"}))
 def edit_cabinet(data):
     """
              Функция получает json с id пользователя, и информацией о пользователе.
