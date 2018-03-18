@@ -91,7 +91,6 @@ def change_password(data):
                 logging.error('Fatal error: Password comparison')
                 return {names.ANSWER: names.ERROR}
 
-print(change_password({"id_user":"34", "Old_password":"new_password", "New_password":"new_password"}))
 def edit_cabinet(data):
     """
              Функция получает json с id пользователя, и информацией о пользователе.
