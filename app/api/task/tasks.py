@@ -219,7 +219,7 @@ def get_task_event(data):
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: 'Error connect db'}
-    return {names.ANSWER: names.SUCCESS, names.DATA: preparation_result(result, data[names.ID_USER])}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def input_task_acc(user_data):

@@ -1,41 +1,39 @@
 # coding=utf-8
 import json
 from flask_restful import Resource, reqparse
-from flask import request
-from api.config import HEADER
 import api.task.tasks as tasks
-import api.auth.auth as auth
 import api.base_name as names
+from api.service import GameService as gs
 
 
 class Task(Resource):
+    def __init__(self):
+        self.__parser = reqparse.RequestParser()
+        self.__parser.add_argument('data')
+        self.__parser.add_argument('param')
+        self.__args = self.__parser.parse_args()
+        self.data = None
+        self.param = None
+
+    def parse_data(self):
+        self.data = self.__args.get('data', None)
+        self.param = self.__args.get('param', None)
+        self.data = gs.converter(self.data)
+        return
+
+    def switch(self):
+        print(self.data)
+        if self.data is not None and self.param == "check":
+            answer = tasks.check_task(self.data)
+            print(answer)
+            return answer
+        elif self.data is not None:
+            answer = tasks.get_task_event(self.data)
+            print(answer)
+            return answer
+
     def get(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument('session')
-        parser.add_argument('Task_name')
-        parser.add_argument('Task_flag')
-        args = parser.parse_args()
-        print('GET /')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', args)
-        session = args.get('session', None)
-        Task_name = args.get('Task_name', None)
-        Task_flag = args.get('Task_flag', None)
-        id_user = auth.session_verification(session)
-        answer = None
-        if Task_name is not None and Task_flag is not None and session is not None:
-            data = {'Task_name': Task_name, 'Task_flag': Task_flag, names.ID_USER: id_user}
-            answer = tasks.check_task(data)
-        else:
-            data = {'id_event': 1, names.ID_USER: id_user} \
-                if session is not None and isinstance(id_user, int) else {'id_event': 1, names.ID_USER: 0}
-            temp = tasks.get_task_event(data)
-            answer = {names.DATA: [], names.ANSWER: temp[names.ANSWER]}
-            print(temp)
-            for i in temp[names.DATA]:
-                answer[names.DATA].append(i)
-        if id is not None:
-            login = auth.get_login(id_user)
-            answer[names.LOGIN] = login
-        return answer, 200, HEADER
+        self.parse_data()
+        answer = self.switch()
+        return answer, 200, {'Access-Control-Allow-Origin': '*'}
+#        return "Error", 200, {'Access-Control-Allow-Origin': '*'}
