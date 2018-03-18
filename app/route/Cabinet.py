@@ -4,7 +4,7 @@ from flask import request
 import api.user_cabinet.cabinet as cabinet
 import api.base_name as names
 from api.service import GameService as gs
-
+from api.auth.auth import session_verification
 class Cabinet(Resource):
     def __init__(self):
         self.__parser = reqparse.RequestParser()
@@ -20,9 +20,10 @@ class Cabinet(Resource):
         print(self.param)
         print(self.data)
         self.data = gs.converter(self.data)
-        return
+        self.data["id_user"] = session_verification(self.data["UUID"])
+        print("data", self.data)
+
     def switch(self):
-        print(self.param)
         if self.param == "edit" and self.data is not None:
             answer = cabinet.edit_cabinet(self.data)
         elif self.param == "new_password" and self.data is not None:
@@ -30,6 +31,7 @@ class Cabinet(Resource):
             print(answer)
         else:
             answer = cabinet.user_cabinet(self.data)
+            #print(answer)
         return answer
 
     def get(self):

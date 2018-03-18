@@ -4,7 +4,7 @@ from flask_restful import Resource, reqparse
 import api.task.tasks as tasks
 import api.base_name as names
 from api.service import GameService as gs
-
+from api.auth.auth import session_verification
 
 class Task(Resource):
     def __init__(self):
@@ -19,13 +19,13 @@ class Task(Resource):
         self.data = self.__args.get('data', None)
         self.param = self.__args.get('param', None)
         self.data = gs.converter(self.data)
+        self.data["id_user"] = session_verification(self.data["UUID"])
         return
 
     def switch(self):
         print(self.data)
         if self.data is not None and self.param == "check":
             answer = tasks.check_task(self.data)
-            print(answer)
             return answer
         elif self.data is not None:
             answer = tasks.get_task_event(self.data)

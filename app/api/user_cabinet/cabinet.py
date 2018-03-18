@@ -22,21 +22,18 @@ def user_cabinet(data):
         logging.error('Fatal error: param id')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
-        if data[names.ID_USER].isdigit() == False:
-            return {names.ANSWER: names.ERROR, names.DATA: data}
-    except:
-        logging.error('Fatal error: type id')
-        return {names.ANSWER: names.ERROR, names.DATA: data}
-    try:
         if gs.check_id(data[names.ID_USER]) == False:
             return {names.ANSWER: "Id not found", names.DATA: data}
     except:
         logging.error('Fatal error: check id')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
+
         sql = "SELECT Name, City, Sex, Email, Logo, Educational FROM users " \
               "where id_user = '{}'".format(data[names.ID_USER])
+        #print(sql)
         result = gs.SqlQuery(sql)
+
         return {names.ANSWER: names.SUCCESS, names.DATA: result}
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)

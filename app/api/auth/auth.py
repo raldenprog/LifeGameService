@@ -14,6 +14,7 @@ def session_verification(session):
     """
     try:
         sql = "SELECT id_user FROM Session WHERE UUID = '{}'".format(session)
+        #print(sql)
         result = gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -23,7 +24,7 @@ def session_verification(session):
             return None
     except:
         return None
-    return result['User']
+    return result[0]["id_user"]
 
 
 def get_login(id_user):
