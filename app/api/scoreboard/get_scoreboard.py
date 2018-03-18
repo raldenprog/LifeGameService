@@ -72,3 +72,52 @@ select * from sumit_acc order by point desc, time desc""".format(id_event=id_eve
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
+
+
+def get_top_task(id_event=None):
+    """
+    Метод выводит для каждого таска события топ 3 сдавших флаги
+    :return:
+    """
+    sql = """with
+get_task as (
+  select id_task, task_name, task_point, task_category from task
+	where id_event = {id_event}
+),
+get_stat as (
+  select distinct tacc.id_task
+    , array(
+    select acc
+    from task_acc acc
+    where acc.id_event = {id_event}
+      and tacc.id_task = acc.id_task
+    --order by acc.time
+    limit 3
+   ) as d
+  from task_acc tacc
+),
+arr_inf_stat as (
+  select id_task
+    , unnest(d.d) as result
+  from (select * from get_stat) as d
+),
+extract_arr as (
+ select (result).id_task 
+  , t.task_name as task_name
+  , us.name as user_name
+  , (result).point as task_point
+  , (result).time as task_time
+ from arr_inf_stat stat
+inner join users us 
+    on us.id_user = (result).id_user
+inner join task t 
+    on t.id_task = (result).id_task
+ order by (result).id_task, (result).time
+)
+select * from extract_arr stat""".format(id_event=id_event)
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
