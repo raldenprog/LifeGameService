@@ -6,6 +6,7 @@ logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
 
+
 def registration_event(event_data):
     """
     Метод регистрирует событие
@@ -54,6 +55,7 @@ VALUES (\'{Name}\', \'{Description}\',
         return {names.ANSWER: names.ERROR}
 
     return {names.ANSWER: names.SUCCESS}
+
 
 def update_event(event_data):
     """
@@ -106,3 +108,38 @@ Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE id_event='{id_eve
 def delete_event(user_data):
     pass
 
+
+def update_status_close_events():
+    """
+    Метод закрывает событие, если оно закончилось либо закрыто на перерыв
+    :return:
+    """
+    sql = """update event
+    set status = 0
+    where CURRENT_TIMESTAMP >= date_end
+    or (CURRENT_TIMESTAMP >= date_stop and CURRENT_TIMESTAMP < date_continue)
+    """
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
+
+
+def update_status_open_events():
+    """
+    Метод запускает событие, если оно началось либо закончился перерыв
+    :return:
+    """
+    sql = """update event
+    set status = 1
+    where (CURRENT_TIMESTAMP >= date_start and CURRENT_TIMESTAMP < date_stop)
+    or (CURRENT_TIMESTAMP >= date_continue and CURRENT_TIMESTAMP < date_end)
+    """
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
