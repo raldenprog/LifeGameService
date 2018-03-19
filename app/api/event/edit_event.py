@@ -123,6 +123,7 @@ def update_status_close_events():
     set status = 0
     where CURRENT_TIMESTAMP >= date_end
     or (CURRENT_TIMESTAMP >= date_stop and CURRENT_TIMESTAMP < date_continue)
+    and status = 1
     """
     try:
         result = gs.SqlQuery(sql)
@@ -141,6 +142,7 @@ def update_status_open_events():
     set status = 1
     where (CURRENT_TIMESTAMP >= date_start and CURRENT_TIMESTAMP < date_stop)
     or (CURRENT_TIMESTAMP >= date_continue and CURRENT_TIMESTAMP < date_end)
+    and status = 0
     """
     try:
         result = gs.SqlQuery(sql)
