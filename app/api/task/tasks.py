@@ -63,10 +63,10 @@ def create_one_task(data):
         return {names.ANSWER: names.ERROR,
                 names.DATA: check_data}
     try:
-        sql = "INSERT INTO task" \
-            " VALUES (null,\"{task_category}\",\"{task_name}\"," \
-            "\"{task_flag}\",\"{task_description}\",{task_point},\"{task_hint}\"," \
-            "null, \"{task_link}\",1,1,2)".format(**data)
+        sql = "INSERT INTO task (task_category, task_name, task_flag, task_description, task_point, task_hint, task_solve, task_link, status, public_status, id_event)" \
+            " VALUES (\'{task_category}\',\'{task_name}\'," \
+            "\'{task_flag}\',\'{task_description}\',{task_point},\'{task_hint}\'," \
+            "\'{task_solve}\', \'{task_link}\',\'{status}\',\'{public_status}\',\'{id_event}\')".format(**data)
         print(sql)
         gs.SqlQuery(sql)
         #check_data["database"] = "Recorded"
@@ -83,6 +83,7 @@ def create_one_task(data):
                 names.DATA: check_data}
     else:
         return {names.ANSWER: names.SUCCESS}
+
 
 '''
 Данная функция принимает на вход массив из JSON записей
@@ -236,7 +237,7 @@ returning id
         id_user=data['id_user'],
         Task_id=data['Task_id'],
         Task_flag=data['Task_flag'])
-    #print(sql)
+
     try:
         result = gs.SqlQuery(sql)
     except:

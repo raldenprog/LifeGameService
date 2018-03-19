@@ -18,24 +18,30 @@ class Task(Resource):
     def parse_data(self):
         self.data = self.__args.get('data', None)
         self.param = self.__args.get('param', None)
+        print("param: ", self.param)
+        print("data: ", self.data)
         self.data = gs.converter(self.data)
         self.data["id_user"] = session_verification(self.data["UUID"])
+
         return
 
     def switch(self):
-        print(self.data)
         if self.data is not None and self.param == "check":
             answer = tasks.check_task(self.data)
             return answer
+        if self.data is not None and self.param == "create":
+            answer = tasks.create_one_task(self.data)
+            return answer
         elif self.data is not None:
             answer = tasks.get_task_event(self.data)
-            print(answer)
             return answer
 
     def get(self):
         try:
+            print("Task")
             self.parse_data()
             answer = self.switch()
+            print("answer: ", answer)
             return answer, 200, {'Access-Control-Allow-Origin': '*'}
         except:
             return "Error", 200, {'Access-Control-Allow-Origin': '*'}

@@ -15,6 +15,7 @@ class Registration(Resource):
     def parse_data(self):
         self.data = self.__args.get('data', None)
         self.data = gs.converter(self.data)
+        print("data: ", self.data)
 
         return
 
@@ -46,10 +47,14 @@ class Registration(Resource):
         return answer
 
     def get(self):
-        self.parse_data()
-        check = self.check_data()
-        if check:
-            answer = self.switch()
-            print(answer)
-            return answer, 200, {'Access-Control-Allow-Origin': '*'}
-        return "Error",  200, {'Access-Control-Allow-Origin': '*'}
+        try:
+            print("Registration")
+            self.parse_data()
+            check = self.check_data()
+            if check:
+                answer = self.switch()
+                print("answer: ", answer)
+                return answer, 200, {'Access-Control-Allow-Origin': '*'}
+            return "Error",  200, {'Access-Control-Allow-Origin': '*'}
+        except:
+            return "Error",  200, {'Access-Control-Allow-Origin': '*'}

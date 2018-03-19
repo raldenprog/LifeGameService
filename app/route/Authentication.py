@@ -16,7 +16,7 @@ class Authentication(Resource):
     def parse_data(self):
         self.data = self.__args.get('data', None)
         self.data = gs.converter(self.data)
-        print(self.data)
+        print("data: ", self.data)
         return
 
     def check_data(self):
@@ -28,15 +28,16 @@ class Authentication(Resource):
 
     def switch(self):
         answer = auth.login_verification(self.data)
-        print(answer)
         return answer
 
     def get(self):
         try:
+            print("Auth")
             self.parse_data()
             check = self.check_data()
             if check:
                 answer = self.switch()
+                print("answer: ", answer)
                 return answer, 200, {'Access-Control-Allow-Origin': '*'}
             return "Error",  200, {'Access-Control-Allow-Origin': '*'}
         except:
