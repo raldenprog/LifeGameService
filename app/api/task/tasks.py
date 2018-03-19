@@ -219,7 +219,7 @@ def get_task_event(data):
  , Task_link
 FROM task
 WHERE id_event = {id_event}
- and (select status from event where id_event = 1) = {id_event}
+ and (select status from event where id_event = {id_event}) = 1
 ORDER BY Task_category
  , Task_point
 """.format(id_event=data['id_event'])
