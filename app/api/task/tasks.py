@@ -210,9 +210,19 @@ def preparation_result(data, id_user):
 
 
 def get_task_event(data):
-    sql = "SELECT ID_Task, Task_name, Task_category, Task_point, " \
-          "Task_description, Task_hint, Task_link FROM task WHERE id_event={} " \
-          "order by Task_category, Task_point".format(data['id_event'])
+    sql = """SELECT ID_Task
+ , Task_name
+ , Task_category
+ , Task_point
+ , Task_description
+ , Task_hint
+ , Task_link
+FROM task
+WHERE id_event = {id_event}
+ and (select status from event where id_event = 1) = {id_event}
+ORDER BY Task_category
+ , Task_point
+""".format(id_event=data['id_event'])
     #print(sql)
     try:
         result = gs.SqlQuery(sql)
