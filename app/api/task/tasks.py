@@ -232,36 +232,36 @@ ORDER BY Task_category
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
-def input_task_acc(user_data):
-    #TODO: Временное решение.
-    id_event = 2
-    sql = "INSERT INTO task_acc (id_task, id_user, id_event, point, time)" \
-        " VALUES ({}, {}, {}, {}, NOW())".format(user_data['id_task'], user_data[names.ID_USER], id_event, user_data['task_point'])
-    #print(sql)
-    try:
-        gs.SqlQuery(sql)
-    except:
-        logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
-        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных."}
-    return True
-
-
 def check_task(data):
-    sql = "SELECT id_Task, Task_point FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(
-        data['Task_name'],
-        data['Task_flag'])
+    sql = """
+INSERT INTO task_acc (id_task, id_user, id_event, point, time)
+SELECT
+   t.id_task, {id_user}, {id_event}, t.task_point, current_timestamp
+from task t
+WHERE exists(
+  select *
+  from event
+  where id_event = {id_event}
+   and status = 1
+)
+and exists(
+  select *
+  from task task
+  where task.id_task = {Task_id}
+  and task.Task_flag = '{Task_flag}'
+)
+and t.id_task = {Task_id}
+returning id
+
+    """.format(
+        id_event=data['id_event'],
+        id_user=data['id_user'],
+        Task_id=data['Task_id'],
+        Task_flag=data['Task_flag'])
     #print(sql)
     try:
-        result = gs.SqlQuery(sql)[0]
-        #print(result)
+        result = gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: 'Error connect db'}
-    try:
-        if len(result) == 2:
-            result[names.ID_USER] = data[names.ID_USER]
-            #print(result)
-            input_task_acc(result)
-            return {names.ANSWER: names.SUCCESS, names.DATA: True}
-    except:
         return {names.ANSWER: names.WARNING, names.DATA: False}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
