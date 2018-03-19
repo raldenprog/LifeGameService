@@ -3,84 +3,165 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="css/template.css" type="text/css"/>
-    <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../../ctf-git/ctf/authorization/css/template.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../../ctf-git/ctf/authorization/css/main.css" type="text/css"/>
     <SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
-    <script type="text/javascript" src="js/autorization-steps.js"></script>
-    <script type="text/javascript" src="js/registration.js"></script>
-    <SCRIPT defer type="text/javascript" src="js/main.js"></SCRIPT>
+    <script type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/autorization-steps.js"></script>
+    <script type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/registration.js"></script>
+    <SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/main.js"></SCRIPT>
     <title>Регистрация</title>
 </head>
 <body>
-<div class="reg-page">
-<header class="header"><div class="header__title">Registration</div></header>
+<div class="background"></div>
+    <header class="header">
+        <div class="header__element header__element--logo"><div>LifeGameService</div></div>
+        <div class="header__element"><div>Главная</div></div>
+        <div class="header__element"><div>Соревнования</div></div>
+        <div class="header__element"><div>Рейтинг</div></div>
+        <div class="header__element header__element--login-reg">
+            <div class="header__element--login">
+                Войти
+            </div>
+            <div class="header__element--reg">
+                Зарегистрироваться
+            </div>
+
+        </div>
+
+    </header>
+
 
 <div class="authorization">
     <div class="authorization-container">
-        <img src="img/S.png" class="background__s-img">
-        <div class="authorization__title">Регистрация</div>
+
+        <div class="authorization__title">Стать участником LifeGameService</div>
         <form method="get" action="send.php">
             <div class="step">
-                <div class="authorization__form-line"><strong>Логин: <span class="authorization__star">*</span></strong><input
-                        class="authorization__input" type="text" name="login"
-                        placeholder="Введите логин" id="login"></div>
-                <div class="authorization__form-line"><strong>E-mail: <span
-                        class="authorization__star">*</span></strong><input class="authorization__input" type="text"
-                                                                            name="email"
-                                                                            placeholder="Введите e-mail" id="email">
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Логин <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="login"
+                               placeholder="Введите логин"
+                               id="login">
+                    </div>
                 </div>
-                <div class="authorization__form-line"><strong>Пароль: <span
-                        class="authorization__star">*</span></strong><input class="authorization__input" type="password"
-                                                                            name="passw"
-                                                                            placeholder="Введите пароль" id="pass">
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        E-mail <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="email"
+                               placeholder="Введите e-mail"
+                               id="email">
+                    </div>
                 </div>
-                <div class="authorization__form-line"><strong>Пароль: <span
-                        class="authorization__star">*</span></strong><input class="authorization__input" type="password"
-                                                                            name="passw-check"
-                                                                            placeholder="Повторите пароль"
-                                                                            id="pass-check">
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Пароль <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="passw"
+                               placeholder="Введите пароль"
+                               id="pass">
+                    </div>
                 </div>
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Повсторите пароль <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="pass-check"
+                               placeholder="Повторите пароль"
+                               id="pass-check">
+                    </div>
+                </div>
+
+
             </div>
+
+
             <div class="step">
-                <div class="authorization__form-line"><strong>Имя:</strong><input class="authorization__input"
-                                                                                  type="text" name="name"
-                                                                                  placeholder="Введите имя" id="name">
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        ФИО
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="name"
+                               placeholder="Введите имя"
+                               id="name">
+                    </div>
                 </div>
-                <div class="authorization__form-line"><strong>Фамилия:</strong><input class="authorization__input"
-                                                                                      type="text" name="sname"
-                                                                                      placeholder="Введите фамилию"
-                                                                                      id="sname">
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Город
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="city"
+                               placeholder="Введите город проживания"
+                               id="city">
+                    </div>
                 </div>
-                <div class="authorization__form-line"><strong>Пол:</strong>
-                    <select id="gender">
-                        <option>Не выбрано</option>
-                        <option>male</option>
-                        <option>female</option>
-                    </select></div>
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Учебное заведение
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="educational"
+                               placeholder="Введите ваше учебное заведение"
+                               id="educational">
+                    </div>
+                </div>
+
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Пол
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <select id="gender" class="authorization__input-select">
+                            <option>Не выбрано</option>
+                            <option>Мужской</option>
+                            <option>Женский</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
             </div>
-            <div class="step">
-                <div class="authorization__form-line"><strong>Город:</strong><input class="authorization__input"
-                                                                                    type="text" name="city"
-                                                                                    placeholder="Введите город проживания"
-                                                                                    id="city">
-                </div>
-                <div class="authorization__form-line"><strong>Учебное заведение:</strong><input
-                        class="authorization__input" type="text"
-                        name="educational"
-                        placeholder="Введите ваше учебное заведение" id="educational">
-                </div>
-                <div class="authorization__form-line"><strong>Аватарка:</strong>
-                    <button name="choose-logo">выбрать файл</button>
-                </div>
-            </div>
+
             <div class="authorization__steps-links">
                 <a href="#" class="authorization__prev-step">Назад</a>
-                <a href="#" class="authorization__next-step">Следующий шаг</a>
-                <input type="button" class="authorization__next-step" id="reg-btn" value="Зарегистрироваться">
+                <a href="#" class="authorization__next-step">Далее</a>
+                <input type="button" class="authorization__next-step authorization__next-step--registration" id="reg-btn" value="Зарегистрироваться">
             </div>
         </form>
     </div>
 </div>
-</div>
+
 </body>
 </html>

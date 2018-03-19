@@ -1,25 +1,86 @@
 @import "mixin";
 
 .header {
-  height: 133px;
+  height: 68px;
   width: 100%;
+  max-width: 1366px;
   position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 99;
-  background: url(../img/header.jpg) center no-repeat;
-  background-size: 100% 100%;
-  padding: 0 166px;
+  background-color: #8fb0c3;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
-  &__title {
-    font-family: "Times New Roman";
+  &__element {
+    max-width: 185px;
     width: 100%;
-    font-size: 78px;
-    text-transform: uppercase;
-    text-align: center;
-    color: @orange-transparent-color;
-    padding-top: 22px;
+    border-right: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-family: Verdana;
+    color: black;
+    text-decoration: none;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &--logo {
+      width: 335px;
+      background-color: #56849f;
+      font-size: 40px;
+      max-width: none;
+      padding: 0 35px;
+      color: white;
+    }
+
+    &--login {
+      padding-right: 17px;
+      margin-right: 10px;
+      background: url(../img/icons/login.png) no-repeat;
+      background-position: right;
+      background-size: 17px 18px;
+    }
+
+    &--login-reg {
+      max-width: none;
+    }
+
+    &--account {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 15px;
+      min-width: none;
+      max-width: none;
+      position: relative;
+      box-sizing: border-box;
+
+      &:after {
+        content: "";
+        display: block;
+        height: 7px;
+        width: 15px;
+        background: url(../img/arrow.png);
+        background-size: contain;
+        position: absolute;
+        right: 20px;
+        justify-content: left;
+        padding-left: 15px;
+        box-sizing: border-box;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
   }
 
   &__link {
@@ -71,16 +132,33 @@
       width: 224px;
     }
   }
-}
 
-.header-menu-container {
-  display: flex;
-}
+  &__account-info-container {
+    position: absolute;
+    width: 100%;
+    border: 1px solid black;
+    top: 67px;
+    left: -1px;
+    padding-bottom: 1px;
+  }
 
-@media screen and (max-width:1500px) {
-  .header {
-    height: 80px;
+  &__account-info-team {
+    background-color: #fff;
+    padding: 14px 20px;
+    box-sizing: border-box;
+  }
 
+  &__account-info-row {
+    display: block;
+    padding: 14px 20px;
+    background-color: #e9eff3;
+    box-sizing: border-box;
+    border-top: 1px solid black;
+    text-decoration: none;
+    color: black;
+  }
+
+  @media screen and (max-width: 1500px) {
     &__title {
       font-size: 40px;
       padding-top: 14px;
@@ -121,5 +199,7 @@
         }
       }
     }
+
   }
 }
+

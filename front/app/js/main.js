@@ -1,7 +1,14 @@
 function logout() {
-    $.cookie('UUID', null);
+    setCookie("UUID", "", {
+        expires: -1
+    });
+
+    console.log("куки удалены");
+    console.log($.cookie("UUID"));
+
     $(location).attr('href', "login.html");
 }
+
 
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
@@ -27,5 +34,15 @@ function maybeScroll () {
 }
 
 $(document).ready(function () {
+    if ($.cookie('UUID') != null) {
+
+    }
     maybeScroll ();
+
+    $("#account-info-switch").click(function () {
+        //$(".header__account-info-container").classList;
+        document.getElementById("header-account-info-container").classList.toggle("disabled-block");
+        //console.log(document.getElementById("header-account-info-container"));
+    });
+
 });

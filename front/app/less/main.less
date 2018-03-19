@@ -1,4 +1,6 @@
 @import "mixin";
+@import "table-default";
+@import "popup-default";
 @import "background";
 @import "authorization";
 @import "scoreboard";
@@ -6,6 +8,11 @@
 @import "tasks";
 @import "task-description";
 @import "legend";
+@import "competitions";
+@import "personal-page";
+@import "index-page";
+@import "news";
+@import "soon-competition";
 
 @font-face {
   font-family: minionpro-regular;
@@ -22,4 +29,8 @@
 body {
   font-family: @main-font;
   margin:0;
+}
+
+.disabled-block {
+  display: none !important;
 }

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../ctf-git/ctf/authorization/css/main.css" type="text/css"/>
+    <title>Войти в аккаунт</title>
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="popup-default disabled-block">
+    <div class="popup-default--container">
+        <div class="popup-default__close-button">X</div>
+
+        <div class="popup-default__title">
+            Пожалуйста, выберите
+        </div>
+
+        <div class="popup-default__buttons-container">
+            <div class="popup-default__button">Участвовать официально</div>
+            <div class="popup-default__button">Участвовать вне конкурса</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup-default--description popup-default disabled-block">
+    <div class="popup-default--container">
+
+        <div class="popup-default__title">
+            Описание чего-то
+        </div>
+
+        <div class="popup-default__main-text">
+            loren ipsumloren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+        </div>
+    </div>
+</div>
+
+
+<header class="header">
+    <div class="header__element header__element--logo">
+        <div>LifeGameService</div>
+    </div>
+    <div class="header__element">
+        <div>Главная</div>
+    </div>
+    <div class="header__element">
+        <div>Соревнования</div>
+    </div>
+    <div class="header__element">
+        <div>Рейтинг</div>
+    </div>
+
+    <div class="header__element header__element--login-reg disabled-block">
+        <div class="header__element--login">
+            Войти
+        </div>
+        <div class="header__element--reg">
+            Зарегистрироваться
+        </div>
+    </div>
+
+    <div class="header__element header__element--account">
+        <div class="header__element--avatar">
+            <img src="../../../../ctf-git/ctf/authorization/img/avatar.png" alt="" style="height: 58px; width: auto;">
+        </div>
+        <div class="header__element--name">Piggi</div>
+    </div>
+
+
+</header>
+
+<div class="competitions">
+    <div class="competitions-container">
+
+
+        <div class="competitions__check-container">
+            <div class="competitions__check-box-and-title-container">
+                <input type="checkbox">
+                <Span>Отобразить открытые соревнования</Span>
+            </div>
+
+            <div class="competitions__check-box-and-title-container">
+                <input type="checkbox">
+                <Span>Отобразить закрытые соревнования</Span>
+            </div>
+        </div>
+
+
+        <div class="competitions__check-container">
+            <div class="competitions__check-box-and-title-container">
+                <input type="checkbox">
+                <Span>Показать прошедшие соревнования</Span>
+            </div>
+
+            <div class="competitions__check-box-and-title-container">
+                <input type="checkbox">
+                <Span>показать текущие соревнования</Span>
+            </div>
+
+            <div class="competitions__check-box-and-title-container">
+                <input type="checkbox">
+                <Span>Показать предстоящие соревнования</Span>
+            </div>
+        </div>
+
+
+        <table class="competitions__table">
+            <tr>
+                <td>
+                    <div class="competitions__table-title">Название</div>
+                </td>
+                <td>
+                    <div class="competitions__table-title">Авторы</div>
+                </td>
+                <td>
+                    <div class="competitions__table-title">Начало</div>
+                </td>
+                <td>
+                    <div></div>
+                </td>
+                <td>
+                    <div class="competitions__table-title">Длит.</div>
+                </td>
+                <td>
+                    <div></div>
+                </td>
+                <td>
+                    <div class="competitions__table-title">Результаты</div>
+                </td>
+                <td>
+                    <div class="competitions__table-title">Кол-вл участн</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Лешие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>хз, кто авторы</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>4:20</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div>До регистрации 1д</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Длит.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div class="competitions__button">принять участие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div class="competitions__button">Просмотр</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>50</div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Лешие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>хз, кто авторы</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>4:20</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div>До регистрации 1д</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Длит.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div class="competitions__button competitions__button--no-active">принять участие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>рез.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>50</div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Лешие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>хз, кто авторы</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>4:20</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div>До регистрации 1д</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Длит.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div class="competitions__button competitions__button--active">Участвую</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div class="competitions__button competitions__button--active">Просмотр</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>50</div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Лешие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>хз, кто авторы</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>4:20</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div>До регистрации 1д</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Длит.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div>принять участие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>рез.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>50</div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Лешие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>хз, кто авторы</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>4:20</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div>До регистрации 1д</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>Длит.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block competitions__table-cell-block--transparent">
+                        <div>принять участие</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>рез.</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="competitions__table-cell-block">
+                        <div>50</div>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div class="table-default__last-cell-block">
+                        <div></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-default__last-cell-block">
+                        <div></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-default__last-cell-block">
+                        <div></div>
+                    </div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="table-default__last-cell-block">
+                        <div></div>
+                    </div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="table-default__last-cell-block">
+                        <div></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-default__last-cell-block">
+                        <div></div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>
+
+<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/jquery.cookie.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/json-action.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/cookie.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/main.js"></SCRIPT>
+</body>
+</html>

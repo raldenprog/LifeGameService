@@ -1,49 +1,104 @@
+var tasks;
+
+
+
 function getTasks() {
-    str = "http://90.189.132.25:13451/task?session=" + $.cookie('UUID');
+    var categories = new Array();
+    var active;
+    var obj = {
+        id_event: 7
+    };
+
+    var data = JSON.stringify(obj);
+
+    var str = 'http://90.189.132.25:13451/task?data=' + data;
     var xhr = createCORSRequest('GET', str);
+
+    console.log(str);
+
     xhr.send();
     xhr.onload = function () {
         tasks = $.parseJSON(this.responseText);
-        console.log(this.responseText);
 
-        for (i = 0; i < tasks.Data.length; i++) {
-            //data.Data[i].Task_hint  если пустой, то не выводить
-            //data.Data[i].Task_description
-            //data.Data[i].Task_name
-            //data.Data[i].Task_link  если null то не выводить на экран
-            //data.Data[i].Close      сдан таск или нет
-            //data.Data[i].Task_category
-            //data.Data[i].Task_point
-            //data.Data[i].Task_point
+        console.log("answer");
+        console.log(tasks);
+        console.log(tasks.Data.length);
 
-            //console.log(tasks.Data[i].Task_category);
-            //console.log("____");
-            var str = '<a href="#" class="tasks__link';
-            if (tasks.Data[i].Close === true) {
-                str = str + ' tasks__link--done'
+        var categoiesContainer = document.getElementById("tasks__category-container");
+
+
+        for (var i = 0; i < tasks.Data.length; i++) {
+
+            var alreadyExists = false;
+
+            for (var j = 0; j < categories.length; j++) {
+                if (tasks.Data[i].task_category === categories[j]) {
+                    alreadyExists = true;
+                    break;
+                }
             }
-            str = str + '" id="' + tasks.Data[i].Task_name + '" onclick="openTask(\'' + String(tasks.Data[i].Task_name) + '\')">' + tasks.Data[i].Task_point + '</a>';
 
-            category = '#' + tasks.Data[i].Task_category;
-            $(category).append(str);
+            if (!alreadyExists) {
+                var str = '<div active-category="true"  category-name="' + tasks.Data[i].task_category + '" class="tasks__category">' + tasks.Data[i].task_category + '</div>';
+
+                categoiesContainer.innerHTML += str;
+                categories[categories.length] = tasks.Data[i].task_category;
+            }
         }
-    }
+
+        console.log($("[active-category=true]"));
+        console.log($("#tasks__category-container").attr("class"));
+
+        console.log($("[active-category=true]").attr("category-name"));
+        var active = $("[active-category=true]").attr("category-name");
+
+
+
+        for (var i = 0; i < tasks.Data.length; i++) {
+            if (tasks.Data[i].task_category === active) { // ВЫВОД НА ЭКРАН
+                str = '<div class="tasks__one-task">';
+                str += '<div class="tasks__task-name">' + tasks.Data[i].task_name + '</div>';
+                str += '<div class="tasks__form-container"><div class="tasks__task-description">' + tasks.Data[i].task_description +'</div> ';
+                str += '<form onsubmit="submitTask(' + tasks.Data[i].id_task + ');" class="tasks__tasks-form" action="">';
+                str += '<div class="tasks__task-flag-input"><input type="text">';
+                str += '<div class="tasks__task-flag-input-done" style="display: none;"></div></div>';
+                str += '<div class="tasks__task-submit-button" onclick="submitTask(' + tasks.Data[i].task_id + ')">Отправить</div></form></div></div>';
+                document.getElementById("tasks-list-container").innerHTML += str;
+            }
+        }
+    };
 
     xhr.onerror = function () {
-        //console.log('error ' + this.status);
+        console.log('error ' + this.status);
     }
 }
 
 function submitTask(task) {
-    var str = 'http://90.189.132.25:13451/task?session=' + $.cookie('UUID') + '&Task_name=' + task + '&Task_flag=' + $("#flag").val();
+    alert(task);
+
+    var flag = "c0c7c76d30bd3dcaefc96f40275bdc0a";
+
+    var obj = {
+        Task_id: 148,
+        Task_flag: "CTF{test}",
+        UUID: "0fc1d179-1b23-47dc-b83a-b3270b544c3d",
+        id_event: 7
+    };
+
+    var data = JSON.stringify(obj);
+
+    var str = 'http://90.189.132.25:13451/task?param=check&data=' + data;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
     xhr.onload = function () {
+        console.log(this.responseText);
         data = $.parseJSON(this.responseText);
-        if (data.Data) {
-            location.reload();
+        console.log(data);
+        if (data.Answer === "Success") {
+            console.log("Флаг правильный");
+            //location.reload();
         } else { alert("Неправильный флаг"); }
-    }
+    };
 
     xhr.onerror = function () {
         alert("Неверный флаг");
@@ -84,5 +139,5 @@ function openTask(task) {
 }
 
 $(document).ready(function () {
-    getTasks();
+    //getTasks();
 });

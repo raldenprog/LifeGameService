@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../ctf-git/ctf/authorization/css/main.css" type="text/css"/>
+    <title>Персональная страница</title>
+</head>
+<body>
+
+<div class="background">
+</div>
+
+<header class="header">
+    <div class="header__element header__element--logo">
+        <div>LifeGameService</div>
+    </div>
+    <a href="#" class="header__element">
+        <div>Главная</div>
+    </a>
+    <a href="#" class="header__element">
+        <div>Соревнования</div>
+    </a>
+    <a href="#" class="header__element">
+        <div>Рейтинг</div>
+    </a>
+
+    <div class="header__element header__element--login-reg disabled-block">
+        <a href="login.html" class="header__element--login">
+            Войти
+        </a>
+        <a href="reg.html" class="header__element--reg">
+            Зарегистрироваться
+        </a>
+    </div>
+
+    <div class="header__element header__element--account" id="account-info-switch">
+        <div class="header__element--avatar">
+            <img src="../../../../ctf-git/ctf/authorization/img/avatar.png" alt="" style="height: 58px; width: auto;">
+        </div>
+        <div class="header__element--name">Piggi</div>
+
+
+
+        <div class="header__account-info-container disabled-block" id="header-account-info-container">
+            <div class="header__account-info-team">"Команда свиней" <br> Личный рейтиннг - 100</div>
+
+            <a class="header__account-info-row" href="per">
+                Страница пользователя
+            </a>
+            <a class="header__account-info-row" id="logout-link">
+                Выход
+            </a>
+        </div>
+    </div>
+
+
+</header>
+
+    <div class="personal-page__content-container">
+
+        <div class="personal-page__info-container">
+
+            <div class="personal-page__head-info-container">
+                <img class="personal-page__avatar" src="../../../../ctf-git/ctf/authorization/img/avatar.png">
+                <div>
+                    <div class="personal-page__login">Piggy</div>
+                    <div class="personal-page__team">"Команда свиней"</div>
+                    <div class="personal-page__rating">Рейтинг - 100</div>
+                </div>
+            </div>
+
+            <div class="personal-page__info-block">
+                <div class="personal-page__info-row">
+                    <div class="personal-page__info-row-title"> Ф.И.О.</div>
+                    <div class="personal-page__info-data">Толстова Свинья Хрюндовна</div>
+                </div>
+
+                <div class="personal-page__info-row">
+                    <div class="personal-page__info-row-title">Пол</div>
+                    <div class="personal-page__info-data">Трансгендер</div>
+                </div>
+
+                <div class="personal-page__info-row">
+                    <div class="personal-page__info-row-title">Место учебы</div>
+                    <div class="personal-page__info-data">ШАРага</div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div>
+            <div class="soon-competition--container">
+                <div class="soon-competition__title">Сводка по соревнованиям</div>
+
+                <div class="table-container" style="width: 500px">
+                    <table class="table-default">
+                        <tr>
+                            <td>
+                                <div class="table-default__title">Название</div>
+                            </td>
+                            <td>
+                                <div class="table-default__title">Начало</div>
+                            </td>
+                            <td>
+                                <div class="table-default__title">Результаты</div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="table-default__cell-block">
+                                    <div>Соревнования 1</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-default__cell-block">
+                                    <div>15.15.2015 14:30</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-default__cell-block">
+
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="table-default__cell-block">
+                                    <div>Соревнования 2</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-default__cell-block">
+                                    <div>15.15.2015 14:30</div>
+                                </div>
+                            </td>
+                            <td class="">
+                                <div class="table-default__cell-block">
+                                    <div>1 место</div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="table-default__last-cell-block">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-default__last-cell-block">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-default__last-cell-block"></div>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/jquery.cookie.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/json-action.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/cookie.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/personal-page.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="../../../../ctf-git/ctf/authorization/js/main.js"></SCRIPT>
+</body>
+</html>

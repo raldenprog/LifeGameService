@@ -1,30 +1,63 @@
 @orange-color: #fd7100;
 @orange-transparent-color: rgba(253,113,0,0.32);
 
-@main-font: minionpro-regular;
+@main-font: Verdana;
 
 .background {
-  padding-top: 133px;
   width: 100%;
-  min-height: calc(100vh - 133px);
-  background: url(../img/background.jpg) no-repeat;
-  background-size: 100% 100%;
-  background-attachment: fixed;
+  height: 100%;
+  background: url(../img/background.png) no-repeat;
+  background-position: center;
+  background-size: auto 100%;
+  z-index: -1;
+  position: fixed;
+  opacity: 0.5;
 }
 
 .btn {
-  font-family: gautami;
-  text-transform: uppercase;
+  display: block;
+  border: 1px solid black;
+  border-radius: 12px;
+  color: white;
+  background-color: #56849f;
+  font-size: 20px;
+  line-height: 37px;
+  font-family: Verdana;
+  text-align: center;
   text-decoration: none;
-  box-sizing: border-box;
-  border: 10px solid @orange-transparent-color;
-  background-color: transparent;
-  color: @orange-transparent-color;
-  transition: 0.3s all;
 
   &:hover {
-    color: @orange-color;
-    border-color: @orange-color;
+    background-color: #c4c4c4;
+    cursor: pointer;
+  }
+}
+
+.button-in-table-default {
+  display: inline-block;
+  height: 34px;
+  width: auto;
+  background-color: white;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 8px;
+  line-height: 33px;
+  box-sizing: border-box;
+  padding: 0 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--no-active {
+    background-color: #c4c4c4;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  &--active {
+    background-color: #a2eb67;
   }
 }
 
@@ -60,7 +93,7 @@
   padding-right: 10px;
 }
 
-@media screen and (max-width:1500px) {
+@media screen and (max-width:1500px) { ///////////////////////////////////////////////////////////////////////////////
   .modal-window-container {
     width: 420px;
   }
