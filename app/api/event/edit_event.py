@@ -109,6 +109,11 @@ def delete_event(user_data):
     pass
 
 
+def update_status_event():
+    update_status_close_events()
+    update_status_open_events()
+
+
 def update_status_close_events():
     """
     Метод закрывает событие, если оно закончилось либо закрыто на перерыв
