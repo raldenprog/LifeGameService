@@ -217,12 +217,25 @@ def get_task_event(data):
  , Task_description
  , Task_hint
  , Task_link
-FROM task
+ , case
+    when exists(
+     select *
+     from task_acc
+     where id_event = {id_event}
+       and id_user = {id_user}
+       and id_task = t.id_task
+    ) then True
+   else False
+   end as close
+FROM task t
 WHERE id_event = {id_event}
  and (select status from event where id_event = {id_event}) = 1
 ORDER BY Task_category
  , Task_point
-""".format(id_event=data['id_event'])
+""".format(
+        id_user=data['id_user'],
+        id_event=data['id_event']
+    )
     #print(sql)
     try:
         result = gs.SqlQuery(sql)
