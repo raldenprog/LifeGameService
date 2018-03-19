@@ -174,41 +174,6 @@ def get_task_event_category(event, task_category):
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
-def get_task_acc(id_task, id_user):
-    sql = "SELECT id_task FROM task_acc WHERE id_task in {} and id_user = {}".format(id_task, id_user)
-    print(sql)
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {}
-    try:
-        print(result)
-        if len(result) > 0:
-            return result
-    except:
-        return {}
-
-
-def preparation_result(data, id_user):
-    result = []
-    temp = dict()
-    id_task = list()
-    for item in data:
-        item['Close'] = False
-        id_task_temp = item.get('ID_Task')
-        temp[id_task_temp] = item
-        id_task.append(id_task_temp)
-    #TODO: временное решение
-    id_task = tuple(id_task)
-    close_status = get_task_acc(id_task, id_user)
-    if close_status is not None:
-        for i in close_status:
-            id_task = i['id_task']
-            temp[id_task]['Close'] = True
-    return data
-
-
 def get_task_event(data):
     sql = """SELECT ID_Task
  , Task_name
