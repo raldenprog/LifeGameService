@@ -5,24 +5,32 @@ from api.config import HEADER
 import api.scoreboard.get_scoreboard as score
 import api.auth.auth as auth
 import api.base_name as names
+from api.service import GameService as gs
 
 
 class Scoreboard(Resource):
+    def __init__(self):
+        self.__parser = reqparse.RequestParser()
+        self.__parser.add_argument('data')
+        self.__args = self.__parser.parse_args()
+        self.data = None
+
+    def parse_data(self):
+        self.data = self.__args.get('data', None)
+        self.data = gs.converter(self.data)
+        print("data: ", self.data)
+        return
+
+    def switch(self):
+        answer = gs.converter(score.get_scoreboard(self.data["id_event"]))
+        return answer
+
     def get(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument('session')
-        args = parser.parse_args()
-        session = args.get('session', None)
-        print('GET /')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', args)
-        answer = score.get_scoreboard()
         try:
-            id_user = auth.session_verification(session)
-            login = auth.get_login(id_user)
-            answer[names.LOGIN] = login
+            print("Scoreboard")
+            self.parse_data()
+            answer = self.switch()
+            print("answer: ", answer)
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
         except:
-            pass
-        print(answer)
-        return answer, 200, HEADER
+            return "Error", 200, {'Access-Control-Allow-Origin': '*'}

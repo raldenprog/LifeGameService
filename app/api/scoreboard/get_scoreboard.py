@@ -39,13 +39,13 @@ def event_users(count, event):
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
-def get_scoreboard(id_event=None):
+def get_scoreboard(id_event):
     """
     Метод выводит текущую таблицу очков
     :return:
     """
     #TODO: Временное решение. Номер события
-    id_event = id_event or 2
+    #id_event = id_event or 2
     sql = """with
 user_participation_event as (
   select us.id_user
@@ -66,13 +66,13 @@ sumit_acc as (
 )
 
 select * from sumit_acc order by point desc, time desc""".format(id_event=id_event)
+    #print(sql)
     try:
         result = gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
-
 
 def get_top_task(id_event=None):
     """

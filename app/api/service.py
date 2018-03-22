@@ -36,7 +36,7 @@ class GameService:
     @staticmethod
     def __converter_data(param):
         if isinstance(param, date):
-            return param.strftime('%d.%m.%Y')
+            return param.strftime('%Y.%m.%d %H:%M:%S')
 
     @staticmethod
     def converter(js):
