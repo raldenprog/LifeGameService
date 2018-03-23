@@ -9,14 +9,28 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 #print(time.time())
-def all_event(count):
+def all_event(id_user, count):
     """
     Метод возвращает 10 событий, начиная с заданного номера
+    :param id_user: int id пользователя
     :param count: int номер события, с которого начинать вывод
     :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     try:
-        sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event LIMIT 10 OFFSET {}".format(count)
+        sql = """with 
+events as (
+  select id_event
+  , Name
+  , Status
+  , Date_start
+  , Date_end
+  , case when (Date_end - Date_start) < interval '0 hours' then interval '0 hours' else (Date_end - Date_start) end as interval
+  , case when (select 1 from participation where id_user =  {id_user} and id_event = ev.id_event) is not null then True else False end as participation
+  from Event ev
+  limit 10
+  offset {count}
+)
+table events""".format(count=count, id_user=id_user)
         if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
             #print(result)
