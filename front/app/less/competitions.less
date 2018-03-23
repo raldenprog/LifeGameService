@@ -1,0 +1,116 @@
+@import "mixin";
+
+.competitions {
+  padding-top: 133px;
+
+  &-container {
+    max-width: 1160px;
+    width: 100%;
+    padding: 11px;
+    border-radius: 15px;
+    background-color: rgba(106, 192, 243, 0.5);
+    border: 1px solid #7f7f7f;
+    margin: 0 auto;
+  }
+
+  &__check-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    min-height: 38px;
+    margin-bottom: 8px;
+    border: 1px solid black;
+    border-radius: 14px;
+    background-color: white;
+  }
+
+  &__check-box-and-title-container {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+  }
+
+  &__table {
+    margin: 0 auto;
+    width: 100%;
+    border-spacing: 0;
+    font-size: 12px;
+
+    & td {
+      padding: 0 5px 0 0;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  &__table-title {
+    width: 100%;
+    background-color: #ffffff;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border: 1px solid black;
+    border-bottom: none;
+    height: 48px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 47px;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  &__table-cell-block {
+    background-color: #ffffff;
+    width: 100%;
+    border: 1px solid black;
+    border-top: none;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    box-sizing: border-box;
+
+    &:first-child {
+
+    }
+
+    &--transparent {
+      background: none;
+    }
+  }
+
+  &__button {
+    .button-in-table-default;
+
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+    transition: transform 0.3s;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
+    }
+
+    &--no-active {
+      box-shadow: none;
+
+      &:hover {
+        box-shadow: none;
+        transform: none;
+      }
+    }
+  }
+
+  tr:nth-child(2) & {
+    background-color: grey;
+
+    &__table-cell-block {
+      border-top: 1px solid black;
+    }
+  }
+
+}

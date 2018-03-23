@@ -1,0 +1,41 @@
+@import "mixin";
+
+.soon-competition {
+  &--container {
+    max-width: 540px;
+    width: 100%;
+    background-color: rgba(106,192,243,0.5);
+    display: inline-block;
+    border-radius: 9px;
+    border: 1px solid #5a666e;
+    padding: 20px;
+    font-size: 18px;
+    box-sizing: border-box;
+
+    table {
+      tr {
+        font-size: 14px;
+
+        &:first-child {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  &__button {
+    .button-in-table-default;
+    transition: box-shadow 0.3s;
+    transition: transform 0.3s;
+
+    &:hover {
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
+    }
+  }
+}

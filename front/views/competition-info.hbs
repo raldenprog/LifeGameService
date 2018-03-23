@@ -1,0 +1,53 @@
+<div class="competition">
+    <div class="competition__head-menu">
+        <a href="#" class="competition__head-menu-element">"Это соревнование"</a>
+        <a href="/competition/{{ competitionId }}/info" class="competition__head-menu-element">Информация</a>
+        <a href="/competition/{{ competitionId }}/tasks" class="competition__head-menu-element">Задание</a>
+        <a href="/competition/{{ competitionId }}/rating" class="competition__head-menu-element">Рейтинг соревнования</a>
+
+    </div>
+
+    <div class="popup-default--description popup-default">
+    <div class="popup-default--container">
+
+        <div class="popup-default__title">
+            Описание чего-то
+        </div>
+
+        <div class="popup-default__main-text">
+            loren ipsumloren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsumloren ipsumloren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+            loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum
+        </div>
+    </div>
+</div>
+</div>
+
+
+<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/jquery.cookie.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/json-action.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/cookie.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/main.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/task.js"></SCRIPT>
+
+<script defer type="text/javascript">
+    getTasks({{ competitionId }});
+</script>
