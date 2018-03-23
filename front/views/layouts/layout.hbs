@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header class="header">
+    <div class="header__element header__element--logo">
+        <div>LifeGameService</div>
+    </div>
+    <a href="/" class="header__element">
+        <div>Главная</div>
+    </a>
+    <a href="/competitions" class="header__element">
+        <div>Соревнования</div>
+    </a>
+    <a href="#" class="header__element">
+        <div>Рейтинг</div>
+    </a>
+
+
+
+    <div class="header__element header__element--account" id="account-info-switch">
+
+        {{# if UUIDset }}
+
+            <div class="header__account-info-container disabled-block" id="header-account-info-container">
+                <div class="header__account-info-team">"Команда свиней" <br> Личный рейтиннг - 100</div>
+
+                <a class="header__account-info-row" href="per">
+                    Страница пользователя
+                </a>
+                <a class="header__account-info-row" id="logout-link">
+                    Выход
+                </a>
+            </div>
+
+            <div class="header__element--avatar">
+                <img src="/img/avatar.png" alt="" style="height: 58px; width: auto;">
+            </div>
+            <div class="header__element--name">Piggi</div>
+        {{ else }}
+            <div class="header__element header__element--login-reg">
+                <a href="/login" class="header__element--login">
+                    Войти
+                </a>
+                <a href="/reg" class="header__element--reg">
+                    Зарегистрироваться
+                </a>
+            </div>
+        {{/if}}
+
+    </div>
+</header>
+
+<div class="background">
+</div>
+
+    {{{ body }}}
+
+</body>
+</html>

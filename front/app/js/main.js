@@ -1,7 +1,8 @@
 function logout() {
-    $.cookie('UUID', null);
-    $(location).attr('href', "login.html");
+    deleteCookie('UUID');
+    $(location).attr('href', "/login");
 }
+
 
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
@@ -27,5 +28,17 @@ function maybeScroll () {
 }
 
 $(document).ready(function () {
+    if ($.cookie('UUID') != null) {
+
+    }
     maybeScroll ();
+
+    $("#account-info-switch").click(function () {
+        //$(".header__account-info-container").classList;
+        document.getElementById("header-account-info-container").classList.toggle("disabled-block");
+        //console.log(document.getElementById("header-account-info-container"));
+
+        console.log("switch");
+    });
+
 });

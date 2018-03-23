@@ -1,0 +1,56 @@
+@import "mixin";
+
+.personal-page {
+  .background;
+
+  &__content-container {
+    max-width: 1366px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding-top: 133px;
+  }
+
+  &__head-info-container {
+    display: flex;
+
+    margin-bottom: 40px;
+  }
+
+  &__avatar {
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin-right: 20px;
+  }
+
+  &__info-container {
+    max-width: 730px;
+    min-width: 500px;
+    max-height: 900px;
+    padding-right: 6px;
+  }
+
+  &__info-row {
+    display: flex;
+  }
+
+  &__info-row-title {
+    max-width: 120px;
+    width: 100%;
+    margin-right: 10px;
+  }
+
+  &__info-block {
+    display: inline-block;
+    width: 100%;
+    background-color: white;
+    margin-top: 20px;
+    padding: 15px 20px 40px 20px;
+    border-radius: 9px;
+    border: 1px solid #333333;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+}

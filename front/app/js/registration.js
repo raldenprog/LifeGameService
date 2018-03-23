@@ -26,40 +26,61 @@ $(document).ready(function() {
             Educational: educational,
             Logo_name: '8',
             Logo: '9'
+
+            //Login:"new_user2",
+            /*Password:"new_password",
+            Name:"new_name",
+            Surname:"new_surname",
+            Email:"new_email",
+            City:"new_city",
+            Educational:"new_ed",
+            Logo_name:"new_logo_name",
+            Logo:"new_logo",
+            Sex:"Man"*/
         };
 
-        setJson(str, 'http://90.189.132.25:13451/registration');
+        var data = JSON.stringify(str);
 
-        var data = JSON.stringify({Data: str});
-        var xhr = createCORSRequest('POST', 'http://90.189.132.25:13451/registration');
-        xhr.setRequestHeader(
-            'X-Custom-Header', 'value');
-        xhr.setRequestHeader(
-            'Content-Type', 'application/json; charset=utf-8');
-        xhr.setRequestHeader(
-            'Access-Control-Allow-Origin', '*');
-        xhr.send(data);
+
+        str = 'http://90.189.132.25:13451/registration?data=' + data;
+        var xhr = createCORSRequest('GET', str);
+        xhr.send();
 
         xhr.onload = function () {
             alert("успешная регистрация");
             alert(this.responseText);
-        }
+            console.log(this.responseText);
+            //console.log($.parseJSON(this.responseText));
+            var answ = $.parseJSON(this.responseText);
+            console.log(answ.Answer);
+            if (answ.Answer === 'Success') {
+                $.cookie('UUID', answ.Data.UUID);
+                console.log("cookie set");
+                console.log($.cookie('UUID'));
+            }
+
+            if ($.cookie('UUID') != null) {
+                $(location).attr('href', "personal-page.html");
+
+            }
+        };
 
         xhr.onerror = function () {
             alert('error ' + this.status);
         }
     }
 
+
     $("#reg-btn").click(function(){	// Событие клика на кнопку "Зарегистрироваться"
-        login = $("#login").val();
-        email = $("#email").val();
-        pass = $("#pass").val();
-        pass_check = $("#pass-check").val();
-        name = $("#name").val();
-        sname = $("#sname").val();
-        gender = $("#gender").val();
-        city = $("#city").val();
-        educational = $("#educational").val();
+        var login = $("#login").val();
+        var email = $("#email").val();
+        var pass = $("#pass").val();
+        var pass_check = $("#pass-check").val();
+        var name = $("#name").val();
+        var sname = $("#sname").val();
+        var gender = $("#gender").val();
+        var city = $("#city").val();
+        var educational = $("#educational").val();
 /*
         console.log(login);
         console.log(email);

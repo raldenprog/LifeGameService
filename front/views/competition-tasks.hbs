@@ -1,0 +1,83 @@
+<div class="competition">
+    <div class="competition__head-menu">
+        <a href="#" class="competition__head-menu-element">"Это соревнование"</a>
+        <a href="/competition/{{ competitionId }}/info" class="competition__head-menu-element">Информация</a>
+        <a href="/competition/{{ competitionId }}/tasks" class="competition__head-menu-element">Задание</a>
+        <a href="/competition/{{ competitionId }}/rating" class="competition__head-menu-element">Рейтинг соревнования</a>
+    </div>
+
+
+    <div>{{ competitionId }}</div>
+
+    <div class="competition__category-container" id="tasks-category-container">
+
+    </div>
+
+    <div class="competition__tasks-list-container" id="tasks-container">
+
+        <div class="competition__category-list-container" id="crypto-tasks-container">
+            <div class="competition__one-task">
+                <div class="competition__task-name">Название</div>
+                <div>
+                    <div class="competition__task-description">фыыыыыыыыыыыыф фыв фы фыв фыв фыв фыв фывфыв ф фыв фыв фы фыв фыв
+                        фыв фыв фыв фывфыв ф фыв фыв фы   фыв фыв фыв фывфыв ф фыв фыв фы фыв фывфыв ф фыв фыв фы</div>
+                    <form class="competition__tasks-form" action="">
+                        <div class="competition__task-flag-input">
+                            <input type="text">
+                            <div class="competition__task-flag-input-done" style="display: none;"></div>
+                        </div>
+                        <div class="competition__task-submit-button">Отправить</div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="competition__one-task tasks__one-task--done">
+                <div class="competition__task-name">Название</div>
+                <div class="competition__form-container">
+                    <div class="competition__task-description">фыыыыыыыыыыыыф фыв фы фыв фыв фыв фыв фывфыв ф фыв фыв фы фыв фыв
+                        фыв фыв фыв фывфыв ф фыв фыв фы фыв фыв фыв фывфыв ф фыв фыв фы фыв фывфыв ф фыв фыв фы
+                    </div>
+                    <form onsubmit="submitTask()" class="competition__tasks-form">
+                        <div class="competition__task-flag-input">
+                            <input type="text" style="display: none;">
+                            <div class="competition__task-flag-input-done" style="">Решено</div>
+                        </div>
+
+                        <input type="submit" class="competition__task-submit-button" value="Отправить">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="competition__category-list-container" id="joy-tasks-container" style="display: none">
+        </div>
+
+        <div class="competition__category-list-container" id="ppc-tasks-container" style="display: none">
+        </div>
+
+        <div class="competition__category-list-container" id="recon-tasks-container" style="display: none">
+        </div>
+
+        <div class="competition__category-list-container" id="stego-tasks-container" style="display: none">
+        </div>
+
+        <div class="competition__category-list-container" id="web-tasks-container" style="display: none">
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/jquery.cookie.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/json-action.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/cookie.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/main.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/task.js"></SCRIPT>
+
+<script defer type="text/javascript">
+    getTasks({{ competitionId }});
+</script>

@@ -1,0 +1,45 @@
+<div class="authorization">
+    <div class="authorization-container">
+
+        <div class="authorization__title">Войти в LifeGameService</div>
+
+        <form action="javascript:authorisationSubmit();">
+            <div class="authorization__input-container">
+                <div class="authorization__input-title">Логин</div>
+                <div class="authorization__input-field-wrapper">
+                    <input class="authorization__input-text"
+                           type="text" name="login"
+                           placeholder="LOGIN"
+                           id="login-field">
+                </div>
+            </div>
+
+            <div class="authorization__input-container">
+                <div class="authorization__input-title">Пароль</div>
+                <div class="authorization__input-field-wrapper">
+                    <input class="authorization__input-text"
+                           type="password" name="passw"
+                           placeholder="PASS"
+                           id="pass-field">
+                </div>
+            </div>
+
+            <button type="submit" class="authorization__login-button" value="Sign in" id="login">Войти</button>
+
+
+            <div class="authorization__help-links-container">
+                <a class="authorization__forgot-password" href="#">Вспомнить пароль</a>
+                <a class="authorization__registration-link" href="/reg">Зарегистрироваться</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="/js/jquery.cookie.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="/js/cookie.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="/js/json-action.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="/js/main.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="/js/login.js"></SCRIPT>
