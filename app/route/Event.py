@@ -24,7 +24,6 @@ class Event(Resource):
         print("param: ", self.param)
         print("data: ", self.data)
         self.data = gs.converter(self.data)
-        self.data["id_user"] = session_verification(self.data["UUID"])
         return
 
     def switch(self):
@@ -44,6 +43,7 @@ class Event(Resource):
             answer = gs.converter(edit.update_event(self.data))
             return answer
         elif self.param == "reg_user" and self.data is not None:
+            self.data["id_user"] = session_verification(self.data["UUID"])
             answer = gs.converter(reg_user(self.data))
             return answer
         elif self.param is None and self.data[names.PAGE] is not None:
