@@ -12,7 +12,7 @@ def check_registration(data):
     """
     Метод проверки, зарегестрирован ли пользователь на данное событие
     :param data: dict: id_user, id_event
-    :return: {names.ANSWER: ответ}
+    :return: True or False
     """
     try:
         sql = "SELECT id_user FROM participation WHERE id_user=\'{id_user}\' and id_event=\'{id_event}\'".format(**data)
@@ -27,6 +27,11 @@ def check_registration(data):
         return False
 
 def check_event(data):
+    """
+        Метод проверяет существует ли событие
+        :param data: dict: id_event
+        :return: True or False
+        """
     try:
         sql = "SELECT name FROM event WHERE id_event=\'{id_event}\'".format(**data)
         #print(sql)
@@ -52,7 +57,7 @@ def registration(data):
                 #print(sql)
                 gs.SqlQuery(sql)
             else:
-                return {names.ANSWER: "event not found"}
+                return {names.ANSWER: "Event not found"}
         else:
             return {names.ANSWER: "User already registered"}
     except:
