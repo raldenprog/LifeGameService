@@ -2,8 +2,8 @@
     <div class="authorization-container">
 
         <div class="authorization__title">Стать участником LifeGameService</div>
-        <form method="get" action="send.php">
-            <div class="step">
+        <form>
+            <div  class="step" style="display: none;">
 
                 <div class="authorization__input-container">
                     <div class="authorization__input-title">
@@ -38,7 +38,7 @@
 
                     <div class="authorization__input-field-wrapper">
                         <input class="authorization__input-text"
-                               type="text" name="passw"
+                               type="password" name="passw"
                                placeholder="Введите пароль"
                                id="pass">
                     </div>
@@ -51,7 +51,7 @@
 
                     <div class="authorization__input-field-wrapper">
                         <input class="authorization__input-text"
-                               type="text" name="pass-check"
+                               type="password" name="pass-check"
                                placeholder="Повторите пароль"
                                id="pass-check">
                     </div>
@@ -61,7 +61,7 @@
             </div>
 
 
-            <div class="step">
+            <div class="step" style="display: none;">
                 <div class="authorization__input-container">
                     <div class="authorization__input-title">
                         ФИО
@@ -123,7 +123,7 @@
             <div class="authorization__steps-links">
                 <a href="#" class="authorization__prev-step">Назад</a>
                 <a href="#" class="authorization__next-step">Далее</a>
-                <input type="button" class="authorization__next-step authorization__next-step--registration" id="reg-btn" value="Зарегистрироваться">
+                <input type="button" class="authorization__next-step authorization__next-step--registration" style="display: none;" id="reg-btn" value="Зарегистрироваться">
             </div>
         </form>
     </div>
