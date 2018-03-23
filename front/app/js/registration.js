@@ -59,7 +59,7 @@ $(document).ready(function() {
             }
 
             if ($.cookie('UUID') != null) {
-                $(location).attr('href', "/personal-page");
+                $(location).attr('href', "/login");
 
             }
         };
