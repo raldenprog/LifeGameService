@@ -14,12 +14,11 @@ $(document).ready(function() {
         return xhr;
     }
 
-    function registration(login, email, pass, name, sname, gender, city, educational) {
+    function registration(login, email, pass, name, gender, city, educational) {
         var str = {
             Login: login,
             Password: pass,
             Name: name,
-            Surname: sname,
             Email: email,
             Sex: gender,
             City: city,
@@ -46,13 +45,13 @@ $(document).ready(function() {
         var xhr = createCORSRequest('GET', str);
         xhr.send();
 
+        console.log(str);
+
         xhr.onload = function () {
-            alert("успешная регистрация");
-            alert(this.responseText);
             console.log(this.responseText);
-            //console.log($.parseJSON(this.responseText));
             var answ = $.parseJSON(this.responseText);
             console.log(answ.Answer);
+
             if (answ.Answer === 'Success') {
                 $.cookie('UUID', answ.Data.UUID);
                 console.log("cookie set");
@@ -60,14 +59,14 @@ $(document).ready(function() {
             }
 
             if ($.cookie('UUID') != null) {
-                $(location).attr('href', "personal-page.html");
+                $(location).attr('href', "/personal-page");
 
             }
         };
 
         xhr.onerror = function () {
             alert('error ' + this.status);
-        }
+        };
     }
 
 
@@ -77,7 +76,6 @@ $(document).ready(function() {
         var pass = $("#pass").val();
         var pass_check = $("#pass-check").val();
         var name = $("#name").val();
-        var sname = $("#sname").val();
         var gender = $("#gender").val();
         var city = $("#city").val();
         var educational = $("#educational").val();
@@ -93,7 +91,7 @@ $(document).ready(function() {
         console.log(educational);*/
 
         if (login  && email && pass && pass === pass_check) {
-            registration(login, email, pass, name, sname, gender, city, educational);
+            registration(login, email, pass, name, gender, city, educational);
         } else {
             alert("Введите корректно необходимые данные");
             $(steps).hide(); // скрываем все шаги
