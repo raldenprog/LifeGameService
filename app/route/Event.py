@@ -47,7 +47,8 @@ class Event(Resource):
             answer = gs.converter(reg_user(self.data))
             return answer
         elif self.param is None and self.data[names.PAGE] is not None:
-            answer = gs.converter(show.all_event(self.data[names.PAGE]))
+            self.data["id_user"] = session_verification(self.data["UUID"])
+            answer = gs.converter(show.all_event(self.data[names.ID_USER], self.data[names.PAGE]))
             return answer
 
     def get(self):
