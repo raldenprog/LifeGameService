@@ -229,6 +229,12 @@ and exists(
   where task.id_task = {Task_id}
   and task.Task_flag = '{Task_flag}'
 )
+and exists(
+  select *
+  from participation
+  where id_event = {id_event}
+  and id_user = {id_user}
+)
 and t.id_task = {Task_id}
 returning id
 
