@@ -21,18 +21,21 @@ class Task(Resource):
         print("param: ", self.param)
         print("data: ", self.data)
         self.data = gs.converter(self.data)
-        self.data["id_user"] = session_verification(self.data["UUID"])
+
 
         return
 
     def switch(self):
         if self.data is not None and self.param == "check":
+            self.data["id_user"] = session_verification(self.data["UUID"])
             answer = tasks.check_task(self.data)
             return answer
         if self.data is not None and self.param == "create":
+            print(1)
             answer = tasks.create_one_task(self.data)
             return answer
         elif self.data is not None:
+            self.data["id_user"] = session_verification(self.data["UUID"])
             answer = tasks.get_task_event(self.data)
             return answer
 

@@ -59,16 +59,15 @@ $(document).ready(function() {
             }
 
             if ($.cookie('UUID') != null) {
-                $(location).attr('href', "/login");
+                $(location).attr('href', "/competitions");
 
             }
         };
 
         xhr.onerror = function () {
-            alert('error ' + this.status);
+            //alert('error ' + this.status);
         };
     }
-
 
     $("#reg-btn").click(function(){	// Событие клика на кнопку "Зарегистрироваться"
         var login = $("#login").val();
@@ -79,16 +78,6 @@ $(document).ready(function() {
         var gender = $("#gender").val();
         var city = $("#city").val();
         var educational = $("#educational").val();
-/*
-        console.log(login);
-        console.log(email);
-        console.log(pass);
-        console.log(pass_check);
-        console.log(name);
-        console.log(sname);
-        console.log(gender);
-        console.log(city);
-        console.log(educational);*/
 
         if (login  && email && pass && pass === pass_check) {
             registration(login, email, pass, name, gender, city, educational);
@@ -106,8 +95,8 @@ $(document).ready(function() {
         }
     });
 
-    $("#login").change(function () { $("#login").removeClass("authorization__input--warning") })
-    $("#email").change(function () { $("#email").removeClass("authorization__input--warning"); })
-    $("#pass").change(function () { $("#pass").removeClass("authorization__input--warning"); })
-    $("#pass-check").change(function () { $("#pass-check").removeClass("authorization__input--warning"); })
+    $("#login").change(function () { $("#login").removeClass("authorization__input--warning") });
+    $("#email").change(function () { $("#email").removeClass("authorization__input--warning"); });
+    $("#pass").change(function () { $("#pass").removeClass("authorization__input--warning"); });
+    $("#pass-check").change(function () { $("#pass-check").removeClass("authorization__input--warning"); });
 });
