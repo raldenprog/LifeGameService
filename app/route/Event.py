@@ -5,6 +5,7 @@ import api.event.show_event as show  # show_event
 import api.event.edit_event as edit
 from api.service import GameService as gs
 from api.event.registration_user import registration as reg_user
+from api.auth.auth import session_verification
 import api.base_name as names
 
 
@@ -23,6 +24,7 @@ class Event(Resource):
         print("param: ", self.param)
         print("data: ", self.data)
         self.data = gs.converter(self.data)
+        self.data["id_user"] = session_verification(self.data["UUID"])
         return
 
     def switch(self):
