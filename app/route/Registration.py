@@ -26,8 +26,6 @@ class Registration(Resource):
             return False
         if self.data[names.NAME] is None:
             return False
-        if self.data[names.SURNAME] is None:
-            return False
         if self.data[names.EMAIL] is None:
             return False
         if self.data[names.SEX] is None:

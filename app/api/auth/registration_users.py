@@ -18,8 +18,7 @@ def registration_user(user_data):
     :param user_data: dict данные пользователя
     :return: UUID сессии
     """
-    check = [names.LOGIN, names.PASSWORD, names.NAME,
-             names.SURNAME, names.EMAIL, names.SEX,
+    check = [names.LOGIN, names.PASSWORD, names.NAME, names.EMAIL, names.SEX,
              names.CITY, names.EDUCATION, names.LOGO_NAME, names.LOGO]
     registration_data = dict.fromkeys(check, '')
     error = False
@@ -100,7 +99,7 @@ def input_user_table(id_user, user_data, connect, current_connect):
     """
     user_data[names.ID_USER] = id_user
     sql = "INSERT INTO Users" \
-          " VALUES ({id_user},\'{Name}\',\'{Surname}\',\'{Email}\'," \
+          " VALUES ({id_user},\'{Name}\',None,\'{Email}\'," \
           "\'{Sex}\',\'{City}\',\'{Educational}\',\'{Logo}\'" \
           ")".format(**user_data)
     try:
