@@ -23,7 +23,7 @@ function authorisation(login, pass) {
             setCookie('UUID', id.Data.UUID, {path: '/'});
 
             if ($.cookie('UUID')) {
-                $(location).attr('href', "/account");
+                $(location).attr('href', "/competitions");
             } else { alert("coockie error"); }
 
 
