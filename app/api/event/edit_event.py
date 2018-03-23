@@ -63,10 +63,10 @@ def update_event(event_data):
     :param event_data: dict информация о событии
     :return: {names.ANSWER: ответ}
     """
-    check = [names.ID, names.NAME, 'Description', names.LOGO,
+    check = [names.ID_EVENT, names.NAME, 'Description', names.LOGO,
              'Status', 'Date_start', 'Date_end',
              'Date_stop', 'Date_continue']
-    update_data = {names.ID: '', names.NAME: '', 'Description': '', names.LOGO: '',
+    update_data = {names.ID_EVENT: '', names.NAME: '', 'Description': '', names.LOGO: '',
         'Status': '', 'Date_start': '', 'Date_end': '',
         'Date_stop': '', 'Date_continue': ''}
     flag = False
