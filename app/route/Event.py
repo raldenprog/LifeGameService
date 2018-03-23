@@ -4,6 +4,7 @@ from flask import request
 import api.event.show_event as show  # show_event
 import api.event.edit_event as edit
 from api.service import GameService as gs
+from api.event.registration_user import registration as reg_user
 import api.base_name as names
 
 
@@ -39,6 +40,9 @@ class Event(Resource):
             return answer
         elif self.param == "update" and self.data is not None:
             answer = gs.converter(edit.update_event(self.data))
+            return answer
+        elif self.param == "reg_user" and self.data is not None:
+            answer = gs.converter(reg_user(self.data))
             return answer
         elif self.param is None and self.data[names.PAGE] is not None:
             answer = gs.converter(show.all_event(self.data[names.PAGE]))
