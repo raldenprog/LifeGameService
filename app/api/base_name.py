@@ -21,5 +21,6 @@ LOGO_NAME = "Logo_name"
 LOGO = "Logo"
 UUID = "UUID"
 PAGE = "Page"
-
+NEWS = "News_text"
+COMMENT = "Comment_text"
 ERROR_EXECUTE_DATABASE = "Fatal error: execute database"
