@@ -16,9 +16,22 @@ def check_registration(data):
     """
     try:
         sql = "SELECT id_user FROM participation WHERE id_user=\'{id_user}\' and id_event=\'{id_event}\'".format(**data)
-        print(sql)
+        #print(sql)
         answer = gs.SqlQuery(sql)
         if answer == []:
+            return True
+        else:
+            return False
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return False
+
+def check_event(data):
+    try:
+        sql = "SELECT name FROM event WHERE id_event=\'{id_event}\'".format(**data)
+        #print(sql)
+        answer = gs.SqlQuery(sql)
+        if answer != []:
             return True
         else:
             return False
@@ -34,9 +47,12 @@ def registration(data):
     """
     try:
         if check_registration(data):
-            sql = "INSERT INTO participation (id_user, id_event) VALUES (\'{id_user}\', \'{id_event}\')".format(**data)
-            #print(sql)
-            gs.SqlQuery(sql)
+            if check_event(data):
+                sql = "INSERT INTO participation (id_user, id_event) VALUES (\'{id_user}\', \'{id_event}\')".format(**data)
+                #print(sql)
+                gs.SqlQuery(sql)
+            else:
+                return {names.ANSWER: "event not found"}
         else:
             return {names.ANSWER: "User already registered"}
     except:
