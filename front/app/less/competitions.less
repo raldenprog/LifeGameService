@@ -1,11 +1,10 @@
 @import "mixin";
 
 .competitions {
-  padding-top: 133px;
+  padding: 133px 20px 30px;
 
   &-container {
     max-width: 1160px;
-    width: 100%;
     padding: 11px;
     border-radius: 15px;
     background-color: rgba(106, 192, 243, 0.5);
@@ -31,11 +30,16 @@
     font-size: 18px;
   }
 
+  &__table-container {
+    overflow-x: scroll;
+  }
+
   &__table {
     margin: 0 auto;
     width: 100%;
     border-spacing: 0;
     font-size: 12px;
+    min-width: 1100px;
 
     & td {
       padding: 0 5px 0 0;
