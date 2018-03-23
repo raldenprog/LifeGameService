@@ -1,37 +1,46 @@
+var data;
+
+function writeAccountPageData(data) {
+    console.log(data);
+
+    document.getElementById('login').innerHTML = data.Data[0].name;
+    document.getElementById('team').innerHTML = "";
+    document.getElementById('rating').innerHTML = ""; // Пока что рейтинга нет
+}
+
 $(document).ready(function () {
-    if ($.cookie('UUID')) {
-        var obj = {
-            //Login: $.cookie('UUID')
-            UUID: "0fc1d179-1b23-47dc-b83a-b3270b544c3d"
-        };
+    var obj = {
+        UUID: $.cookie('UUID')
+    };
+
+    var data = JSON.stringify(obj);
 
 
-        var data = JSON.stringify(obj);
+    var str = 'http://90.189.132.25:13451/cabinet?data=' + data;
+    var xhr = createCORSRequest('GET', str);
+    xhr.send();
 
-        var str = 'http://90.189.132.25:13451/cabinet?data=' + data;
-        var xhr = createCORSRequest('GET', str);
-        xhr.send();
+    xhr.onload = function () {
+        //console.log(this.responseText);
 
-        xhr.onload = function () {
-            console.log(this.responseText);
+        var data = $.parseJSON(this.responseText);
 
-            id = $.parseJSON(this.responseText);
+        if (data.Answer === 'Success') {
+            console.log("success");
+        } else {
+            alert('Произошла ошибка');
+        }
 
-            if(id.Answer === 'Success') {
-                console.log("success");
-            } else { alert('Произошла ошибка');}
-        };
+        writeAccountPageData(data);
+    };
 
-        xhr.onerror = function () {
-            //alert('error ' + this.status);
-            console.log(str);
-        };
+    xhr.onerror = function () {
+        //alert('error ' + this.status);
+        console.log(str);
+    };
 
-
-
-        //$(location).attr('href', "login.html");
-        console.log("ВЫ не авторизованы, вас перенаправляет на страницу авторизации");
-    }
+    //$(location).attr('href', "login.html");
+    console.log("ВЫ не авторизованы, вас перенаправляет на страницу авторизации");
 
     $("#logout-link").click(function () {
         logout();

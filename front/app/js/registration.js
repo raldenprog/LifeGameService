@@ -1,8 +1,4 @@
 $(document).ready(function() {
-    if ($.cookie('UUID')) {
-        $(location).attr('href', "personal-page.html");
-    }
-
     var steps = $("form").children(".step");
 
     function createCORSRequest(method, url) {

@@ -26,6 +26,11 @@
     font-family: Verdana;
     color: black;
     text-decoration: none;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #7ca3b9;
+    }
 
     &:last-child {
       border-right: none;
@@ -38,9 +43,14 @@
       max-width: none;
       padding: 0 35px;
       color: white;
+
+      &:hover {
+        background-color: #56849f;
+      }
     }
 
     &--login {
+      display: block;
       padding-right: 17px;
       margin-right: 10px;
       background: url(../img/icons/login.png) no-repeat;

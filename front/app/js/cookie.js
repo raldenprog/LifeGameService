@@ -37,6 +37,9 @@ function getCookie(name) {
 
 function deleteCookie(name) {
     setCookie(name, "", {
-        expires: -1
-    })
+        expires: -1,
+        path: '/'
+    });
+
+    console.log("delete cookie");
 }

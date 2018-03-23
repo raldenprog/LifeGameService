@@ -1,0 +1,128 @@
+<div class="authorization">
+    <div class="authorization-container">
+
+        <div class="authorization__title">Стать участником LifeGameService</div>
+        <form method="get" action="send.php">
+            <div class="step">
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Категория таска <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-category"
+                               placeholder="Категория таска"
+                               id="task-category">
+                    </div>
+                </div>
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Имя таска <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-name"
+                               placeholder="Имя таска"
+                               id="task-name">
+                    </div>
+                </div>
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Флаг таска <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-flag"
+                               placeholder="Флаг таска"
+                               id="task-flag">
+                    </div>
+                </div>
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Описание таска <span class="authorization__star">*</span>
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-description"
+                               placeholder="Описание таска"
+                               id="task-description">
+                    </div>
+                </div>
+
+
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Очки
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-point"
+                               placeholder="Очки"
+                               id="task-point">
+                    </div>
+                </div>
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Подсказка
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-hint"
+                               placeholder="Подсказка"
+                               id="task-hint">
+                    </div>
+                </div>
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        Ссылка
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-link"
+                               placeholder="Ссылка"
+                               id="task-link">
+                    </div>
+                </div>
+
+
+                <div class="authorization__input-container">
+                    <div class="authorization__input-title">
+                        id соревнования
+                    </div>
+
+                    <div class="authorization__input-field-wrapper">
+                        <input class="authorization__input-text"
+                               type="text" name="task-event-id"
+                               placeholder="id соревнования"
+                               id="task-event-id">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="authorization__steps-links">
+                <input type="button" class="authorization__next-step authorization__next-step--registration" id="create-task-button" value="Создать таск">
+            </div>
+        </form>
+    </div>
+</div>
+
+<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+<script type="text/javascript" src="/js/autorization-steps.js"></script>
+<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+<SCRIPT defer type="text/javascript" src="/js/main.js"></SCRIPT>
+<SCRIPT defer type="text/javascript" src="/js/create-task.js"></SCRIPT>

@@ -1,0 +1,14 @@
+<h1>{{ title }}</h1>
+<p>Welcome to {{ title }}</p>
+
+
+{{# if condition }}
+    it true
+{{ else }}
+    is false
+{{/if}}
+
+<form action="/competition/submit" method="post">
+    <input type="text" name="id">
+    <button type="submit">Submit</button>
+</form>

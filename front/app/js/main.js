@@ -1,12 +1,6 @@
 function logout() {
-    setCookie("UUID", "", {
-        expires: -1
-    });
-
-    console.log("куки удалены");
-    console.log($.cookie("UUID"));
-
-    $(location).attr('href', "login.html");
+    deleteCookie('UUID');
+    $(location).attr('href', "/login");
 }
 
 
@@ -43,6 +37,8 @@ $(document).ready(function () {
         //$(".header__account-info-container").classList;
         document.getElementById("header-account-info-container").classList.toggle("disabled-block");
         //console.log(document.getElementById("header-account-info-container"));
+
+        console.log("switch");
     });
 
 });

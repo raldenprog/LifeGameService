@@ -1,0 +1,56 @@
+<div class="competition">
+    <div class="competition__head-menu">
+        <a href="#" class="competition__head-menu-element">"Это соревнование"</a>
+        <a href="/competition/{{ competitionId }}/info" class="competition__head-menu-element">Информация</a>
+        <a href="/competition/{{ competitionId }}/tasks" class="competition__head-menu-element">Задание</a>
+        <a href="/competition/{{ competitionId }}/rating" class="competition__head-menu-element">Рейтинг соревнования</a>
+
+    </div>
+
+
+    <div class="scoreboard">
+
+
+        <table class="scoreboard__table-container"  >
+            <tbody id="scoreboard-table">
+                <tr>
+                    <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">#</div></td>
+                    <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">Команда</div></td>
+                    <td><div class="scoreboard__table-cell">crypto</div></td>
+                    <td><div class="scoreboard__table-cell">joy</div></td>
+                    <td><div class="scoreboard__table-cell">ppc</div></td>
+                    <td><div class="scoreboard__table-cell">recon</div></td>
+                    <td><div class="scoreboard__table-cell">stego</div></td>
+                    <td><div class="scoreboard__table-cell">web</div></td>
+                    <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Итоговый балл</div></td>
+                </tr>
+
+                <tr>
+                    <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">1</div></td>
+                    <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right" >Команда А</div></td>
+                    <td><div class="scoreboard__table-cell">400</div></td>
+                    <td><div class="scoreboard__table-cell">200</div></td>
+                    <td><div class="scoreboard__table-cell">420</div></td>
+                    <td><div class="scoreboard__table-cell">123</div></td>
+                    <td><div class="scoreboard__table-cell">300</div></td>
+                    <td><div class="scoreboard__table-cell">400</div></td>
+                    <td><div class="scoreboard__table-cell scoreboard__table-cell--result">100500</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/jquery.cookie.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/json-action.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/cookie.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/main.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/scoreboard.js"></SCRIPT>
+
+<script defer type="text/javascript">
+    getScoreboard({{ competitionId }});
+</script>

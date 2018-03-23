@@ -1,20 +1,48 @@
 var tasks;
+var id_event;
+
+function Competition() {
+
+}
+
+Competition.prototype.changeCategory = function (category) {
+    var containers = $('.competition__category-list-container');
+    for (var i = 0; i < containers.length; i++) {
+        containers.eq(i).hide();
+    }
+    $("#" + category + "-tasks-container").show();
+
+    var categories = $('.competition__category');
+    for (var i = 0; i < categories.length; i++) {
+
+        if (categories.eq(i).attr('name') === category) {
+            categories.eq(i).addClass('competition__category--active');
+        } else {
+            categories.eq(i).removeClass('competition__category--active');
+        }
+    }
+
+    this.activeCategory = category.toLowerCase()
+};
 
 
+var competition = new Competition();
 
-function getTasks() {
+function getTasks(competitionId) {
+    id_event = competitionId;
+
     var categories = new Array();
     var active;
+
     var obj = {
-        id_event: 7
+        id_event: id_event,
+        UUID: $.cookie('UUID')
     };
 
     var data = JSON.stringify(obj);
 
     var str = 'http://90.189.132.25:13451/task?data=' + data;
     var xhr = createCORSRequest('GET', str);
-
-    console.log(str);
 
     xhr.send();
     xhr.onload = function () {
@@ -24,7 +52,7 @@ function getTasks() {
         console.log(tasks);
         console.log(tasks.Data.length);
 
-        var categoiesContainer = document.getElementById("tasks__category-container");
+        var categoiesContainer = document.getElementById("tasks-category-container");
 
 
         for (var i = 0; i < tasks.Data.length; i++) {
@@ -39,7 +67,7 @@ function getTasks() {
             }
 
             if (!alreadyExists) {
-                var str = '<div active-category="true"  category-name="' + tasks.Data[i].task_category + '" class="tasks__category">' + tasks.Data[i].task_category + '</div>';
+                var str = '<div name="' + tasks.Data[i].task_category.toLowerCase() + '" onclick="competition.changeCategory(\'' + tasks.Data[i].task_category.toLowerCase() + '\')"  class="competition__category">' + tasks.Data[i].task_category + '</div>';
 
                 categoiesContainer.innerHTML += str;
                 categories[categories.length] = tasks.Data[i].task_category;
@@ -47,56 +75,92 @@ function getTasks() {
         }
 
         console.log($("[active-category=true]"));
-        console.log($("#tasks__category-container").attr("class"));
+        console.log($("#tasks-category-container").attr("class"));
 
         console.log($("[active-category=true]").attr("category-name"));
         var active = $("[active-category=true]").attr("category-name");
 
 
+        competition.activeCategory = tasks.Data[0].task_category;
+        competition.categoryArray = new Array();
 
+
+
+       /*
+       // Здесь будут добавляться контейнеры под категории
+
+        var str = "";
         for (var i = 0; i < tasks.Data.length; i++) {
-            if (tasks.Data[i].task_category === active) { // ВЫВОД НА ЭКРАН
-                str = '<div class="tasks__one-task">';
-                str += '<div class="tasks__task-name">' + tasks.Data[i].task_name + '</div>';
-                str += '<div class="tasks__form-container"><div class="tasks__task-description">' + tasks.Data[i].task_description +'</div> ';
-                str += '<form onsubmit="submitTask(' + tasks.Data[i].id_task + ');" class="tasks__tasks-form" action="">';
-                str += '<div class="tasks__task-flag-input"><input type="text">';
-                str += '<div class="tasks__task-flag-input-done" style="display: none;"></div></div>';
-                str += '<div class="tasks__task-submit-button" onclick="submitTask(' + tasks.Data[i].task_id + ')">Отправить</div></form></div></div>';
-                document.getElementById("tasks-list-container").innerHTML += str;
+            //Добавление контейнера, если такой категории нет
+            if (competition.categoryArray.indexOf(tasks.Data[i].task_category) === -1) {
+                competition.categoryArray[competition.categoryArray.length] = tasks.Data[i].task_category;
+
+
+                if (tasks.Data[i].task_category === competition.activeCategory) {
+                    str += '<div id="' + tasks.Data[i].task_category + '-list-container"></div>';
+                } else {
+                    str += '<div id="' + tasks.Data[i].task_category + '-list-container" style="display: none;"></div>';
+                }
             }
+        }
+        document.getElementById('tasks-container').innerHTML += str;
+*/
+
+        var str = "";
+        for (var i = 0; i < tasks.Data.length; i++) {
+
+
+            if (tasks.Data[i].close) {
+                str = '<div class="competition__one-task competition__one-task--done">';
+            } else {
+                str = '<div class="competition__one-task">';
+            }
+
+            str += '<div class="competition__task-name">' + tasks.Data[i].task_name + '</div>';
+            str += '<div class="competition__form-container"><div class="competition__task-description">' + tasks.Data[i].task_description + '</div>';
+            str += '<div onsubmit="submitTask(' + tasks.Data[i].id_task + ');" class="competition__tasks-form" action="">';
+
+            if (tasks.Data[i].close) {
+                str += '<div class="competition__task-flag-input" ><input style="display: none;" type="text">';
+                str += '<div class="competition__task-flag-input-done">Решено</div></div>';
+            } else {
+                str += '<div class="competition__task-flag-input"><input type="text" id="task-input-' + tasks.Data[i].id_task + '">';
+                str += '<div class="competition__task-flag-input-done" style="display: none;">Решено</div></div>';
+            }
+
+            str += '<button class="competition__task-submit-button" onclick="submitTask(' + tasks.Data[i].id_task + ')">Отправить</button></div></div></div>';
+
+            document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container").innerHTML += str;
         }
     };
 
     xhr.onerror = function () {
         console.log('error ' + this.status);
-    }
+    };
 }
 
-function submitTask(task) {
-    alert(task);
+function submitTask(taskId) {
 
-    var flag = "c0c7c76d30bd3dcaefc96f40275bdc0a";
+    var flag = $("#task-input-" + taskId).val();
 
     var obj = {
-        Task_id: 148,
-        Task_flag: "CTF{test}",
-        UUID: "0fc1d179-1b23-47dc-b83a-b3270b544c3d",
-        id_event: 7
+        Task_id: taskId,
+        Task_flag: flag,
+        UUID: $.cookie('UUID'),
+        id_event: id_event
     };
 
     var data = JSON.stringify(obj);
 
     var str = 'http://90.189.132.25:13451/task?param=check&data=' + data;
+    console.log(str);
     var xhr = createCORSRequest('GET', str);
     xhr.send();
     xhr.onload = function () {
-        console.log(this.responseText);
         data = $.parseJSON(this.responseText);
-        console.log(data);
-        if (data.Answer === "Success") {
+        if (data.Data) {
             console.log("Флаг правильный");
-            //location.reload();
+            location.reload();
         } else { alert("Неправильный флаг"); }
     };
 
@@ -110,7 +174,7 @@ function closeDescription() {
 }
 
 function openTask(task) {
-    for (i = 0; i < tasks.Data.length; i++) {
+    for (i = 0; i < competition.Data.length; i++) {
         if (tasks.Data[i].Task_name === task) {
             var str = "<div class=\"task-description\">" +
                 "<div class=\"task-description-container\">" +

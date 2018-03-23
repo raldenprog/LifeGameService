@@ -19,12 +19,14 @@ function authorisation(login, pass) {
 
         console.log(id);
         if(id.Answer === "Success") {
-            $.cookie('UUID', id);
+            //$.cookie('UUID', id.Data.UUID);
+            setCookie('UUID', id.Data.UUID, {path: '/'});
 
             if ($.cookie('UUID')) {
-                $(location).attr('href', "personal-page.html");
-                console.log("Вы авторизованы");
+                $(location).attr('href', "/account");
             } else { alert("coockie error"); }
+
+
         } else { console.log('Введены некорректные данные');}
     }
 
@@ -40,9 +42,5 @@ function authorisationSubmit() {
 }
 
 $(document).ready(function() {
-    if ($.cookie('UUID')) {
-        $(location).attr('href', "personal-page.html");
 
-        console.log("ВЫ авторизованы, вас перенаправляет на чето");
-    }
 });

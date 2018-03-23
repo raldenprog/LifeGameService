@@ -35,12 +35,13 @@
     margin: 0 auto;
     width: 100%;
     border-spacing: 0;
+    font-size: 12px;
 
     & td {
-      padding-right: 5px;
+      padding: 0 5px 0 0;
 
-      &:first-child {
-        padding-right: 5px;
+      &:last-child {
+        padding-right: 0;
       }
     }
   }
@@ -84,6 +85,7 @@
   &__button {
     .button-in-table-default;
 
+    text-decoration: none;
     transition: box-shadow 0.3s;
     transition: transform 0.3s;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
