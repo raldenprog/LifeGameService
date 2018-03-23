@@ -142,6 +142,50 @@ def create_table_task_acc():
     except:
         return
 
+def create_table_news():
+
+    connect, current_connect = db_connect()
+
+    sql = """CREATE TABLE news (
+              news_id SERIAL NOT NULL,
+              News_text varchar(2048) NOT NULL,
+              Autor_id integer NOT NULL,
+              Likes_count integer NOT NULL,
+              Dislikes_count integer NOT NULL,
+              Data data NOT NULL,
+              Time time NOT NULL,
+              PRIMARY KEY (news_id)
+              );"""
+    print(sql)
+    try:
+        current_connect.execute(sql)
+        current_connect.close()
+    except:
+        return
+
+def create_table_comments():
+
+    connect, current_connect = db_connect()
+
+    sql = """CREATE TABLE comments (
+              comment_id SERIAL NOT NULL,
+              news_id integer NOT NULL,
+              parent_comment_id integer NOT NULL,
+              Comment_text varchar(2048) NOT NULL,
+              Autor_id integer NOT NULL,
+              Likes_count integer NOT NULL,
+              Dislikes_count integer NOT NULL,
+              Data data NOT NULL,
+              Time time NOT NULL,
+              PRIMARY KEY (comment_id)
+              );"""
+    print(sql)
+    try:
+        current_connect.execute(sql)
+        current_connect.close()
+    except:
+        return
+
 def create_users():
 
     sql = [
