@@ -24,7 +24,7 @@ events as (
   , Status
   , Date_start
   , Date_end
-  , case when (Date_end - Date_start) < interval '0 hours' then interval '0 hours' else (Date_end - Date_start) end as interval
+  , case when (Date_end - Date_start) < interval '0 hours' then null else timestamp '2001-01-01 00:00' + (Date_end - Date_start) - interval '2001 year' end::time as interval
   , case when (select 1 from participation where id_user =  {id_user} and id_event = ev.id_event) is not null then True else False end as participation
   from Event ev
   limit 10
