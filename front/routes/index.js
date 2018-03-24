@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
     if (typeof req.cookies.UUID != 'string') {
         res.redirect('/login/');
     } else {
-        res.render('index', { UUIDset: true, title: 'Express', condition: true });
+        res.redirect('/competitions/');
+        //res.render('index', { UUIDset: true, title: 'Express', condition: true });
     }
 });
 
