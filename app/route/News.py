@@ -1,11 +1,12 @@
 # coding=utf-8
-__author__ = 'den-isk1995'
 
 from flask_restful import Resource, reqparse
 from api.service import GameService as gs
 import api.news.add_mod_news as news_api
 import api.news.add_mod_comments as comments_api
 import api.base_name as names
+__author__ = 'den-isk1995'
+
 
 class News(Resource):
     def __init__(self):
@@ -23,10 +24,12 @@ class News(Resource):
     def check_data(self):
         if self.data[names.NEWS] is None:
             return False
+        if self.data[names.ID_USER] is None:
+            return False
         return True
 
     def switch(self):
-        answer = news_api.news_validation(self.data)
+        answer = news_api.news_verification(self.data)
         return answer
 
     def get(self):
@@ -41,6 +44,7 @@ class News(Resource):
             return "Error",  200, {'Access-Control-Allow-Origin': '*'}
         except:
             return "Error", 200, {'Access-Control-Allow-Origin': '*'}
+
 
 class Comment(Resource):
     def __init__(self):
@@ -58,10 +62,16 @@ class Comment(Resource):
     def check_data(self):
         if self.data[names.COMMENT] is None:
             return False
+        if self.data[names.ID_USER] is None:
+            return False
+        if self.data[names.ID_COMMENT_PARENT] is None:
+            return False
+        if self.data[names.ID_NEWS] is None:
+            return False
         return True
 
     def switch(self):
-        answer = comments_api.comment_validation(self.data)
+        answer = comments_api.comment_verification(self.data)
         return answer
 
     def get(self):

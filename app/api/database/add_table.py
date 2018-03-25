@@ -149,7 +149,7 @@ def create_table_news():
     sql = """CREATE TABLE news (
               id_news SERIAL NOT NULL,
               News_text varchar(10240) NOT NULL,
-              id_autor integer NOT NULL,
+              id_user integer NOT NULL,
               Likes_count integer NOT NULL,
               Dislikes_count integer NOT NULL,
               Data timestamp NOT NULL,
@@ -171,7 +171,7 @@ def create_table_comments():
               id_news integer NOT NULL,
               id_comment_parent integer NOT NULL,
               Comment_text varchar(10240) NOT NULL,
-              id_autor integer NOT NULL,
+              id_user integer NOT NULL,
               Likes_count integer NOT NULL,
               Dislikes_count integer NOT NULL,
               Data timestamp NOT NULL,

@@ -6,6 +6,7 @@ import api.base_name as names
 from api.service import GameService as gs
 from api.auth.auth import session_verification
 
+
 class Task(Resource):
     def __init__(self):
         self.__parser = reqparse.RequestParser()
@@ -21,7 +22,6 @@ class Task(Resource):
         print("param: ", self.param)
         print("data: ", self.data)
         self.data = gs.converter(self.data)
-
 
         return
 
