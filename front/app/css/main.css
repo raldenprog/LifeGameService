@@ -532,23 +532,20 @@ tr:nth-child(2) .table-default__cell-block {
   max-width: none;
   position: relative;
   box-sizing: border-box;
-}
-.header__element--account:after {
-  content: "";
-  display: block;
-  height: 7px;
-  width: 15px;
-  background: url(../img/arrow.png);
-  background-size: contain;
-  position: absolute;
-  right: 20px;
-  -ms-flex-pack: left;
-      justify-content: left;
-  padding-left: 15px;
-  box-sizing: border-box;
-}
-.header__element--account:hover {
-  cursor: pointer;
+  /*    &:after {
+        content: "";
+        display: block;
+        height: 7px;
+        width: 15px;
+        background: url(../img/arrow.png);
+        background-size: contain;
+        position: absolute;
+        right: 20px;
+        justify-content: left;
+        padding-left: 15px;
+        box-sizing: border-box;
+      }
+*/
 }
 .header__link {
   border: 1px solid black;

@@ -130,8 +130,11 @@ function getTasks(competitionId) {
             }
 
             str += '<button class="competition__task-submit-button" onclick="submitTask(' + tasks.Data[i].id_task + ')">Отправить</button></div></div></div>';
+            if (document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container")) {
 
-            document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container").innerHTML += str;
+                document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container").innerHTML += str;
+
+            }
         }
     };
 
