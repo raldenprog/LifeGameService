@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
     if (typeof req.cookies.UUID != 'string') {
         res.redirect('/login/');
     } else {
-        res.redirect('/competitions/');
+        res.redirect('/competitions-list/');
         //res.render('index', { UUIDset: true, title: 'Express', condition: true });
     }
 });
@@ -47,10 +47,10 @@ router.get('/competition/:id/', function(req, res, next) {
 });
 
 router.get('/competition/', function(req, res, next) {
-    res.redirect('/competitions/');
+    res.redirect('/competitions-list/');
 });
 
-router.get('/competitions/', function(req, res, next) {
+router.get('/competitions-list/', function(req, res, next) {
     var UUIDset = true;
     if (typeof req.cookies.UUID != 'string') {
         UUIDset = false;
@@ -59,7 +59,7 @@ router.get('/competitions/', function(req, res, next) {
     if (typeof req.cookies.UUID != 'string') {
         res.redirect('/login/');
     } else {
-        res.render('competitions', { UUIDset: UUIDset, output: req.params.id });
+        res.render('competitions-list', { UUIDset: UUIDset, output: req.params.id });
     }
 
 
@@ -70,10 +70,10 @@ router.get('/reg/', function(req, res, next) {
     //res.clearCookie('name');
     console.log(req.cookies.name);
 
-    if (true) {
+    if (typeof req.cookies.UUID != 'string') {
         res.render('reg', { cookiesUUID: req.cookies.UUID });
     } else {
-        res.render('account', { UUIDset: true, title: 'Персональная страница' });
+        res.redirect('/competitions-list/');
     }
 });
 
@@ -86,7 +86,7 @@ router.get('/login/', function(req, res, next) {
         res.render('login', { title: 'Авторизация' });
     } else {
         console.log("redirect");
-        res.redirect('/account/');
+        res.redirect('/competitions-list/');
     }
 });
 
