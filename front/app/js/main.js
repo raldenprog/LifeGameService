@@ -1,3 +1,6 @@
+var port = '13451';
+
+
 function logout() {
     deleteCookie('UUID');
     $(location).attr('href', "/login");

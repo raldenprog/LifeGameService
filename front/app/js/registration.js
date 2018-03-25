@@ -1,19 +1,6 @@
 $(document).ready(function() {
     var steps = $("form").children(".step");
 
-    function createCORSRequest(method, url) {
-        var xhr = new XMLHttpRequest();
-        if ("withCredentials" in xhr) {
-            xhr.open(method, url, true);
-        } else if (typeof XDomainRequest != "undefined") {
-            xhr = new XDomainRequest();
-            xhr.open(method, url);
-        } else {
-            xhr = null;
-        }
-        return xhr;
-    }
-
     function registration(login, email, pass, name, gender, city, educational) {
         var str = {
             Login: login,
@@ -41,7 +28,7 @@ $(document).ready(function() {
         var data = JSON.stringify(str);
 
 
-        str = 'http://90.189.132.25:13451/registration?data=' + data;
+        str = 'http://90.189.132.25:' + port + '/registration?data=' + data;
         var xhr = createCORSRequest('GET', str);
         xhr.send();
 

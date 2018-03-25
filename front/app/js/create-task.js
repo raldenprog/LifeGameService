@@ -1,16 +1,3 @@
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
-        xhr.open(method, url, true);
-    } else if (typeof XDomainRequest != "undefined") {
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
-    } else {
-        xhr = null;
-    }
-    return xhr;
-}
-
 function createTask(category, name, flag, description, point, hint, link, eventId, public_status) {
     var obj = {
         task_category: category,
@@ -28,7 +15,7 @@ function createTask(category, name, flag, description, point, hint, link, eventI
 
     var strObj = JSON.stringify(obj);
 
-    str = 'http://90.189.132.25:13451/task?param=create&data=' + strObj;
+    str = 'http://90.189.132.25:' + port + '/task?param=create&data=' + strObj;
 
     var xhr = createCORSRequest('GET', str);
     xhr.send();

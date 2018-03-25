@@ -7,7 +7,7 @@ function authorisation(login, pass) {
     var data = JSON.stringify(str);
     console.log(data);
 
-    str = 'http://90.189.132.25:13451/auth?data=' + data;
+    str = 'http://90.189.132.25:'  + port +  '/auth?data=' + data;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 
