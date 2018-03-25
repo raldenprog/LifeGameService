@@ -16,12 +16,13 @@ def info_event(id_event):
     :return:
     """
     sql = """Select name from event where id_event = {id_event}""".format(id_event=id_event)
+    #print(sql)
     try:
         result = gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: names.SUCCESS, names.DATA: result}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result[0]}
 
 
 def all_event(id_user, count):
@@ -125,10 +126,10 @@ def find_event(alf, count):
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
-def page_event(count):  # Пустышка
-    sql = "SELECT Name, Description, Status, Date_start, Date_end FROM Event"
+def page_event(data):
+    sql = "SELECT Name, Description, logo, Date_start, Date_end, Date_continue, Status FROM event WHERE id_event = {}".format(data["id_event"])
     try:
-        if isinstance(count, int) and count >= 0:
+        if isinstance(data["id_event"], int):
             result = gs.SqlQuery(sql)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -137,7 +138,6 @@ def page_event(count):  # Пустышка
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
-
 
 def filter_by_status(count, status):
     """

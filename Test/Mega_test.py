@@ -6,7 +6,7 @@ from string import ascii_uppercase
 from api.service import GameService as gs
 import json
 
-URL = "http://0.0.0.0:13451"
+URL = "http://192.168.1.3:13451"
 
 
 class MegaTest:
@@ -197,9 +197,21 @@ class MegaTest:
                 print("NO")
         except:
             print("NO")
+    def page_event(self):
+        try:
+            print("page_event: ", end="")
+            data = {"id_event": 7}
+            req = json.loads(rq.get('{url}/event?param=descr&data={query}'.format(url=URL, query=data).replace('\'', '%22')).text)
+            print(req)
+            if req["Answer"] == 'Success':
+                print("OK")
+            else:
+                print("NO")
+        except:
+            print("NO")
 
 test = MegaTest()
-test.all_event()
+"""test.all_event()
 test.registration()
 test.auth()
 test.find_event()
@@ -213,4 +225,5 @@ test.update_event()
 test.create_one_task()
 test.scoreboard()
 test.reg_user_for_an_event()
-
+"""
+test.page_event()

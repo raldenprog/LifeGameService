@@ -46,7 +46,7 @@ $(document).ready(function() {
             }
 
             if ($.cookie('UUID') != null) {
-                $(location).attr('href', "/competitions");
+                $(location).attr('href', "/competitions-list");
 
             }
         };
