@@ -62,3 +62,14 @@ def input_comments_table(comment_data):
         return {names.ANSWER: names.WARNING,
                 names.DATA: "Ошибка запроса к базе данных. Возможно такой комментарий уже есть"}
     return id_comment
+
+
+def get_comments_by_id_news(id_news):
+    sql = "SELECT * FROM Comments c WHERE c.id_news = {id_news} ORDER BY c.id_news, c.id_comment_parent"\
+        .format(id_news=id_news)
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: 'Error connect db'}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
