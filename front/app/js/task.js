@@ -111,12 +111,13 @@ function getTasks(competitionId) {
 
 
             if (tasks.Data[i].close) {
-                str = '<div class="competition__one-task competition__one-task--done">';
+                str = '<div class="competition__one-task competition__one-task--done" id="one-task-container-' + tasks.Data[i].id_task + '">';
             } else {
-                str = '<div class="competition__one-task">';
+                str = '<div class="competition__one-task" id="one-task-container-' + tasks.Data[i].id_task + '">';
             }
 
-            str += '<div class="competition__task-name">' + tasks.Data[i].task_name + '</div>';
+            str += '<div class="competition__task-name">' + tasks.Data[i].task_name + '<br>' +
+                tasks.Data[i].task_point + '<br><a href="' + tasks.Data[i].task_link + '">link</a></div>';
             str += '<div class="competition__form-container"><div class="competition__task-description">' + tasks.Data[i].task_description + '</div>';
             str += '<div onsubmit="submitTask(' + tasks.Data[i].id_task + ');" class="competition__tasks-form" action="">';
 
@@ -124,8 +125,8 @@ function getTasks(competitionId) {
                 str += '<div class="competition__task-flag-input" ><input style="display: none;" type="text">';
                 str += '<div class="competition__task-flag-input-done">Решено</div></div>';
             } else {
-                str += '<div class="competition__task-flag-input"><input type="text" id="task-input-' + tasks.Data[i].id_task + '">';
-                str += '<div class="competition__task-flag-input-done" style="display: none;">Решено</div></div>';
+                str += '<div class="competition__task-flag-input"><input class="competition__task-field" type="text" id="task-input-' + tasks.Data[i].id_task + '">';
+                str += '<div class="competition__task-flag-input-done" style="display: none;" id="task-input-stub-' + tasks.Data[i].id_task + '">Решено</div></div>';
             }
 
             str += '<button class="competition__task-submit-button" onclick="submitTask(' + tasks.Data[i].id_task + ')">Отправить</button></div></div></div>';
@@ -140,7 +141,7 @@ function getTasks(competitionId) {
 }
 
 function submitTask(taskId) {
-
+    console.log(this);
     var flag = $("#task-input-" + taskId).val();
 
     var obj = {
@@ -158,15 +159,24 @@ function submitTask(taskId) {
     xhr.send();
     xhr.onload = function () {
         data = $.parseJSON(this.responseText);
-        if (data.Data) {
-            console.log("Флаг правильный");
-            location.reload();
-        } else { alert("Неправильный флаг"); }
+        console.log(data);
+
+
+        if (data.Answer.toLowerCase() === "success") {
+            $("#one-task-container-" + taskId).addClass("competition__one-task--done");
+            $("#task-input-" + taskId).hide();
+            $("#task-input-stub-" + taskId).show();
+        } else {
+            $("#task-input-" + taskId).addClass('competition__task-field--wrong');
+            setTimeout(function(){
+                $("#task-input-" + taskId).removeClass('competition__task-field--wrong');
+            }, 2000);
+        }
     };
 
     xhr.onerror = function () {
         alert("Неверный флаг");
-    }
+    };
 }
 
 function closeDescription() {

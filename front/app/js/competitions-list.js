@@ -71,9 +71,9 @@ $(document).ready(function () {
 
                 if (data.Data[i].status === 1) {
                     if (data.Data[i].participation === true) {
-                        str += '<td><div class="competitions__table-cell-block competitions__table-cell-block--transparent"><div><a href="/competition/\' + id_event + \'/info" class="competitions__button competitions__button--active">Перейти</a></div></div></td>';
+                        str += '<td><div class="competitions__table-cell-block competitions__table-cell-block--transparent"><div><a href="/competition/' + data.Data[i].id_event + '/info" class="competitions__button competitions__button--active">Перейти</a></div></div></td>';
                     } else {
-                        str += '<td><div class="competitions__table-cell-block competitions__table-cell-block--transparent"><div><button class="competitions__button" onclick="selectCompetition(' + id_event + ');">принять участие</button></div></div></td>';
+                        str += '<td><div class="competitions__table-cell-block competitions__table-cell-block--transparent"><div><button class="competitions__button" onclick="selectCompetition(' + data.Data[i].id_event + ');">принять участие</button></div></div></td>';
                     }
                 } else {
                     str += '<td><div class="competitions__table-cell-block competitions__table-cell-block--transparent"><div><button class="competitions__button competitions__button--no-active">принять участие</button></div></div></td>';

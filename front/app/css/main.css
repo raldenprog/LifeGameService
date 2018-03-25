@@ -742,6 +742,7 @@ tr:nth-child(2) .table-default__cell-block {
   border: 1px solid #7f7f7f;
   background: rgba(106, 192, 243, 0.5);
   min-height: 200px;
+  margin: 25px auto;
   padding: 10px 15px;
 }
 .competition__one-task {
@@ -765,7 +766,7 @@ tr:nth-child(2) .table-default__cell-block {
   width: 100%;
   margin-right: 20px;
 }
-.competition__task-flag-input input {
+.competition__task-field {
   height: 48px;
   border: 1px solid black;
   width: 100%;
@@ -773,6 +774,10 @@ tr:nth-child(2) .table-default__cell-block {
   display: block;
   padding: 7px 14px;
   box-sizing: border-box;
+  transition: border 0.5s;
+}
+.competition__task-field--wrong {
+  border: 3px solid red;
 }
 .competition__task-flag-input-done {
   width: 100%;

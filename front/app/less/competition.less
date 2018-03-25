@@ -98,6 +98,7 @@
     border: 1px solid #7f7f7f;
     background: rgba(106, 192, 243, 0.5);
     min-height: 200px;
+    margin: 25px auto;
     padding: 10px 15px;
   }
 
@@ -123,15 +124,20 @@
     max-width: 600px;
     width: 100%;
     margin-right: 20px;
+  }
 
-    input {
-      height: 48px;
-      border: 1px solid black;
-      width: 100%;
-      font-size: 18px;
-      display: block;
-      padding: 7px 14px;
-      box-sizing: border-box;
+  &__task-field {
+    height: 48px;
+    border: 1px solid black;
+    width: 100%;
+    font-size: 18px;
+    display: block;
+    padding: 7px 14px;
+    box-sizing: border-box;
+    transition: border 0.5s;
+
+    &--wrong {
+      border: 3px solid red;
     }
   }
 
