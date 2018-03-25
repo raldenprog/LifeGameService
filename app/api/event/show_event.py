@@ -39,7 +39,7 @@ events as (
   , Status
   , Date_start
   , Date_end
-  , case when (Date_end - Date_start) < interval '0 hours' then null else timestamp '2001-01-01 00:00' + (Date_end - Date_start) - interval '2001 year' end::timestamp(6) as interval
+  , case when (Date_end - Date_start) < interval '0 hours' then null else timestamp '2001-01-01 00:00' + (Date_end - Date_start) - interval '2001 year' end::text as interval
   , case when (select 1 from participation where id_user =  {id_user} and id_event = ev.id_event) is not null then True else False end as participation
   , (select count(*) from participation where id_event = ev.id_event) as count
   from Event ev
@@ -48,9 +48,10 @@ events as (
   offset {count}
 )
 table events""".format(count=count, id_user=id_user)
+        print(sql)
         if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
-            #print(result)
+            print(result)
         else:
             logging.error(names.ERROR_EXECUTE_DATABASE)
             return {names.ANSWER: names.ERROR}
