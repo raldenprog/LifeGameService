@@ -17,8 +17,8 @@ class Cabinet(Resource):
     def parse_data(self):
         self.data = self.__args.get('data', None)
         self.param = self.__args.get('param', None)
-        print("param", self.param)
-        print("data", self.data)
+        print("param: ", self.param)
+        print("data: ", self.data)
         self.data = gs.converter(self.data)
         self.data["id_user"] = session_verification(self.data["UUID"])
 
