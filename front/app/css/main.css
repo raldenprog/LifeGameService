@@ -686,6 +686,10 @@ tr:nth-child(2) .table-default__cell-block {
   background: #274d63;
 }
 .competition__head-menu {
+  max-width: 1366px;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
   height: 40px;
   display: -ms-flexbox;
   display: flex;
@@ -694,7 +698,6 @@ tr:nth-child(2) .table-default__cell-block {
   background: #56849f;
   z-index: 97;
   width: 100%;
-  left: 0;
   border-bottom: 1px solid black;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
 }
