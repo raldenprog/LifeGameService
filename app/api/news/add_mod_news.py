@@ -60,3 +60,24 @@ def input_news_table(news_data):
         return {names.ANSWER: names.WARNING,
                 names.DATA: "Ошибка запроса к базе данных. Возможно такая новость уже есть"}
     return id_news
+
+
+def get_news_by_id_user(id_user):
+    sql = "SELECT * FROM News n WHERE n.id_user = {id_user} ORDER BY n.Data"\
+        .format(id_user=id_user)
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: 'Error connect db'}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
+
+
+def get_news_order_by_data():
+    sql = "SELECT * FROM News n ORDER BY n.Data"
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: 'Error connect db'}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
