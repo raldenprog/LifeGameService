@@ -520,6 +520,9 @@ tr:nth-child(2) .table-default__cell-block {
 .header__element--login-reg {
   max-width: none;
 }
+.header__element--logout-link {
+  margin-left: 8px;
+}
 .header__element--account {
   display: -ms-flexbox;
   display: flex;

@@ -21,7 +21,7 @@ function authorisation(login, pass) {
             setCookie('UUID', id.Data.UUID, {path: '/'});
 
             if ($.cookie('UUID')) {
-                $(location).attr('href', "/competitions");
+                $(location).attr('href', "/competitions-list");
             } else { alert("coockie error"); }
 
 
