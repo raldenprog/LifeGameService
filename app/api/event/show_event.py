@@ -8,7 +8,22 @@ logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
                     level=logging.INFO)
 
-#print(time.time())
+
+def info_event(id_event):
+    """
+    Метод возвращает название события
+    :param id_event: int, id события
+    :return:
+    """
+    sql = """Select name from event where id_event = {id_event}""".format(id_event=id_event)
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
+
+
 def all_event(id_user, count):
     """
     Метод возвращает 10 событий, начиная с заданного номера
@@ -24,10 +39,11 @@ events as (
   , Status
   , Date_start
   , Date_end
-  , case when (Date_end - Date_start) < interval '0 hours' then null else timestamp '2001-01-01 00:00' + (Date_end - Date_start) - interval '2001 year' end::time as interval
+  , case when (Date_end - Date_start) < interval '0 hours' then null else timestamp '2001-01-01 00:00' + (Date_end - Date_start) - interval '2001 year' end::timestamp(6) as interval
   , case when (select 1 from participation where id_user =  {id_user} and id_event = ev.id_event) is not null then True else False end as participation
   , (select count(*) from participation where id_event = ev.id_event) as count
   from Event ev
+  order by status desc, date_start, date_end
   limit 10
   offset {count}
 )
