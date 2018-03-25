@@ -28,6 +28,25 @@ Competition.prototype.changeCategory = function (category) {
 
 var competition = new Competition();
 
+function addCategoryContainer(tasks) {
+    var container = "";
+    for (var i = 0; i < tasks.Data.length; i++) {
+        /*var container = document.CreateElement("div", {
+            "class": "competition__category-list-container",
+            "id": tasks.Data[i].task_category.toLowerCase() + "wtf-tasks-container",
+            "style": "display: none;"
+        });*/
+        if (tasks.Data[i].task_category === competition.activeCategory) {
+            container += '<div class="competition__category-list-container" id="' + tasks.Data[i].task_category.toLowerCase() + '-tasks-container"></div>';
+        } else {
+            container += '<div class="competition__category-list-container" id="' + tasks.Data[i].task_category.toLowerCase() + '-tasks-container" style="display: none"></div>';
+        }
+
+    }
+    document.getElementById("tasks-container").innerHTML += container;
+    //tasks.Data[i].task_category.toLowerCase();
+}
+
 function getTasks(competitionId) {
     id_event = competitionId;
 
@@ -48,17 +67,18 @@ function getTasks(competitionId) {
     xhr.onload = function () {
         tasks = $.parseJSON(this.responseText);
 
+        competition.activeCategory = tasks.Data[0].task_category;
+        competition.categoryArray = new Array();
+
         console.log("answer");
         console.log(tasks);
         console.log(tasks.Data.length);
 
         var categoiesContainer = document.getElementById("tasks-category-container");
 
-
+        // Добавление категорий в контейнер
         for (var i = 0; i < tasks.Data.length; i++) {
-
             var alreadyExists = false;
-
             for (var j = 0; j < categories.length; j++) {
                 if (tasks.Data[i].task_category === categories[j]) {
                     alreadyExists = true;
@@ -67,44 +87,18 @@ function getTasks(competitionId) {
             }
 
             if (!alreadyExists) {
-                var str = '<div name="' + tasks.Data[i].task_category.toLowerCase() + '" onclick="competition.changeCategory(\'' + tasks.Data[i].task_category.toLowerCase() + '\')"  class="competition__category">' + tasks.Data[i].task_category + '</div>';
+                if (tasks.Data[i].task_category === competition.activeCategory) {
+                    var str = '<div name="' + tasks.Data[i].task_category.toLowerCase() + '" onclick="competition.changeCategory(\'' + tasks.Data[i].task_category.toLowerCase() + '\')"  class="competition__category competition__category--active">' + tasks.Data[i].task_category + '</div>';
+                } else {
+                    var str = '<div name="' + tasks.Data[i].task_category.toLowerCase() + '" onclick="competition.changeCategory(\'' + tasks.Data[i].task_category.toLowerCase() + '\')"  class="competition__category">' + tasks.Data[i].task_category + '</div>';
+                }
 
                 categoiesContainer.innerHTML += str;
-                categories[categories.length] = tasks.Data[i].task_category;
+                categories[categories.length] = tasks.Data[i].task_category; //добавляем элемент в массив категорий
             }
         }
 
-        console.log($("[active-category=true]"));
-        console.log($("#tasks-category-container").attr("class"));
-
-        console.log($("[active-category=true]").attr("category-name"));
-        var active = $("[active-category=true]").attr("category-name");
-
-
-        competition.activeCategory = tasks.Data[0].task_category;
-        competition.categoryArray = new Array();
-
-
-
-       /*
-       // Здесь будут добавляться контейнеры под категории
-
-        var str = "";
-        for (var i = 0; i < tasks.Data.length; i++) {
-            //Добавление контейнера, если такой категории нет
-            if (competition.categoryArray.indexOf(tasks.Data[i].task_category) === -1) {
-                competition.categoryArray[competition.categoryArray.length] = tasks.Data[i].task_category;
-
-
-                if (tasks.Data[i].task_category === competition.activeCategory) {
-                    str += '<div id="' + tasks.Data[i].task_category + '-list-container"></div>';
-                } else {
-                    str += '<div id="' + tasks.Data[i].task_category + '-list-container" style="display: none;"></div>';
-                }
-            }
-        }
-        document.getElementById('tasks-container').innerHTML += str;
-*/
+        addCategoryContainer(tasks);
 
         var str = "";
         for (var i = 0; i < tasks.Data.length; i++) {
