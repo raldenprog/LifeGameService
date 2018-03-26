@@ -27,7 +27,7 @@ class Authentication(Resource):
         if self.param == "get_user_name" and self.data is not None:
             self.data["id_user"] = session_verification(self.data["UUID"])
             print(self.data["id_user"])
-            answer = gs.converter(auth.get_user_name(self.data["id_user"]))
+            answer = gs.converter(gs.converter(auth.get_user_name(self.data["id_user"])))
             return answer
         else:
             answer = auth.login_verification(self.data)

@@ -12,25 +12,36 @@ class News(Resource):
     def __init__(self):
         self.__parser = reqparse.RequestParser()
         self.__parser.add_argument('data')
+        self.__parser.add_argument('param')
         self.__args = self.__parser.parse_args()
         self.data = None
+        self.param = None
 
     def parse_data(self):
         self.data = self.__args.get('data', None)
+        self.param = self.__args.get('param', None)
+        if self.data is None and self.param is None:
+            return
         self.data = gs.converter(self.data)
+        print("param: ", self.param)
         print("data: ", self.data)
         return
 
     def check_data(self):
-        if self.data[names.NEWS] is None:
-            return False
-        if self.data[names.ID_USER] is None:
-            return False
+        if self.data is not None and self.param == "create":
+            if self.data[names.NEWS] is None:
+                return False
+            if self.data[names.ID_USER] is None:
+                return False
         return True
 
     def switch(self):
-        answer = news_api.news_verification(self.data)
-        return answer
+        if self.data is not None and self.param == "create":
+            answer = news_api.news_verification(self.data)
+            return answer
+        else:
+            answer = gs.converter(gs.converter(news_api.get_news_order_by_data()))
+            return answer
 
     def get(self):
         try:

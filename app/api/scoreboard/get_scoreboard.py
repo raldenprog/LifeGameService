@@ -121,8 +121,7 @@ select * from extract_arr stat""".format(id_event=id_event)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
-    return {names.ANSWER: names.SUCCESS, names.DATA: result}
-
+    return {names.ANSWER: names.SUCCESS, names.DATA: result[0]}
 
 def get_stat_task(id_task=None, id_event=None):
     """

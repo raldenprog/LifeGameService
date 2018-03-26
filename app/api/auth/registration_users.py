@@ -99,7 +99,7 @@ def input_user_table(id_user, user_data, connect, current_connect):
     """
     user_data[names.ID_USER] = id_user
     sql = "INSERT INTO Users" \
-          " VALUES ({id_user},\'{Name}\',None,\'{Email}\'," \
+          " VALUES ({id_user},\'{Name}\','',\'{Email}\'," \
           "\'{Sex}\',\'{City}\',\'{Educational}\',\'{Logo}\'" \
           ")".format(**user_data)
     try:

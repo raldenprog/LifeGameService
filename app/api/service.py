@@ -1,7 +1,7 @@
 __author__ = 'ar.chusovitin'
 import json
 import logging
-from datetime import date
+from datetime import date, datetime
 from api.database.connect_db import db_connect_new as db
 import api.base_name as names
 logging.basicConfig(filename='logger.log',
@@ -37,6 +37,8 @@ class GameService:
     def __converter_data(param):
         if isinstance(param, date):
             return param.strftime('%Y.%m.%d %H:%M:%S')
+        if isinstance(param, datetime):
+            return param.strptime('%Y.%m.%d %H:%M:%S')
 
     @staticmethod
     def converter(js):
