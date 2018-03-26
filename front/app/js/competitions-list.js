@@ -86,12 +86,10 @@ $(document).ready(function () {
                 str += '<td><div class="competitions__table-cell-block"><div>' + data.Data[i].date_start + '</div></div></td>';
                 str += '<td><div class="competitions__table-cell-block"><div>' + data.Data[i].date_end + '</div></div></td>';
 
-
                 var dateString = data.Data[i].interval;
                 var dateObj = dateFromString(dateString);
 
                 str += '<td><div class="competitions__table-cell-block"><div>' + dateObj.hour + 'ч ' + dateObj.minutes + 'мин ' + '</div></div></td>';
-
 
                 if (data.Data[i].status === 1) {
                     if (data.Data[i].participation === true) {
