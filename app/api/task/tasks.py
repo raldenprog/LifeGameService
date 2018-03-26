@@ -207,7 +207,7 @@ ORDER BY Task_category
         result = gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: 'Error connect db'}
+        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
