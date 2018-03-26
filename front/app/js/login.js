@@ -25,7 +25,17 @@ function authorisation(login, pass) {
             } else { alert("coockie error"); }
 
 
-        } else { console.log('Введены некорректные данные');}
+        } else {
+            console.log("Некорректные данные");
+
+            $("#pass-field").addClass('authorization__input-text--wrong');
+            $("#login-field").addClass('authorization__input-text--wrong');
+
+            setTimeout(function(){
+                $("#pass-field").removeClass('authorization__input-text--wrong');
+                $("#login-field").removeClass('authorization__input-text--wrong');
+            }, 2000);
+        }
     }
 
     xhr.onerror = function () {

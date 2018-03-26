@@ -77,6 +77,9 @@
   overflow-y: scroll;
   padding-right: 10px;
 }
+.wrong-field {
+  border: 2px solid red;
+}
 @media screen and (max-width: 1500px) {
   .modal-window-container {
     width: 420px;
@@ -313,6 +316,11 @@ tr:nth-child(2) .table-default__cell-block {
   height: 40px;
   padding: 10px;
   box-sizing: border-box;
+  transition: border 0.5s;
+}
+.authorization__input-text--wrong,
+.authorization__input-select--wrong {
+  border: 2px solid red;
 }
 .authorization__star {
   display: none;
@@ -780,7 +788,7 @@ tr:nth-child(2) .table-default__cell-block {
   transition: border 0.5s;
 }
 .competition__task-field--wrong {
-  border: 3px solid red;
+  border: 2px solid red;
 }
 .competition__task-flag-input-done {
   width: 100%;
