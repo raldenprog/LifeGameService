@@ -79,7 +79,7 @@ $(document).ready(function () {
                     str += '<td><div class="competitions__table-cell-block competitions__table-cell-block--transparent"><div><button class="competitions__button competitions__button--no-active">принять участие</button></div></div></td>';
                 }
 
-                str += '<td><div class="competitions__table-cell-block"><div><a href="/competition/7/rating" class="competitions__button">Просмотр</a></div></div></td>';
+                str += '<td><div class="competitions__table-cell-block"><div><a href="/competition/' + data.Data[i].id_event + '/rating" class="competitions__button">Просмотр</a></div></div></td>';
                 str += '<td><div class="competitions__table-cell-block"><div>' + 50 + '</div></div></td>';
 
 
