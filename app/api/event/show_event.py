@@ -49,7 +49,7 @@ events as (
   offset {count}
 )
 table events""".format(count=count, id_user=id_user)
-        print(sql)
+        #print(sql)
         if isinstance(count, int) and count >= 0:
             result = gs.SqlQuery(sql)
             print(result)

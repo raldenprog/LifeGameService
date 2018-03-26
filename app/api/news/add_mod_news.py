@@ -68,4 +68,4 @@ def get_news_order_by_data():
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
-    return {names.ANSWER: names.SUCCESS, names.DATA: gs.converter(result)}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
