@@ -40,7 +40,7 @@ class News(Resource):
             answer = news_api.news_verification(self.data)
             return answer
         else:
-            answer = gs.converter(news_api.get_news_order_by_data())
+            answer = gs.converter(gs.converter(news_api.get_news_order_by_data()))
             return answer
 
     def get(self):
