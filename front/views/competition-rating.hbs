@@ -1,6 +1,6 @@
 <div class="competition">
     <div class="competition__head-menu">
-        <a href="#" class="competition__head-menu-element">"Это соревнование"</a>
+        <a href="#" class="competition__head-menu-element js-competition-set-name"></a>
         <a href="/competition/{{ competitionId }}/info" class="competition__head-menu-element">Информация</a>
         <a href="/competition/{{ competitionId }}/tasks" class="competition__head-menu-element">Задание</a>
         <a href="/competition/{{ competitionId }}/rating" class="competition__head-menu-element">Рейтинг соревнования</a>
@@ -27,9 +27,10 @@
     </div>
 </div>
 
-
+<SCRIPT type="text/javascript" src="/js/competition.js"></SCRIPT>
 <SCRIPT type="text/javascript" src="/js/scoreboard.js"></SCRIPT>
 
 <script defer type="text/javascript">
     getScoreboard({{ competitionId }});
+    writeCompetitionName({{ competitionId }});
 </script>
