@@ -38,6 +38,25 @@ function closePopup(id) {
     $('#' + id).hide();
 }
 
+function dateFromString(dateString) {
+    //0016-04-23 09:20:06.337478 Формат получаемых данных
+
+    var dateArray = dateString.split(' ');
+    dateArray[0] = dateArray[0].split('-');
+    dateArray[1] = dateArray[1].split(':');
+
+    var dateObj = {
+        year: dateArray[0][0],
+        month: dateArray[0][1],
+        day: dateArray[0][2],
+        hour: dateArray[1][0],
+        minutes: dateArray[1][1],
+        second: dateArray[1][2]
+    };
+
+    return dateObj;
+}
+
 $(document).ready(function () {
     var obj = {
         Name: 'Mostevent',
@@ -66,7 +85,12 @@ $(document).ready(function () {
                 str += '<td><div class="competitions__table-cell-block"><div>хз, кто авторы</div></div></td>';
                 str += '<td><div class="competitions__table-cell-block"><div>' + data.Data[i].date_start + '</div></div></td>';
                 str += '<td><div class="competitions__table-cell-block"><div>' + data.Data[i].date_end + '</div></div></td>';
-                str += '<td><div class="competitions__table-cell-block"><div>Длительность</div></div></td>';
+
+
+                var dateString = data.Data[i].interval;
+                var dateObj = dateFromString(dateString);
+
+                str += '<td><div class="competitions__table-cell-block"><div>' + dateObj.hour + 'ч ' + dateObj.minutes + 'мин ' + '</div></div></td>';
 
 
                 if (data.Data[i].status === 1) {
@@ -80,18 +104,21 @@ $(document).ready(function () {
                 }
 
                 str += '<td><div class="competitions__table-cell-block"><div><a href="/competition/' + data.Data[i].id_event + '/rating" class="competitions__button">Просмотр</a></div></div></td>';
-                str += '<td><div class="competitions__table-cell-block"><div>' + 50 + '</div></div></td>';
+                str += '<td><div class="competitions__table-cell-block"><div>' + data.Data[i].count + '</div></div></td>';
 
 
                 document.getElementById('competitions-table').innerHTML += str;
             }
 
-            str += '<tr><td><div class="table-default__last-cell-block"><div></div></div>' +
-                '</td><td><div class="table-default__last-cell-block"><div></div></div></td><td>' +
-                '<div class="table-default__last-cell-block"><div></div></div></td><td></td><td>' +
-                '<div class="table-default__last-cell-block"><div></div></div></td><td></td><td>' +
-                '<div class="table-default__last-cell-block"><div></div></div></td><td>' +
-                '<div class="table-default__last-cell-block"><div></div></div></td></tr>';
+            str += '<tr>' +
+                '<td><div class="table-default__last-cell-block"></div></td>' +
+                '<td><div class="table-default__last-cell-block"></div></td>' +
+                '<td><div class="table-default__last-cell-block"></div></td>' +
+                '<td><div class="table-default__last-cell-block"></div></td>' +
+                '<td><div class="table-default__last-cell-block"></div></td>' +
+                '<td></td>' +
+                '<td><div class="table-default__last-cell-block"></div></td>' +
+                '<td><div class="table-default__last-cell-block"></div></td></tr>';
 
             document.getElementById('competitions-table').innerHTML += str;
 
