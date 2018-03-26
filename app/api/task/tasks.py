@@ -246,6 +246,8 @@ returning id
 
     try:
         result = gs.SqlQuery(sql)
+        if result == []:
+            return {names.ANSWER: "Wrong flag", names.DATA: False}
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.WARNING, names.DATA: False}
