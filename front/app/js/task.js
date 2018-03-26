@@ -123,7 +123,10 @@ function getTasks(competitionId) {
                 str += '<div class="competition__task-flag-input-done" style="display: none;" id="task-input-stub-' + tasks.Data[i].id_task + '">Решено</div></div>';
             }
 
-            str += '<button class="competition__task-submit-button" onclick="submitTask(' + tasks.Data[i].id_task + ')">Отправить</button></div></div></div>';
+            if (!tasks.Data[i].close) {
+                str += '<button class="competition__task-submit-button" id="task-submit-button-' + tasks.Data[i].id_task + '" onclick="submitTask(' + tasks.Data[i].id_task + ')">Отправить</button></div></div></div>';
+            }
+
             if (document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container")) {
 
                 document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container").innerHTML += str;
@@ -163,6 +166,7 @@ function submitTask(taskId) {
             $("#one-task-container-" + taskId).addClass("competition__one-task--done");
             $("#task-input-" + taskId).hide();
             $("#task-input-stub-" + taskId).show();
+            $("#task-submit-button-" + taskId).hide();
         } else {
             $("#task-input-" + taskId).addClass('competition__task-field--wrong');
             setTimeout(function(){
