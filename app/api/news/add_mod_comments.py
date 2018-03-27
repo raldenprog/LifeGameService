@@ -36,7 +36,7 @@ def input_comments_table(comment_data):
     :return: id_comment
     """
     sql = """INSERT INTO Comments (id_news, id_comment_parent, Comment_text, id_user, Likes_count, Dislikes_count, Date)
-          VALUES ({id_news}, {id_comment_parent}, {Comment_text}, {id_user}, 0, 0, current_timestamp)
+          VALUES ({id_news}, {id_comment_parent}, '{Comment_text}', {id_user}, 0, 0, current_timestamp)
           RETURNING id_comment
           """.format(id_news=comment_data[names.ID_NEWS],
                      id_comment_parent=comment_data[names.ID_COMMENT_PARENT],
