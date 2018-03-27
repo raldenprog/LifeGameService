@@ -52,11 +52,16 @@ def input_comments_table(comment_data):
 
 
 def get_comments_by_id_news(id_news):
-    sql = "SELECT * FROM Comments c WHERE c.id_news = {id_news} ORDER BY c.id_news, c.id_comment_parent"\
+    """
+     Метод извлекает все комментарии по id_news
+    :param id_news: ID новости для которой извлекаются комментарии
+    :return: dict
+    """
+    sql = "SELECT * FROM Comments c WHERE c.id_news = {id_news} ORDER BY c.id_comment_parent"\
         .format(id_news=id_news)
     try:
         result = gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
-    return {names.ANSWER: names.SUCCESS, names.DATA: gs.converter(result)}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
