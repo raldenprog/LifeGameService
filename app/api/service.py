@@ -1,6 +1,7 @@
 __author__ = 'ar.chusovitin'
 import json
 import logging
+import psycopg2
 from datetime import date, datetime
 from api.database.connect_db import db_connect_new as db
 import api.base_name as names
@@ -23,12 +24,12 @@ class GameService:
             #print(query)
             current_connect.execute(query)
             connect.commit()
-        except:
+        except psycopg2.Error as e:
             return result
         finally:
             try:
                 result = current_connect.fetchall()
-            except:
+            except psycopg2.Error as e:
                 return result
             connect.close()
             return result

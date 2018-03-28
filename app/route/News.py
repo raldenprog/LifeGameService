@@ -61,29 +61,43 @@ class Comment(Resource):
     def __init__(self):
         self.__parser = reqparse.RequestParser()
         self.__parser.add_argument('data')
+        self.__parser.add_argument('param')
         self.__args = self.__parser.parse_args()
         self.data = None
+        self.param = None
 
     def parse_data(self):
         self.data = self.__args.get('data', None)
+        self.param = self.__args.get('param', None)
         self.data = gs.converter(self.data)
         print("data: ", self.data)
+        print("param: ", self.param)
         return
 
     def check_data(self):
-        if self.data[names.COMMENT] is None:
-            return False
-        if self.data[names.ID_USER] is None:
-            return False
-        if self.data[names.ID_COMMENT_PARENT] is None:
-            return False
-        if self.data[names.ID_NEWS] is None:
-            return False
+        if self.data is not None and self.param == "create":
+            if self.data[names.COMMENT] is None:
+                return False
+            if self.data[names.ID_USER] is None:
+                return False
+            if self.data[names.ID_COMMENT_PARENT] is None:
+                return False
+            if self.data[names.ID_NEWS] is None:
+                return False
+        if self.data is not None and self.param == "get":
+            if self.data[names.ID_NEWS] is None:
+                return False
         return True
 
     def switch(self):
-        answer = comments_api.comment_verification(self.data)
-        return answer
+        if self.data is not None and self.param == "create":
+            answer = comments_api.comment_verification(self.data)
+            return answer
+        if self.data is not None and self.param == "get":
+            answer = gs.converter(
+                        gs.converter(
+                            comments_api.get_comments_by_id_news(self.data.get(names.ID_NEWS, None))))
+            return answer
 
     def get(self):
         try:
