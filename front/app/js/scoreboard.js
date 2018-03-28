@@ -28,12 +28,12 @@ function getScoreboard(id_event) {
                 var str = '<tr>\n' +
                     '<td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">' + (i+1) + '</div></td>' +
                     '<td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">' + scores.Data[i].name + '</div></td>' +
-                    '<td><div class="scoreboard__table-cell">crypto</div></td>' +
+                    /*'<td><div class="scoreboard__table-cell">crypto</div></td>' +
                     '<td><div class="scoreboard__table-cell">joy</div></td>' +
                     '<td><div class="scoreboard__table-cell">ppc</div></td>' +
                     '<td><div class="scoreboard__table-cell">recon</div></td>' +
                     '<td><div class="scoreboard__table-cell">stego</div></td>' +
-                    '<td><div class="scoreboard__table-cell">web</div></td>' +
+                    '<td><div class="scoreboard__table-cell">web</div></td>' +*/
                     '<td><div class="scoreboard__table-cell scoreboard__table-cell--result">' + scores.Data[i].point + '</div></td></tr>';
                 document.getElementById('scoreboard-table').innerHTML += str;
             }
