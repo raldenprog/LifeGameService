@@ -8,17 +8,21 @@ from api.auth.registration_users import registration_user
 
 def create_table_user():
     connect, current_connect = db_connect()
-    sql = """CREATE TABLE Users (
-        id_user SERIAL NOT NULL,
-        Name char(32),
-        Surname char(32),
-        Email char(64),
-        Sex char(8),
-        City char(64),
-        Educational char(255),
-        Logo char(256),
-        PRIMARY KEY (id_user)
-        );"""
+    sql = """--drop table users;
+
+
+CREATE TABLE public.users
+(
+    id_user SERIAL NOT NULL,
+    name text COLLATE pg_catalog."default",
+    surname text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default",
+    sex text COLLATE pg_catalog."default",
+    city text COLLATE pg_catalog."default",
+    educational text COLLATE pg_catalog."default",
+    logo text COLLATE pg_catalog."default",
+    CONSTRAINT users_pkey PRIMARY KEY (id_user)
+)"""
     print(sql)
     try:
         current_connect.execute(sql)
@@ -29,12 +33,14 @@ def create_table_user():
 
 def create_table_auth():
     connect, current_connect = db_connect()
-    sql = """CREATE TABLE Auth (
-        id_user bigint NOT NULL,
-        Login char(30) NOT NULL UNIQUE,
-        Password char(40) NOT NULL,
-        PRIMARY KEY (id_user)
-        ) """
+    sql = """CREATE TABLE auth
+(
+    id_user SERIAL NOT NULL,
+    login text COLLATE pg_catalog."default" NOT NULL,
+    password text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT auth_pkey PRIMARY KEY (id_user),
+    CONSTRAINT auth_login_key UNIQUE (login)
+) """
     print(sql)
     try:
         current_connect.execute(sql)
@@ -45,11 +51,14 @@ def create_table_auth():
 
 def create_table_access():
     connect, current_connect = db_connect()
-    sql = """CREATE TABLE Access (
-          id_user int NOT NULL,
-          Access integer NOT NULL DEFAULT 0,
-          PRIMARY KEY (id_user)
-          ) """
+    sql = """--DROP TABLE access;
+
+CREATE TABLE access
+(
+    id_user integer NOT NULL,
+    access integer NOT NULL DEFAULT 0,
+    CONSTRAINT access_pkey PRIMARY KEY (id_user)
+) """
     print(sql)
     try:
         current_connect.execute(sql)
@@ -76,18 +85,33 @@ def create_table_session():
 
 def create_table_event():
     connect, current_connect = db_connect()
-    sql = """CREATE TABLE Event (
-        id_event SERIAL NOT NULL,
-        Name char(255) NOT NULL,
-        Description varchar(2048) NOT NULL,
-        Logo char(30) NOT NULL,
-        Status char(30) NOT NULL,
-        Date_start date NOT NULL,
-        Date_end date NOT NULL,
-        Date_stop date NOT NULL,
-        Date_continue date NOT NULL,
-        PRIMARY KEY (id_event)
-        );"""
+    sql = """-- Table: public.event
+
+DROP TABLE event;
+
+CREATE TABLE event
+(
+    id_event SERIAL NOT NULL,
+    name text COLLATE pg_catalog."default" NOT NULL,
+    description text COLLATE pg_catalog."default" NOT NULL,
+    logo text COLLATE pg_catalog."default" NOT NULL,
+    date_start timestamp(6) without time zone NOT NULL,
+    date_end timestamp(6) without time zone NOT NULL,
+    date_stop timestamp(6) without time zone NOT NULL,
+    date_continue timestamp(6) without time zone NOT NULL,
+    status integer,
+    CONSTRAINT event_pkey PRIMARY KEY (id_event)
+)
+
+
+-- DROP INDEX public.event_id_event_close;
+
+CREATE INDEX event_id_event_close
+    ON event USING btree
+    (id_event DESC, status)
+    TABLESPACE pg_default    
+    WHERE status = 1
+;"""
     print(sql)
     try:
         current_connect.execute(sql)
