@@ -1,20 +1,29 @@
 @import "mixin";
 
 .scoreboard {
-  background-color: rgba(106, 192, 243, 0.5);
-  border-radius: 10px;
-  border: 1px solid #3f3f3f;
-  padding: 8px 26px;
+  .default-content-container;
+
+  &--container {
+    //max-width: 600px;
+    width: 100%;
+    margin-right: 20px;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+  }
 
   &__table-container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0 0 0 1px;
+    .default-table-container;
 
     tr, td {
       padding: 0;
+    }
+
+    td {
+      &:last-child {
+        width: 200px;
+      }
     }
 
     tr {

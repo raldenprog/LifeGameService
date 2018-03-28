@@ -4,27 +4,61 @@
         <a href="/competition/{{ competitionId }}/info" class="competition__head-menu-element">Информация</a>
         <a href="/competition/{{ competitionId }}/tasks" class="competition__head-menu-element">Задание</a>
         <a href="/competition/{{ competitionId }}/rating" class="competition__head-menu-element">Рейтинг соревнования</a>
-
     </div>
 
+   <!-- <div class="competition__hint-title">
+        *Нажмите на название команды для вывода подробной информации
+    </div>-->
 
-    <div class="scoreboard">
-        <table class="scoreboard__table-container" >
-            <tbody id="scoreboard-table">
-                <tr>
-                    <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">#</div></td>
-                    <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">Команда</div></td>
-                    <td><div class="scoreboard__table-cell">crypto</div></td>
-                    <td><div class="scoreboard__table-cell">joy</div></td>
-                    <td><div class="scoreboard__table-cell">ppc</div></td>
-                    <td><div class="scoreboard__table-cell">recon</div></td>
-                    <td><div class="scoreboard__table-cell">stego</div></td>
-                    <td><div class="scoreboard__table-cell">web</div></td>
-                    <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Итоговый балл</div></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="competition-rating">
+        <div class="scoreboard--container">
+            <div class="scoreboard">
+                <table class="scoreboard__table-container" >
+                    <tbody id="scoreboard-table">
+                    <tr>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">#</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">Команда</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Итоговый балл</div></td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <!--<div class="task-rating">
+            <div class="task-rating__title">Команда</div>
+
+            <div class="task-rating__table-container">
+                <table class="scoreboard__table-container">
+                    <tbody id="task-rating-table">
+                    <tr>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">#</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">Таски</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Время выполнения</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Баллы</div></td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">1</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">Таски</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Время выполнения</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Баллы</div></td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">2</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--border-right">Таски</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Время выполнения</div></td>
+                        <td><div class="scoreboard__table-cell scoreboard__table-cell--result">Баллы</div></td>
+                    </tr>
+                    </table>
+                </table>
+
+            </div>
+        </div>-->
     </div>
+
 </div>
 
 <SCRIPT type="text/javascript" src="/js/competition.js"></SCRIPT>
