@@ -80,7 +80,7 @@ $(document).ready(function () {
         var id_event = 7;
 
         if (data.Answer === 'Success') {
-            for (var i = 0; i < data.Data.length - 1; i++) {
+            for (var i = 0; i < data.Data.length; i++) {
                 var str = '<tr><td><div class="competitions__table-cell-block"><div>' + data.Data[i].name + '</div></div></td>';
                 str += '<td><div class="competitions__table-cell-block"><div>Life</div></div></td>';
                 str += '<td><div class="competitions__table-cell-block"><div>' + data.Data[i].date_start + '</div></div></td>';
