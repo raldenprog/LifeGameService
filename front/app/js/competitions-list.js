@@ -108,7 +108,7 @@ $(document).ready(function () {
                 document.getElementById('competitions-table').innerHTML += str;
             }
 
-            str += '<tr>' +
+            str = '<tr>' +
                 '<td><div class="table-default__last-cell-block"></div></td>' +
                 '<td><div class="table-default__last-cell-block"></div></td>' +
                 '<td><div class="table-default__last-cell-block"></div></td>' +
