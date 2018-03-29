@@ -176,7 +176,16 @@ tr:nth-child(2) .table-default__cell-block {
   width: 100%;
   height: 100%;
 }
+.popup-default--description .popup-default--container {
+  width: 730px;
+  top: 166px;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+  max-height: calc(100vh - 220px);
+  overflow-y: scroll;
+}
 .popup-default--container {
+  z-index: 50;
   position: fixed;
   width: 660px;
   top: 50%;
@@ -187,7 +196,9 @@ tr:nth-child(2) .table-default__cell-block {
   background-color: white;
   padding: 35px 20px 40px;
   box-sizing: border-box;
-  z-index: 50;
+}
+.popup-default--description.popup-default {
+  background-color: transparent;
 }
 .popup-default__background {
   background-color: rgba(0, 0, 0, 0.5);
@@ -235,17 +246,6 @@ tr:nth-child(2) .table-default__cell-block {
 }
 .popup-default__main-text {
   display: inline-block;
-}
-.popup-default--description.popup-default {
-  background-color: transparent;
-}
-.popup-default--description .popup-default--container {
-  width: 730px;
-  top: 166px;
-  -ms-transform: translateX(-50%);
-      transform: translateX(-50%);
-  height: calc(100vh - 220px);
-  overflow-y: scroll;
 }
 .background__s-img {
   position: fixed;
