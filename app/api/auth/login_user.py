@@ -10,6 +10,22 @@ logging.basicConfig(filename='logger.log',
                     level=logging.INFO)
 
 
+def get_user_name(id_user):
+    """
+    Метод возвращает имя пользователя
+    :param id_user: int, id пользователя
+    :return:
+    """
+    sql = """Select name from users where id_user = {id_user}""".format(id_user=id_user)
+    print(sql)
+    try:
+        result = gs.SqlQuery(sql)
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result[0]}
+#print(get_user_name("9"))
+
 def login_verification(user_data):
     """
     Метод проверяет корректность параметров и если всё корректно, передает в метод auth_user

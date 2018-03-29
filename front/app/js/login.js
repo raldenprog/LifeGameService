@@ -4,24 +4,38 @@ function authorisation(login, pass) {
         Password: pass
     };
 
-    var data = JSON.stringify({Data: str});
-    var xhr = createCORSRequest('POST', 'http://90.189.132.25:13451/auth');
-    xhr.setRequestHeader(
-        'X-Custom-Header', 'value');
-    xhr.setRequestHeader(
-        'Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader(
-        'Access-Control-Allow-Origin', '*');
-    xhr.send(data);
+    var data = JSON.stringify(str);
+    console.log(data);
+
+    str = 'http://90.189.132.25:'  + port +  '/auth?data=' + data;
+    var xhr = createCORSRequest('GET', str);
+    xhr.send();
+
 
     xhr.onload = function () {
         id = $.parseJSON(this.responseText);
-        if(id.Answer === 'Success') {
-            $.cookie('UUID', String(id.Data.UUID));
+
+        console.log(id);
+        if(id.Answer === "Success") {
+            //$.cookie('UUID', id.Data.UUID);
+            setCookie('UUID', id.Data.UUID, {path: '/'});
+
             if ($.cookie('UUID')) {
-                $(location).attr('href', "index.html");
-            } else { alert("cookie error"); }
-        } else { alert('Введены некорректные данные');}
+                $(location).attr('href', "/competitions-list");
+            } else { alert("coockie error"); }
+
+
+        } else {
+            console.log("Некорректные данные");
+
+            $("#pass-field").addClass('authorization__input-text--wrong');
+            $("#login-field").addClass('authorization__input-text--wrong');
+
+            setTimeout(function(){
+                $("#pass-field").removeClass('authorization__input-text--wrong');
+                $("#login-field").removeClass('authorization__input-text--wrong');
+            }, 2000);
+        }
     }
 
     xhr.onerror = function () {
@@ -36,7 +50,5 @@ function authorisationSubmit() {
 }
 
 $(document).ready(function() {
-    if ($.cookie('UUID')) {
-        $(location).attr('href', "index.html");
-    }
+
 });

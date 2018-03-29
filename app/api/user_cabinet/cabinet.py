@@ -22,21 +22,18 @@ def user_cabinet(data):
         logging.error('Fatal error: param id')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
-        if data[names.ID_USER].isdigit() == False:
-            return {names.ANSWER: names.ERROR, names.DATA: data}
-    except:
-        logging.error('Fatal error: type id')
-        return {names.ANSWER: names.ERROR, names.DATA: data}
-    try:
         if gs.check_id(data[names.ID_USER]) == False:
             return {names.ANSWER: "Id not found", names.DATA: data}
     except:
         logging.error('Fatal error: check id')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
+
         sql = "SELECT Name, City, Sex, Email, Logo, Educational FROM users " \
               "where id_user = '{}'".format(data[names.ID_USER])
+        #print(sql)
         result = gs.SqlQuery(sql)
+
         return {names.ANSWER: names.SUCCESS, names.DATA: result}
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -61,14 +58,14 @@ def change_password(data):
         logging.error('Fatal error: check data is None')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     try:
-        if (gs.check_id(data[names.ID])) == 0:
+        if gs.check_id(data[names.ID_USER]) == False:
             return {names.ANSWER: "Id not found", names.DATA: data}
     except:
         logging.error('Fatal error: check id')
         return {names.ANSWER: names.ERROR, names.DATA: data}
     else:
         try:
-            sql = "SELECT Password FROM Users where ID = '{}'".format(data[names.ID])
+            sql = "SELECT password FROM auth where id_user = '{}'".format(data[names.ID_USER])
             result = gs.SqlQuery(sql)
         except:
             logging.error(names.ERROR_EXECUTE_DATABASE)
@@ -78,11 +75,11 @@ def change_password(data):
                 password_hash = hashlib.md5()
                 password_hash.update(data['Old_password'].encode())
                 data['Old_password'] = password_hash.hexdigest()
-                if data['Old_password'] == result[names.PASSWORD]:
+                if data['Old_password'] == result[0]["password"]:
                     password_hash = hashlib.md5()
                     password_hash.update(data['New_password'].encode())
                     data['New_password'] = password_hash.hexdigest()
-                    sql = "UPDATE Users SET Password='{}' WHERE ID='{}'".format(data["New_password"], data[names.ID])
+                    sql = "UPDATE auth SET password='{}' WHERE id_user='{}'".format(data["New_password"], data[names.ID_USER])
                     gs.SqlQuery(sql)
                     return {names.ANSWER: names.SUCCESS}
                 else:
@@ -90,7 +87,6 @@ def change_password(data):
             except:
                 logging.error('Fatal error: Password comparison')
                 return {names.ANSWER: names.ERROR}
-
 
 def edit_cabinet(data):
     """
@@ -113,7 +109,7 @@ def edit_cabinet(data):
         return {names.ANSWER: names.ERROR,
                 names.DATA: data}
     try:
-        if (gs.check_id(int(data[names.ID]))) == 0:
+        if gs.check_id(data[names.ID_USER]) == False:
             return {names.ANSWER: "Id not found",
                     names.DATA: data}
     except:
@@ -122,10 +118,10 @@ def edit_cabinet(data):
                 names.DATA: data}
     else:
         try:
-            sql = "UPDATE Users SET Name='{}', Patronymic='{}', Email='{}', Sex='{}', City='{}'," \
-                  " Educational='{}', Logo='{}' WHERE ID='{}'".format(
-                data[names.NAME], data["Patronymic"], data[names.EMAIL], data[names.SEX], data[names.CITY],
-                data[names.EDUCATION], data[names.LOGO], data[names.ID]
+            sql = "UPDATE users SET Name='{}', Email='{}', Sex='{}', City='{}'," \
+                  " Educational='{}', Logo='{}', surname = '{}' WHERE id_user='{}'".format(
+                data[names.NAME], data[names.EMAIL], data[names.SEX], data[names.CITY],
+                data[names.EDUCATION], data[names.LOGO], data['Surname'], data[names.ID_USER]
                 )
             gs.SqlQuery(sql)
             return {names.ANSWER: names.SUCCESS, names.DATA: data}

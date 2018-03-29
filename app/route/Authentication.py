@@ -1,34 +1,46 @@
 # coding=utf-8
-import json
-from flask_restful import Resource
-from flask import request
-from api.config import HEADER
+
+from flask_restful import Resource, reqparse
 import api.auth.login_user as auth
 import api.base_name as names
+from api.service import GameService as gs
+from api.auth.auth import session_verification
 
 
 class Authentication(Resource):
+    def __init__(self):
+        self.__parser = reqparse.RequestParser()
+        self.__parser.add_argument('data')
+        self.__parser.add_argument('param')
+        self.__args = self.__parser.parse_args()
+        self.data = None
+
+    def parse_data(self):
+        self.data = self.__args.get('data', None)
+        self.param = self.__args.get('param', None)
+        print("param:", self.param)
+        self.data = gs.converter(self.data)
+        print("data: ", self.data)
+        return
+
+    def switch(self):
+        if self.param == "get_user_name" and self.data is not None:
+            self.data["id_user"] = session_verification(self.data["UUID"])
+            print(self.data["id_user"])
+            answer = gs.converter(gs.converter(auth.get_user_name(self.data["id_user"])))
+            return answer
+        else:
+            answer = auth.login_verification(self.data)
+            return answer
+
     def get(self):
-        print('GET /')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.form)
-        return {'test': 'test'}, 200, HEADER
+        try:
+            print("Auth")
+            self.parse_data()
 
-    def post(self):
-        print('POST /auth')
-        print(request.headers)
-        print('cookies = ', request.cookies)
-        print('ARGS = ', request.form)
-        url = json.loads(request.data.decode())[names.DATA]
-        print(url)
-        answer = auth.login_verification(url)
-        print(answer)
-        return answer, 200, {'Access-Control-Allow-Origin': '*'}
+            answer = self.switch()
+            print("answer: ", answer)
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
 
-    def options(self):
-        return {'Allow': 'POST'}, 200, {'Access-Control-Allow-Origin': '*',
-                                        'Access-Control-Allow-Methods': 'POST,GET',
-                                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, '
-                                                                        'Content-Type, '
-                                                                        'X-Custom-Header'}
+        except:
+            return "Error", 200, {'Access-Control-Allow-Origin': '*'}

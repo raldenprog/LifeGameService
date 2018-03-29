@@ -1,0 +1,29 @@
+<div class="competition">
+    <div class="competition__head-menu">
+        <a class="competition__head-menu-element js-competition-set-name"></a>
+        <a href="/competition/{{ competitionId }}/info" class="competition__head-menu-element">Информация</a>
+        <a href="/competition/{{ competitionId }}/tasks" class="competition__head-menu-element">Задание</a>
+        <a href="/competition/{{ competitionId }}/rating" class="competition__head-menu-element">Рейтинг соревнования</a>
+
+    </div>
+
+    <div class="popup-default--description popup-default">
+    <div class="popup-default--container">
+
+        <div class="popup-default__title" id="competition-name">
+        </div>
+
+        <div class="popup-default__main-text" id="competition-description">
+        </div>
+    </div>
+</div>
+</div>
+
+
+<SCRIPT type="text/javascript" src="/js/competition.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/competition-info.js"></SCRIPT>
+
+<script defer type="text/javascript">
+    writeCompetitionName({{ competitionId }});
+    writeCompetitionInfo({{ competitionId }});
+</script>

@@ -1,74 +1,53 @@
 @import "mixin";
 
 .scoreboard {
-  .background;
-  color: @orange-color;
-  padding: 235px 0 80px;
+  .default-content-container;
 
-  table {
-    width: 600px;
-    background: url(../img/table-background.png) no-repeat;
-    background-size: cover;
-    border: 14px solid @orange-transparent-color;
-    border-collapse: separate;
-    border-spacing: 0;
-    color: @orange-color;
-    font-family: gautami;
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 75px;
+  &--container {
+    //max-width: 600px;
+    width: 100%;
+    margin-right: 20px;
+  }
 
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__table-container {
+    .default-table-container;
+
+    tr, td {
+      padding: 0;
+    }
 
     td {
-      border-bottom: 14px solid @orange-transparent-color;
-      padding: 11px 10px 0;
+      &:last-child {
+        width: 200px;
+      }
     }
 
-    tr:last-child td {
-      border-bottom: 0;
-    }
+    tr {
+      border-bottom: 1px solid black;
 
-    td:first-child {
-      padding-left: 15px;
-    }
-  }
-
-
-  &__line {
-    height: 20px;
-    display: flex;
-    justify-content: space-between;
-
-    &:nth-child(2n) {
-      background-color: #d8e1ea;
-    }
-  }
-
-  @media screen and (max-width:1500px) {
-    padding: 125px 0 20px;
-
-    table {
-      width: 450px;
-      border: 6px solid rgba(253, 113, 0, 0.32);
-      font-size: 20px;
-      line-height: 35px;
-
-      td {
-        border-bottom: 6px solid rgba(253, 113, 0, 0.32);
+      &:last-child {
+        border-bottom: 0;
       }
     }
   }
 
-  .scoreboard-tables-container{
-    width: 1040px;
-  }
-}
+  &__table-cell {
+    min-height: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    line-height: 36px;
 
-.scoreboard-tables-container {
-  display: flex;
-  justify-content: space-between;
-  width: 1430px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 5;
+    &--result {
+      border-left: 1px solid black;
+    }
+
+    &--border-right {
+      border-right: 1px solid black;
+    }
+  }
 }

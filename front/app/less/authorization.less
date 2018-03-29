@@ -1,10 +1,9 @@
 @import "mixin";
 
 .authorization {
-  .background;
-
   &__title {
-    font-size: 36px;
+    font-size: 24px;
+    font-family: Verdana;
     text-align: center;
     color: #39291e;
     margin: 0 auto 70px;
@@ -12,26 +11,58 @@
     padding-top: 40px;
   }
 
-  &__form-line {
+  &__input-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 466px;
+    margin: 0 auto 28px;
+    align-items: center;
+  }
+
+  &__input-title {
     font-size: 18px;
-    margin: 0 auto 30px;
+    font-family: Verdana;
+  }
 
-    select {
-      width: 200px;
-      padding: 5px;
-      box-sizing: border-box;
-    }
+  &__input-field-wrapper {
 
-    button {
-      padding: 5px;
-      width: 140px;
-    }
+  }
 
-    span {
-      font-weight: 400;
-      color: #C02D2C;
+  &__login-button {
+    .btn;
+
+    width: 100px;
+    height: 44px;
+    margin: 50px auto 0;
+  }
+
+  &__help-links-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto 0;
+    width: 466px;
+  }
+
+  &__forgot-password {
+    font-size: 18px;
+    color: #000;
+  }
+
+  &__registration-link {
+    font-size: 20px;
+    text-decoration: underline;
+  }
+
+  &__input-text, &__input-select {
+    width: 300px;
+    border: 1px solid black;
+    height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: border 0.5s;
+
+    &--wrong {
+      .wrong-field;
     }
   }
 
@@ -76,35 +107,10 @@
     }
   }
 
-  &__prev-step, &__next-step, &__login, &__login-reg-link {
-    padding: 15px 0;
-    height: 80px;
-    text-align: center;
-    font-size: 27px;
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    box-sizing: border-box;
-    border: 10px solid @orange-transparent-color;
-    background-color: transparent;
-    color: @orange-transparent-color;
-    transition: 0.3s all;
-
-    &:hover {
-      cursor: pointer;
-      color: @orange-color;
-      border-color: @orange-color;
-    }
-  }
-
   &__prev-step {
-    width: 140px;
-    color: black;
-    border: 1px solid #a7a7a7;
+    .btn;
 
-    &:hover {
-      background-color: #f3f6f9;
-    }
+    width: 128px;
   }
 
   &__login-reg-link {
@@ -113,9 +119,16 @@
   }
 
   &__next-step, &__login {
-    width: 198px;
-    padding: 0 25px;
-    color: @orange-transparent-color;
+    .btn;
+
+    height: 42px;
+    width: 128px;
+  }
+
+  &__next-step {
+    &--registration {
+      width: 250px;
+    }
   }
 
   &__login {
@@ -124,10 +137,8 @@
 }
 
 .authorization-container {
-  padding-top: 150px;
-  width: 590px;
+  width: 500px;
   margin: 0 auto;
-  box-shadow: 0 9px 46px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 5;
 }
@@ -142,9 +153,5 @@
     &__login {
       border-width: 6px;
     }
-  }
-
-  .authorization-container {
-    padding-top: 50px;
   }
 }

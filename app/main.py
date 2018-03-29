@@ -14,7 +14,9 @@ from route import Registration, \
     Scoreboard, \
     Event, \
     Cabinet, \
-    Index
+    Index, \
+    Favicon, \
+    News
 
 routes = {Index.Index: '/',
           Registration.Registration: '/registration',
@@ -23,7 +25,10 @@ routes = {Index.Index: '/',
           Scoreboard.Scoreboard: '/scoreboard',
           Event.Event: '/event',
           Cabinet.Cabinet: '/cabinet',
-          Logout.Logout: '/logout'
+          Logout.Logout: '/logout',
+          Favicon.Favicon: "/favicon.ico",
+          News.News: "/news",
+          News.Comment: "/comment"
           }
 
 _app = Flask(__name__)

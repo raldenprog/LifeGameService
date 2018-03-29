@@ -1,53 +1,183 @@
-function getTasks() {
-    str = "http://90.189.132.25:13451/task?session=" + $.cookie('UUID');
-    var xhr = createCORSRequest('GET', str);
-    xhr.send();
-    xhr.onload = function () {
-        tasks = $.parseJSON(this.responseText);
-        console.log(this.responseText);
+var tasks;
+var id_event;
 
-        for (i = 0; i < tasks.Data.length; i++) {
-            //data.Data[i].Task_hint  если пустой, то не выводить
-            //data.Data[i].Task_description
-            //data.Data[i].Task_name
-            //data.Data[i].Task_link  если null то не выводить на экран
-            //data.Data[i].Close      сдан таск или нет
-            //data.Data[i].Task_category
-            //data.Data[i].Task_point
-            //data.Data[i].Task_point
+function Competition() {
 
-            //console.log(tasks.Data[i].Task_category);
-            //console.log("____");
-            var str = '<a href="#" class="tasks__link';
-            if (tasks.Data[i].Close === true) {
-                str = str + ' tasks__link--done'
-            }
-            str = str + '" id="' + tasks.Data[i].Task_name + '" onclick="openTask(\'' + String(tasks.Data[i].Task_name) + '\')">' + tasks.Data[i].Task_point + '</a>';
+}
 
-            category = '#' + tasks.Data[i].Task_category;
-            $(category).append(str);
+Competition.prototype.changeCategory = function (category) {
+    var containers = $('.competition__category-list-container');
+    for (var i = 0; i < containers.length; i++) {
+        containers.eq(i).hide();
+    }
+    $("#" + category + "-tasks-container").show();
+
+    var categories = $('.competition__category');
+    for (var i = 0; i < categories.length; i++) {
+
+        if (categories.eq(i).attr('name') === category) {
+            categories.eq(i).addClass('competition__category--active');
+        } else {
+            categories.eq(i).removeClass('competition__category--active');
         }
     }
 
-    xhr.onerror = function () {
-        //console.log('error ' + this.status);
+    this.activeCategory = category.toLowerCase()
+};
+
+
+var competition = new Competition();
+
+function addCategoryContainer(tasks) {
+    var container = "";
+    for (var i = 0; i < tasks.Data.length; i++) {
+        /*var container = document.CreateElement("div", {
+            "class": "competition__category-list-container",
+            "id": tasks.Data[i].task_category.toLowerCase() + "wtf-tasks-container",
+            "style": "display: none;"
+        });*/
+        if (tasks.Data[i].task_category === competition.activeCategory) {
+            container += '<div class="competition__category-list-container" id="' + tasks.Data[i].task_category.toLowerCase() + '-tasks-container"></div>';
+        } else {
+            container += '<div class="competition__category-list-container" id="' + tasks.Data[i].task_category.toLowerCase() + '-tasks-container" style="display: none"></div>';
+        }
+
     }
+    document.getElementById("tasks-container").innerHTML += container;
+    //tasks.Data[i].task_category.toLowerCase();
 }
 
-function submitTask(task) {
-    var str = 'http://90.189.132.25:13451/task?session=' + $.cookie('UUID') + '&Task_name=' + task + '&Task_flag=' + $("#flag").val();
+function getTasks(competitionId) {
+    id_event = competitionId;
+
+    var categories = new Array();
+    var active;
+
+    var obj = {
+        id_event: id_event,
+        UUID: $.cookie('UUID')
+    };
+
+    var data = JSON.stringify(obj);
+
+    var str = 'http://90.189.132.25:' + port + '/task?data=' + data;
+    var xhr = createCORSRequest('GET', str);
+
+    xhr.send();
+    xhr.onload = function () {
+        tasks = $.parseJSON(this.responseText);
+
+        competition.activeCategory = tasks.Data[0].task_category;
+        competition.categoryArray = new Array();
+
+        console.log("answer");
+        console.log(tasks);
+        console.log(tasks.Data.length);
+
+        var categoiesContainer = document.getElementById("tasks-category-container");
+
+        // Добавление категорий в контейнер
+        for (var i = 0; i < tasks.Data.length; i++) {
+            var alreadyExists = false;
+            for (var j = 0; j < categories.length; j++) {
+                if (tasks.Data[i].task_category === categories[j]) {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+
+            if (!alreadyExists) {
+                if (tasks.Data[i].task_category === competition.activeCategory) {
+                    var str = '<div name="' + tasks.Data[i].task_category.toLowerCase() + '" onclick="competition.changeCategory(\'' + tasks.Data[i].task_category.toLowerCase() + '\')"  class="competition__category competition__category--active">' + tasks.Data[i].task_category + '</div>';
+                } else {
+                    var str = '<div name="' + tasks.Data[i].task_category.toLowerCase() + '" onclick="competition.changeCategory(\'' + tasks.Data[i].task_category.toLowerCase() + '\')"  class="competition__category">' + tasks.Data[i].task_category + '</div>';
+                }
+
+                categoiesContainer.innerHTML += str;
+                categories[categories.length] = tasks.Data[i].task_category; //добавляем элемент в массив категорий
+            }
+        }
+
+        addCategoryContainer(tasks);
+
+        var str = "";
+        for (var i = 0; i < tasks.Data.length; i++) {
+
+
+            if (tasks.Data[i].close) {
+                str = '<div class="competition__one-task competition__one-task--done" id="one-task-container-' + tasks.Data[i].id_task + '">';
+            } else {
+                str = '<div class="competition__one-task" id="one-task-container-' + tasks.Data[i].id_task + '">';
+            }
+
+            str += '<div class="competition__task-name">' + tasks.Data[i].task_name + '<br>' +
+                tasks.Data[i].task_point + '<br><a href="' + tasks.Data[i].task_link + '">link</a></div>';
+            str += '<div class="competition__form-container"><div class="competition__task-description">' + tasks.Data[i].task_description + '</div>';
+            str += '<div onsubmit="submitTask(' + tasks.Data[i].id_task + ');" class="competition__tasks-form" action="">';
+
+            if (tasks.Data[i].close) {
+                str += '<div class="competition__task-flag-input" ><input style="display: none;" type="text">';
+                str += '<div class="competition__task-flag-input-done">Решено</div></div>';
+            } else {
+                str += '<div class="competition__task-flag-input"><input class="competition__task-field" type="text" id="task-input-' + tasks.Data[i].id_task + '">';
+                str += '<div class="competition__task-flag-input-done" style="display: none;" id="task-input-stub-' + tasks.Data[i].id_task + '">Решено</div></div>';
+            }
+
+            if (!tasks.Data[i].close) {
+                str += '<button class="competition__task-submit-button" id="task-submit-button-' + tasks.Data[i].id_task + '" onclick="submitTask(' + tasks.Data[i].id_task + ')">Отправить</button></div></div></div>';
+            }
+
+            if (document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container")) {
+
+                document.getElementById(tasks.Data[i].task_category.toLowerCase() + "-tasks-container").innerHTML += str;
+
+            }
+        }
+    };
+
+    xhr.onerror = function () {
+        console.log('error ' + this.status);
+    };
+}
+
+function submitTask(taskId) {
+    console.log(this);
+    var flag = $("#task-input-" + taskId).val();
+
+    var obj = {
+        Task_id: taskId,
+        Task_flag: flag,
+        UUID: $.cookie('UUID'),
+        id_event: id_event
+    };
+
+    var data = JSON.stringify(obj);
+
+    var str = 'http://90.189.132.25:' + port + '/task?param=check&data=' + data;
+    console.log(str);
     var xhr = createCORSRequest('GET', str);
     xhr.send();
     xhr.onload = function () {
         data = $.parseJSON(this.responseText);
-        if (data.Data) {
-            location.reload();
-        } else { alert("Неправильный флаг"); }
-    }
+        console.log(data);
+
+
+        if (data.Answer.toLowerCase() === "success") {
+            $("#one-task-container-" + taskId).addClass("competition__one-task--done");
+            $("#task-input-" + taskId).hide();
+            $("#task-input-stub-" + taskId).show();
+            $("#task-submit-button-" + taskId).hide();
+        } else {
+            $("#task-input-" + taskId).addClass('competition__task-field--wrong');
+            setTimeout(function(){
+                $("#task-input-" + taskId).removeClass('competition__task-field--wrong');
+            }, 2000);
+        }
+    };
 
     xhr.onerror = function () {
         alert("Неверный флаг");
-    }
+    };
 }
 
 function closeDescription() {
@@ -55,7 +185,7 @@ function closeDescription() {
 }
 
 function openTask(task) {
-    for (i = 0; i < tasks.Data.length; i++) {
+    for (i = 0; i < competition.Data.length; i++) {
         if (tasks.Data[i].Task_name === task) {
             var str = "<div class=\"task-description\">" +
                 "<div class=\"task-description-container\">" +
@@ -84,5 +214,5 @@ function openTask(task) {
 }
 
 $(document).ready(function () {
-    getTasks();
+    //getTasks();
 });

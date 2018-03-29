@@ -63,10 +63,10 @@ def create_one_task(data):
         return {names.ANSWER: names.ERROR,
                 names.DATA: check_data}
     try:
-        sql = "INSERT INTO task" \
-            " VALUES (null,\"{task_category}\",\"{task_name}\"," \
-            "\"{task_flag}\",\"{task_description}\",{task_point},\"{task_hint}\"," \
-            "null, \"{task_link}\",1,1,2)".format(**data)
+        sql = "INSERT INTO task (task_category, task_name, task_flag, task_description, task_point, task_hint, task_solve, task_link, status, public_status, id_event)" \
+            " VALUES (\'{task_category}\',\'{task_name}\'," \
+            "\'{task_flag}\',\'{task_description}\',{task_point},\'{task_hint}\'," \
+            "\'{task_solve}\', \'{task_link}\',\'{status}\',\'{public_status}\',\'{id_event}\')".format(**data)
         print(sql)
         gs.SqlQuery(sql)
         #check_data["database"] = "Recorded"
@@ -83,6 +83,7 @@ def create_one_task(data):
                 names.DATA: check_data}
     else:
         return {names.ANSWER: names.SUCCESS}
+
 
 '''
 Данная функция принимает на вход массив из JSON записей
@@ -174,82 +175,80 @@ def get_task_event_category(event, task_category):
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
-def get_task_acc(id_task, id_user):
-    sql = "SELECT id_task FROM task_acc WHERE id_task in {} and id_user = {}".format(id_task, id_user)
-    print(sql)
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {}
-    try:
-        print(result)
-        if len(result) > 0:
-            return result
-    except:
-        return {}
-
-
-def preparation_result(data, id_user):
-    result = []
-    temp = dict()
-    id_task = list()
-    for item in data:
-        item['Close'] = False
-        id_task_temp = item.get('ID_Task')
-        temp[id_task_temp] = item
-        id_task.append(id_task_temp)
-    #TODO: временное решение
-    id_task = tuple(id_task)
-    close_status = get_task_acc(id_task, id_user)
-    if close_status is not None:
-        for i in close_status:
-            id_task = i['id_task']
-            temp[id_task]['Close'] = True
-    return data
-
-
 def get_task_event(data):
-    sql = "SELECT ID_Task, Task_name, Task_category, Task_point, " \
-          "Task_description, Task_hint, Task_link FROM task WHERE id_event={} " \
-          "order by Task_category, Task_point".format(data['id_event'])
-    print(sql)
+    sql = """SELECT ID_Task
+ , Task_name
+ , Task_category
+ , Task_point
+ , Task_description
+ , Task_hint
+ , Task_link
+ , case
+    when exists(
+     select *
+     from task_acc
+     where id_event = {id_event}
+       and id_user = {id_user}
+       and id_task = t.id_task
+    ) then True
+   else False
+   end as close
+FROM task t
+WHERE id_event = {id_event}
+ and (select status from event where id_event = {id_event}) = 1
+ORDER BY Task_category
+ , Task_point
+""".format(
+        id_user=data['id_user'],
+        id_event=data['id_event']
+    )
+    #print(sql)
     try:
         result = gs.SqlQuery(sql)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: 'Error connect db'}
-    return {names.ANSWER: names.SUCCESS, names.DATA: preparation_result(result, data[names.ID_USER])}
-
-
-def input_task_acc(user_data):
-    #TODO: Временное решение.
-    id_event = 2
-    sql = "INSERT INTO task_acc" \
-        " VALUES (null, {}, {}, {}, {}, NOW())".format(user_data['ID_Task'], user_data[names.ID_USER], id_event, user_data['Task_point'])
-    print(sql)
-    try:
-        gs.SqlQuery(sql)
-    except:
-        logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
-        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных."}
-    return True
+        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def check_task(data):
-    sql = "SELECT ID_Task, Task_point FROM task WHERE Task_name = '{}' and Task_flag = '{}'".format(
-        data['Task_name'],
-        data['Task_flag'])
-    print(sql)
+    sql = """
+INSERT INTO task_acc (id_task, id_user, id_event, point, time)
+SELECT
+   t.id_task, {id_user}, {id_event}, t.task_point, current_timestamp
+from task t
+WHERE exists(
+  select *
+  from event
+  where id_event = {id_event}
+   and status = 1
+)
+and exists(
+  select *
+  from task task
+  where task.id_task = {Task_id}
+  and task.Task_flag = '{Task_flag}'
+)
+and exists(
+  select *
+  from participation
+  where id_event = {id_event}
+  and id_user = {id_user}
+)
+and t.id_task = {Task_id}
+returning id
+
+    """.format(
+        id_event=data['id_event'],
+        id_user=data['id_user'],
+        Task_id=data['Task_id'],
+        Task_flag=data['Task_flag'])
+
     try:
         result = gs.SqlQuery(sql)
+        if result == []:
+            return {names.ANSWER: "Wrong flag", names.DATA: False}
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: 'Error connect db'}
-    try:
-        if len(result) == 2:
-            result[names.ID_USER] = data[names.ID_USER]
-            input_task_acc(result)
-            return {names.ANSWER: names.SUCCESS, names.DATA: True}
-    except:
         return {names.ANSWER: names.WARNING, names.DATA: False}
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
