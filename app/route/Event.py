@@ -7,7 +7,7 @@ from api.service import GameService as gs
 from api.event.registration_user import registration as reg_user
 from api.auth.auth import session_verification
 import api.base_name as names
-
+from api.event.edit_event import update_status_event
 
 class Event(Resource):
     def __init__(self):
@@ -60,6 +60,7 @@ class Event(Resource):
     def get(self):
         try:
             print("Event")
+            update_status_event()
             self.parse_data()
             answer = gs.converter(self.switch())
             print("answer: ", answer)
