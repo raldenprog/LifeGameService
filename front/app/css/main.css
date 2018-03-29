@@ -323,7 +323,8 @@ tr:nth-child(2) .table-default__cell-block {
   text-decoration: underline;
 }
 .authorization__input-text,
-.authorization__input-select {
+.authorization__input-select,
+.authorization__input-text-area {
   width: 300px;
   border: 1px solid black;
   height: 40px;
@@ -332,8 +333,12 @@ tr:nth-child(2) .table-default__cell-block {
   transition: border 0.5s;
 }
 .authorization__input-text--wrong,
-.authorization__input-select--wrong {
+.authorization__input-select--wrong,
+.authorization__input-text-area--wrong {
   border: 2px solid red;
+}
+.authorization__input-text-area {
+  height: 300px;
 }
 .authorization__star {
   display: none;
