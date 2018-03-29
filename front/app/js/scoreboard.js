@@ -1,5 +1,9 @@
 var tasks;
 
+if (typeof(port) == "undefined") {
+    var port = "13451";
+}
+
 function getScoreboard(id_event) {
 
     var obj = {

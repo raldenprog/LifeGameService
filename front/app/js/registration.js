@@ -1,6 +1,10 @@
 $(document).ready(function() {
     var steps = $("form").children(".step");
 
+    if (typeof(port) == "undefined") {
+        var port = "13451";
+    }
+
     function registration(login, email, pass, name, gender, city, educational) {
         var str = {
             Login: login,
@@ -26,8 +30,6 @@ $(document).ready(function() {
         };
 
         var data = JSON.stringify(str);
-
-
         str = 'http://90.189.132.25:' + port + '/registration?data=' + data;
         var xhr = createCORSRequest('GET', str);
         xhr.send();

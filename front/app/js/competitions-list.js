@@ -64,6 +64,10 @@ $(document).ready(function () {
         UUID: $.cookie('UUID')
     };
 
+    if (typeof(port) == "undefined") {
+        var port = "13451";
+    }
+
     var strObj = JSON.stringify(obj);
 
     var str = 'http://90.189.132.25:' + port + '/event?data=' + strObj;

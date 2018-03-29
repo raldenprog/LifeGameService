@@ -1,6 +1,10 @@
 var tasks;
 var id_event;
 
+if (typeof(port) == "undefined") {
+    var port = "13451";
+}
+
 function Competition() {
 
 }
@@ -22,7 +26,7 @@ Competition.prototype.changeCategory = function (category) {
         }
     }
 
-    this.activeCategory = category.toLowerCase()
+    this.activeCategory = category.toLowerCase();
 };
 
 
@@ -176,7 +180,7 @@ function submitTask(taskId) {
     };
 
     xhr.onerror = function () {
-        alert("Неверный флаг");
+        console.log("Проблемы с запросом");
     };
 }
 

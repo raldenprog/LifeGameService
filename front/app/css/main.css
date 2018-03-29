@@ -730,7 +730,7 @@ tr:nth-child(2) .table-default__cell-block {
   left: 50%;
   -ms-transform: translateX(-50%);
       transform: translateX(-50%);
-  height: 40px;
+  min-height: 40px;
   display: -ms-flexbox;
   display: flex;
   position: absolute;

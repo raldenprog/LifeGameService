@@ -1,3 +1,7 @@
+if (typeof(port) == "undefined") {
+    var port = "13451";
+}
+
 function authorisation(login, pass) {
     var str = {
         Login: login,
