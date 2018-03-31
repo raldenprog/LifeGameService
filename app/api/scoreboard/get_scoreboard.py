@@ -56,7 +56,7 @@ user_participation_event as (
 ),
 sumit_acc as (
   select upe.*
-  , sum(tacc.point) as point
+  , sum(tacc.point) / 2 as point
   , max(tacc.time) as time
   from task_acc tacc, 
   user_participation_event upe
