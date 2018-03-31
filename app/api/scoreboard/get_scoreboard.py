@@ -53,10 +53,11 @@ user_participation_event as (
   from users us
   inner join participation part 
     on part.id_user = us.id_user
+  where id_event = 1
 ),
 sumit_acc as (
   select upe.*
-  , sum(tacc.point) / 2 as point
+  , sum(tacc.point) as point
   , max(tacc.time) as time
   from task_acc tacc, 
   user_participation_event upe
