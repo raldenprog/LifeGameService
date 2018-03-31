@@ -35,6 +35,10 @@ function createTask(category, name, flag, description, point, hint, link, eventI
 }
 
 $(document).ready(function() {
+    if (typeof(port) == "undefined") {
+        var port = "13451";
+    }
+
     $("#create-task-button").click(function(){	// Событие клика на кнопку "Зарегистрироваться"
         var category = $("#task-category").val();
         var name = $("#task-name").val();
