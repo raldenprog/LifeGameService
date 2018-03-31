@@ -53,7 +53,7 @@ user_participation_event as (
   from users us
   inner join participation part 
     on part.id_user = us.id_user
-  where id_event = 1
+  where id_event = {id_event}
 ),
 sumit_acc as (
   select upe.*
