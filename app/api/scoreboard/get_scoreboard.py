@@ -66,7 +66,7 @@ sumit_acc as (
   group by upe.id_user, upe.name
 )
 
-select * from sumit_acc order by point desc, time desc""".format(id_event=id_event)
+select * from sumit_acc order by point desc, time""".format(id_event=id_event)
     #print(sql)
     try:
         result = gs.SqlQuery(sql)
