@@ -212,6 +212,7 @@ ORDER BY Task_category
 
 
 def check_task(data):
+    data['Task_flag'] = data['Task_flag'].replace("'", "")
     sql = """
 INSERT INTO task_acc (id_task, id_user, id_event, point, time)
 SELECT
