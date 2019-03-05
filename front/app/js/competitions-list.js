@@ -15,7 +15,7 @@ function regForCompetition(official) {
     };
     var strObj = JSON.stringify(obj);
 
-    var str = 'http://90.189.132.25:' + port + '/event?param=reg_user&data=' + strObj;
+    var str = 'http://127.0.0.1:' + port + '/event?param=reg_user&data=' + strObj;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 
@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     var strObj = JSON.stringify(obj);
 
-    var str = 'http://90.189.132.25:' + port + '/event?data=' + strObj;
+    var str = 'http://127.0.0.1:' + port + '/event?data=' + strObj;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 

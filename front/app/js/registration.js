@@ -30,7 +30,7 @@ $(document).ready(function() {
         };
 
         var data = JSON.stringify(str);
-        str = 'http://90.189.132.25:' + port + '/registration?data=' + data;
+        str = 'http://127.0.0.1:' + port + '/registration?data=' + data;
         var xhr = createCORSRequest('GET', str);
         xhr.send();
 

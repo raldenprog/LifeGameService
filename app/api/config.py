@@ -2,6 +2,6 @@ HEADER = {'Access-Control-Allow-Origin': '*'}
 DATABASE = {
     "dbname": "inside",
     "user": "inside_user",
-    "host": "192.168.1.3",
+    "host": "127.0.0.1",
     "password": "PINLOX!@#PINLOX!@#"
 }

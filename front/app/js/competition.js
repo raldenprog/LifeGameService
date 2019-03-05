@@ -9,7 +9,7 @@ function writeCompetitionName(id) {
         var port = "13451";
     }
 
-    var str = 'http://90.189.132.25:' + port + '/event?param=info_event&data=' + strObj;
+    var str = 'http://127.0.0.1:' + port + '/event?param=info_event&data=' + strObj;
 
     console.log(str);
 
