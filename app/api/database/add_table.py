@@ -3,6 +3,7 @@ import sys
 import os
 print(os.getcwd())
 sys.path.append(os.getcwd()+'/../../')
+sys.path.append(os.getcwd())
 from api.database.connect_db import db_connect_new as db_connect
 from api.auth.registration_users import registration_user
 
