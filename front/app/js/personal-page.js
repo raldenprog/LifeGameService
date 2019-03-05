@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     var data = JSON.stringify(obj);
 
-    var str = 'http://127.0.0.1:'  + port +  '/cabinet?data=' + data;
+    var str = 'http://192.168.1.3:'  + port +  '/cabinet?data=' + data;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 
