@@ -8,7 +8,7 @@ function getScoreboard(id_event) {
 
     var str = JSON.stringify(obj);
 
-    var str = 'http://192.168.1.3:13451/scoreboard?data=' + str;
+    var str = 'http://90.189.132.25:13451/scoreboard?data=' + str;
 
     console.log(str);
 

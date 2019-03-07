@@ -46,7 +46,7 @@ class MegaTest:
     def auth(self):
         try:
             print("auth: ", end="")
-            data = {"Login": self.login, "Password": "password"}
+            data = {"Login": 'raldenprog', "Password": 'raldenprog'}
             req = json.loads(rq.get('{url}/auth?data={query}'.format(url=URL, query=data).replace('\'', '%22')).text)
             if req["Answer"] == 'Success':
                 print("OK")
@@ -226,4 +226,4 @@ test.create_one_task()
 test.scoreboard()
 test.reg_user_for_an_event()
 """
-test.page_event()
+test.auth()
