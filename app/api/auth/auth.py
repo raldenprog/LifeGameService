@@ -12,18 +12,18 @@ def session_verification(session):
     :param session: UUID сессии
     :return: int Возвращает ID пользователя
     """
-    try:
-        sql = "SELECT id_user FROM Session WHERE UUID = '{}'".format(session)
+    #try:
+    sql = "SELECT id_user FROM Session WHERE UUID = '{}'".format(session)
         #print(sql)
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return None
-    try:
-        if len(result) == 0:
-            return None
-    except:
-        return None
+    result = gs.SqlQuery(sql)
+    #except:
+    #    logging.error(names.ERROR_EXECUTE_DATABASE)
+    #    return None
+    #try:
+    #    if len(result) == 0:
+    #        return None
+    #except:
+     #   return None
     return result[0]["id_user"]
 
 
