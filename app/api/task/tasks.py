@@ -208,7 +208,7 @@ ORDER BY Task_category
     #print('result: ', result[0])
     if result == []:
         print('error')
-        get_task_event(data)
+        return get_task_event(data)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
     #except:
     #    logging.error(names.ERROR_EXECUTE_DATABASE)
