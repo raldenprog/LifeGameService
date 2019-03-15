@@ -203,16 +203,16 @@ ORDER BY Task_category
         id_event=data['id_event']
     )
     print(sql)
-    try:
-        result = gs.SqlQuery(sql)
-        print('result: ', result[0])
-        if result == []:
-            print('error')
-            get_task_event(data)
-        return {names.ANSWER: names.SUCCESS, names.DATA: result}
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
+    #try:
+    result = gs.SqlQuery(sql)
+    print('result: ', result[0])
+    if result == []:
+        print('error')
+        get_task_event(data)
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
+    #except:
+    #    logging.error(names.ERROR_EXECUTE_DATABASE)
+    #    return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
 
 
 def check_task(data):
