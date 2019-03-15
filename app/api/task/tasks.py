@@ -167,11 +167,11 @@ def get_task_event_name(event, task_name):
 def get_task_event_category(event, task_category):
     sql = "SELECT id_task, task_name, task_category, event FROM task WHERE event={} AND task_category={}".format(event, task_category)
 
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR}
+    #try:
+    result = gs.SqlQuery(sql)
+   # except:
+    #    logging.error(names.ERROR_EXECUTE_DATABASE)
+    #    return {names.ANSWER: '1 error'}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
@@ -249,11 +249,11 @@ returning id
         Task_id=data['Task_id'],
         Task_flag=data['Task_flag'])
 
-    try:
-        result = gs.SqlQuery(sql)
-        if result == []:
-            return {names.ANSWER: "Wrong flag", names.DATA: False}
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.WARNING, names.DATA: False}
+    #try:
+    result = gs.SqlQuery(sql)
+    if result == []:
+        return {names.ANSWER: "Wrong flag", names.DATA: False}
+    #except:
+    #    logging.error(names.ERROR_EXECUTE_DATABASE)
+    #    return {names.ANSWER: names.WARNING, names.DATA: False}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
