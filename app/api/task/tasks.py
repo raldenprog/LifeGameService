@@ -205,7 +205,7 @@ ORDER BY Task_category
     print(sql)
     #try:
     result = gs.SqlQuery(sql)
-    print('result: ', result[0])
+    #print('result: ', result[0])
     if result == []:
         print('error')
         get_task_event(data)
