@@ -202,9 +202,12 @@ ORDER BY Task_category
         id_user=data['id_user'],
         id_event=data['id_event']
     )
-    #print(sql)
+    print(sql)
     try:
         result = gs.SqlQuery(sql)
+        if result == []:
+            print('error')
+            get_task_event(data)
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
