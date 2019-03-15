@@ -156,11 +156,11 @@ json = {    names.ID :              "1",
 def get_task_event_name(event, task_name):
     sql = "SELECT ID_Task, Task_name, Task_category, Task_description FROM task WHERE event={} AND ID_Task={}".format(event, task_name)
 
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR}
+    #try:
+    result = gs.SqlQuery(sql)
+    #except:
+    #    logging.error(names.ERROR_EXECUTE_DATABASE)
+    #    return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
