@@ -37,6 +37,7 @@ class Task(Resource):
         elif self.data is not None:
             self.data["id_user"] = session_verification(self.data["UUID"])
             answer = tasks.get_task_event(self.data)
+            print('ans:', answer)
             return answer
 
     def get(self):
