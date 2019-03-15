@@ -209,10 +209,10 @@ ORDER BY Task_category
         if result == []:
             print('error')
             get_task_event(data)
+        return {names.ANSWER: names.SUCCESS, names.DATA: result}
     except:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
-    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def check_task(data):
