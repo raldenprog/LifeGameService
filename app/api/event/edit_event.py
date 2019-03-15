@@ -123,6 +123,7 @@ def update_status_close_events():
     set status = 0
     where CURRENT_TIMESTAMP >= date_end
     or (CURRENT_TIMESTAMP >= date_stop and CURRENT_TIMESTAMP < date_continue)
+    or (current_timestamp < date_start)
     and status = 1
     """
     try:
