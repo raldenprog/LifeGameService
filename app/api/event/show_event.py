@@ -17,11 +17,11 @@ def info_event(id_event):
     """
     sql = """Select name from event where id_event = {id_event}""".format(id_event=id_event)
     #print(sql)
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR}
+    #try:
+    result = gs.SqlQuery(sql)
+    #except:
+    #    logging.error(names.ERROR_EXECUTE_DATABASE)
+    #    return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result[0]}
 
 
