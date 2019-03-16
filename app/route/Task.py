@@ -41,11 +41,11 @@ class Task(Resource):
             return answer
 
     def get(self):
-        #try:
-        print("Task")
-        self.parse_data()
-        answer = self.switch()
-        print("answer: ", answer)
-        return answer, 200, {'Access-Control-Allow-Origin': '*'}
-        #except:
-        #    return "Error", 200, {'Access-Control-Allow-Origin': '*'}
+        try:
+            print("Task")
+            self.parse_data()
+            answer = self.switch()
+            print("answer: ", answer)
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
+        except:
+            return "Error", 200, {'Access-Control-Allow-Origin': '*'}

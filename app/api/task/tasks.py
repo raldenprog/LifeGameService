@@ -203,16 +203,16 @@ ORDER BY Task_category
         id_event=data['id_event']
     )
     print(sql)
-    #try:
-    result = gs.SqlQuery(sql)
-    #print('result: ', result[0])
-    if result == []:
-        print('error')
-        return get_task_event(data)
-    return {names.ANSWER: names.SUCCESS, names.DATA: result}
-    #except:
-    #    logging.error(names.ERROR_EXECUTE_DATABASE)
-    #    return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
+    try:
+        result = gs.SqlQuery(sql)
+        print('result: ', result[0])
+        if result == []:
+            print('error')
+            return get_task_event(data)
+        return {names.ANSWER: names.SUCCESS, names.DATA: result}
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
 
 
 def check_task(data):
@@ -249,11 +249,13 @@ returning id
         Task_id=data['Task_id'],
         Task_flag=data['Task_flag'])
 
-    #try:
-    result = gs.SqlQuery(sql)
-    if result == []:
-        return {names.ANSWER: "Wrong flag", names.DATA: False}
-    #except:
-    #    logging.error(names.ERROR_EXECUTE_DATABASE)
-    #    return {names.ANSWER: names.WARNING, names.DATA: False}
+    try:
+        if "'" in data['Task_flag']:
+            data['Task_flag'] = 'CTF{crutch}'
+        result = gs.SqlQuery(sql)
+        if result == []:
+            return {names.ANSWER: "Wrong flag", names.DATA: False}
+    except:
+        logging.error(names.ERROR_EXECUTE_DATABASE)
+        return {names.ANSWER: names.WARNING, names.DATA: False}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
