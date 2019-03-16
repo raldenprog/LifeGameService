@@ -250,8 +250,7 @@ returning id
         Task_flag=data['Task_flag'])
 
     try:
-        if "'" in data['Task_flag']:
-            data['Task_flag'] = 'CTF{crutch}'
+        data['Task_flag'].replace("'", "")
         result = gs.SqlQuery(sql)
         if result == []:
             return {names.ANSWER: "Wrong flag", names.DATA: False}
