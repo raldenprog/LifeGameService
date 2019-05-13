@@ -9,7 +9,7 @@ function writeCompetitionInfo(id) {
         var port = "13451";
     }
 
-    var str = 'http://90.189.132.25:' + port + '/event?param=descr&data=' + strObj;
+    var str = 'http://90.189.168.29:' + port + '/event?param=descr&data=' + strObj;
 
     console.log(str);
 
