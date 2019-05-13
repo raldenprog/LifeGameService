@@ -55,7 +55,7 @@ function setUsername() {
 
     var strObj = JSON.stringify(obj);
 
-    var str = 'http://90.189.168.29:'  + port +  '/auth?param=get_user_name&data=' + strObj;
+    var str = 'http://192.168.0.7:'  + port +  '/auth?param=get_user_name&data=' + strObj;
     console.log(str);
 
     var xhr = createCORSRequest('GET', str);

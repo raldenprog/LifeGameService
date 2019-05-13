@@ -15,7 +15,7 @@ function createTask(category, name, flag, description, point, hint, link, eventI
 
     var strObj = JSON.stringify(obj);
 
-    str = 'http://90.189.168.29:' + port + '/task?param=create&data=' + strObj;
+    str = 'http://192.168.0.7:' + port + '/task?param=create&data=' + strObj;
 
     var xhr = createCORSRequest('GET', str);
     xhr.send();
