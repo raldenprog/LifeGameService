@@ -64,7 +64,7 @@ function getTasks(competitionId) {
 
     var data = JSON.stringify(obj);
 
-    var str = 'http://192.168.0.7:' + port + '/task?data=' + data;
+    var str = 'http://90.189.168.29:' + port + '/task?data=' + data;
     var xhr = createCORSRequest('GET', str);
 
     xhr.send();
@@ -157,7 +157,7 @@ function submitTask(taskId) {
 
     var data = JSON.stringify(obj);
 
-    var str = 'http://192.168.0.7:' + port + '/task?param=check&data=' + data;
+    var str = 'http://90.189.168.29:' + port + '/task?param=check&data=' + data;
     console.log(str);
     var xhr = createCORSRequest('GET', str);
     xhr.send();

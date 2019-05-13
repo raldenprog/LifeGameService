@@ -28,7 +28,7 @@ function registration(login, email, pass, name, sname, gender, city, educational
 
     var data = JSON.stringify(str);
 
-    str = 'http://192.168.0.7:13451/registration?data=' + data;
+    str = 'http://90.189.168.29:13451/registration?data=' + data;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 
