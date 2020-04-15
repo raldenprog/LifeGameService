@@ -16,7 +16,7 @@ $(document).ready(function () {
     var data = JSON.stringify(obj);
 
 
-    var str = 'http://90.189.168.29:13451/cabinet?data=' + data;
+    var str = 'http://217.23.13.145:13451/cabinet?data=' + data;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 

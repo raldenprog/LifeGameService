@@ -41,7 +41,7 @@ function getTasks(competitionId) {
 
     var data = JSON.stringify(obj);
 
-    var str = 'http://90.189.168.29:13451/task?data=' + data;
+    var str = 'http://217.23.13.145:13451/task?data=' + data;
     var xhr = createCORSRequest('GET', str);
 
     xhr.send();
@@ -152,7 +152,7 @@ function submitTask(taskId) {
 
     var data = JSON.stringify(obj);
 
-    var str = 'http://90.189.168.29:13451/task?param=check&data=' + data;
+    var str = 'http://217.23.13.145:13451/task?param=check&data=' + data;
     console.log(str);
     var xhr = createCORSRequest('GET', str);
     xhr.send();

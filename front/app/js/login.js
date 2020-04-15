@@ -11,7 +11,7 @@ function authorisation(login, pass) {
     var data = JSON.stringify(str);
     console.log(data);
 
-    str = 'http://90.189.168.29:'  + port +  '/auth?data=' + data;
+    str = 'http://217.23.13.145:'  + port +  '/auth?data=' + data;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 

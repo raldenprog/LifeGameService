@@ -15,7 +15,7 @@ function regForCompetition(official) {
     };
     var strObj = JSON.stringify(obj);
 
-    var str = 'http://90.189.168.29:13451/event?param=reg_user&data=' + strObj;
+    var str = 'http://217.23.13.145:13451/event?param=reg_user&data=' + strObj;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 
@@ -46,7 +46,7 @@ $(document).ready(function () {
 
     var strObj = JSON.stringify(obj);
 
-    var str = 'http://90.189.168.29:13451/event?data=' + strObj;
+    var str = 'http://217.23.13.145:13451/event?data=' + strObj;
     var xhr = createCORSRequest('GET', str);
     xhr.send();
 

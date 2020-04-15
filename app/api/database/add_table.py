@@ -78,6 +78,20 @@ def create_table_session():
         return
 
 
+def create_table_participation():
+    connect, current_connect = db_connect()
+    sql = """CREATE TABLE participation (
+          id_user INT,
+          id_event INT
+          ); """
+    print(sql)
+    try:
+        current_connect.execute(sql)
+        current_connect.close()
+    except:
+        return
+
+
 def create_table_event():
     connect, current_connect = db_connect()
     sql = """-- Table: public.event
