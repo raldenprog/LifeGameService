@@ -1,7 +1,7 @@
 HEADER = {'Access-Control-Allow-Origin': '*'}
 DATABASE = {
     "dbname": "inside",
-    "user": "postgres",
+    "user": "inside",
     "host": "127.0.0.1",
-    "password": "postgres"
+    "password": "PINLOX!@#PINLOX!@#"
 }

@@ -58,6 +58,7 @@ def auth_user(user_data):
     password_hash.update(user_data[names.PASSWORD].encode())
     user_data[names.PASSWORD] = password_hash.hexdigest()
     sql = "SELECT id_user FROM Auth WHERE Login = '{}' and Password = '{}'".format(user_data[names.LOGIN], user_data[names.PASSWORD])
+    print(sql)
     result = gs.SqlQuery(sql)
     if len(result) == 0:
         return {names.ANSWER: names.WARNING, names.DATA: "Данного пользователя нет в базе данных"}
