@@ -20,19 +20,12 @@ class GameService:
         """
         connect, current_connect = db()
         result = None
-        try:
-            #print(query)
-            current_connect.execute(query)
-            connect.commit()
-        except psycopg2.Error as e:
-            return result
-        finally:
-            try:
-                result = current_connect.fetchall()
-            except psycopg2.Error as e:
-                return result
-            connect.close()
-            return result
+        print(query)
+        current_connect.execute(query)
+        connect.commit()
+        result = current_connect.fetchall()
+        connect.close()
+        return result
 
     @staticmethod
     def __converter_data(param):
