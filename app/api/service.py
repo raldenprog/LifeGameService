@@ -23,7 +23,10 @@ class GameService:
         print(query)
         current_connect.execute(query)
         connect.commit()
-        result = current_connect.fetchall()
+        try:
+            result = current_connect.fetchall()
+        except:
+            pass
         connect.close()
         return result
 
