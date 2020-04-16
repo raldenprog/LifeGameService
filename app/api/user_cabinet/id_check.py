@@ -12,9 +12,5 @@ def check_id(id_user):
     Передаем функции искомый id.
     Возвращает True если id есть, False если id нет
     """
-    try:
-        sql = "select exists(select 1 from users where id_user = {})".format(id_user)
-        return gs.SqlQuery(sql).get('exists', False)
-    except:
-        logging.error('Fatal error: check id')
-        return {names.ANSWER: names.ERROR}
+    sql = "select exists(select 1 from users where id_user = {})".format(id_user)
+    return gs.SqlQuery(sql).get('exists', False)

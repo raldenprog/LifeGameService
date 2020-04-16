@@ -48,16 +48,12 @@ def create_one_task(data):
     error_flag = 0
     check_data = empty_task_data()
     for check in check_field:
-        try:
-            if data[check] is None:
-                error_flag = 1
-                logging.info('Incorrect parameter \'%s\' - None' % check)
-                check_data[check] = names.ERROR
-            else:
-                check_data[check] = names.SUCCESS
-        except:
+        if data[check] is None:
             error_flag = 1
-            logging.error('Fatal error param \'%s\'' % check)
+            logging.info('Incorrect parameter \'%s\' - None' % check)
+            check_data[check] = names.ERROR
+        else:
+            check_data[check] = names.SUCCESS
 
     if error_flag:
         return {names.ANSWER: names.ERROR,
@@ -203,16 +199,12 @@ ORDER BY Task_category
         id_event=data['id_event']
     )
     print(sql)
-    try:
-        result = gs.SqlQuery(sql)
-        print('result: ', result[0])
-        if result == []:
-            print('error')
-            return get_task_event(data)
-        return {names.ANSWER: names.SUCCESS, names.DATA: result}
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
+    result = gs.SqlQuery(sql)
+    print('result: ', result[0])
+    if result == []:
+        print('error')
+        return get_task_event(data)
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def check_task(data):
@@ -249,12 +241,8 @@ returning id
         Task_id=data['Task_id'],
         Task_flag=data['Task_flag'])
 
-    try:
-        data['Task_flag'].replace("'", "")
-        result = gs.SqlQuery(sql)
-        if result == []:
-            return {names.ANSWER: "Wrong flag", names.DATA: False}
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.WARNING, names.DATA: False}
+    data['Task_flag'].replace("'", "")
+    result = gs.SqlQuery(sql)
+    if result == []:
+        return {names.ANSWER: "Wrong flag", names.DATA: False}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}

@@ -57,9 +57,5 @@ class GameService:
         Передаем функции искомый id.
         Возвращает True если id есть, False если id нет
         """
-        try:
-            sql = "select exists(select 1 from users where id_user = {})".format(id_user)
-            return GameService.SqlQuery(sql)[0]['exists']
-        except:
-            logging.error('Fatal error: check id')
-            return {names.ANSWER: names.ERROR}
+        sql = "select exists(select 1 from users where id_user = {})".format(id_user)
+        return GameService.SqlQuery(sql)[0]['exists']

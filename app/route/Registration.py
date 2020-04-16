@@ -45,14 +45,11 @@ class Registration(Resource):
         return answer
 
     def get(self):
-        try:
-            print("Registration")
-            self.parse_data()
-            check = self.check_data()
-            if check:
-                answer = self.switch()
-                print("answer: ", answer)
-                return answer, 200, {'Access-Control-Allow-Origin': '*'}
-            return "Error",  200, {'Access-Control-Allow-Origin': '*'}
-        except:
-            return "Error",  200, {'Access-Control-Allow-Origin': '*'}
+        print("Registration")
+        self.parse_data()
+        check = self.check_data()
+        if check:
+            answer = self.switch()
+            print("answer: ", answer)
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
+        return "Error",  200, {'Access-Control-Allow-Origin': '*'}

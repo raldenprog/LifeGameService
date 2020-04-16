@@ -60,12 +60,7 @@ def input_auth_table(user_data):
           " VALUES (\'{Login}\',\'{Password}\') RETURNING id_user".format(
         Login=user_data.get(names.LOGIN),
         Password=user_data.get(names.PASSWORD))
-    try:
-        id_user = gs.SqlQuery(sql)[0]['id_user']
-    except:
-        logging.error('error: Ошибка запроса к базе данных. Возможно такой пользователь уже есть')
-        return {names.ANSWER: names.WARNING,
-                names.DATA: "Ошибка запроса к базе данных. Возможно такой пользователь уже есть"}
+    id_user = gs.SqlQuery(sql)[0]['id_user']
     return input_access_table(id_user, user_data, connect, current_connect)
 
 
@@ -80,11 +75,7 @@ def input_access_table(id_user, user_data, connect, current_connect):
     """
     sql = "INSERT INTO Access" \
           " VALUES ({id},0)".format(id=id_user)
-    try:
-        gs.SqlQuery(sql)
-    except:
-        logging.error('error: Ошибка запроса к базе данных')
-        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных"}
+    gs.SqlQuery(sql)
     return input_user_table(id_user, user_data, connect, current_connect)
 
 
@@ -102,11 +93,7 @@ def input_user_table(id_user, user_data, connect, current_connect):
           " VALUES ({id_user},\'{Name}\','',\'{Email}\'," \
           "\'{Sex}\',\'{City}\',\'{Educational}\',\'{Logo}\'" \
           ")".format(**user_data)
-    try:
-        gs.SqlQuery(sql)
-    except:
-        logging.error('error: Ошибка запроса к базе данных')
-        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных"}
+    gs.SqlQuery(sql)
     return input_session_table(id_user, connect, current_connect)
 
 
@@ -121,9 +108,5 @@ def input_session_table(id_user, connect=None, current_connect=None):
     UUID = uuid.uuid4()
     sql = "INSERT INTO Session (id_user, uuid)" \
           " VALUES ({id}, \'{UUID}\')".format(id=id_user, UUID=UUID)
-    try:
-        gs.SqlQuery(sql)
-    except:
-        logging.error('error: Ошибка запроса к базе данных')
-        return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных"}
+    gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: {"UUID": str(UUID)}}

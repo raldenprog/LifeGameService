@@ -16,12 +16,8 @@ def info_event(id_event):
     :return:
     """
     sql = """Select name from event where id_event = {id_event}""".format(id_event=id_event)
-    #print(sql)
-    #try:
+    print(sql)
     result = gs.SqlQuery(sql)
-    #except:
-    #    logging.error(names.ERROR_EXECUTE_DATABASE)
-    #    return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result[0]}
 
 
@@ -32,8 +28,7 @@ def all_event(id_user, count):
     :param count: int номер события, с которого начинать вывод
     :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
-    try:
-        sql = """with 
+    sql = """with 
 events as (
   select id_event
   , Name
@@ -49,14 +44,12 @@ events as (
   offset {count}
 )
 table events""".format(count=count, id_user=id_user)
-        #print(sql)
-        if isinstance(count, int) and count >= 0:
-            result = gs.SqlQuery(sql)
-            print(result)
-        else:
-            logging.error(names.ERROR_EXECUTE_DATABASE)
-            return {names.ANSWER: names.ERROR}
-    except:
+
+    print(sql)
+    if isinstance(count, int) and count >= 0:
+        result = gs.SqlQuery(sql)
+        print(result)
+    else:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
@@ -70,13 +63,9 @@ def current_event(count):
     """
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Date_start < {} LIMIT 10 OFFSET {}".format(time.time(), count)
-    try:
-        if isinstance(count, int) and count >= 0:
-            result = gs.SqlQuery(sql)
-        else:
-            logging.error(names.ERROR_EXECUTE_DATABASE)
-            return {names.ANSWER: names.ERROR}
-    except:
+    if isinstance(count, int) and count >= 0:
+        result = gs.SqlQuery(sql)
+    else:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
@@ -91,13 +80,9 @@ def end_event(count):
     sql = "SELECT Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Date_end > {} LIMIT 10 OFFSET {}".format(datetime.datetime.now().strftime('%d.%m.%Y'), count)
     print(sql)
-    try:
-        if isinstance(count, int) and count >= 0:
-            result = gs.SqlQuery(sql)
-        else:
-            logging.error(names.ERROR_EXECUTE_DATABASE)
-            return {names.ANSWER: names.ERROR}
-    except:
+    if isinstance(count, int) and count >= 0:
+        result = gs.SqlQuery(sql)
+    else:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
@@ -112,15 +97,11 @@ def find_event(alf, count):
     """
     sql = "SELECT id_event, Name, Description, Status, Date_start, Date_end " \
           "FROM Event WHERE Name LIKE '%{}%' ORDER BY id_event LIMIT 10 OFFSET {}".format(alf, count)
-    #print(sql)
-    try:
-        if isinstance(count, int) and count >= 0:
-            result = gs.SqlQuery(sql)
-            #print(result)
-        else:
-            logging.error(names.ERROR_EXECUTE_DATABASE)
-            return {names.ANSWER: names.ERROR}
-    except:
+    print(sql)
+    if isinstance(count, int) and count >= 0:
+        result = gs.SqlQuery(sql)
+        #print(result)
+    else:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
@@ -128,13 +109,9 @@ def find_event(alf, count):
 
 def page_event(data):
     sql = "SELECT Name, Description, logo, Date_start, Date_end, Date_continue, Status FROM event WHERE id_event = {}".format(data["id_event"])
-    try:
-        if isinstance(data["id_event"], int):
-            result = gs.SqlQuery(sql)
-        else:
-            logging.error(names.ERROR_EXECUTE_DATABASE)
-            return {names.ANSWER: names.ERROR}
-    except:
+    if isinstance(data["id_event"], int):
+        result = gs.SqlQuery(sql)
+    else:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
@@ -147,13 +124,9 @@ def filter_by_status(count, status):
     :return: {names.ANSWER: names.SUCCESS, names.DATA: result}
     """
     sql = "SELECT Name, Description, Date_start, Date_end FROM Event where status='{}' LIMIT 10 OFFSET {}".format(status, count)
-    try:
-        if isinstance(count, int) and count >= 0:
-            result = gs.SqlQuery(sql)
-        else:
-            logging.error(names.ERROR_EXECUTE_DATABASE)
-            return {names.ANSWER: names.ERROR}
-    except:
+    if isinstance(count, int) and count >= 0:
+        result = gs.SqlQuery(sql)
+    else:
         logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}

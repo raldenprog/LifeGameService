@@ -44,17 +44,14 @@ class News(Resource):
             return answer
 
     def get(self):
-        try:
-            print("News")
-            self.parse_data()
-            check = self.check_data()
-            if check:
-                answer = self.switch()
-                print("answer: ", answer)
-                return answer, 200, {'Access-Control-Allow-Origin': '*'}
-            return "Error",  200, {'Access-Control-Allow-Origin': '*'}
-        except:
-            return "Error", 200, {'Access-Control-Allow-Origin': '*'}
+        print("News")
+        self.parse_data()
+        check = self.check_data()
+        if check:
+            answer = self.switch()
+            print("answer: ", answer)
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
+        return "Error",  200, {'Access-Control-Allow-Origin': '*'}
 
 
 class Comment(Resource):
@@ -100,14 +97,11 @@ class Comment(Resource):
             return answer
 
     def get(self):
-        try:
-            print("Comment")
-            self.parse_data()
-            check = self.check_data()
-            if check:
-                answer = self.switch()
-                print("answer: ", answer)
-                return answer, 200, {'Access-Control-Allow-Origin': '*'}
-            return "Error",  200, {'Access-Control-Allow-Origin': '*'}
-        except:
-            return "Error", 200, {'Access-Control-Allow-Origin': '*'}
+        print("Comment")
+        self.parse_data()
+        check = self.check_data()
+        if check:
+            answer = self.switch()
+            print("answer: ", answer)
+            return answer, 200, {'Access-Control-Allow-Origin': '*'}
+        return "Error",  200, {'Access-Control-Allow-Origin': '*'}

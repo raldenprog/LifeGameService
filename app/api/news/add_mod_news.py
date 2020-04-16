@@ -41,31 +41,17 @@ def input_news_table(news_data):
           RETURNING id_news
           """.format(News_text=news_data[names.NEWS],
                      id_user=news_data[names.ID_USER])
-    try:
-        id_news = gs.SqlQuery(sql)[0]['id_news']
-    except:
-        logging.error('error: Ошибка запроса к базе данных. Возможно такая новость уже есть')
-        return {names.ANSWER: names.WARNING,
-                names.DATA: "Ошибка запроса к базе данных. Возможно такая новость уже есть"}
+    id_news = gs.SqlQuery(sql)[0]['id_news']
     return {names.ANSWER: names.SUCCESS, names.DATA: {"id_news": str(id_news)}}
 
 
 def get_news_by_id_user(id_user):
-    sql = "SELECT * FROM News n WHERE n.id_user = {id_user} ORDER BY n.Date"\
-        .format(id_user=id_user)
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
+    sql = "SELECT * FROM News n WHERE n.id_user = {id_user} ORDER BY n.Date".format(id_user=id_user)
+    result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
 def get_news_order_by_data():
     sql = "SELECT * FROM News n ORDER BY n.Date"
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
+    result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}

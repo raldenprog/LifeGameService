@@ -42,12 +42,7 @@ def input_comments_table(comment_data):
                      id_comment_parent=comment_data[names.ID_COMMENT_PARENT],
                      Comment_text=comment_data[names.COMMENT],
                      id_user=comment_data[names.ID_USER])
-    try:
-        id_comment = gs.SqlQuery(sql)[0]['id_comment']
-    except:
-        logging.error('error: Ошибка запроса к базе данных. Возможно такой комментарий уже есть')
-        return {names.ANSWER: names.WARNING,
-                names.DATA: "Ошибка запроса к базе данных. Возможно такой комментарий уже есть"}
+    id_comment = gs.SqlQuery(sql)[0]['id_comment']
     return {names.ANSWER: names.SUCCESS, names.DATA: {"id_comment": str(id_comment)}}
 
 
@@ -57,11 +52,6 @@ def get_comments_by_id_news(id_news):
     :param id_news: ID новости для которой извлекаются комментарии
     :return: dict
     """
-    sql = "SELECT * FROM Comments c WHERE c.id_news = {id_news} ORDER BY c.id_comment_parent"\
-        .format(id_news=id_news)
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR_CONNECT_DATABASE}
+    sql = "SELECT * FROM Comments c WHERE c.id_news = {id_news} ORDER BY c.id_comment_parent".format(id_news=id_news)
+    result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}

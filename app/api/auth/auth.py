@@ -33,15 +33,8 @@ def get_login(id_user):
     :param id_user: ID пользователя
     :return: str Логин пользователя
     """
-    try:
-        sql = "SELECT Login FROM Auth WHERE User = '{}'".format(id_user)
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return None
-    try:
-        if len(result) == 0:
-            return None
-    except:
+    sql = "SELECT Login FROM Auth WHERE User = '{}'".format(id_user)
+    result = gs.SqlQuery(sql)
+    if len(result) == 0:
         return None
     return result[names.LOGIN]

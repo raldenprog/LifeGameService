@@ -9,9 +9,5 @@ logging.basicConfig(filename='logger.log',
 
 
 def db_connect_new():
-    try:
-        connect = psycopg2.connect("dbname='{dbname}' user='{user}' host='{host}' password='{password}'".format(**DATABASE))
-        return connect, connect.cursor(cursor_factory=RealDictCursor)
-    except:
-        logging.error('Fatal error: connect database')
-        raise
+    connect = psycopg2.connect("dbname='{dbname}' user='{user}' host='{host}' password='{password}'".format(**DATABASE))
+    return connect, connect.cursor(cursor_factory=RealDictCursor)

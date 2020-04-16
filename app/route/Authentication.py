@@ -34,13 +34,9 @@ class Authentication(Resource):
             return answer
 
     def get(self):
-        try:
-            print("Auth")
-            self.parse_data()
+        print("Auth")
+        self.parse_data()
 
-            answer = self.switch()
-            print("answer: ", answer)
-            return answer, 200, {'Access-Control-Allow-Origin': '*'}
-
-        except:
-            return "Error", 200, {'Access-Control-Allow-Origin': '*'}
+        answer = self.switch()
+        print("answer: ", answer)
+        return answer, 200, {'Access-Control-Allow-Origin': '*'}

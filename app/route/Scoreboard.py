@@ -34,11 +34,8 @@ class Scoreboard(Resource):
             return answer
 
     def get(self):
-        try:
-            print("Scoreboard")
-            self.parse_data()
-            answer = gs.converter(self.switch())
-            print("answer: ", answer)
-            return answer, 200, {'Access-Control-Allow-Origin': '*'}
-        except:
-            return "Error", 200, {'Access-Control-Allow-Origin': '*'}
+        print("Scoreboard")
+        self.parse_data()
+        answer = gs.converter(self.switch())
+        print("answer: ", answer)
+        return answer, 200, {'Access-Control-Allow-Origin': '*'}

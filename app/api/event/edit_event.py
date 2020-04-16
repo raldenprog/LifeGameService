@@ -21,17 +21,12 @@ def registration_event(event_data):
         'Date_stop': '', 'Date_continue': ''}
     flag = False
     for data in check:
-        try:
-            if event_data[data] is None:
-                logging.info('Incorrect parameter ' + data)
-                registration_data[data] = names.ERROR
-                flag = True
-            else:
-                registration_data[data] = event_data[data]
-        except:
-            logging.error('Fatal error: param ' + data)
+        if event_data[data] is None:
+            logging.info('Incorrect parameter ' + data)
             registration_data[data] = names.ERROR
             flag = True
+        else:
+            registration_data[data] = event_data[data]
     if flag:
         return {names.ANSWER: names.ERROR, names.DATA: registration_data}
     return input_event_table(registration_data)
@@ -43,16 +38,12 @@ def input_event_table(event_data):
     :param event_data: dict информация о событии
     :return: {names.ANSWER: ответ}
     """
-    try:
-        sql = """INSERT INTO event ("name", description, logo, status, date_start, date_end, date_stop, date_continue) 
+    sql = """INSERT INTO event ("name", description, logo, status, date_start, date_end, date_stop, date_continue) 
 VALUES (\'{Name}\', \'{Description}\', 
 \'{Logo}\', \'{Status}\', \'{Date_start}\', \'{Date_end}\', 
 \'{Date_stop}\', \'{Date_continue}\')""".format(**event_data)
-        print(sql)
-        gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR}
+    print(sql)
+    gs.SqlQuery(sql)
 
     return {names.ANSWER: names.SUCCESS}
 
@@ -71,17 +62,12 @@ def update_event(event_data):
         'Date_stop': '', 'Date_continue': ''}
     flag = False
     for data in check:
-        try:
-            if event_data[data] is None:
-                logging.info('Incorrect parameter ' + data)
-                update_data[data] = names.ERROR
-                flag = True
-            else:
-                update_data[data] = event_data[data]
-        except:
-            logging.error('Fatal error: param ' + data)
+        if event_data[data] is None:
+            logging.info('Incorrect parameter ' + data)
             update_data[data] = names.ERROR
             flag = True
+        else:
+            update_data[data] = event_data[data]
     if flag:
         return {names.ANSWER: names.ERROR, names.DATA: update_data}
     return update_event_table(update_data)
@@ -93,15 +79,11 @@ def update_event_table(user_data):
     :param user_data: dict информация о событии
     :return: {names.ANSWER: ответ}
     """
-    try:
-        sql = """UPDATE event 
+    sql = """UPDATE event 
 SET Name='{Name}', Description='{Description}', Logo='{Logo}', 
 Status='{Status}', Date_start='{Date_start}', Date_end='{Date_end}', 
 Date_stop='{Date_stop}', Date_continue='{Date_continue}' WHERE id_event='{id_event}'""".format(**user_data)
-        gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR}
+    gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS}
 
 
@@ -126,11 +108,7 @@ def update_status_close_events():
     or (current_timestamp < date_start)
     and status = 1
     """
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR}
+    result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
@@ -145,9 +123,5 @@ def update_status_open_events():
     or (CURRENT_TIMESTAMP >= date_continue and CURRENT_TIMESTAMP < date_end)
     and status = 0
     """
-    try:
-        result = gs.SqlQuery(sql)
-    except:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
-        return {names.ANSWER: names.ERROR}
+    result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
