@@ -36,8 +36,6 @@ def get_scoreboard(id_event):
     Метод выводит текущую таблицу очков
     :return:
     """
-    #TODO: Временное решение. Номер события
-    #id_event = id_event or 2
     sql = """with
 user_participation_event as (
   select us.id_user
@@ -62,6 +60,7 @@ select * from sumit_acc order by point desc, time""".format(id_event=id_event)
     print(sql)
     result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
+
 
 def get_top_task(id_event=None):
     """
@@ -108,6 +107,7 @@ select * from extract_arr stat""".format(id_event=id_event)
     result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result[0]}
 
+
 def get_stat_task(id_task=None, id_event=None):
     """
     Метод выводит для конкретного таска информацию, кто сдал и в какой момент
@@ -133,5 +133,32 @@ inner join task t
     on t.id_task = tc.id_task
 )
 select * from main""".format(id_task=id_task, id_event=id_event)
+    result = gs.SqlQuery(sql)
+    return {names.ANSWER: names.SUCCESS, names.DATA: result}
+
+
+def stat_group_by_task(id_event=None):
+    """
+    Метод выводит для конкретного таска информацию, кто сдал и в какой момент
+    :return:
+    """
+    sql = """
+with task_deciding as (
+    select 
+        id_task
+        , count(1) deciding_qty
+    from task_acc
+    where id_event ={id_event}
+    group by id_task
+    order by deciding_qty desc
+)
+
+select 
+    td.id_task 
+    , td.deciding_qty
+    , task_name
+from task_deciding td
+join task t on td.id_task = t.id_task
+""".format(id_event=id_event)
     result = gs.SqlQuery(sql)
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
