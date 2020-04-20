@@ -42,6 +42,8 @@ class Task(Resource):
 
     def get(self):
         print("Task")
+        tasks.update_status_start_tasks()
+        tasks.update_status_free_tasks()
         self.parse_data()
         answer = self.switch()
         print("answer: ", answer)

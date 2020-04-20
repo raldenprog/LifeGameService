@@ -97,6 +97,7 @@ def create_one_task(data):
 происходит внутри неё.
 '''
 
+
 def create_few_tasks(batch_data):
     answers = []
     try:
@@ -127,47 +128,31 @@ def create_few_tasks(batch_data):
             names.DATA: answers,
             "number": len(batch_data)}
 
-json = {    names.ID :              "1",
-            "task_category" :   2,
-            "task_name" :       3,
-            "task_flag" :       4,
-            "task_description" :5,
-            "task_point" :      6,
-            "task_hint" :       7,
-            "task_solve" :      8,
-            "task_link" :       9
-        },\
-       {    names.ID :              "11",
-            "task_category" :   21,
-            "task_name" :       31,
-            "task_flag" :       41,
-            "task_description" :51,
-            "task_point" :      62,
-            "task_hint" :       73,
-            "task_solve" :      84,
-            "task_link" :       95
-            }
 
-
-def get_task_event_name(event, task_name):
-    sql = "SELECT ID_Task, Task_name, Task_category, Task_description FROM task WHERE event={} AND ID_Task={}".format(event, task_name)
-
-    #try:
+def update_status_free_tasks():
+    """
+    Метод переносит таск в категорию бесплатных, если его время вышло
+    :return:
+    """
+    sql = """update task
+    set task_category = 'free', task_point = 0
+    where CURRENT_TIMESTAMP >= date_end
+    and task_category <> 'free'
+    """
     result = gs.SqlQuery(sql)
-    #except:
-    #    logging.error(names.ERROR_EXECUTE_DATABASE)
-    #    return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 
-def get_task_event_category(event, task_category):
-    sql = "SELECT id_task, task_name, task_category, event FROM task WHERE event={} AND task_category={}".format(event, task_category)
-
-    #try:
+def update_status_start_tasks():
+    """
+    Метод запускает таски, если время начала пришло
+    :return:
+    """
+    sql = """update task
+    set  status = 1
+    where CURRENT_TIMESTAMP >= date_start and CURRENT_TIMESTAMP < date_end and status = 0
+    """
     result = gs.SqlQuery(sql)
-   # except:
-    #    logging.error(names.ERROR_EXECUTE_DATABASE)
-    #    return {names.ANSWER: '1 error'}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
 

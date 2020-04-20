@@ -29,6 +29,12 @@ class Scoreboard(Resource):
         elif self.data.get('param') == "by_user":
             answer = gs.converter(score.get_scoreboard(self.data["id_event"]))
             return answer
+        elif self.param == "get_top_task" and self.data is not None:
+            answer = gs.converter(score.get_top_task(self.data["id_event"]))
+            return answer
+        else:
+            answer = gs.converter(score.get_scoreboard(self.data["id_event"]))
+            return answer
 
     def get(self):
         print("Scoreboard")
