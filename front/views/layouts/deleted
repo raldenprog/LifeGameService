@@ -1,0 +1,9 @@
+{{ else }}
+            <div class="header__element header__element--login-reg right__corner">
+                <a href="/login" class="header__element--login">
+                    Войти
+                </a>
+                <!--<a href="/reg" class="header__element--reg right__corner">
+                    Зарегистрироваться
+                </a>-->
+            </div>
