@@ -5,11 +5,7 @@ function writeCompetitionInfo(id) {
 
     var strObj = JSON.stringify(obj);
 
-    if (typeof(port) == "undefined") {
-        var port = "13451";
-    }
-
-    var str = 'http://217.23.13.145:' + port + '/event?param=descr&data=' + strObj;
+    var str = 'http://90.189.132.25:' + port + '/event?param=descr&data=' + strObj;
 
     console.log(str);
 

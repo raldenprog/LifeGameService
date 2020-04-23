@@ -1,17 +1,13 @@
-if (typeof(port) == "undefined") {
-    var port = "13451";
-}
-
 function authorisation(login, pass) {
     var str = {
-        Login: login,
-        //"Login": "test_user15",
-        Password: pass
-        //"Password": "new_password"
+       //Login: login,
+        "Login": "test_user15",
+        //Password: pass
+        "Password": "new_password"
     };
 
     var data = JSON.stringify({Data: str});
-    var xhr = createCORSRequest('POST', 'http://217.23.13.145:' + port + '/auth?data=');
+    var xhr = createCORSRequest('POST', 'http://90.189.132.25:' + port + '/auth?data=');
     xhr.setRequestHeader(
         'X-Custom-Header', 'value');
     xhr.setRequestHeader(

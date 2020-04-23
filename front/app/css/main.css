@@ -1,12 +1,12 @@
 .background {
   width: 100%;
   height: 100%;
-  background: url(../img/background.png) no-repeat;
+  background: url(../img/background1.jpg) no-repeat;
+  background-color: #0c1222;
   background-position: center;
   background-size: auto 100%;
   z-index: -1;
   position: fixed;
-  opacity: 0.5;
 }
 .btn {
   display: block;
@@ -278,13 +278,14 @@ tr:nth-child(2) .table-default__cell-block {
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  width: 466px;
-  margin: 0 auto 28px;
+  width: 350px;
+  margin: 0 auto 2px;
   -ms-flex-align: center;
       align-items: center;
 }
 .authorization__input-title {
   font-size: 18px;
+  font-weight: 700;
   font-family: Verdana;
 }
 .authorization__login-button {
@@ -292,7 +293,7 @@ tr:nth-child(2) .table-default__cell-block {
   border: 1px solid black;
   border-radius: 12px;
   color: white;
-  background-color: #56849f;
+  background-color: rgba(255, 84, 69, 1);;
   font-size: 20px;
   line-height: 37px;
   font-family: Verdana;
@@ -300,10 +301,10 @@ tr:nth-child(2) .table-default__cell-block {
   text-decoration: none;
   width: 100px;
   height: 44px;
-  margin: 50px auto 0;
+  margin: 15px auto 0;
 }
 .authorization__login-button:hover {
-  background-color: #c4c4c4;
+  background-color: rgba(19, 210, 253, 1);
   cursor: pointer;
 }
 .authorization__help-links-container {
@@ -311,34 +312,35 @@ tr:nth-child(2) .table-default__cell-block {
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  margin: 30px auto 0;
+  margin: 10px auto 0px;
+  justify-content: center;
   width: 466px;
 }
 .authorization__forgot-password {
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
   color: #000;
+  text-decoration: none;
 }
-.authorization__registration-link {
-  font-size: 20px;
-  text-decoration: underline;
+
+.authorization__forgot-password:hover {
+    color: aliceblue;
 }
+
 .authorization__input-text,
-.authorization__input-select,
-.authorization__input-text-area {
-  width: 300px;
+.authorization__input-select {
+  width: 200px;
   border: 1px solid black;
   height: 40px;
   padding: 10px;
   box-sizing: border-box;
   transition: border 0.5s;
+  margin: 20px;
 }
 .authorization__input-text--wrong,
-.authorization__input-select--wrong,
-.authorization__input-text-area--wrong {
+.authorization__input-select--wrong {
   border: 2px solid red;
-}
-.authorization__input-text-area {
-  height: 300px;
 }
 .authorization__star {
   display: none;
@@ -391,7 +393,7 @@ tr:nth-child(2) .table-default__cell-block {
   border: 1px solid black;
   border-radius: 12px;
   color: white;
-  background-color: #56849f;
+  background-color: rgba(255, 84, 69, 1);
   font-size: 20px;
   line-height: 37px;
   font-family: Verdana;
@@ -400,7 +402,7 @@ tr:nth-child(2) .table-default__cell-block {
   width: 128px;
 }
 .authorization__prev-step:hover {
-  background-color: #c4c4c4;
+  background-color: #13D2FD;
   cursor: pointer;
 }
 .authorization__login-reg-link {
@@ -413,7 +415,7 @@ tr:nth-child(2) .table-default__cell-block {
   border: 1px solid black;
   border-radius: 12px;
   color: white;
-  background-color: #56849f;
+  background-color: rgba(255, 84, 69, 1);
   font-size: 20px;
   line-height: 37px;
   font-family: Verdana;
@@ -424,7 +426,7 @@ tr:nth-child(2) .table-default__cell-block {
 }
 .authorization__next-step:hover,
 .authorization__login:hover {
-  background-color: #c4c4c4;
+  background-color: #13D2FD;
   cursor: pointer;
 }
 .authorization__next-step--registration {
@@ -497,13 +499,13 @@ tr:nth-child(2) .table-default__cell-block {
 .header {
   height: 68px;
   width: 100%;
-  max-width: 1366px;
+  max-width: 750px;
   position: fixed;
   left: 50%;
   -ms-transform: translateX(-50%);
       transform: translateX(-50%);
   z-index: 99;
-  background-color: #8fb0c3;
+  background-color: rgba(19, 210, 253, 1);
   box-sizing: border-box;
   display: -ms-flexbox;
   display: flex;
@@ -513,7 +515,7 @@ tr:nth-child(2) .table-default__cell-block {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .header__element {
-  max-width: 185px;
+  max-width: 250px;
   width: 100%;
   border-right: 1px solid black;
   display: -ms-flexbox;
@@ -522,14 +524,14 @@ tr:nth-child(2) .table-default__cell-block {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
-  font-size: 18px;
-  font-family: Verdana;
+  font-size: 22px;
+  font-family: 'Russo One', sans-serif;
   color: black;
   text-decoration: none;
   transition: background 0.2s;
 }
 .header__element:hover {
-  background: #7ca3b9;
+  background: #0078b0;
 }
 .header__element:last-child {
   border-right: none;
@@ -546,15 +548,30 @@ tr:nth-child(2) .table-default__cell-block {
   background-color: #56849f;
 }
 .header__element--login {
+  text-decoration: none;
   display: block;
+  color:#000;
   padding-right: 17px;
   margin-right: 10px;
   background: url(../img/icons/login.png) no-repeat;
   background-position: right;
   background-size: 17px 18px;
 }
+.header__element--login{
+  text-decoration: none;
+}
+.header__element--login:hover{
+  color: #fff;
+}
 .header__element--login-reg {
   max-width: none;
+  text-decoration: none;
+  color:#000;
+}
+.header__element--login-reg:hover {
+  max-width: none;
+  text-decoration: none;
+  color:#FFFFFF;
 }
 .header__element--logout-link {
   margin-left: 8px;
@@ -735,7 +752,7 @@ tr:nth-child(2) .table-default__cell-block {
   left: 50%;
   -ms-transform: translateX(-50%);
       transform: translateX(-50%);
-  min-height: 40px;
+  height: 40px;
   display: -ms-flexbox;
   display: flex;
   position: absolute;
@@ -1523,4 +1540,34 @@ td {
 }
 .disabled-block {
   display: none !important;
+}
+
+.form__window1{
+    border-radius: 20px;
+    background-color: rgba(253, 184, 19, 0.7);
+    justify-content: space-between;
+}
+
+.form__window{
+    border-radius: 20px;
+    background-color: rgba(253, 184, 19, 0.7);
+    height: 450px;
+    justify-content: space-between;
+}
+.corners {
+    border-radius: 0 0 40px 40px;
+}
+
+.left__corner {
+    border-radius: 0 0 0 40px;
+}
+
+.right__corner {
+    border-radius: 0 0 40px 0;
+    text-decoration: none;
+    color: #000;
+}
+
+.right__corner:hover {
+    color: #FFF;
 }

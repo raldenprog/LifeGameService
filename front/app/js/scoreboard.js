@@ -1,9 +1,5 @@
 var tasks;
 
-if (typeof(port) == "undefined") {
-    var port = "13451";
-}
-
 function getScoreboard(id_event) {
 
     var obj = {
@@ -12,7 +8,7 @@ function getScoreboard(id_event) {
 
     var str = JSON.stringify(obj);
 
-    var str = 'http://217.23.13.145:' + port + '/scoreboard?data=' + str;
+    var str = 'http://90.189.132.25:' + port + '/scoreboard?data=' + str;
 
     console.log(str);
 

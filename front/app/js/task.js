@@ -1,10 +1,6 @@
 var tasks;
 var id_event;
 
-if (typeof(port) == "undefined") {
-    var port = "13451";
-}
-
 function Competition() {
 
 }
@@ -26,7 +22,7 @@ Competition.prototype.changeCategory = function (category) {
         }
     }
 
-    this.activeCategory = category.toLowerCase();
+    this.activeCategory = category.toLowerCase()
 };
 
 
@@ -64,7 +60,7 @@ function getTasks(competitionId) {
 
     var data = JSON.stringify(obj);
 
-    var str = 'http://217.23.13.145:' + port + '/task?data=' + data;
+    var str = 'http://90.189.132.25:' + port + '/task?data=' + data;
     var xhr = createCORSRequest('GET', str);
 
     xhr.send();
@@ -157,7 +153,7 @@ function submitTask(taskId) {
 
     var data = JSON.stringify(obj);
 
-    var str = 'http://217.23.13.145:' + port + '/task?param=check&data=' + data;
+    var str = 'http://90.189.132.25:' + port + '/task?param=check&data=' + data;
     console.log(str);
     var xhr = createCORSRequest('GET', str);
     xhr.send();
@@ -180,7 +176,7 @@ function submitTask(taskId) {
     };
 
     xhr.onerror = function () {
-        console.log("Проблемы с запросом");
+        alert("Неверный флаг");
     };
 }
 
