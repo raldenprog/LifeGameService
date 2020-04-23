@@ -42,7 +42,7 @@ $(document).ready(function() {
         var data = JSON.stringify(str);
 
 
-        str = 'http://90.189.132.25:13451/registration?data=' + data;
+        str = 'http://188.227.86.21:13451/registration?data=' + data;
         var xhr = createCORSRequest('GET', str);
         xhr.send();
 

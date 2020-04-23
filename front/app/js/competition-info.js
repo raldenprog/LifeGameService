@@ -5,7 +5,7 @@ function writeCompetitionInfo(id) {
 
     var strObj = JSON.stringify(obj);
 
-    var str = 'http://90.189.132.25:' + port + '/event?param=descr&data=' + strObj;
+    var str = 'http://188.227.86.21:' + port + '/event?param=descr&data=' + strObj;
 
     console.log(str);
 

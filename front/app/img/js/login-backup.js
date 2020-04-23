@@ -7,7 +7,7 @@ function authorisation(login, pass) {
     };
 
     var data = JSON.stringify({Data: str});
-    var xhr = createCORSRequest('POST', 'http://90.189.132.25:13451/auth?data=');
+    var xhr = createCORSRequest('POST', 'http://188.227.86.21:13451/auth?data=');
     xhr.setRequestHeader(
         'X-Custom-Header', 'value');
     xhr.setRequestHeader(
