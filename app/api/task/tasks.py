@@ -171,6 +171,7 @@ def get_task_event(data):
      where id_event = {id_event}
        and id_user = {id_user}
        and id_task = t.id_task
+       and t.status = 1
     ) then True
    else False
    end as close
