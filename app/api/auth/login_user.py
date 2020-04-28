@@ -3,7 +3,7 @@ import hashlib
 import logging
 from api.service import GameService as gs
 import api.base_name as names
-from api.auth.registration_users import input_session_table
+# from api.auth.registration_users import input_session_table
 
 logging.basicConfig(filename='logger.log',
                     format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
@@ -62,7 +62,8 @@ def auth_user(user_data):
     result = gs.SqlQuery(sql)
     if len(result) == 0:
         return {names.ANSWER: names.WARNING, names.DATA: "Данного пользователя нет в базе данных"}
-    answer = input_session_table(result[0].get(names.ID_USER))
+    # answer = input_session_table(result[0].get(names.ID_USER))
+    answer = None
     if answer.get(names.ANSWER) is not names.SUCCESS:
         return {names.ANSWER: names.WARNING, names.DATA: "Ошибка запроса к базе данных. Неудача"}
     return answer

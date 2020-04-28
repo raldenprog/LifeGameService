@@ -1,7 +1,7 @@
 # coding=utf-8
 from flask_restful import Resource, reqparse
 from flask import request
-from api.config import HEADER
+from api.base_name import HEADER
 import api.scoreboard.get_scoreboard as score
 import api.auth.auth as auth
 import api.base_name as names

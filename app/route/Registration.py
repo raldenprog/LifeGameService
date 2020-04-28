@@ -1,55 +1,29 @@
 # coding=utf-8
-from flask_restful import Resource, reqparse
-import api.auth.registration_users as reg
 import api.base_name as names
-from api.service import GameService as gs
+from route.BaseRoute import BaseRoute
+from api.auth.registration_users import Registration
 
 
-class Registration(Resource):
+class RegistrationRoute(BaseRoute):
     def __init__(self):
-        self.__parser = reqparse.RequestParser()
-        self.__parser.add_argument('data')
-        self.__args = self.__parser.parse_args()
-        self.data = None
+        super().__init__()
+        self.login = None
+        self.password = None
+        self.name = None
+        self.email = None
+        self.arguments = [names.LOGIN, names.PASSWORD, names.NAME, names.EMAIL]
+        for argument in self.arguments:
+            self.parser.add_argument(argument)
+        self.args = self.parser.parse_args()
 
     def parse_data(self):
-        self.data = self.__args.get('data', None)
-        self.data = gs.converter(self.data)
-        print("data: ", self.data)
+        self.login = self.args.get(names.LOGIN, None)
+        self.password = self.args.get(names.PASSWORD, None)
+        self.name = self.args.get(names.NAME, None)
+        self.email = self.args.get(names.EMAIL, None)
 
-        return
-
-    def check_data(self):
-        if self.data[names.LOGIN] is None:
-            return False
-        if self.data[names.PASSWORD] is None:
-            return False
-        if self.data[names.NAME] is None:
-            return False
-        if self.data[names.EMAIL] is None:
-            return False
-        if self.data[names.SEX] is None:
-            return False
-        if self.data[names.CITY] is None:
-            return False
-        if self.data[names.EDUCATION] is None:
-            return False
-        if self.data[names.LOGO_NAME] is None:
-            return False
-        if self.data[names.LOGO] is None:
-            return False
-        return True
-
-    def switch(self):
-        answer = reg.registration_user(self.data)
-        return answer
-
-    def get(self):
-        print("Registration")
+    def post(self):
         self.parse_data()
-        check = self.check_data()
-        if check:
-            answer = self.switch()
-            print("answer: ", answer)
-            return answer, 200, {'Access-Control-Allow-Origin': '*'}
-        return "Error",  200, {'Access-Control-Allow-Origin': '*'}
+        reg = Registration()
+        uuid_user = reg.registration_user(self.login, self.password, self.name, self.email)
+        return {names.UUID: uuid_user}, 200, {'Access-Control-Allow-Origin': '*'}

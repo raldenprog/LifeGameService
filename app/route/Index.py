@@ -1,7 +1,7 @@
 # coding=utf-8
 from flask_restful import Resource
 from flask import request
-from api.config import HEADER
+from api.base_name import HEADER
 import api.base_name as names
 
 class Index(Resource):
