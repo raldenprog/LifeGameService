@@ -1,11 +1,7 @@
 # coding: utf8
-import logging
 import hashlib
 from api.service import GameService as gs
 import api.base_name as names
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s ',
-                    level=logging.INFO)
 
 
 def user_cabinet(data):
@@ -14,7 +10,6 @@ def user_cabinet(data):
     Проверяет, что id не пустой. Возвращает json с данными о пользователе.
     """
     if data[names.ID_USER] is None:
-        logging.info('Incorrect parameter id - None')
         data[names.ID_USER] = "Empty"
         return {names.ANSWER: names.ERROR, names.DATA: data}
     if gs.check_id(data[names.ID_USER]) == False:
@@ -37,7 +32,6 @@ def change_password(data):
     """
     for i in data:
         if data[i] is None:
-            logging.info('Incorrect parameter ' + i + ' - None')
             data[i] = "Empty"
             return {names.ANSWER: names.ERROR, names.DATA: data}
     if gs.check_id(data[names.ID_USER]) == False:
@@ -70,7 +64,6 @@ def edit_cabinet(data):
     """
     for i in data:
         if data[i] is None:
-            logging.info('Incorrect parameter '+i+' - None')
             data[i] = "Empty"
             return {names.ANSWER: names.ERROR,
                     names.DATA: data}

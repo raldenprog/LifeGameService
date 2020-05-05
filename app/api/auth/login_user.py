@@ -1,13 +1,7 @@
 # coding=utf-8
 import hashlib
-import logging
 from api.service import GameService as gs
 import api.base_name as names
-# from api.auth.registration_users import input_session_table
-
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def get_user_name(id_user):
@@ -21,7 +15,6 @@ def get_user_name(id_user):
     #try:
     result = gs.SqlQuery(sql)
     #except:
-    #    logging.error(names.ERROR_EXECUTE_DATABASE)
     #    return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result[0]}
 #print(get_user_name("9"))
@@ -37,7 +30,6 @@ def login_verification(user_data):
     error = False
     for data in check:
         if user_data.get(data, None) is None:
-            logging.info('Incorrect parameter ' + data)
             user_info[data] = 'Пустой параметр!'
             error = True
         else:

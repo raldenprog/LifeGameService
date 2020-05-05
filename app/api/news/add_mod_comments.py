@@ -1,10 +1,6 @@
 # coding=utf-8
 import api.base_name as names
-import logging
 from api.service import GameService as gs
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def comment_verification(comment_data):
@@ -17,7 +13,6 @@ def comment_verification(comment_data):
     error = False
     for data in check:
         if comment_data.get(data, None) is None:
-            logging.info('Incorrect parameter ' + data)
             comment_data[data] = 'Пустой параметр!'
             error = True
     if error:

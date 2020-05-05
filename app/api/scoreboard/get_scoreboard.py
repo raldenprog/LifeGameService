@@ -1,10 +1,6 @@
 # coding: utf-8
-import logging
 from api.service import GameService as gs
 import api.base_name as names
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def all_users(count):
@@ -18,7 +14,6 @@ def all_users(count):
     if count and isinstance(count, int) and count >= 0:
         result = gs.SqlQuery(sql)
     else:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 

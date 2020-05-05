@@ -1,11 +1,7 @@
 __author__ = 'ar.chusovitin'
 import json
-import logging
 from datetime import date, datetime
 from api.database.connect_db import db_connect_new as db
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 class GameService:

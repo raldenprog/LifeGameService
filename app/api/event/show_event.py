@@ -1,12 +1,8 @@
 # coding: utf8
-import logging
 import time
 import datetime
 from api.service import GameService as gs
 import api.base_name as names
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def info_event(id_event):
@@ -50,7 +46,6 @@ table events""".format(count=count, id_user=id_user)
         result = gs.SqlQuery(sql)
         print(result)
     else:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -66,7 +61,6 @@ def current_event(count):
     if isinstance(count, int) and count >= 0:
         result = gs.SqlQuery(sql)
     else:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -83,7 +77,6 @@ def end_event(count):
     if isinstance(count, int) and count >= 0:
         result = gs.SqlQuery(sql)
     else:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -102,7 +95,6 @@ def find_event(alf, count):
         result = gs.SqlQuery(sql)
         #print(result)
     else:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -112,7 +104,6 @@ def page_event(data):
     if isinstance(data["id_event"], int):
         result = gs.SqlQuery(sql)
     else:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}
 
@@ -127,6 +118,5 @@ def filter_by_status(count, status):
     if isinstance(count, int) and count >= 0:
         result = gs.SqlQuery(sql)
     else:
-        logging.error(names.ERROR_EXECUTE_DATABASE)
         return {names.ANSWER: names.ERROR}
     return {names.ANSWER: names.SUCCESS, names.DATA: result}

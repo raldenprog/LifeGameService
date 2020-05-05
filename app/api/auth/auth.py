@@ -1,9 +1,5 @@
-import logging
 from api.service import GameService as gs
 import api.base_name as names
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def session_verification(session):
@@ -17,7 +13,6 @@ def session_verification(session):
         #print(sql)
     result = gs.SqlQuery(sql)
     #except:
-    #    logging.error(names.ERROR_EXECUTE_DATABASE)
     #    return None
     #try:
     #    if len(result) == 0:

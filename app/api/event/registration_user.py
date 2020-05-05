@@ -1,11 +1,6 @@
 __author__ = 'RaldenProg'
-
-import logging
 from api.service import GameService as gs
 import api.base_name as names
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def check_registration(data):

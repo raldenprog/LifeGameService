@@ -1,10 +1,6 @@
 # coding=utf-8
-import logging
 import api.base_name as names
 from api.service import GameService as gs
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def news_verification(news_data):
@@ -18,7 +14,6 @@ def news_verification(news_data):
     error = False
     for data in check:
         if news_data.get(data, None) is None:
-            logging.info('Incorrect parameter ' + data)
             news_data[data] = 'Пустой параметр!'
             error = True
     if error:

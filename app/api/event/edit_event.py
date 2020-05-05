@@ -1,10 +1,6 @@
 # coding: utf8
-import logging
 from api.service import GameService as gs
 import api.base_name as names
-logging.basicConfig(filename='logger.log',
-                    format='%(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s %(asctime)s',
-                    level=logging.INFO)
 
 
 def registration_event(event_data):
@@ -22,7 +18,6 @@ def registration_event(event_data):
     flag = False
     for data in check:
         if event_data[data] is None:
-            logging.info('Incorrect parameter ' + data)
             registration_data[data] = names.ERROR
             flag = True
         else:
@@ -63,7 +58,6 @@ def update_event(event_data):
     flag = False
     for data in check:
         if event_data[data] is None:
-            logging.info('Incorrect parameter ' + data)
             update_data[data] = names.ERROR
             flag = True
         else:

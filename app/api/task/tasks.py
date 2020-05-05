@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-import logging
 from api.service import GameService as gs
 import api.base_name as names
-logging.basicConfig(filename='logger.log',
-                    format='%(asctime)s %(filename)-12s[LINE:%(lineno)d] %(levelname)-8s %(message)s',
-                    level=logging.INFO)
 
 def empty_task_data():
     return {
@@ -50,7 +46,6 @@ def create_one_task(data):
     for check in check_field:
         if data[check] is None:
             error_flag = 1
-            logging.info('Incorrect parameter \'%s\' - None' % check)
             check_data[check] = names.ERROR
         else:
             check_data[check] = names.SUCCESS
@@ -70,7 +65,6 @@ def create_one_task(data):
         if e == 1062:
             return {names.ANSWER: names.WARNING,
                     names.DATA: 'Duplicate task'}
-        logging.error('Fatal error: param \'sql\' can\'t create new record')
         #check_data["database"] = "Unrecorded"
         return {names.ANSWER: names.WARNING,
                 names.DATA: check_data}
@@ -108,7 +102,6 @@ def create_few_tasks(batch_data):
                     "number": 0}
     except:
         print ("Except 1")
-        logging.error('Fatal error in function \'create_few_tasks\', param \'batch_data\'')
         return {names.ANSWER: names.ERROR,
                 names.DATA: None,
                 "number": 0}
@@ -119,7 +112,6 @@ def create_few_tasks(batch_data):
             answers.append(answer)
     except:
         print ("Except 2")
-        logging.error('Fatal error in function \'create_few_tasks\', param \'data\'')
         return {names.ANSWER: names.ERROR,
                 names.DATA: None,
                 "number": 0}
